@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:og="http://ogp.me/ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:schema="http://schema.org/" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" version="2.0" xml:base="https://drupal-coder.ru/">
+  <channel>
+    <title>React</title>
+    <link>https://drupal-coder.ru/</link>
+    <description/>
+    <language>ru</language>
+    
+    <item>
+  <title>React чекаут для N1Commerce</title>
+  <link>https://drupal-coder.ru/blog/react-chekaut-dlya-n1commerce</link>
+  <description>
+&lt;span&gt;React чекаут для N1Commerce&lt;/span&gt;
+
+&lt;span&gt;&lt;span lang="" about="https://drupal-coder.ru/user/52" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;n.demidov&lt;/span&gt;&lt;/span&gt;
+
+&lt;span&gt;пн, 05/21/2018 - 15:15&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p dir="ltr"&gt;Современный веб шагнул далеко вперед. Для решения актуальных бизнес задач классический подход к созданию сайтов подвергается значительной трансформации как в идеологическом, так и в техническом планах. Так, например, пересматривается роль браузера в веб-системе.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Современный браузер - это достаточно производительный инструмент, способный разгрузить сервер от необходимости обрабатывать лишние пользовательские взаимодействия, запросы, рендеринг страниц. Он способен обеспечивать работу полноценных клиентских веб-приложений, функционирующих аналогично десктопным, но не зависящих от операционной системы и не требующих установки.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;С точки зрения пользователя - веб-приложения повышают удобство использования, плавность работы системы и интерактивность, избавляют от постоянных перезагрузок страницы. С точки зрения разработчика - позволяют повторно использовать кодовую базу, интегрировать готовые приложения в существующие сайты с минимальными затратами на доработку, пользоваться актуальными технологиями и подходами для создания быстрых, сложных и производительных приложений.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Для внедрения современных подходов в нашу платформу для быстрого создания интернет-магазинов &lt;a href="https://n1commerce.ru/ru"&gt;N1Commerce&lt;/a&gt; мы разработали систему, реализующую логин и корзину. Составными частями этой системы являются модульное Frontend-приложение и Middle веб-сервис.&lt;/p&gt;
+
+&lt;h2 dir="ltr"&gt; &lt;/h2&gt;
+
+&lt;h2 dir="ltr"&gt;&lt;strong&gt;Frontend&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p dir="ltr"&gt;Frontend представляет собой современный ES6-проект на &lt;a href="https://reactjs.org/"&gt;React&lt;/a&gt; аналогичный проекту одностраничного приложения. Используется сборка проекта на &lt;a href="https://webpack.js.org/"&gt;Webpack&lt;/a&gt;, компиляция ES6-кода через &lt;a href="https://babeljs.io/"&gt;Babel&lt;/a&gt;, линтинг кода через &lt;a href="https://eslint.org/"&gt;Eslint&lt;/a&gt;. Отличие состоит в том, что приложение разбивается на несколько бандлов, которые встраиваются в регионы классического веб-сайта.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt; &lt;/p&gt;
+
+&lt;p dir="ltr"&gt;&lt;img alt="Экран приложения" data-entity-type="file" data-entity-uuid="67b46c5a-be95-4dec-9ce8-86660696f170" height="483" src="https://drupal-coder.ru/sites/default/files/inline-images/1.%20paukshte_screen.png" width="684" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;p dir="ltr"&gt; &lt;/p&gt;
+
+&lt;p dir="ltr"&gt;&lt;img alt="Схема бандлов" data-entity-type="file" data-entity-uuid="bb660570-ea3f-46dc-b954-91250443562a" height="518" src="https://drupal-coder.ru/sites/default/files/inline-images/2.%20Screen%20Shot%202018-05-16%20at%2018.33.25.png" width="682" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Так, кнопка добавления товара в корзину, кнопка логина, кнопка корзины, диалог логина, диалог корзины - все отдельные приложения, слабо связанные друг с другом. Взаимодействие между ними осуществляется через смену url, а также через общее хранилище состояния, для реализации которого использована популярная библиотека &lt;a href="https://redux.js.org/"&gt;Redux&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Слабая связь между бандлами позволяет гибко компоновать модули на странице, расставлять в UI, свободно заменять или удалять ненужные.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;&lt;img alt="Вариант компоновки бандлов" data-entity-type="file" data-entity-uuid="eccf20f8-37ae-4865-bb25-a401a746ce13" height="382" src="https://drupal-coder.ru/sites/default/files/inline-images/3.%20Screen%20Shot%202018-05-16%20at%2018.43.31.png" width="680" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Для построения пользовательского интерфейса была выбрана библиотека &lt;a href="https://reactjs.org/"&gt;React&lt;/a&gt;, которая очень хорошо проявляет себя в качестве инструмента для создания UI, обладает обширной экосистемой, развитым международным комьюнити и базируется на ряде удачных технологических принципов, таких как компонентный подход, однонаправленный поток данных, расширяемость, отсутствие архитектурных ограничений и поощрение повторного использования кода.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Интерфейс каждого дочернего приложения конструируется с помощью набора общих и индивидуальных взаимозаменяемых компонентов. Односторонний поток данных от родительского компонента к дочерним позволяет управлять состояниями компонентов, реагировать на изменения данных, обновляя и перестраивая интерфейс.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Клиентское веб-приложение строится на взаимодействии с сервером через асинхронные запросы. Это позволяет избавиться от лишних перезагрузок страницы, повысить отзывчивость и ощущение быстроты работы сайта.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;В нашей системе наряду с &lt;a href="https://www.drupal.org/docs/8/api/restful-web-services-api/restful-web-services-api-overview"&gt;RESTful веб-сервисом&lt;/a&gt; используется &lt;a href="https://www.drupal.org/project/jsonapi"&gt;JSON API&lt;/a&gt; для получения данных от Drupal-бэкенда. Запрос данных залогиненного юзера, добавление товара в корзину, удаление товара из корзины, логаут - эти операции клиент запрашивает непосредственно у бэкенда.&lt;/p&gt;
+
+&lt;h2 dir="ltr"&gt; &lt;/h2&gt;
+
+&lt;h2 dir="ltr"&gt;&lt;strong&gt;Middle&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p dir="ltr"&gt;Однако не все запросы можно доверить клиенту делать напрямую. Часть запросов требует расширенных прав, например, проверка наличия в системе существующей учетной записи.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;С целью защиты системы от раскрытия чувствительных данных была создана прослойка между фронтендом и бэкендом - мидл. Так как мидл является элементом серверной части, он имеет расширенный доступ к запросам и может выполнять защищенные операции по обращению клиента.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;&lt;img alt="Схема с middle" data-entity-type="file" data-entity-uuid="695751d0-4f61-44a4-90ee-3764fab98547" height="323" src="https://drupal-coder.ru/sites/default/files/inline-images/4.%20Screen%20Shot%202018-05-16%20at%2019.29.57.png" width="680" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Мидл в нашей системе построен на платформе &lt;a href="https://nodejs.org/"&gt;NodeJS&lt;/a&gt;. Применение js в серверной разработке позволяет использовать часть общих библиотек на клиенте и на сервере. Кроме того, node-приложения хорошо поддаются горизонтальному масштабированию, поскольку способны исполнять несколько асинхронных запросов на одном потоке.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Другой причиной для введения мидла в систему является унификация api для логина. Мы воспользовались библиотекой &lt;a href="http://www.passportjs.org/"&gt;PassportJS&lt;/a&gt; для реализации единого с точки зрения клиента api для входа через социальные сети и стандартный email + пароль.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Проблемой социальных логинов является разрозненность их api - каждый провайдер имеет свою собственную клиентскую библиотеку, которую необходимо загружать с сервера, встраивать на веб-страницу, писать специальные обработчики и поддерживать их в дальнейшем, а в случае ввода в систему мобильных приложений и вовсе потребуется встраивание отдельных библиотек для мобильных платформ. Это накладывает очевидные неудобства и заставляет разрастаться и без того обширный клиентский код.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Используя унифицированное api мы делаем процесс логина прозрачным для клиента, повышаем комфорт разработки и обеспечиваем более легкую расширяемость набора клиентских приложений.&lt;/p&gt;
+
+&lt;h2 dir="ltr"&gt; &lt;/h2&gt;
+
+&lt;h2 dir="ltr"&gt;&lt;strong&gt;Proxy&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p dir="ltr"&gt;Поскольку логин в нашем приложении осуществляется не напрямую, а через мидл, требуется настройка proxy, который будет распределять клиентские запросы между мидлом и бэкендом на сервере. Это обусловлено политикой безопасности браузера, который в обычном режиме работы не допускает кросс-доменные запросы, а также необходимостью сохранения идентификаторов сессии в cookies с привязкой к домену.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;&lt;img alt="Схема с прокси" data-entity-type="file" data-entity-uuid="c1d0bbe0-3290-4571-b41f-e279d8c6f602" height="343" src="https://drupal-coder.ru/sites/default/files/inline-images/5.%20Screen%20Shot%202018-05-16%20at%2019.31.19.png" width="678" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Использование прокси позволяет соблюсти ограничения браузера, при необходимости выполнять масштабирование сервера, балансировку нагрузки, менять внутренний адрес мидла или выносить его на внешний сервер. Все это дает возможность использовать систему в нагруженных сценариях работы.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt; &lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Интеграция рассмотренной в статье системы в N1Commerce позволяет вывести нашу платформу на новый технологический уровень, формируя эффективное сочетание отлаженных бизнес процессов и современных тенденций в вебе.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/react" hreflang="ru"&gt;React&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/e-commerce" hreflang="ru"&gt;E-Commerce&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=150&amp;2=comment&amp;3=comment" token="cufSITIrymlp6AxYdXkBLg3KVvMCgvaXU90mZs2zpbY"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/ispolzovanie-otchetov-ecommerce-v-yandeksmetrike" hreflang="ru"&gt;Использование отчетов Ecommerce в Яндекс.Метрике &lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-react" hreflang="ru"&gt;Drupal + React&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/ispolzovanie-react-js-komponentov-v-unity" hreflang="ru"&gt;Использование React JS компонентов в Unity&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Mon, 21 May 2018 15:15:54 +0000</pubDate>
+    <dc:creator>n.demidov</dc:creator>
+    <guid isPermaLink="false">150 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>Использование React JS компонентов в Unity</title>
+  <link>https://drupal-coder.ru/blog/ispolzovanie-react-js-komponentov-v-unity</link>
+  <description>
+&lt;span&gt;Использование React JS компонентов в Unity&lt;/span&gt;
+
+&lt;span&gt;&lt;span lang="" about="https://drupal-coder.ru/user/86" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;a.savinov&lt;/span&gt;&lt;/span&gt;
+
+&lt;span&gt;ср, 05/16/2018 - 12:39&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p dir="ltr"&gt;Доброго времени суток. В данной статье рассматривается пример реализации ReactJS-компонента в мобильном приложении, разработанном на движке Unity 2017.4 LTS. Польза владения таким инструментом обусловлена тем, что на момент написания настоящей статьи ReactJS является самой популярной библиотекой для создания веб-компонентов, и таких компонентов уже написано превеликое множество. Так почему бы этим не воспользоваться? Можно просто вставить готовый веб-компонент, который визуально будет неотличим от компонента интерфейса, реализованного на движке. Кроме того, даже если Вы не нашли нужное, то очевидно, что верстать и добавлять интерактив с помощью HTML+CSS+JS гораздо проще и приятнее, чем в Unity. Конечно, придется реализовать взаимодействие веб-компонента и приложения, о чем будет рассказано в статье.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Начнем с почвы. Для того, чтобы встроить React-компонент в мобильное приложение нам нужны React-компонент и мобильное приложение. Исходный код React-компонента Вы можете найти по &lt;a href="https://github.com/svnvav/about-component"&gt;этой&lt;/a&gt; ссылке, а проект Unity с уже встроенным WebView - по &lt;a href="https://github.com/svnvav/unity-webview-react"&gt;этой&lt;/a&gt;. WebView в данном контексте - это специальная обертка над встроенным в устройство браузером для вывода веб-страниц внутри приложения. В своих проектах мы используем две различных кроссплатформенных реализации WebView: &lt;a href="https://assetstore.unity.com/packages/tools/integration/cross-platform-native-plugins-ultra-pack-31086"&gt;платную&lt;/a&gt; и &lt;a href="https://github.com/gree/unity-webview"&gt;бесплатную&lt;/a&gt;. В примере, естественно, используется бесплатная.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Итак, с одной стороны имеется инструмент, позволяющий выводить Веб-страницы в приложении, реагировать на событие загрузки страницы при помощи одного callback-метода, принимать и обрабатывать сообщения от браузера при помощи другого, а также выполнять JavaScript-код. С другой - обыкновенный Веб-компонент, скрипт для которого написан на ReactJS. Цель - подружить обе стороны.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;В общем случае нет необходимости как-то менять Веб-компонент для отображения через WebView, поскольку WebView использует встроенный в устройство браузер. При такой постановке страница выведется как есть. Нас такой расклад не устроил по двум причинам: во-первых, мы разрабатываем мобильное приложение, во-вторых, хотелось бы при инициализации React-компонента сразу передать ему нужные данные.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Первое накладывает свой отпечаток на файле HTML-разметки, в котором рендерится компонент. А именно, в содержимое тега &lt;head/&gt; мы поместили следующую мета-информацию.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="html5 geshifilter-html5" style="font-family:monospace;"&gt; &lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;
+
+&lt;p dir="ltr"&gt;Решение второй задачи, как можно видеть в предоставленном примере, заключается в том, что мы оборачиваем инициализацию ReactDOM.render() в функцию с параметром для данных, которую затем вызовем из приложения.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="javascript geshifilter-javascript" style="font-family:monospace;"&gt;window.&lt;span style="color: #660066;"&gt;createAboutComponent&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000066; font-weight: bold;"&gt;function&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;data&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+    ReactDOM.&lt;span style="color: #660066;"&gt;render&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; document.&lt;span style="color: #660066;"&gt;getElementById&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #3366CC;"&gt;'container'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;
+
+&lt;p dir="ltr"&gt;С обыкновенными React-компонентами разобрались. Далее мы хотели улучшить компонент, добавив возможность передавать сообщения приложению. В предложенной реализации Webview это осуществляется при помощи объекта window.Unity, который содержит функцию call, обеспечивающую передачу строки в callback-метод C#. Для удобства лучше вынести взаимодействие компонента с Unity в отдельный скрипт.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="javascript geshifilter-javascript" style="font-family:monospace;"&gt;&lt;span style="color: #000066; font-weight: bold;"&gt;function&lt;/span&gt; createAPIObject&lt;span style="color: #009900;"&gt;(&lt;/span&gt;w&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #000066; font-weight: bold;"&gt;const&lt;/span&gt; APIObject &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+ 
+    &lt;span style="color: #006600; font-style: italic;"&gt;//Закрывает Webview в приложении&lt;/span&gt;
+    close&lt;span style="color: #339933;"&gt;:&lt;/span&gt; &lt;span style="color: #000066; font-weight: bold;"&gt;function&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+      &lt;span style="color: #000066; font-weight: bold;"&gt;if&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;window.&lt;span style="color: #660066;"&gt;Unity&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; window.&lt;span style="color: #660066;"&gt;Unity&lt;/span&gt;.&lt;span style="color: #660066;"&gt;call&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #3366CC;"&gt;"close"&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+ 
+  &lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+  APIObject.&lt;span style="color: #660066;"&gt;close&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; APIObject.&lt;span style="color: #660066;"&gt;close&lt;/span&gt;.&lt;span style="color: #660066;"&gt;bind&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;APIObject&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+  &lt;span style="color: #000066; font-weight: bold;"&gt;return&lt;/span&gt; APIObject&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+ 
+let api&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+&lt;span style="color: #006600; font-style: italic;"&gt;//Инициализация объекта API&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000066; font-weight: bold;"&gt;function&lt;/span&gt; Init&lt;span style="color: #009900;"&gt;(&lt;/span&gt;w&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #000066; font-weight: bold;"&gt;if&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #339933;"&gt;!&lt;/span&gt;w.&lt;span style="color: #660066;"&gt;unityApi&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+    api &lt;span style="color: #339933;"&gt;=&lt;/span&gt; createAPIObject&lt;span style="color: #009900;"&gt;(&lt;/span&gt;w&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    w.&lt;span style="color: #660066;"&gt;unityApi&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; api&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;}&lt;/span&gt; &lt;span style="color: #000066; font-weight: bold;"&gt;else&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+    api &lt;span style="color: #339933;"&gt;=&lt;/span&gt; w.&lt;span style="color: #660066;"&gt;unityApi&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;window&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+&lt;span style="color: #FF0000;"&gt;export&lt;/span&gt; &lt;span style="color: #000066; font-weight: bold;"&gt;default&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  close&lt;span style="color: #339933;"&gt;:&lt;/span&gt; api.&lt;span style="color: #660066;"&gt;close&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;
+
+&lt;p dir="ltr"&gt;Теперь, добавляя в скрипт зависимость import unityApi from '../utils/unityApi';&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;разработчик получает доступ к функциям взаимодействия с Unity приложением.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Далее перейдем к нюансам в Unity. Есть две проблемы, причем, одна только с Android, другая со всеми, кроме Android. В Android, как известно, всё содержимое приложения есть Java-архив, из-за чего Unity приходится особым образом взаимодействовать с внутренними файлами, а именно при помощи класса www. Но, поскольку наш Веб-компонент поставляется как HTML файл с зависимостями, ссылки на нутро apk не работают. Проблему решает перенос таких файлов в persistentDataPath на время работы приложения. Пример реализации копирования файлов можно посмотреть в классе WebViewController, область Loading region.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;В других системах, в том числе и в редакторе Unity, реализация WebView от Gree по каким-то причинам не инициализирует объект window.Unity. Исправим:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="csharp geshifilter-csharp" style="font-family:monospace;"&gt;WebView&lt;span style="color: #008000;"&gt;.&lt;/span&gt;&lt;span style="color: #0000FF;"&gt;EvaluateJS&lt;/span&gt;&lt;span style="color: #008000;"&gt;(&lt;/span&gt;&lt;span style="color: #666666;"&gt;@"
+	window.Unity = {
+		call: function(msg) { 
+		  var iframe = document.createElement('IFRAME'); 
+		  iframe.setAttribute('src', 'unity:' + msg); 
+		  document.documentElement.appendChild(iframe); 
+		  iframe.parentNode.removeChild(iframe); 
+		  iframe = null; 
+	    } 
+	};
+"&lt;/span&gt;&lt;span style="color: #008000;"&gt;)&lt;/span&gt;&lt;span style="color: #008000;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;
+
+&lt;p dir="ltr"&gt;Теперь callback Webview обрабатывает строку сообщения, переданную из браузера.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Осталось реализовать загрузку файла с Веб-компонентом и инициализировать его, передав нужные данные, что и сделано в методе WebViewController.LoadPage, который принимает в качестве параметров имя HTML-файла и строку JS кода для исполнения. В примере загружается страница характеристик товара и передается JSON-объект, представляющий данные для отображения. Важно отметить, что выполнение JS-кода необходимо осуществлять только после загрузки файла с компонентом и всех необходимых зависимостей. По этой причине переданная в обработчик WebView JS-строка сначала сохраняется в переменную и только по вызову callback-метода onLoad передается на исполнение.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;На этом все. В заключение важно сказать, что созданные для мобильного приложения веб-компоненты обладают всеми преимуществами, которые предоставляет библиотека React, как, например, динамическая загрузка страницы и стилей. Богатая экосистема и компонентный подход позволяют многократно переиспользовать уже написанный код, не прибегая к существенным временным затратам. Кроме того, Facebook, как разработчик этой библиотеки, предоставляет отличные средства отладки React-компонентов в браузере, что в совокупе заметно ускоряет процесс создания конечного продукта в сравнении с другими известными JavaScript-фреймворками. По этим причинам React уже на протяжении более чем двух лет занимает позицию самой популярной библиотеки для Frontend-разработки и сохраняет такой статус к середине 2018 года.&lt;/p&gt;&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/react" hreflang="ru"&gt;React&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/unity" hreflang="ru"&gt;Unity&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=149&amp;2=comment&amp;3=comment" token="24KR1-tRKtPIrH8ngBO9o7ojxUdHa5v1mTgtA2NfNVc"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-react" hreflang="ru"&gt;Drupal + React&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/react-chekaut-dlya-n1commerce" hreflang="ru"&gt;React чекаут для N1Commerce&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Wed, 16 May 2018 12:39:18 +0000</pubDate>
+    <dc:creator>a.savinov</dc:creator>
+    <guid isPermaLink="false">149 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>Drupal + React</title>
+  <link>https://drupal-coder.ru/blog/drupal-react</link>
+  <description>
+&lt;span&gt;Drupal + React&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/42" lang="" about="https://drupal-coder.ru/user/42" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Андрей Тымчук&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;пн, 05/14/2018 - 15:55&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Headless Drupal - это одна из наиболее актуальных и интересных идей использования Drupal 8. Данный термин подразумевает разделение backend и frontend, при котором Drupal выступает только в роли серверной части, а «клиентом» может быть любой JavaScript-фреймворк, мобильное приложение, ваш собственный «велосипед» и т.д. Основная идея такого подхода заключается в желании полного контроля над отображением контента без необходимости использования тяжёлой системы рендеринга Drupal.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3&gt;RESTful Drupal&lt;/h3&gt;
+
+&lt;p&gt;Когда у Drupal забирают frontend часть, он становится веб-сервисом. В отличие от Drupal 7, в Drupal 8 достаточно включения модуля &lt;a href="https://www.drupal.org/docs/8/api/restful-web-services-api/restful-web-services-api-overview"&gt;RESTful Web Services&lt;/a&gt; (поставляется вместе с ядром) для управления сущностями с помощью REST-запросов. Кроме того, данный модуль позволяет создавать Views, которые будут отдавать контент в REST-формате.&lt;/p&gt;
+
+&lt;p&gt;При необходимости интерфейса администрирования REST-ресурсов можно установить модуль &lt;a href="https://www.drupal.org/project/restui"&gt;REST UI&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Drupal 8 REST UI" data-entity-type="file" data-entity-uuid="25022d99-6c26-404e-99ad-4ffa05882f90" src="https://drupal-coder.ru/sites/default/files/inline-images/restui.png" width="800" height="350" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3&gt;JSON API&lt;/h3&gt;
+
+&lt;p&gt;При проектировании RESTful веб-сервисов стоит также обратить внимание на модуль &lt;a href="https://www.drupal.org/project/jsonapi"&gt;JSON API&lt;/a&gt;, который является реализацией &lt;a href="http://jsonapi.org"&gt;одноимённой спецификации&lt;/a&gt;, определяющей структуру запросов клиента и ответов сервера при извлечении/изменении ресурсов. Для получения функционала модуля требуется только его включение без какой-либо дополнительной настройки. После включения модуля можно управлять сущностями Drupal с помощью стандартных HTTP-запросов GET, POST, PATCH, и DELETE. Проверка доступа к операциям над сущностями выполняется на основе стандартной системы разрешений Drupal.&lt;/p&gt;
+
+&lt;p&gt;Следует понимать, что JSON API полностью основан на сущностях, поэтому его нельзя использовать для операций, не связанных с «CRUD». К примеру, регистрация новой учётной записи, авторизация пользователя или запрос нового пароля не являются частью JSON API. Подобные операции следует выполнять с помощью функционала, который предоставляется ядром Drupal.&lt;/p&gt;
+
+&lt;p&gt;Расширить функционал JSON API можно с помощью модулей &lt;a href="https://www.drupal.org/project/jsonapi_extras"&gt;JSON API Extras&lt;/a&gt; и &lt;a href="https://www.drupal.org/project/jsonapi_defaults"&gt;JSON API Defaults&lt;/a&gt;. Первый даёт возможность тонкой настройки предоставляемых ресурсов, а второй позволяет задать ресурсам простые пути без нагромождения большого количества URL-параметров.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Drupal 8 JSON API Extras" data-entity-type="file" data-entity-uuid="bfeaa47f-1079-47e3-99f6-019265af3609" src="https://drupal-coder.ru/sites/default/files/inline-images/jsonapi-extras.png" width="800" height="361" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Кстати, в скором времени модуль JSON API &lt;a href="https://www.drupal.org/project/jsonapi/issues/2931785"&gt;может быть добавлен&lt;/a&gt; в состав ядра Drupal 8.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3&gt;Интеграция React и Drupal модуля&lt;/h3&gt;
+
+&lt;p&gt;В случае интеграции React с модулем Drupal речь идёт об использовании React-компонентов в функционале модуля. Сгенерированные JavaScript-файлы подключаются с помощью библиотек.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="yaml geshifilter-yaml" style="font-family:monospace;"&gt;&lt;span style="color: #007F45;"&gt;example&lt;/span&gt;:&lt;span style="color: green;"&gt;
+  version&lt;/span&gt;&lt;span style="font-weight: bold; color: brown;"&gt;: &lt;/span&gt;VERSION&lt;span style="color: #007F45;"&gt;
+  js&lt;/span&gt;:&lt;span style="color: green;"&gt;
+    js/bundle/first.bundle.js&lt;/span&gt;&lt;span style="font-weight: bold; color: brown;"&gt;: &lt;/span&gt;&lt;span class="br0"&gt;{&lt;/span&gt;&lt;span class="br0"&gt;}&lt;/span&gt;&lt;span style="color: green;"&gt;
+    js/bundle/second.bundle.js&lt;/span&gt;&lt;span style="font-weight: bold; color: brown;"&gt;: &lt;/span&gt;&lt;span class="br0"&gt;{&lt;/span&gt;&lt;span class="br0"&gt;}&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$build&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#attached'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'library'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'example_module/example'&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;«Общение» компонента с сервером реализуется на основе REST-ресурсов, для определения которых имеет смысл использовать связку модулей RESTful Web Services и JSON API. Рассмотрим несколько примеров запросов к ресурсам (код приведён в формате HTTP).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Создать пользователя&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="text geshifilter-text" style="font-family:monospace;"&gt;POST /entity/user?_format=json HTTP/1.1
+Host: drupal8.example
+Content-Type: application/json
+ 
+{
+  "name": [{ "value": "user@mail.example" }],
+  "pass": [{ "value": "thebestpassword" }],
+  "status": [{ "value": true }]
+}&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Авторизовать пользователя&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="text geshifilter-text" style="font-family:monospace;"&gt;POST /user/login?_format=json HTTP/1.1
+Host: drupal8.example
+Content-Type: application/json
+ 
+{"name": "user@mail.example", "pass": "thebestpassword"}&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Получить токен сессии&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="text geshifilter-text" style="font-family:monospace;"&gt;GET /session/token HTTP/1.1
+Host: drupal8.example&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Выйти из текущего аккаунта&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="text geshifilter-text" style="font-family:monospace;"&gt;POST /user/logout?_format=json HTTP/1.1
+Host: drupal8.example
+Content-Type: application/json&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Получить информацию о пользователе с определённым Email&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="text geshifilter-text" style="font-family:monospace;"&gt;GET /jsonapi/user/user?filter[mail][value]=user@mail.example HTTP/1.1
+Host: drupal8.example&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Получить ближайшие 10 опубликованных статей&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="text geshifilter-text" style="font-family:monospace;"&gt;GET /jsonapi/node/article?filter[status][value]=1&amp;sort=-created&amp;page[limit]=10 HTTP/1.1
+Host: drupal8.example&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3&gt;RESTful Commerce&lt;/h3&gt;
+
+&lt;p&gt;Отдельно стоит отметить управление REST-ресурсами для Commerce. Все данные, представляющие собой сущности могут быть получены с помощью JSON API. Однако для корзины в Commerce не определены REST-ресурсы и она не является сущностью, поэтому взаимодействовать с ней подобным образом нельзя. В данном случае следует использовать модуль &lt;a href="https://www.drupal.org/project/commerce_cart_api"&gt;Commerce Cart API&lt;/a&gt;, который предоставляет REST-ресурсы для получения корзины, а также добавления и удаления позиций.&lt;/p&gt;
+
+&lt;p&gt;В заключении рассмотрим несколько примеров запросов к ресурсам Commerce (код приведён в формате HTTP).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Получить информацию о товаре, включая вариации, по его ID&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="text geshifilter-text" style="font-family:monospace;"&gt;GET /jsonapi/commerce_product/product?filter[product_id][value]=1&amp;include=variations HTTP/1.1
+Host: drupal8.example&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Получить список завершённых заказов&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="text geshifilter-text" style="font-family:monospace;"&gt;GET /jsonapi/commerce_order/default?filter[state][value]=completed HTTP/1.1
+Host: drupal8.example&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Получить информацию о корзине&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="text geshifilter-text" style="font-family:monospace;"&gt;GET /cart?_format=json HTTP/1.1
+Host: drupal8.example&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Добавить товар в корзину&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="text geshifilter-text" style="font-family:monospace;"&gt;POST /cart/add?_format=json HTTP/1.1
+Host: drupal8.example
+Content-Type: application/json
+ 
+[
+  {
+    "purchased_entity_type": "commerce_product_variation",
+    "purchased_entity_id": "1"
+  },
+  {
+    "purchased_entity_type": "commerce_product_variation",
+    "purchased_entity_id": "2"	
+  }
+]&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Удалить товар из корзины&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="text geshifilter-text" style="font-family:monospace;"&gt;DELETE /cart/2/items/10?_format=json HTTP/1.1
+Host: drupal8.example&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-8" hreflang="ru"&gt;Drupal 8&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/react" hreflang="ru"&gt;React&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=148&amp;2=comment&amp;3=comment" token="vmyEvyDHkO205FAqZmhHSW9Hd66MZmekRfQSoDC8gk0"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/ispolzovanie-react-js-komponentov-v-unity" hreflang="ru"&gt;Использование React JS компонентов в Unity&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/react-chekaut-dlya-n1commerce" hreflang="ru"&gt;React чекаут для N1Commerce&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Mon, 14 May 2018 15:55:49 +0000</pubDate>
+    <dc:creator>Андрей Тымчук</dc:creator>
+    <guid isPermaLink="false">148 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/drupal-react#comments</comments>
+    </item>
+
+  </channel>
+</rss>

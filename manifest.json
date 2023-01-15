@@ -1,0 +1,23 @@
+{
+	"dir" : "ltr",
+	"lang" : "ru",
+	"name" : "Drupal Coder - разработка сайтов на drupal",
+	"scope" : "/",
+	"display" : "browser",
+	"start_url" : "https://drupal-coder.ru/",
+	"short_name" : "Drupal Coder",
+	"theme_color" : "transparent",
+	"description" : "Создание сайтов на drupal 8 и 7, поддержка и доработка друпал сайтов любой сложности и запущенности. DrupalCoder - это команда с 10 летним опытом в drupal.",
+	"orientation" : "any",
+	"background_color" : "transparent",
+	"related_applications" : [],
+	"prefer_related_applications" : false,
+	"icons" : [
+		{
+			"src": "https://drupal-coder.ru/sites/default/files/android-chrome-256x256.png",
+			"sizes": "256x256"
+		}],
+	"url" : "https://drupal-coder.ru",
+	"screenshots" : [],
+	"generated" : ""
+}

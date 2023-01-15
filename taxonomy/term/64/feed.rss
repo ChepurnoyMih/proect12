@@ -1,0 +1,1877 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:og="http://ogp.me/ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:schema="http://schema.org/" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" version="2.0" xml:base="https://drupal-coder.ru/">
+  <channel>
+    <title>Drupal 8</title>
+    <link>https://drupal-coder.ru/</link>
+    <description/>
+    <language>ru</language>
+    
+    <item>
+  <title>Вставка блока в текстовое поле</title>
+  <link>https://drupal-coder.ru/blog/vstavka-bloka-v-tekstovoe-pole</link>
+  <description>
+&lt;span&gt;Вставка блока в текстовое поле&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/59" lang="" about="https://drupal-coder.ru/user/59" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Александр Долженков&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;пт, 01/28/2022 - 19:05&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;В этой статье мы расскажем, как вывести любой блок с помощью подстановки токена в текстовое поле. В итоге у нас получится готовый модуль для Drupal 8-9.&lt;/p&gt;
+
+&lt;h4&gt;Создание модуля&lt;/h4&gt;
+
+&lt;p&gt;Создадим директорию для модуля и назовем её, например: insert_block_token.&lt;/p&gt;
+
+&lt;p&gt;Добавим файл конфигурации модулю insert_block_token.info.yml и добавим в него конфигурации.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;name: Insert Block Token
+type: module
+description: "Inserts the contents of a block into the text field using token."
+package: custom
+core_version_requirement: ^8 || ^9
+
+dependencies:
+  - drupal:block
+  - drupal:filter
+
+version: '8.x-1.0'
+project: 'insert_block_token'&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Для правильной работы нам потребуется сделать 2 зависимости от блока block и filter. Эти блоки являются частью ядра Drupal.&lt;/p&gt;
+
+&lt;p&gt;Название и описание можно использовать на ваш выбор.&lt;/p&gt;
+
+&lt;p&gt;Теперь нам потребуется файл с кодом модуля insert_block_token.module.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;/**
+* Implements hook_help().
+*/
+
+function insert_block_token_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#insert_block_token':
+      return t('&lt;p--&gt;Use special token to insert the contents of a block into a text field.&lt;/p--&gt;');
+  }
+} &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Вся работа модуля будет реализована в плагине для текстовых фильтров, поэтому в insert_block_token.module мы добавляем только справочную информацию.&lt;/p&gt;
+
+&lt;h4&gt;Создание фильтра&lt;/h4&gt;
+
+&lt;p&gt;Создадим плагин для фильтра, соблюдая правила структуры директорий src/Plugin/Filter/. В директорию Filter добавляем файл InsertBlockTokenFilter.php. Имя файла состоит из названия модуля в CamelCase и Filter &lt;НазваниеМодуля&gt;Filter.php. Так как это стандартный тип плагина, подключать или указывать не нужно — Drupal автоматически подключит его сразу после включения модуля.&lt;/p&gt;
+
+&lt;p&gt;Определим пространство имен и дополнительные классы в нашем фильтре.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;namespace Drupal\insert_block_token\Plugin\Filter;
+ 
+use Drupal\Core\Url;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\filter\Plugin\FilterBase;
+use Drupal\filter\FilterProcessResult;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;Url — класс ссылки;&lt;/li&gt;
+	&lt;li&gt;FormStateInterface — интерфейс для $form_state;&lt;/li&gt;
+	&lt;li&gt;FilterBase — класс фильтра;&lt;/li&gt;
+	&lt;li&gt;FilterProcessResult — класс для вывода содержимого фильтра.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Добавим класс и наследуем его от FilterBase, также добавим обязательную &lt;a href="https://www.drupal.org/docs/8/api/filter-api/overview" rel="noopener noreferrer" target="_blank"&gt;аннотацию&lt;/a&gt; к фильтру.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;/**
+ * Class InsertBlockTokenFilter.
+ *
+ * @package Drupal\insert_block_token\Plugin\Filter
+ *
+ * @Filter( 
+ * id = "filter_insert_block_token",
+ * title = @Translation("Insert blocks"),
+ * description = @Translation("Inserts the contents of a block into a node using [block:block-entity-id] tags."),
+ * type = Drupal\filter\Plugin\FilterInterface::TYPE_MARKUP_LANGUAGE,
+ * )
+ */
+
+ class InsertBlockTokenFilter extends FilterBase { &lt;/code&gt; &lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Переопределим метод &lt;a href="https://api.drupal.org/api/drupal/core%21modules%21filter%21src%21Plugin%21FilterBase.php/function/FilterBase%3A%3Atips/8.3.x" rel="noopener noreferrer" target="_blank"&gt;tips&lt;/a&gt;. Он отвечает за отображение подсказок на странице описания фильтров filter/tips и краткого описания фильтров в поле ввода.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;public function tips($long = FALSE) {
+  if ($long) {
+    return $this-&gt;t('&lt;a name="filter-insert_block_token" id="filter-insert_block_token"&gt;&lt;/a&gt;You may use [block:&lt;em&gt;block_entity_id&lt;/em&gt;] to display the contents of block.');
+  } else {
+    $tips_url = Url::fromRoute("filter.tips_all", [], ['fragment' =&gt; 'filter-insert_block_token']);
+    return $this-&gt;t('You may use &lt;a href="@insert_block_token_help"&gt;[block:&lt;em&gt;block_entity_id&lt;/em&gt;]&lt;/a&gt; to display the contents of block.', ["@insert_block_token_help" =&gt; $tips_url-&gt;toString()]);
+  }
+} &lt;/code&gt; &lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Код работы фильтра пишем в методе process. Для начала добавим регулярное выражение, которое в содержимом будет находить наш токен. Далее из токена будем доставать id сущности блока.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;public function process($text, $langcode) {
+  if (preg_match_all("/\[block:([^\]]+)+\]/", $text, $match)) {
+    $raw_tags = $repl = [];
+    foreach ($match[1] as $key =&gt; $value) {
+      $raw_tags[] = $match[0][$key];
+
+      if (strpos($value, '=') !== FALSE) {
+        $block_id_split = explode('=', $value); $block_id = $block_id_split[1];
+      } else {
+        $block_id = $value;
+      } &lt;/code&gt; &lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Теперь нам нужно добавить вызов блока. Добавим код для блоков и кастомных блоков (контентных, создаваемых в админке). Инициализируем переменную $replacement и положим в нее рендер блока.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;$replacement = '';
+// Render blocks in code.
+if ($block = \Drupal::service('entity_type.manager')
+ -&gt;getStorage('block')
+ -&gt;load($block_id)) {
+  $block_view = \Drupal::service('entity_type.manager')
+    -&gt;getViewBuilder('block')
+    -&gt;view($block);
+  $replacement = \Drupal::service('renderer')-&gt;render($block_view);
+} 
+
+// Render custom blocks. 
+if ($block = \Drupal::service('entity_type.manager')
+  -&gt;getStorage('block_content')
+  -&gt;load($block_id)) {
+
+  $block_view = \Drupal::service('entity_type.manager')
+   -&gt;getViewBuilder('block_content')
+   -&gt;view($block); $replacement = \Drupal::service('renderer')-&gt;render($block_view);
+  } 
+$repl[] = $replacement; &lt;/code&gt; &lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;В заключении осталось только подменить наш токен в содержимом и передать измененное содержимое как результат работы фильтра на вывод.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;  $text = str_replace($raw_tags, $repl, $text);
+}
+
+return new FilterProcessResult($text); &lt;/code&gt; &lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h4&gt;Итог&lt;/h4&gt;
+
+&lt;p&gt;Мы написали модуль и реализовали в нем подстановку блока по токену.&lt;/p&gt;
+
+&lt;p&gt;Код всего модуля: &lt;a href="https://drupal-coder.ru/sites/default/files/blog/insert_block_token.zip"&gt;insert_block_token&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Документация по классу &lt;a href="https://api.drupal.org/api/drupal/core%21modules%21filter%21src%21Plugin%21FilterBase.php/class/FilterBase/8.3.x" rel="noopener noreferrer" target="_blank"&gt;FilterBase&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-8" hreflang="ru"&gt;Drupal 8&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=295&amp;2=comment&amp;3=comment" token="1jb8zcaIB6r56HMYLRmsai1Lwvql2Ixmx2NXv4afjjc"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/suschnosti-drupal-8" hreflang="ru"&gt;Сущности Drupal 8&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/prodvinutaya-zagruzka-suschnostey-v-drupal-8" hreflang="ru"&gt;Продвинутая загрузка сущностей в Drupal 8&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Fri, 28 Jan 2022 19:05:44 +0000</pubDate>
+    <dc:creator>Александр Долженков</dc:creator>
+    <guid isPermaLink="false">295 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>Настройка AMP для Drupal 8 и 9</title>
+  <link>https://drupal-coder.ru/blog/nastroyka-amp-dlya-drupal-8-i-9</link>
+  <description>
+&lt;span&gt;Настройка AMP для Drupal 8 и 9&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/59" lang="" about="https://drupal-coder.ru/user/59" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Александр Долженков&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;ср, 01/26/2022 - 09:27&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Для ускорения мобильных страниц Google предлагает использовать их технологию — AMP. Она позволяет генерировать облегченные страницы — они грузятся быстрее обычных из-за особой системы кэширования. Поисковая система Google охотнее продвигает такие страницы в поисковой выдаче (Яндекс с этой технологией пока не дружит).&lt;/p&gt;
+&lt;p&gt;В этой статье мы рассмотрим пошаговую настройку вывода AMP-страниц на Drupal.&lt;/p&gt;
+
+&lt;h4&gt;Установка модуля&lt;/h4&gt;
+&lt;p&gt;Для начала установим модуль AMP. Мы рекомендуем использовать composer. Для Drupal 8 и 9 (до 9.1+)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;composer require 'drupal/amp’&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;На момент написания статьи, актуальная версия модуля AMP 3.5 не поддерживала Drupal версии 9.1+. По этой причине устанавливаем dev версию модуля, для Drupal 9.1+.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;composer require 'drupal/amp:3.x-dev@dev'&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Все требуемые для работы библиотеки по умолчанию устанавливаются с модулем.&lt;/p&gt;
+
+&lt;h4&gt;Установка темы&lt;/h4&gt;
+&lt;p&gt;Для вывода AMP-страниц потребуется тема оформления. Можно использовать любую тему совместимую с Drupal 8+ и удовлетворяющую требованиям AMP. С конвертацией и требованиями можно ознакомиться &lt;a href="https://www.drupal.org/docs/contributed-modules/accelerated-mobile-pages-amp/amp-version-83/converting-your-primary-theme" target="_blank" rel="noopener noreferrer"&gt;тут&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Мы будем использовать специальную и уже готовую тему AMPTheme. Заметим, что это тема готова к использованию с AMP, но она не содержит стилей. Их можно будет добавить самостоятельно. Установка чистой темы позволит избежать конфликтов и проблем с отображением, которые могут возникнуть, если использовать большую и сложную тему.&lt;/p&gt;
+&lt;p&gt;Установим тему:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;composer require 'drupal/amptheme’&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Теперь нам нужно сделать подтему из &lt;code&gt;ampsubtheme_example&lt;/code&gt;. Вы можете создать её сами или использовать уже подготовленную нами &lt;a href="https://github.com/alexgred/ampsubtheme" target="_blank" rel="noopener noreferrer"&gt;подтему&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Название темы &lt;code&gt;ampsubtheme&lt;/code&gt; можно изменить, оно должно содержать символы латиницы, цифры и символ нижнего подчеркивания “_”. Переименуем папку с темой и все файлы, содержащие &lt;code&gt;ampsubtheme&lt;/code&gt; в названии. В файле &lt;code&gt;ampsubtheme&lt;/code&gt;.theme заменим вхождение &lt;code&gt;ampsubtheme&lt;/code&gt; на ваше название.&lt;/p&gt;
+&lt;p&gt;На странице управления темами &lt;code&gt;admin/appearance&lt;/code&gt; включим (установим) вашу тему и AMP Base. Отметим, что устанавливать по умолчанию не нужно, только включить.&lt;/p&gt;
+&lt;div style="text-align: center; margin: 20px 0;"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/amp/themes.jpg" alt="" /&gt;&lt;/div&gt;
+
+&lt;h4&gt;Настройка&lt;/h4&gt;
+&lt;p&gt;Перейдем к настройке модуля &lt;code&gt;admin/config/services/amp&lt;/code&gt;. Выберем подтему для отображения.&lt;/p&gt;
+&lt;div style="text-align: center; margin: 20px 0;"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/amp/amp_theme.jpg" alt="" /&gt;&lt;/div&gt;
+&lt;p&gt;Выбираем тип материала, который хотим отображать как AMP страницы и жмем “enable”.&lt;/p&gt;
+&lt;div style="text-align: center; margin: 20px 0;"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/amp/enable.jpg" alt="" /&gt;&lt;/div&gt;
+&lt;p&gt;Выбираем дисплей AMP и сохраняем тип материала.&lt;/p&gt;
+&lt;div style="text-align: center; margin: 20px 0;"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/amp/choose_display.jpg" alt="" /&gt;&lt;/div&gt;
+&lt;p&gt;Переходим к настройки дисплея “configure”.&lt;/p&gt;
+&lt;div style="text-align: center; margin: 20px 0;"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/amp/conf.jpg" alt="" /&gt;&lt;/div&gt;
+&lt;p&gt;Для текста формата полей выбираем AMP text, AMP Trimmed Text или AMP Summary or Trimmed в зависимости ваших нужд по выводу текста. Для изображениях выбираем AMP image и настраиваем.&lt;/p&gt;
+&lt;div style="text-align: center; margin: 20px 0;"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/amp/display.jpg" alt="" /&gt;&lt;/div&gt;
+&lt;p&gt;Важно! для responsive значения ширины и высоты ОБЯЗАТЕЛЬНО. Можно указывать ratio, например: 16х9&lt;/p&gt;
+&lt;div style="text-align: center; margin: 20px 0;"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/amp/img.jpg" alt="" /&gt;&lt;/div&gt;
+&lt;p&gt;Проверяем работу модуля перейдя на тестовую страницу: &lt;code&gt;admin/amp/library/test&lt;/code&gt;. Если видим “The Library is working”, значит вы все сделали правильно и все работает.&lt;/p&gt;
+&lt;div style="text-align: center; margin: 20px 0;"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/amp/test.jpg" alt="" /&gt;&lt;/div&gt;
+&lt;p&gt;Для отображения дополнительных кнопок сохранения AMP можно активировать соответствующую галочку:&lt;/p&gt;
+&lt;div style="text-align: center; margin: 20px 0;"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/amp/add.jpg" alt="" /&gt;&lt;/div&gt;
+&lt;p&gt;Дополнительные настройки, использование которых — на ваш риск:&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;Advanced option — конвертирует все HTML в поле body в AMPhtml. Не рекомендуем, так как может удалить часть HTML, который не соответствует стандартам AMP.&lt;/li&gt;
+  &lt;li&gt;Experimental option — будет генерировать весь сайт в AMP формате. Также не рекомендуем — тоже может удалить часть HTML, который не соответствует стандартам AMP.&lt;/li&gt;
+&lt;/ul&gt;&lt;div style="text-align: center; margin: 20px 0;"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/amp/adv.jpg" alt="" /&gt;&lt;/div&gt;
+
+&lt;h4&gt;Настройка и добавление блоков&lt;/h4&gt;
+&lt;p&gt;AMP-страницы, как и обычные, поддерживают вывод блоков &lt;code&gt;admin/structure/block/list/ampsubtheme&lt;/code&gt;. Настройка происходит так же, как и обычно. Нужно только выбрать соответствующую тему.&lt;/p&gt;
+&lt;div style="text-align: center; margin: 20px 0;"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/amp/blocks.jpg" alt="" /&gt;&lt;/div&gt;
+&lt;p&gt;В теме оформления можно добавить свои регионы. Это производится как и в обычной теме в файле &lt;code&gt;my_amp_theme.info.yml.info.yml&lt;/code&gt;. Не забудьте сбросить кэш после внесения изменений в файл конфигураций темы.&lt;/p&gt;
+
+&lt;h4&gt;Итог&lt;/h4&gt;
+&lt;p&gt;Мы настроили модуль и тему для AMP.&lt;/p&gt;
+&lt;p&gt;Чтобы открыть доступ к страницам AMP, нужно запросить страницу с добавлением параметра ?amp в адресную строку, например: &lt;code&gt;node/12345?amp&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Модуль поддерживает режим отладки. Чтобы открыть к нему доступ, в адресную строку добавляем параметр: &lt;code&gt;?amp&amp;debug#development=1&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4&gt;Дополнительные материалы&lt;/h4&gt;
+&lt;p&gt;Документация технологии AMP с дополнительными тегами: &lt;a href="https://amp.dev/" target="_blank" rel="noopener noreferrer"&gt;https://amp.dev/&lt;/a&gt;&lt;br /&gt;
+  Документация по модулю: &lt;a href="https://www.drupal.org/docs/8/modules/accelerated-mobile-pages-amp/amp-version-83" target="_blank" rel="noopener noreferrer"&gt;https://www.drupal.org/docs/8/modules/accelerated-mobile-pages-amp/amp-version-83&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-8" hreflang="ru"&gt;Drupal 8&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/prodvizenie-saitov" hreflang="ru"&gt;Продвижение сайтов&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=294&amp;2=comment&amp;3=comment" token="_8dmtEYvMrzg7f9GTUFmT0L61xh-uUTbizTQ2JIK1zA"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/tekhnologiya-google-amp-dlya-saytov-na-drupal-bystraya-zagruzka-stranic-sayta-s-mobilnogo" hreflang="ru"&gt;Технология Google AMP для сайтов на Drupal: быстрая загрузка страниц сайта с мобильного телефона&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Wed, 26 Jan 2022 09:27:19 +0000</pubDate>
+    <dc:creator>Александр Долженков</dc:creator>
+    <guid isPermaLink="false">294 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>Правильные ответы сервера для ускорения индексации сайта</title>
+  <link>https://drupal-coder.ru/blog/pravilnye-otvety-servera-dlya-uskoreniya-indeksacii-sayta</link>
+  <description>
+&lt;span&gt;Правильные ответы сервера для ускорения индексации сайта&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/93" lang="" about="https://drupal-coder.ru/user/93" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Геворг Мкртчян&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;ср, 10/14/2020 - 06:50&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Клиенты часто обращаются к нам после проведения SEO аудита за оптимизацией сайта на Drupal. Список рекомендаций практически всегда один и тот же, за исключением индивидуальных особенностей поддерживаемого проекта. Проанализировав статистику, заметили, что хоть нашу проблему и включают в отчет, заказчики и исполнители чаще всего игнорируют ее, потому что информации и опыта оказывается слишком мало. Это проблема - правильные заголовки ответа от сервера. Выдача корректных заголовков позволяет ускорить индексацию новых и измененных страниц сайта в несколько раз. &lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Получен код 304 Not Modified. Если страница не изменилась с момента последнего обращения робота, рекомендуется выдавать этот код. Это ускорит индексирование и уменьшит трафик.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Источник: &lt;/em&gt;&lt;a href="https://yandex.ua/support/webmaster/error-dictionary/http-codes.html#http-codes"&gt;&lt;em&gt;https://yandex.ua/support/webmaster/error-dictionary/http-codes.html#http-codes&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Для начала разберемся, что это за заголовок ответа сервера и за что он отвечает. &lt;/p&gt;
+
+&lt;p&gt;Когда пользователь заходит на определенный сайт в браузере, при отсутствии запрета на кеширование со стороны сервера, он сохраняет страницу у себя в кеше. При следующих посещениях браузер запрашивает информацию об актуальности (валидности) сохраненного кеша, и если файлы, сохраненные в кеше актуальны, то повторно с сервера данные не загружаются, а пользователь видит локально сохраненные данные из кеша браузера. &lt;/p&gt;
+
+&lt;p&gt;На сегодняшний день существуют разные механизмы кеширования, о которых можно почитать &lt;a href="https://developer.mozilla.org/ru/docs/Web/HTTP/%D0%9A%D1%8D%D1%88%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5"&gt;тут&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Нас интересует механизм кеширования с временной меткой. При посещении страницы браузер и сервер обмениваются заголовками. Заголовки, которые отправляет браузер на сервер, называют “Заголовки запроса”. А полученные в ответ заголовки от сервера называют “Заголовки ответа”. &lt;/p&gt;
+
+&lt;p&gt;В заголовках ответа должна хранится строка Last-Modified с указанием даты последнего изменения файла. При первом посещении браузер кеширует файл и фиксирует указанную дату в кеше. При последующих посещениях в заголовки запроса добавляется строка If-Modified-since с указанием даты изменения закешированного файла. Сервер проверяет, если файл изменился после указанной даты, то выдает браузеру измененный файл с новой временной меткой Last-Modified. А если файл не изменился с указанной даты - то сервер возвращает заголовок ответа с кодом “304 Not Modified”. В том случае браузер не загружает данные с сервера и выводит файл из кеша.&lt;/p&gt;
+
+&lt;p&gt;Modified”. В том случае браузер не загружает данные с сервера и выводит файл из кеша. &lt;/p&gt;
+
+&lt;p&gt;В 1999 году был принят протокол  HTTP/1.1, в котором появился  более надежный механизм кеширования E-tag. Но проверка валидности кеша по временной метке все еще важна. &lt;/p&gt;
+
+&lt;p&gt;Дело в том, что поисковые системы при проверке сайта не сохраняют данные о метках кеша (E-tag), а также информацию о дате последнего изменения страницы (Last-modified). Но при этом они хранят информацию о последнем посещении страницы ботом. При следующих посещениях бот поисковой системы в качестве заголовка запроса  If-Modified-Since передает дату последнего посещения. И если страница не изменилась после указанной даты (возвращается ответ 304 Not Modified), то бот просто пропускает страницу и продолжает поиск нового и измененного контента по сайту. &lt;/p&gt;
+
+&lt;p&gt;Давайте посчитаем:&lt;/p&gt;
+
+&lt;p&gt;Допустим на сайте есть 10000 товаров. Бот за 1 проход по сайту индексирует не более 1000 страниц (цифра выдуманная, реальные данные про настройки ботов нам не известны). Бот посещает сайт каждые 2 дня, для индексации. И все страницы уже добавлены в индекс. &lt;/p&gt;
+
+&lt;p&gt;Предположим, что после последней индексации у нас изменились цены и скорректированы описания на определенные категории товаров (2000 товаров) и добавились новые товары (500 товаров). &lt;/p&gt;
+
+&lt;p&gt;При некорректной обработке заголовков if-modified since для индексации бот должен пройти по всем страницам сайта. Учитывая вводные данные получится, что для индексации 2000 измененных страниц и 500 новых бот должен просмотреть все страницы сайта. (15000) страниц = 11 посещений сайта = 22 дня. &lt;/p&gt;
+
+&lt;p&gt;Если же заголовки отдаются корректно, то все не измененные страницы будут проигнорированы ботом из-за заголовка 304 Not Modifed. В этом случае для индексации останется 2500 страниц = 3 посещения = 6 дней.&lt;/p&gt;
+
+&lt;p&gt;Получается, что ваши потенциальные покупатели в поисковой выдаче увидят изменения намного раньше, если настроены корректные заголовки. &lt;/p&gt;
+
+&lt;p&gt;В CMS Drupal давно известна проблема с правильными ответами сервера, в частности с корректной выдачей заголовка ответа 304 Not-Modified. Проверка на заголовки кеширования происходит следующим образом: чтобы друпал вернул указанный заголовок, необходимо, чтобы заголовки запросов соответствовали следующим критериям: &lt;/p&gt;
+
+&lt;ol&gt;&lt;li&gt;Есть заголовок If-None-Match и есть заголовок If-Modified-Since;&lt;/li&gt;
+	&lt;li&gt;Значение If-Modified-Since должно быть равно последнему значению Last-modified;&lt;/li&gt;
+	&lt;li&gt;Значение If-None-Match должно быть равно значению E-tag.&lt;/li&gt;
+&lt;/ol&gt;&lt;p&gt;В описанных пунктах есть несколько несоответствий официальной спецификации:&lt;/p&gt;
+
+&lt;ol&gt;&lt;li&gt;В &lt;a href="https://tools.ietf.org/html/rfc7232#section-3.3"&gt;RFC 7232 (Секция 3-3)&lt;/a&gt; говорится, что получатель (сервер)  обязан игнорировать If-Modified-Since, если в запросе есть заголовок If-None-Match. &lt;/li&gt;
+	&lt;li&gt;В &lt;a href="https://tools.ietf.org/html/rfc2616##section-13.3.4"&gt;RFC 2616 (Секция 13.3.4)&lt;/a&gt; говорится, что If-Modified-Since не должен возвращать 304  Not-Modifed, если не все остальные заголовки валидны. &lt;/li&gt;
+&lt;/ol&gt;&lt;p&gt;Учитывая данные 2 пункта можем сделать вывод, что для корректной проверки If-Modified-Since заголовка нужно убедиться, что заголовок If-None-Match отсутствует или валиден, перед тем как проверять If-Modified-Since заголовок. &lt;/p&gt;
+
+&lt;p&gt;Но самая большая проблема указана в пункте 3 “Значение If-None-Match должно быть равно значению E-tag”. Как уже выше говорилось, браузеры сохраняют метку, полученную из заголовка ответа Last-Modified и в будущем передают именно ее для проверки на сервер. Поисковые системы же передают дату последнего посещения, и в 99.99% случаев эта дата не будет совпадать с датой последнего изменения страницы. А это значит, что поисковый бот гарантировано не будет получать ответ “304 Not Modified” на все запросы к Drupal сайту. &lt;/p&gt;
+
+&lt;p&gt;Данная проблема присутствует как в 7 так и в 8 версии Drupal.&lt;/p&gt;
+
+&lt;p&gt;Мы создали патчи  для 7-ой и 8-ой версии. &lt;/p&gt;
+
+&lt;p&gt;Drupal 7 - &lt;a href="https://www.drupal.org/project/drupal/issues/3055984#comment-13213469"&gt;https://www.drupal.org/project/drupal/issues/3055984#comment-13213469&lt;/a&gt; &lt;/p&gt;
+
+&lt;p&gt;Drupal 8 - &lt;a href="https://www.drupal.org/project/drupal/issues/2259489#comment-13134143"&gt;https://www.drupal.org/project/drupal/issues/2259489#comment-13134143&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Приятным бонусом стало то, что в Drupal 8 применимо внедрение зависимостей (Dependency Injection). Это в свою очередь предоставляет возможность менять все, что пожелаете, с помощью переопределения классов сервисов. И это позволило нам создать небольшой модуль &lt;a href="https://www.drupal.org/project/lastmodified_since"&gt;&lt;strong&gt;Last Modified since header fix&lt;/strong&gt;&lt;/a&gt;, который можно установить на ваш сайт до принятия патча разработчиками ядра Drupal 8. Модуль выполняет необходимые настройки и выдает корректные заголовки кеширования. &lt;/p&gt;
+
+&lt;p&gt;Пользователям Drupal 7 придется использовать существующий патч на ядро. &lt;/p&gt;
+
+&lt;p&gt;Нужно отметить, что некоторые серверы (хостинг) настроены так, что веб-сервер сам контролирует вышеуказанные заголовки и выдает их корректно. В этом случае проблему можно сразу и не заметить, но при переезде сайта на другой хост, она может “всплыть”. &lt;/p&gt;
+
+&lt;hr /&gt;&lt;p&gt;В данном контексте страница - это HTML файл страницы и все файлы, которые необходимы для отображения данной страницы, полученные с сервера.&lt;/p&gt;&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/prodvizenie-saitov" hreflang="ru"&gt;Продвижение сайтов&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/seo" hreflang="ru"&gt;SEO&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-7" hreflang="ru"&gt;Drupal 7&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-8" hreflang="ru"&gt;Drupal 8&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=266&amp;2=comment&amp;3=comment" token="8fEI7N9n01EddQ0Ug03YejZAPosvCE9slAcfuGxj-AI"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;</description>
+  <pubDate>Wed, 14 Oct 2020 06:50:29 +0000</pubDate>
+    <dc:creator>Геворг Мкртчян</dc:creator>
+    <guid isPermaLink="false">266 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>Drupal: Модуль CDEK API</title>
+  <link>https://drupal-coder.ru/blog/drupal-modul-cdek-api</link>
+  <description>
+&lt;span&gt;Drupal: Модуль CDEK API&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/42" lang="" about="https://drupal-coder.ru/user/42" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Андрей Тымчук&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;вт, 09/29/2020 - 10:01&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;В начале сентября ветки 8.x-2.x и 7.x-2.x, разрабатываемого мною модуля &lt;a href="https://www.drupal.org/project/cdek_api"&gt;CDEK API&lt;/a&gt;, добрались до полноценных релизов - все задуманные фичи реализованы и протестированы. В данной статье кратко расскажу о том, какие у модуля возможности и как их использовать.&lt;/p&gt;
+
+&lt;p&gt;Напомню, что модуль позволяет взаимодействовать с API сервиса доставки &lt;a href="https://cdek.ru"&gt;СДЭК&lt;/a&gt; и будет полезен исключительно для разработчиков, так как сам по себе он ничего не делает, не дополняет, не расширяет.&lt;/p&gt;
+
+&lt;p&gt;Главное отличие от веток 8.x-1.x и 7.x-1.x — это использование PHP библиотеки &lt;a href="https://github.com/sanmai/cdek-sdk"&gt;CDEK SDK&lt;/a&gt; для взаимодействия с API. Ставится библиотека с помощью Composer, для версии в Drupal 7 потребуется модуль Composer Manager.&lt;/p&gt;
+
+&lt;p&gt;Ветка 8.x-2.x потребует Drupal версии 8.8 или выше (Drupal 9 тоже поддерживается). Для ветки 7.x-2.x потребуется PHP версии 7.0 или выше.&lt;/p&gt;
+
+&lt;h2&gt;Настройка&lt;/h2&gt;
+
+&lt;p&gt;Страница настроек модуля позволяет:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;Задать учётные данные для выполнения авторизованных запросов к API;&lt;/li&gt;
+	&lt;li&gt;Включить тестовый режим (все запросы будут отправляться на тестовый сервер);&lt;/li&gt;
+	&lt;li&gt;Задать таймаут для запросов к API;&lt;/li&gt;
+	&lt;li&gt;Включить кэширование данных (список ПВЗ);&lt;/li&gt;
+	&lt;li&gt;Задать время хранения кэша.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;img alt="Настройки" data-entity-type="file" data-entity-uuid="eb0c0f34-ad15-4998-bfb5-48e7d945583a" src="https://drupal-coder.ru/sites/default/files/inline-images/settings2.png" width="600" height="619" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Базовое использование&lt;/h2&gt;
+
+&lt;p&gt;Основа модуля — это сервис &lt;code&gt;cdek_api&lt;/code&gt;. Рассмотрим ряд примеров:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$client&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; \Drupal&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;service&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'cdek_api'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getCdekClient&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Получаем объект клиента с учётом настроек. Далее с помощью клиента можно выполнить любой запрос, который описан в &lt;a href="https://cdek-sdk.readthedocs.io"&gt;документации&lt;/a&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$points&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; \Drupal&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;service&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'cdek_api'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getPickupPoints&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Получаем список всех ПВЗ (пункт выдачи заказа). Если кэширование включено, то полученные данные будут сохранены в отдельном кэш-бине. Кроме того, независимо от настроек, все данные сохраняются в статическом кэше. Следует отметить, что полный список имеет большой объём. В случае хранения кэша в базе данных и при возникновении ошибки при его записи следует увеличить значение параметра &lt;code&gt;innodb_log_file_size&lt;/code&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$request&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000000; font-weight: bold;"&gt;new&lt;/span&gt; PvzListRequest&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000088;"&gt;$request&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;setCityId&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #cc66cc;"&gt;435&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000088;"&gt;$request&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;setCash&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900; font-weight: bold;"&gt;TRUE&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000088;"&gt;$request&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;setDressingRoom&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900; font-weight: bold;"&gt;TRUE&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+&lt;span style="color: #000088;"&gt;$points&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; \Drupal&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;service&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'cdek_api'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getPickupPoints&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$request&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;При запросе ПВЗ можно использовать фильтры. Для этого нужно в метод передать объект запроса с нужными параметрами. Списки с использованием фильтров также кэшируются.&lt;/p&gt;
+
+&lt;hr /&gt;&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$point&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; \Drupal&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;service&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'cdek_api'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getPickupPoint&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'KSD11'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Получаем конкретный ПВЗ по его коду.&lt;/p&gt;
+
+&lt;hr /&gt;&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$service&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; \Drupal&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;service&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'cdek_api'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+&lt;span style="color: #000088;"&gt;$countries&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$service&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getCountries&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000088;"&gt;$regions&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$service&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getRegions&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000088;"&gt;$cities&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$service&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getCities&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Получаем список доступных стран, регионов и городов. Данные списки строятся на основе списка ПВЗ, поэтому сами не кэшируются.&lt;/p&gt;
+
+&lt;hr /&gt;&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$request&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000000; font-weight: bold;"&gt;new&lt;/span&gt; PvzListRequest&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000088;"&gt;$request&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;setCountryId&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #cc66cc;"&gt;1&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+&lt;span style="color: #000088;"&gt;$cities&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; \Drupal&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;service&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'cdek_api'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getCities&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$request&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Фильтры также доступны.&lt;/p&gt;
+
+&lt;hr /&gt;&lt;p&gt;Если необходимо внести изменения в список ПВЗ, то нужно создать обработчик события &lt;code&gt;cdek_api.pickup_points&lt;/code&gt;. Например, в указанном ниже примере название ПВЗ заменяется на его адрес.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000000; font-weight: bold;"&gt;&lt;?php&lt;/span&gt;
+ 
+&lt;span style="color: #000000; font-weight: bold;"&gt;namespace&lt;/span&gt; Drupal\example\EventSubscriber&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+&lt;span style="color: #000000; font-weight: bold;"&gt;use&lt;/span&gt; Symfony\Component\EventDispatcher\EventSubscriberInterface&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;use&lt;/span&gt; Drupal\cdek_api\Event\PickupPointsEvent&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;use&lt;/span&gt; Drupal\cdek_api\Event\CdekApiEvents&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+&lt;span style="color: #009933; font-style: italic;"&gt;/**
+ * An example event subscriber.
+ */&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;class&lt;/span&gt; ExampleEventSubscriber &lt;span style="color: #000000; font-weight: bold;"&gt;implements&lt;/span&gt; EventSubscriberInterface &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+ 
+  &lt;span style="color: #009933; font-style: italic;"&gt;/**
+   * {@inheritdoc}
+   */&lt;/span&gt;
+  &lt;span style="color: #000000; font-weight: bold;"&gt;public&lt;/span&gt; static &lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; getSubscribedEvents&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+    &lt;span style="color: #b1b100;"&gt;return&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;
+      CdekApiEvents&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;PICKUP_POINTS&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'alterPickupPoints'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+    &lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+ 
+  &lt;span style="color: #009933; font-style: italic;"&gt;/**
+   * React to a list of pickup points being loaded.
+   *
+   * @param \Drupal\cdek_api\Event\PickupPointsEvent $event
+   *   The pickup points event.
+   */&lt;/span&gt;
+  &lt;span style="color: #000000; font-weight: bold;"&gt;public&lt;/span&gt; &lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; alterPickupPoints&lt;span style="color: #009900;"&gt;(&lt;/span&gt;PickupPointsEvent &lt;span style="color: #000088;"&gt;$event&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$points&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$event&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getPoints&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+    &lt;span style="color: #b1b100;"&gt;foreach&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$points&lt;/span&gt; &lt;span style="color: #b1b100;"&gt;as&lt;/span&gt; &lt;span style="color: #000088;"&gt;$point&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+      &lt;span style="color: #000088;"&gt;$point&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;Name&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$point&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;Address&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$event&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;setPoints&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$points&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+ 
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;В Drupal 7 сервисов и событий нет, поэтому код для 7.x-2.x будет отличаться.&lt;/p&gt;
+
+&lt;p&gt;Нужно обращаться напрямую к классу…&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$client&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; CdekApi&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;getInstance&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getCdekClient&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;…и вместо обработки события использовать реализацию хука &lt;code&gt;hook_cdek_api_pickup_points_alter()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #009933; font-style: italic;"&gt;/**
+ * Implements hook_cdek_api_pickup_points_alter().
+ */&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; example_cdek_api_pickup_points_alter&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #990000;"&gt;array&lt;/span&gt; &lt;span style="color: #339933;"&gt;&amp;&lt;/span&gt;&lt;span style="color: #000088;"&gt;$points&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #990000;"&gt;array&lt;/span&gt; &lt;span style="color: #000088;"&gt;$params&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #b1b100;"&gt;foreach&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$points&lt;/span&gt; &lt;span style="color: #b1b100;"&gt;as&lt;/span&gt; &lt;span style="color: #000088;"&gt;$point&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$point&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;Name&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$point&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;Address&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;h2&gt;Элемент формы для выбора ПВЗ&lt;/h2&gt;
+
+&lt;p&gt;Модуль предоставляет два элемента формы, первый из которых — это элемент для иерархического выбора ПВЗ относительно выбранных значений страны/региона/города.&lt;/p&gt;
+
+&lt;p&gt;Чтобы использовать элемент, достаточно внутри формы указать следующий код:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'point'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;
+  &lt;span style="color: #0000ff;"&gt;'#type'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'cdek_select'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img alt="Элемент формы для выбора ПВЗ" data-entity-type="file" data-entity-uuid="c9d6cf76-295d-49c8-9e4a-789859d7081f" src="https://drupal-coder.ru/sites/default/files/inline-images/form-element-1.png" width="300" height="229" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Можно использовать стандартные свойства, применимые к стандартным элементам — &lt;code&gt;#title&lt;/code&gt;, &lt;code&gt;#description&lt;/code&gt;, &lt;code&gt;#required&lt;/code&gt; и другие. Значением элемента при сабмите формы будет код выбранного ПВЗ. Можно также указывать значение по умолчанию с помощью &lt;code&gt;#default_value&lt;/code&gt;, которое должно являться кодом существующего ПВЗ.&lt;/p&gt;
+
+&lt;p&gt;Кроме того, для изменения поведения и/или отображения элемента можно использовать дополнительное свойство &lt;code&gt;#cdek_request&lt;/code&gt;, в котором нужно будет передать объект запроса аналогично тому как это используется в методе &lt;code&gt;getPickupPoints()&lt;/code&gt; для фильтрации списка. Таким образом, можно изменять список ПВЗ, который будет доступен для выбора.&lt;/p&gt;
+
+&lt;p&gt;При этом, если в запросе указан фильтр по городу, то не будут отображаться элементы для выбора города, региона и страны. Если указан фильтр по региону, то не будут отображаться элементы для выбора региона и страны. Если указан фильтр по стране, то не будет отображаться элемент для выбора страны.&lt;/p&gt;
+
+&lt;p&gt;По умолчанию элементы для выбора страны/региона/города/пункта являются выпадающими списками. Их отображение можно кастомизировать с помощью прямого указания их структуры.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'point'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;
+  &lt;span style="color: #0000ff;"&gt;'#type'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'cdek_select'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+  &lt;span style="color: #0000ff;"&gt;'country'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'#type'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'radios'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'#title'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #009900; font-weight: bold;"&gt;NULL&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+  &lt;span style="color: #0000ff;"&gt;'region'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'#access'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #009900; font-weight: bold;"&gt;FALSE&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;h2&gt;Виджет&lt;/h2&gt;
+
+&lt;p&gt;Второй элемент представляет собой интеграцию с виджетом ПВЗ (&lt;a href="https://widget.cdek.ru"&gt;https://widget.cdek.ru&lt;/a&gt;). На сайте СДЭК указано следующее описание виджета:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Виджет предназначен для отображения актуальной информации о пунктах самовывоза СДЭК с привязкой их к карте, возможностью расчета доставки (сроков и стоимости) для указанных габаритов товаров. Виджет может быть отображен как статичный элемент на странице, так и всплывающим окном.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Элемент может быть использован как внутри формы, так и внутри обычного рендер массива. Если элемент используется в контексте формы, то он предназначен для выбора ПВЗ и панель с выбором варианта доставки будет скрыта. Выбранный ПВЗ будет отображаться в дочернем элементе над виджетом. Если элемент используется вне формы, то виджет считается информационным и выбор ПВЗ в нём запрещён.&lt;/p&gt;
+
+&lt;p&gt;В рамках одной страницы рекомендуется использовать не более одного виджета, в противном случае поведение не известно. Чтобы использовать элемент, достаточно указать следующий код:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'point'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;
+  &lt;span style="color: #0000ff;"&gt;'#type'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'cdek_widget'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+  &lt;span style="color: #0000ff;"&gt;'#cdek_widget_options'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'defaultCity'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'Краснодар'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'cityFrom'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'Москва'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img alt="Виджет" data-entity-type="file" data-entity-uuid="cbc34fbf-5925-4048-b752-e95605f092e5" src="https://drupal-coder.ru/sites/default/files/inline-images/form-element3.png" width="800" height="538" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;p&gt;В свойстве &lt;code&gt;#cdek_widget_options&lt;/code&gt; указывается массив настроек виджета. Подробнее о настройках можно прочитать в документации виджета. Настройки &lt;code&gt;link&lt;/code&gt; и &lt;code&gt;servicepath&lt;/code&gt; указывать бессмысленно, так как они будут перезаписаны. Если указать настройку &lt;code&gt;popup&lt;/code&gt; со значением TRUE, то виджет будет отображён в виде всплывающего окна.&lt;/p&gt;
+
+&lt;p&gt;К элементу применимы стандартные свойства элементов формы. Значение по умолчанию должно являться кодом существующего ПВЗ.&lt;/p&gt;
+
+&lt;p&gt;С помощью свойства &lt;code&gt;#cdek_widget_popup_title&lt;/code&gt; можно задать текст ссылки, нажатие которой приводит к открытию виджета в режиме всплывающего окна.&lt;/p&gt;
+
+&lt;p&gt;Свойство &lt;code&gt;#cdek_widget_tariff_list&lt;/code&gt; предназначено для указания списка тарифов, который будет использован контроллером виджета при расчёте стоимости для каждого из типов доставки (&lt;strong&gt;courier&lt;/strong&gt; или &lt;strong&gt;pickup&lt;/strong&gt;). Если список тарифов не указан, то для расчёта будет использован тариф под номером &lt;strong&gt;1&lt;/strong&gt;. Для того, чтобы контроллер мог получить доступ к тарифам, список сохраняется в кэше.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'point'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;
+  &lt;span style="color: #0000ff;"&gt;'#type'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'cdek_widget'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+  &lt;span style="color: #0000ff;"&gt;'#cdek_widget_options'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'defaultCity'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'Краснодар'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'cityFrom'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'Москва'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+  &lt;span style="color: #0000ff;"&gt;'#cdek_widget_tariff_list'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'courier'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #cc66cc;"&gt;233&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;137&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;139&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;16&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;18&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;11&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;1&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;3&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;61&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;60&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;59&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;58&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;57&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;83&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'pickup'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #cc66cc;"&gt;234&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;136&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;138&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;15&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;17&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;10&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;12&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;5&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;62&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;63&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;На данный момент модуль не имеет перевода на русский язык, поэтому все обозначения и описания внутри виджета отображаются на английском языке. Виджет можно локализовать вручную - все строки для перевода находятся в методе &lt;code&gt;WidgetController::doActionLang()&lt;/code&gt;. В случае Drupal 7 - это функция &lt;code&gt;cdek_api_widget_action_lang()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Элемент виджета также предоставляет API со стороны JavaScript. В процессе работы виджета возникают события: &lt;code&gt;cdekApiWidgetReady&lt;/code&gt;, &lt;code&gt;cdekApiWidgetDeliveryCalculated&lt;/code&gt;, &lt;code&gt;cdekApiWidgetPointSelected&lt;/code&gt; и &lt;code&gt;cdekApiWidgetCourierSelected&lt;/code&gt;. Они соответствуют событиям &lt;code&gt;onReady&lt;/code&gt;, &lt;code&gt;onCalculate&lt;/code&gt;, &lt;code&gt;onChoose&lt;/code&gt; и &lt;code&gt;onChooseProfile&lt;/code&gt;, которые описаны в документации виджета. Отличие заключается в отсутствии привязки к объекту виджета, так как событие вызывается для оболочки элемента. Соответственно, подписаться на событие можно с помощью стандартных средств jQuery.&lt;/p&gt;&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-7" hreflang="ru"&gt;Drupal 7&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-8" hreflang="ru"&gt;Drupal 8&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=265&amp;2=comment&amp;3=comment" token="oDTTj6SHpFvGYUI319oXvKTZNvcKlQalAHTJrUNU044"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/modul-performance-monitor-ocenka-proizvoditelnosti-sistemnogo-okruzheniya" hreflang="ru"&gt;Модуль Performance Monitor - оценка производительности системного окружения&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/moy-dostupnyy-vsem-sekretnyy-drupal-modul-dlya-uluchsheniya-seo-ustanovili-bolee-tysyachi-raz" hreflang="ru"&gt;Мой доступный всем секретный Drupal-модуль для улучшения SEO установили более тысячи раз&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/seo-prodvizhenie-internet-magazinov-na-drupal-sozdali-modul-kotoryy-prevraschaet-svoystva" hreflang="ru"&gt;SEO-продвижение интернет-магазинов на Drupal: создали модуль, который превращает свойства товаров в осмысленные заголовки&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Tue, 29 Sep 2020 10:01:02 +0000</pubDate>
+    <dc:creator>Андрей Тымчук</dc:creator>
+    <guid isPermaLink="false">265 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>Drupal 8: Validation Constraints</title>
+  <link>https://drupal-coder.ru/blog/drupal-8-validation-constraints</link>
+  <description>
+&lt;span&gt;Drupal 8: Validation Constraints&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/42" lang="" about="https://drupal-coder.ru/user/42" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Андрей Тымчук&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;пн, 04/20/2020 - 14:11&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;В Drupal 8 валидация сущностей представляет собой отдельное API, которое отделено от механизма валидации форм. Оно основывается на компоненте Symfony Validator и связано с &lt;a href="https://www.drupal.org/docs/8/api/typed-data-api/typed-data-api-overview"&gt;Typed Data API&lt;/a&gt;. поскольку сущности и поля являются типизированными данными. Это также означает, что можно добавлять валидацию к любым типизированным данным.&lt;/p&gt;
+
+&lt;p&gt;Так как валидация сущностей не привязана к формам (хотя она там тоже используется), её можно использовать по требованию. К примеру, это полезно при реализации веб-сервиса, что отражено в модулях JSON:API и RESTful Web Services.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3&gt;Использование&lt;/h3&gt;
+
+&lt;p&gt;Компонент Symfony Validator построен на концепции ограничений (constraints) и валидаторов. Первые определяют правила для валидации, а вторые описывают её логику. В Drupal 8 ограничения интегрированы в систему плагинов, то есть являются плагинами. Все ограничения наследуют класс &lt;code&gt;Symfony\Component\Validator\Constraint&lt;/code&gt;, а все валидаторы - &lt;code&gt;Symfony\Component\Validator\ConstraintValidator&lt;/code&gt;. Помимо ограничений из Symfony, в Drupal 8 описаны собственные ограничения. Например, уникальность значения поля, соответствие сущности типу, корректность формата даты и т.д.&lt;/p&gt;
+
+&lt;p&gt;Чтобы выполнить валидацию объекта типизированных данных, нужно вызвать метод &lt;code&gt;validate()&lt;/code&gt;. Результатом выполнения метода будет список нарушений, выявленных при проверке. Если список пуст, значит валидация прошла успешна. При этом некоторые типы данных сразу описывают, какие ограничения на них налагаются. К примеру, тип данных Email сразу связан с одноимённым ограничением.&lt;/p&gt;
+
+&lt;p&gt;В данном примере валидация пройдёт успешно, так как мы указали валидный email:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$definition&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; DataDefinition&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;create&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'email'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000088;"&gt;$typed_data&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; \Drupal&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;typedDataManager&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;create&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$definition&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'foo-bar@example.com'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000088;"&gt;$violations&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$typed_data&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;validate&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Можно добавлять свои ограничения:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$definition&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; DataDefinition&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;create&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'email'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000088;"&gt;$definition&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;addConstraint&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'Length'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'max'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;100&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000088;"&gt;$typed_data&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; \Drupal&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;typedDataManager&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;create&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$definition&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'foo-bar@example.com'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000088;"&gt;$violations&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$typed_data&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;validate&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Альтернативный способ выполнения валидации:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$violations&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; \Drupal&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;typedDataManager&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getValidator&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;validate&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$typed_data&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Валидация отдельной сущности:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$violations&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$entity&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;validate&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Валидация отдельного поля:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$violations&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$entity&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;get&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'foo_bar'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;validate&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Добавляем ограничение для поля (когда есть доступ к классу сущности):&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000000; font-weight: bold;"&gt;public&lt;/span&gt; static &lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; baseFieldDefinitions&lt;span style="color: #009900;"&gt;(&lt;/span&gt;EntityTypeInterface &lt;span style="color: #000088;"&gt;$entity_type&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$fields&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'foo_bar'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; BaseFieldDefinition&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;create&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'string'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;
+    &lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;setLabel&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;t&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'Foo bar'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;
+    &lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;addConstraint&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'CustomFieldConstraint'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+  &lt;span style="color: #b1b100;"&gt;return&lt;/span&gt; &lt;span style="color: #000088;"&gt;$fields&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Добавляем ограничение для поля (когда нет доступа к классу сущности):&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #009933; font-style: italic;"&gt;/**
+ * Implements hook_entity_bundle_field_info_alter().
+ */&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; MODULE_NAME_entity_bundle_field_info_alter&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #339933;"&gt;&amp;&lt;/span&gt;&lt;span style="color: #000088;"&gt;$fields&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; EntityTypeInterface &lt;span style="color: #000088;"&gt;$entity_type&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #000088;"&gt;$bundle&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #b1b100;"&gt;if&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$entity_type&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;id&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #339933;"&gt;==&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'foo'&lt;/span&gt; &lt;span style="color: #339933;"&gt;&amp;&amp;&lt;/span&gt; &lt;span style="color: #000088;"&gt;$bundle&lt;/span&gt; &lt;span style="color: #339933;"&gt;==&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'bar'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+    &lt;span style="color: #b1b100;"&gt;if&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #990000;"&gt;isset&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$fields&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'foo_bar'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+      &lt;span style="color: #000088;"&gt;$fields&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'foo_bar'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;addConstraint&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'CustomFieldConstraint'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ограничения можно указывать в аннотации сущности. В этом случае они будут применяться на все сущности данного типа. Если доступа к классу сущности нет, используем хук:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #009933; font-style: italic;"&gt;/**
+ * Implements hook_entity_type_alter().
+ */&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; MODULE_NAME_entity_type_alter&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #990000;"&gt;array&lt;/span&gt; &lt;span style="color: #339933;"&gt;&amp;&lt;/span&gt;&lt;span style="color: #000088;"&gt;$entity_types&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$entity_types&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'foo'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;addConstraint&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'CustomEntityConstraint'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3&gt;Собственный валидатор&lt;/h3&gt;
+
+&lt;p&gt;На одном из проектов мне недавно понадобилось добавить валидацию для поля с датой на форме ноды. Нужно было запретить ввод прошедшей даты. Для решения задачи я написал собственный валидатор. Его и рассмотрим в качестве примера.&lt;/p&gt;
+
+&lt;p&gt;Сначала определим ограничение (файл &lt;code&gt;src/Plugin/Validation/Constraint/FutureDateConstraint.php&lt;/code&gt;):&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000000; font-weight: bold;"&gt;&lt;?php&lt;/span&gt;
+ 
+&lt;span style="color: #000000; font-weight: bold;"&gt;namespace&lt;/span&gt; Drupal\MODULE_NAME\Plugin\Validation\Constraint&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+&lt;span style="color: #000000; font-weight: bold;"&gt;use&lt;/span&gt; Symfony\Component\Validator\Constraint&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+&lt;span style="color: #009933; font-style: italic;"&gt;/**
+ * Custom validation constraint.
+ *
+ * @Constraint(
+ *   id = "FutureDate",
+ *   label = @Translation("Future date", context = "Validation"),
+ * )
+ */&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;class&lt;/span&gt; FutureDateConstraint &lt;span style="color: #000000; font-weight: bold;"&gt;extends&lt;/span&gt; Constraint &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+ 
+  &lt;span style="color: #009933; font-style: italic;"&gt;/**
+   * The default violation message.
+   *
+   * @var string
+   */&lt;/span&gt;
+  &lt;span style="color: #000000; font-weight: bold;"&gt;public&lt;/span&gt; &lt;span style="color: #000088;"&gt;$message&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'@name field must be a future date.'&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Далее определяем валидатор (файл &lt;code&gt;src/Plugin/Validation/Constraint/FutureDateConstraintValidator.php&lt;/code&gt;). Имя класса должно следовать шаблону &lt;code&gt;${ConstraintClassName}Validator&lt;/code&gt;. Если имеется необходимость использовать другое имя, то оно указывается в классе ограничения в методе &lt;code&gt;validatedBy()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000000; font-weight: bold;"&gt;&lt;?php&lt;/span&gt;
+ 
+&lt;span style="color: #000000; font-weight: bold;"&gt;namespace&lt;/span&gt; Drupal\MODULE_NAME\Plugin\Validation\Constraint&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+&lt;span style="color: #000000; font-weight: bold;"&gt;use&lt;/span&gt; Symfony\Component\Validator\ConstraintValidator&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;use&lt;/span&gt; Symfony\Component\Validator\Constraint&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;use&lt;/span&gt; Drupal\Core\Datetime\DrupalDateTime&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;use&lt;/span&gt; Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+&lt;span style="color: #009933; font-style: italic;"&gt;/**
+ * Custom constraint validator.
+ */&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;class&lt;/span&gt; FutureDateConstraintValidator &lt;span style="color: #000000; font-weight: bold;"&gt;extends&lt;/span&gt; ConstraintValidator &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+ 
+  &lt;span style="color: #009933; font-style: italic;"&gt;/**
+   * {@inheritdoc}
+   */&lt;/span&gt;
+  &lt;span style="color: #000000; font-weight: bold;"&gt;public&lt;/span&gt; &lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; validate&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$items&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; Constraint &lt;span style="color: #000088;"&gt;$constraint&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+    &lt;span style="color: #009933; font-style: italic;"&gt;/** @var \Drupal\datetime\Plugin\Field\FieldType\DateTimeFieldItemList $items */&lt;/span&gt;
+    &lt;span style="color: #b1b100;"&gt;if&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #339933;"&gt;!&lt;/span&gt;&lt;span style="color: #990000;"&gt;isset&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$items&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #339933;"&gt;||&lt;/span&gt; &lt;span style="color: #000088;"&gt;$items&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;isEmpty&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+      &lt;span style="color: #b1b100;"&gt;return&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+ 
+    &lt;span style="color: #009933; font-style: italic;"&gt;/** @var \Drupal\datetime\Plugin\Field\FieldType\DateTimeItem $item */&lt;/span&gt;
+    &lt;span style="color: #b1b100;"&gt;foreach&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$items&lt;/span&gt; &lt;span style="color: #b1b100;"&gt;as&lt;/span&gt; &lt;span style="color: #000088;"&gt;$item&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+      &lt;span style="color: #000088;"&gt;$value&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$item&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getValue&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'value'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+      &lt;span style="color: #b1b100;"&gt;if&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #990000;"&gt;is_string&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$value&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+        &lt;span style="color: #000088;"&gt;$date1&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000000; font-weight: bold;"&gt;new&lt;/span&gt; DrupalDateTime&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'now'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; DateTimeItemInterface&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;STORAGE_TIMEZONE&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+        &lt;span style="color: #000088;"&gt;$date2&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000000; font-weight: bold;"&gt;new&lt;/span&gt; DrupalDateTime&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$value&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; DateTimeItemInterface&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;STORAGE_TIMEZONE&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+        &lt;span style="color: #b1b100;"&gt;if&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$date2&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getTimestamp&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #339933;"&gt;&lt;&lt;/span&gt; &lt;span style="color: #000088;"&gt;$date1&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getTimestamp&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+          &lt;span style="color: #000088;"&gt;$this&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;context&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;addViolation&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$constraint&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;message&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;
+            &lt;span style="color: #0000ff;"&gt;'@name'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #000088;"&gt;$items&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getFieldDefinition&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getLabel&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+          &lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+        &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+      &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+    &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+ 
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Наконец, добавим ограничение к полю (файл &lt;code&gt;MODULE_NAME.module&lt;/code&gt;):&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #009933; font-style: italic;"&gt;/**
+ * Implements hook_entity_bundle_field_info_alter().
+ */&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; MODULE_NAME_entity_bundle_field_info_alter&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #339933;"&gt;&amp;&lt;/span&gt;&lt;span style="color: #000088;"&gt;$fields&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; EntityTypeInterface &lt;span style="color: #000088;"&gt;$entity_type&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #000088;"&gt;$bundle&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #b1b100;"&gt;if&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$entity_type&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;id&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #339933;"&gt;==&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'node'&lt;/span&gt; &lt;span style="color: #339933;"&gt;&amp;&amp;&lt;/span&gt; &lt;span style="color: #000088;"&gt;$bundle&lt;/span&gt; &lt;span style="color: #339933;"&gt;==&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'foo'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+    &lt;span style="color: #b1b100;"&gt;if&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #990000;"&gt;isset&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$fields&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'field_foo_date'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+      &lt;span style="color: #000088;"&gt;$fields&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'field_foo_date'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;addConstraint&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'FutureDate'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-8" hreflang="ru"&gt;Drupal 8&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=248&amp;2=comment&amp;3=comment" token="VYkgD4YWXiJbOCGOnqvZ50OfcxkcqsaTXi2jScWWdYg"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/moy-dostupnyy-vsem-sekretnyy-drupal-modul-dlya-uluchsheniya-seo-ustanovili-bolee-tysyachi-raz" hreflang="ru"&gt;Мой доступный всем секретный Drupal-модуль для улучшения SEO установили более тысячи раз&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/modul-performance-monitor-ocenka-proizvoditelnosti-sistemnogo-okruzheniya" hreflang="ru"&gt;Модуль Performance Monitor - оценка производительности системного окружения&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-modul-cdek-api" hreflang="ru"&gt;Drupal: Модуль CDEK API&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/seo-prodvizhenie-internet-magazinov-na-drupal-sozdali-modul-kotoryy-prevraschaet-svoystva" hreflang="ru"&gt;SEO-продвижение интернет-магазинов на Drupal: создали модуль, который превращает свойства товаров в осмысленные заголовки&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Mon, 20 Apr 2020 14:11:23 +0000</pubDate>
+    <dc:creator>Андрей Тымчук</dc:creator>
+    <guid isPermaLink="false">248 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/drupal-8-validation-constraints#comments</comments>
+    </item>
+<item>
+  <title>Интеграция сайта Drupal 8 с CRM Битрикс24</title>
+  <link>https://drupal-coder.ru/blog/integraciya-sayta-drupal-8-s-crm-bitriks24</link>
+  <description>
+&lt;span&gt;Интеграция сайта Drupal 8 с CRM Битрикс24&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/64" lang="" about="https://drupal-coder.ru/user/64" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Алексей Зубенко&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;пт, 10/25/2019 - 12:07&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2019-11/b24_drupal_0.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;В настоящий момент &lt;a href="https://www.bitrix24.ru/"&gt;&lt;em&gt;Битрикс24&lt;/em&gt;&lt;/a&gt; является одним из ведущих решений на рынке CRM и заслуженно занимает одно из ключевых мест в бизнес-процессах многих организаций. Эффективное использование интернет-сайта компании неизбежно подразумевает интеграцию его информационных потоков в структуру CRM.&lt;/p&gt;
+
+&lt;p&gt;При этом ввиду направленности компании &lt;em&gt;1С&lt;/em&gt; на продвижение собственного продукта на рынке CMS средства интеграции для конкурирующих решений компанией почти не разрабатываются, в результате чего реализация этого функционала зачастую представляет собой однобокие кастомные решения, заточенные под конкретный проекты.&lt;/p&gt;
+
+&lt;p&gt;Для сайтов, построенных на CMF &lt;em&gt;Drupal 8&lt;/em&gt;, специалистами нашей компании был разработан пакет модулей &lt;a href="https://drupal.org/project/b24"&gt;https://drupal.org/project/b24&lt;/a&gt;, решающий задачи интеграции с &lt;em&gt;Битрикс24&lt;/em&gt; для наиболее востребованных сценариев работы: создание лидов в Битрикс 24 при отправке веб-форм и создание лидов и сделок в Битрикс 24 при добавлении заказов в Drupal Commerce 2.&lt;/p&gt;
+
+&lt;p&gt;25 октября 2019 опубликована альфа-версия модулей на Drupal.org. В настоящий момент модуль еще не имеет достаточно стабильной версии, поскольку структура кода и API еще не устоялась и в дальнейшем возможно внесение изменений, которые теоретически могут поломать построенные на его основе сторонние решения. Однако, мы успешно внедряем модуль как на сайтах наших клиентов, так и на наших собственных сайтах так как внутри компании сами используем Битрикс 24 в качестве CRM.&lt;/p&gt;
+
+&lt;p&gt;Пакет состоит из основного модуля, обеспечивающего взаимодействие с Битрикс24, а также ряда дополнительных модулей, реализующих конкретный функционал:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;&lt;strong&gt;b24_commerce&lt;/strong&gt; - обеспечивает интеграцию с модулем commerce и реализует экспорт заказов в лиды, контакты и товары на стороне Битрикс24.&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;b24_contact&lt;/strong&gt; - экспортирует результаты отправки форм, реализованных модулем contact, входящим в ядро Drupal 8.&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;b24_webform&lt;/strong&gt; - аналогично, но уже для форм, сделанных на основе популярного модуля webform.&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;b24_user&lt;/strong&gt; - синхронизирует пользователей Drupal со списком контактов в CRM.&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;b24_utm&lt;/strong&gt; - реализует учет UTM-меток при экспорте лидов.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Модуль учитывает оба стандартных режима работы Битрикс24 — классический (создание лида с последующей конвертацией в сделку и контакт) и упрощенный (создание сделки и контакта сразу без создания лида).&lt;/p&gt;
+
+&lt;h3&gt;Начало работы и настройка основного модуля&lt;/h3&gt;
+
+&lt;p&gt;Для начала работы необходимо внести ряд основных настроек для связи с Битрикс24. На странице для ввода учетных данных (&lt;em&gt;Администрирование » Конфигурация » Bitrix24 » Credentials&lt;/em&gt;) укажите домен вашего Битрикс24-сайта. То есть если вы заходите в свою CRM по адресу my-crm.bitrix24.ru, то в это поле следует ввести «my-crm». После сохранения формы в полях ниже для удобства будут сформированы ссылки на страницы вашего Битрикс24, на которых вы должны будете зарегистрировать приложение с правами доступа к CRM и выбранной опцией «&lt;em&gt;Приложение использует только API&lt;/em&gt;» (&lt;em&gt;Рис. 1&lt;/em&gt;). Для более тонкой настройки модуля может также потребоваться доступ к пользователям.&lt;/p&gt;
+&lt;figure role="group" class="align-center"&gt;&lt;img alt="Создание приложения в Битрикс24" data-entity-type="file" data-entity-uuid="c103a53e-e6de-4945-bf14-e75d1ddacb56" src="https://drupal-coder.ru/sites/default/files/inline-images/1_app_1.png" width="600" height="309" loading="lazy" /&gt;&lt;figcaption&gt;&lt;em&gt;Рис. 1 - Добавление приложения в Битрикс24: необходимые права&lt;/em&gt;&lt;/figcaption&gt;&lt;/figure&gt;&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Для корректной аутентификации в полях «Укажите ссылку» следует проставить значение «[адрес_сайта]/b24/oauth» - эта строка также будет показана в описаниях к полям формы (&lt;em&gt;Рис. 2&lt;/em&gt;).&lt;/p&gt;
+&lt;figure role="group" class="align-center"&gt;&lt;img alt="Создание приложения в Битрикс24 - установка callback-страницы" data-entity-type="file" data-entity-uuid="d23189bc-b9fb-420d-b237-b6bc63ed6b99" src="https://drupal-coder.ru/sites/default/files/inline-images/1_app_2.png" width="600" height="176" loading="lazy" /&gt;&lt;figcaption&gt;&lt;em&gt;Рис. 2 - Добавление приложения в Битрикс24: установка callback-страницы&lt;/em&gt;&lt;/figcaption&gt;&lt;/figure&gt;&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;После создания приложения ему будет присвоен код приложения (client_id) и ключ приложения (client_secret). Их необходимо внести в соответствующие поля настроек модуля. После сохранения формы необходимо инициировать первичное получение токена для доступа к приложению, кликнув на ссылку «Get access token» внизу формы (&lt;em&gt;Рис. 3&lt;/em&gt;). В дальнейшем токен будет обновляться при каждом обращении к приложению, а также по крону. Поскольку срок жизни токена составляет один час, для сайтов с малой посещаемостью лучшим решением будет установить периодичность запуска крона в один час.&lt;/p&gt;
+&lt;figure role="group" class="align-center"&gt;&lt;img alt="Настройка основного модуля - учетные данные" data-entity-type="file" data-entity-uuid="69fd8f76-d466-4b66-ab8d-01cb26ca69c2" src="https://drupal-coder.ru/sites/default/files/inline-images/2_setting_1.png" width="600" height="238" loading="lazy" /&gt;&lt;figcaption&gt;&lt;em&gt;Рис. 3 - Настройка основного модуля: учетные данные&lt;/em&gt;&lt;/figcaption&gt;&lt;/figure&gt;&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;После установки данных для доступа к Битрикс24 на странице "&lt;em&gt;Администрирование » Конфигурация » Bitrix24 » Настройки&lt;/em&gt;"  можно указать ответственного пользователя, то есть пользователя в CRM, которому будет назначаться вновь созданные лиды и сделки (&lt;em&gt;Рис. 4&lt;/em&gt;). Если список выбора пуст, то всего скорее вы забыли дать права своему приложению на доступ к пользователям. При отсутствии этой настройки создаваемые сущности будут назначаться в соответствии с настройками CRM.&lt;/p&gt;
+&lt;figure role="group" class="align-center"&gt;&lt;img alt="Настройки основного модуля - установка ответственного пользователя" data-entity-type="file" data-entity-uuid="10918d5a-6104-4267-8b99-7507ab27fe90" src="https://drupal-coder.ru/sites/default/files/inline-images/2_setting_2.png" width="410" height="216" loading="lazy" /&gt;&lt;figcaption&gt;&lt;em&gt;Рис. 4 - Настройки основного модуля: установка ответственного пользователя&lt;/em&gt;&lt;/figcaption&gt;&lt;/figure&gt;&lt;p&gt; &lt;/p&gt;
+
+&lt;h3&gt; &lt;/h3&gt;
+
+&lt;h3&gt;b24_contact: Экспорт данных из стандартных контактных форм Drupal (модуль contact)&lt;/h3&gt;
+
+&lt;p&gt;Перейдите на страницу настройки соответствующего модуля "&lt;em&gt;Администрирование » Конфигурация » Bitrix24 » Contact Form Setings&lt;/em&gt;". Выберите вкладку с названием нужной формы и активируйте чекбокс «Enable Export», после чего отобразится группа полей, каждое из которых соответствует полю лида (&lt;em&gt;Рис. 5&lt;/em&gt;). В каждом установите соответствие с полем контактной формы.&lt;/p&gt;
+
+&lt;p&gt;В качестве соответствия можно выбрать вариант «Custom», который позволяет ввести свободную строку с поддержкой токенов, однако стоит заметить, что в отличие от webform каждое заполнение формы не является сущностью и передать одно из его значений в виде токенов не получится в виду отсутствия поддержки оных. То есть изменить, к примеру, значение, передаваемое полем «Ваше имя» на «Форма отправлена клиентом [submission:field_name]» не получится. Возможно, это будет реализовано в будущем. Однако глобальные токены вроде [site:name] доступны.&lt;/p&gt;
+&lt;figure role="group" class="align-center"&gt;&lt;img alt="Настройка экспорта контактных форм Drupal" data-entity-type="file" data-entity-uuid="0506b958-5be0-414d-968e-72f0e115cc54" src="https://drupal-coder.ru/sites/default/files/inline-images/3_contact.png" width="600" height="420" loading="lazy" /&gt;&lt;figcaption&gt;&lt;em&gt;Рис. 5 - Настройка экспорта контактных форм Drupal&lt;/em&gt;&lt;/figcaption&gt;&lt;/figure&gt;&lt;h3&gt; &lt;/h3&gt;
+
+&lt;h3&gt;b24_webform: Экспорт данных из форм, созданных средствами модуля webform&lt;/h3&gt;
+
+&lt;p&gt;Настройки аналогичны предыдущему пункту за исключением более полной поддержки токенов (&lt;em&gt;Рис. 6&lt;/em&gt;).&lt;/p&gt;
+&lt;figure role="group" class="align-center"&gt;&lt;img alt="Настройка экспорта результатов заполнения форм Drupal webforn" data-entity-type="file" data-entity-uuid="6df278d6-4129-41d6-8ad9-0a189484a622" src="https://drupal-coder.ru/sites/default/files/inline-images/4_webform.png" width="600" height="274" loading="lazy" /&gt;&lt;figcaption&gt;&lt;em&gt;Рис. 6 - Настройка экспорта результатов заполнения форм Drupal webform&lt;/em&gt;&lt;/figcaption&gt;&lt;/figure&gt;&lt;h3&gt; &lt;/h3&gt;
+
+&lt;h3&gt;b24_users: Синхронизация пользователей с контактами&lt;/h3&gt;
+
+&lt;p&gt;На странице &lt;em&gt;"Администрирование » Конфигурация » Bitrix24 » Users synchronization" &lt;/em&gt;выберите роли пользователей, которые следует синхронизировать с контактами Битрикс24 (Рис. 7).&lt;/p&gt;
+&lt;figure role="group" class="align-center"&gt;&lt;img alt="Настройка экспорта пользователей - выбор ролей для экспорта" data-entity-type="file" data-entity-uuid="993a4de9-94f8-483c-9895-56b63323b436" src="https://drupal-coder.ru/sites/default/files/inline-images/5_users_1.png" width="600" height="191" loading="lazy" /&gt;&lt;figcaption&gt;&lt;em&gt;Рис. 7 - Настройка экспорта пользователей: выбор ролей для экспорта&lt;/em&gt;&lt;/figcaption&gt;&lt;/figure&gt;&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;После чего необходимо установить соответствия между полями пользователей (имеется также поддержка полей профилей) и полями контактов Битрикс24 на странице "&lt;em&gt;Администрирование » Конфигурация » Bitrix24 Users synchronization » Fields mapping&lt;/em&gt;".&lt;/p&gt;
+
+&lt;p&gt;Конфигурирование соответствий несколько менее понятный и прозрачный процесс, поскольку здесь нет списков выбора, как это имеет место в настройке экспорта форм, и соответствия назначаются при помощи токенов, что очевидно займет больше времени, однако такой способ предлагает необходимую гибкость и разнообразие в настройке.&lt;/p&gt;
+
+&lt;p&gt;Далее можно произвести экспорт пользователей на странице "&lt;em&gt;Администрирование » Конфигурация » Bitrix24 » Users synchronization » Users Export&lt;/em&gt;". При этом соответствия между сущностями пользователя Drupal и контакта Битрикс24 сохраняются и при повторном экспорте новые контакты создаваться не будут.&lt;/p&gt;
+
+&lt;p&gt;При активации опции «Enable live export» (Рис. 7) все изменения будут отправляться в CRM сразу при создании/редактировании/удалении пользователя.&lt;br /&gt;
+Поддерживается также импорт контактов из CRM в пользователи Drupal ("&lt;em&gt;Администрирование » Конфигурация » Bitrix24 » Users synchronization » Users Import&lt;/em&gt;"). При этом га страницу импорта можно выбрать, какие дополнительные роли будут назначены импортируемым пользователям.&lt;/p&gt;
+
+&lt;h3&gt; &lt;/h3&gt;
+
+&lt;h3&gt;b24_commerce: Экспорт заказов и товаров Drupal Commerce&lt;/h3&gt;
+
+&lt;p&gt;Настройка экспорта заказов происходит на странице "&lt;em&gt;Администрирование » Конфигурация » Bitrix24 » Commerce Integration&lt;/em&gt;". Здесь необходимо установить режим работы CRM (уже упомянутые классический или упрощенный) — к сожалению, в текущем состоянии API Битрикс24 не позволяет получать этот показатель автоматически. При этом в случае упрощенного режима настройки на этом заканчиваются. В случае стандартного режима для каждого типа товаров в отдельности следует выбрать, надо ли управлять конвертацией созданных лидов в контакты и в сделки на стороне модуля. Обычно это происходит на стороне CRM, однако этот функционал можно настроить на стороне Drupal, для чего нужно активировать конвертацию в нужные сущности и указать, на каком этапе жизни заказа это должно происходить (&lt;em&gt;Рис. 8&lt;/em&gt;).&lt;/p&gt;
+&lt;figure role="group" class="align-center"&gt;&lt;img alt="Настройка экспорта заказов Drupal Commerce - выбор режима экспорта" data-entity-type="file" data-entity-uuid="fdbd130f-b3e2-4a9a-ac3e-37f55ff71e32" src="https://drupal-coder.ru/sites/default/files/inline-images/6_commerce_1.png" width="600" height="374" loading="lazy" /&gt;&lt;figcaption&gt;&lt;em&gt;Рис. 8 - Настройка экспорта заказов Drupal Commerce: выбор режима экспорта&lt;/em&gt;&lt;/figcaption&gt;&lt;/figure&gt;&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Далее на странице "&lt;em&gt;Администрирование » Конфигурация » Bitrix24 » Commerce Integration » Fields Mapping&lt;/em&gt;" следует с помощью токенов установить соответствия полей заказа с полями сделок и лидов для каждого из типов товаров. Обратите внимание, что на этой странице в зависимости от конфигурации вашего интернет-магазина может присутствовать несколько вкладок-табов (сверху), каждая из которых соответствует типу товара. Вкладки «Leads» и «Deals» содержат соответствия поле лидов и сделок соответственно (&lt;em&gt;Рис. 9&lt;/em&gt;).&lt;/p&gt;
+&lt;figure role="group" class="align-center"&gt;&lt;img alt="Настройка экспорта заказов Drupal Commerce: соответствие полей" data-entity-type="file" data-entity-uuid="70d5c948-8045-4900-827c-a7bfaa049030" src="https://drupal-coder.ru/sites/default/files/inline-images/6_commerce_2.png" width="600" height="256" loading="lazy" /&gt;&lt;figcaption&gt;&lt;em&gt;Рис. 9 - Настройка экспорта заказов Drupal Commerce: соответствие полей&lt;/em&gt;&lt;/figcaption&gt;&lt;/figure&gt;&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Для привязки создаваемых лидов и сделок к товарам на стороне Битрикс24 реализован экспорт товаров. Настройка экспорта производится на странице "&lt;em&gt;Администрирование » Конфигурация » Bitrix24 » Commerce Integration » Products Export&lt;/em&gt;", где устанавливается магазин, из которого будут экспортироваться товары, а также при необходимости указывается поле, по которому на сайте просходит распределение товаров по разделам каталога. Это позволит сохранить структуру каталога при его экспорте в CRM. Первичный экспорт лучше провести после первичной настройки модуля на этой же странице. В дальнейшем все изменения будут синхронизироваться с CRM автоматически.&lt;/p&gt;
+
+&lt;h3&gt;&lt;br /&gt;
+b24_utm. Учет UTM-меток при экспорте лидов&lt;/h3&gt;
+
+&lt;p&gt;Это очень простой функционал, отслеживающий приход посетителя с UTM-меткой и в случае экспорта лида от его лица заполняющий на стороне Битрикс24 соответствующие поля. Для отслеживания меток достаточно включить модуль. Какие бы то ни было настройки в настоящий момент не требуются.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3&gt;Поиск и отслеживание проблем&lt;/h3&gt;
+
+&lt;p&gt;Поскольку любая интеграция с внешними сервисами часто сопровождается значительными сложностями в конфигурации, при написании модуля уделено особое внимание логированию результатов запросов к Битрикс24. Поэтому если что-то по вашему мнению пошло не так, нужная информация наверняка находится в логах «&lt;em&gt;/admin/reports/dblog&lt;/em&gt;». &lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3&gt;Итого&lt;/h3&gt;
+
+&lt;p&gt;Любой масштабный проект — это не только &lt;s&gt;ценный мех&lt;/s&gt; огромное количество рабочих часов и литры выпитого кофе, но и необходимость смотреть значительно шире своего кода, на высоком уровне разбираться в чужой работе и понимать самые разнообразные потребности как всего бизнеса, так и его составляющих — простых сотрудников у монитора. Поэтому мы с радостью примем любые отзывы и советы по поводу работы модуля и дальнейшему развитию функционала.&lt;/p&gt;
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-field-blog-form field--type-entity-reference field--label-hidden field--item"&gt;
+&lt;div class="row"&gt;
+      
+&lt;div class="col-md-6 col-xs-12 col-sm-6"&gt;
+      
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;div class="block-form-wrapper"&gt;
+&lt;h2 class="block-form-title"&gt;Заказать интеграцию &lt;br /&gt; Drupal с CRM Битрикс 24&lt;/h2&gt;
+
+&lt;div class="block-form-description"&gt;Справа находится пример контактной формы на Drupal 8 с автоматическим заведением лидов в Битрикс 24. Отправьте нам сообщение через эту форму если вам нужна помощь в интеграции вашего сайта на Drupal с CRM Битрикс 24.&lt;/div&gt;
+
+&lt;div class="block-form-contacts"&gt;
+  &lt;ul&gt;&lt;li class="block-form-phone"&gt;&lt;a href="tel:88002222673"&gt;8 800 222-26-73&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="block-form-email"&gt;&lt;a href="mailto:info@drupal-coder.ru"&gt;info@drupal-coder.ru&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;
+      
+  &lt;/div&gt;
+
+&lt;div class="col-md-6 col-xs-12 col-sm-6"&gt;
+      
+            &lt;div class="field field--name-field-block-with-form-value field--type-entity-reference field--label-hidden field--item"&gt;&lt;form class="contact-message-drupal-bitrix-form contact-message-form contact-form antibot" data-user-info-from-browser="" data-drupal-selector="contact-message-drupal-bitrix-form" data-action="/taxonomy/term/64/feed" action="https://drupal-coder.ru/antibot" method="post" id="contact-message-drupal-bitrix-form" accept-charset="UTF-8"&gt;
+  &lt;noscript&gt;
+  &lt;div class="antibot-no-js antibot-message antibot-message-warning"&gt;Вы должны включить JavaScript чтобы использовать эту форму.&lt;/div&gt;
+&lt;/noscript&gt;
+&lt;div class="field--type-string field--name-field-vashe-imya field--widget-string-textfield form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-field-vashe-imya-wrapper" id="edit-field-vashe-imya-wrapper"&gt;      &lt;div class="form-item js-form-item form-type-textfield js-form-type-textfield form-item-field-vashe-imya-0-value js-form-item-field-vashe-imya-0-value form-group"&gt;
+      &lt;label for="edit-field-vashe-imya-0-value" class="control-label"&gt;Ваше имя&lt;/label&gt;
+  
+  
+  &lt;input class="js-text-full text-full form-text form-control" data-drupal-selector="edit-field-vashe-imya-0-value" type="text" id="edit-field-vashe-imya-0-value" name="field_vashe_imya[0][value]" value="" size="60" maxlength="255" placeholder="Ваше имя" /&gt;&lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;div class="field--type-email field--name-field-e-mail field--widget-email-default form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-field-e-mail-wrapper" id="edit-field-e-mail-wrapper"&gt;      &lt;div class="form-item js-form-item form-type-email js-form-type-email form-item-field-e-mail-0-value js-form-item-field-e-mail-0-value form-group"&gt;
+      &lt;label for="edit-field-e-mail-0-value" class="control-label"&gt;E-mail&lt;/label&gt;
+  
+  
+  &lt;input data-drupal-selector="edit-field-e-mail-0-value" class="form-email form-control" type="email" id="edit-field-e-mail-0-value" name="field_e_mail[0][value]" value="" size="60" maxlength="254" placeholder="E-mail" /&gt;&lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;div class="field--type-string field--name-field-telefon field--widget-string-textfield form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-field-telefon-wrapper" id="edit-field-telefon-wrapper"&gt;      &lt;div class="form-item js-form-item form-type-textfield js-form-type-textfield form-item-field-telefon-0-value js-form-item-field-telefon-0-value form-group"&gt;
+      &lt;label for="edit-field-telefon-0-value" class="control-label"&gt;Телефон&lt;/label&gt;
+  
+  
+  &lt;input class="js-text-full text-full form-text form-control" data-drupal-selector="edit-field-telefon-0-value" type="text" id="edit-field-telefon-0-value" name="field_telefon[0][value]" value="" size="60" maxlength="255" placeholder="Телефон" /&gt;&lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;div class="field--type-string-long field--name-field-vash- field--widget-string-textarea form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-field-vash-wrapper" id="edit-field-vash-wrapper"&gt;      &lt;div class="form-item js-form-item form-type-textarea js-form-type-textarea form-item-field-vash--0-value js-form-item-field-vash--0-value form-group"&gt;
+      &lt;label for="edit-field-vash-0-value" class="control-label"&gt;Ваш комментарий&lt;/label&gt;
+  
+  
+  &lt;div class="form-textarea-wrapper"&gt;
+  &lt;textarea class="js-text-full text-full form-textarea form-control resize-vertical" data-drupal-selector="edit-field-vash-0-value" id="edit-field-vash-0-value" name="field_vash_[0][value]" rows="5" cols="60" placeholder="Ваш комментарий"&gt;&lt;/textarea&gt;&lt;/div&gt;
+
+
+  
+  
+  &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;input autocomplete="off" data-drupal-selector="form-zyefwhjhw3tgnu9ts-jtezpdu-nma-ad0d4konxgfyg" type="hidden" name="form_build_id" value="form-zYEFWhjHW3TGnu9tS_jtEzpDU_NMA_AD0D4koNxgfyg" /&gt;&lt;input data-drupal-selector="edit-contact-message-drupal-bitrix-form" type="hidden" name="form_id" value="contact_message_drupal_bitrix_form" /&gt;&lt;input data-drupal-selector="edit-antibot-key" type="hidden" name="antibot_key" value="" /&gt;&lt;div class="form-item js-form-item form-type-checkbox js-form-type-checkbox form-item-fz152-agreement js-form-item-fz152-agreement checkbox"&gt;
+  
+  
+  
+
+      &lt;label for="edit-fz152-agreement" class="control-label option js-form-required form-required"&gt;&lt;input required="required" data-drupal-selector="edit-fz152-agreement" class="form-checkbox required" type="checkbox" id="edit-fz152-agreement" name="fz152_agreement" value="1" aria-required="true" /&gt;&lt;span class="custom-checkbox"&gt;&lt;/span&gt;Отправляя заявку, я даю согласие на &lt;a href="https://drupal-coder.ru/privacy-policy" target="_blank" rel="nofollow"&gt;обработку своих персональных данных&lt;/a&gt;.&lt;/label&gt;
+  
+  
+  &lt;/div&gt;
+&lt;div data-drupal-selector="edit-actions" class="form-actions form-group js-form-wrapper form-wrapper" id="edit-actions"&gt;&lt;button data-drupal-selector="edit-submit" class="button button--primary js-form-submit form-submit btn-primary btn" type="submit" id="edit-submit" name="op" value="Отправить заявку"&gt;Отправить заявку&lt;/button&gt;&lt;/div&gt;
+
+&lt;/form&gt;
+&lt;/div&gt;
+      
+  &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-8" hreflang="ru"&gt;Drupal 8&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/e-commerce" hreflang="ru"&gt;E-Commerce&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/bitriks24" hreflang="ru"&gt;Битрикс24&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/integracii" hreflang="ru"&gt;интеграции&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;h2 class="block-form-title"&gt;Комментарии&lt;/h2&gt;
+    
+  
+  &lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Егор
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;вторник, ноября 17, 2020 - 15:24&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Добрый день!&lt;br /&gt;
+Поясните пожалуйста, что делать с адресом .../b24/oauth&lt;br /&gt;
+На него редиректит, а такой страницы нет на сайте, получаю 404 соответственно. Или ее нужно создать предварительно?&lt;br /&gt;
+В Битрикс24 указываю в настройках прав и CRM и пользователи - все безуспешно, нет подключения.&lt;/p&gt;
+&lt;p&gt;Спасибо!&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1015&amp;1=default&amp;2=ru&amp;3=" token="mdGQp7NSKnVjUSH63Y9kyy99w7vb0g-f80BIjCXTkw8"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+&lt;div class="indented"&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;среда, ноября 18, 2020 - 06:42&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;Здравствуйте, Егор, 
+
+Страница создается самим модулем, вручную ее добавлять не нужно. Если модуль установлен только что, попробуйте сбросить кэш - возможно, страница еще не появилась. Проверьте, не опечатались ли при указании адреса приложения в настройках Битрикс 24. Сообщите, пожалуйста, о результатах - возможно, это действительно баг, о котором мы пока не знаем.&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1021&amp;1=default&amp;2=ru&amp;3=" token="2sdLPSdWCV1Hupx4kClCGm5BHnVkRn0vr7eV3nBjfok"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+&lt;div class="indented"&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Егор
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;среда, ноября 18, 2020 - 08:35&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Все ок. спасибо!&lt;br /&gt;
+Оказывается нужно было прописать путь разрешение для nginx.&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1022&amp;1=default&amp;2=ru&amp;3=" token="eJd8JFYk2Nj3Vyvxvr8OxghfmwuPkxqeLobl2C4s4zY"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+&lt;/div&gt;&lt;/div&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Евгений
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;пятница, февраля 4, 2022 - 08:10&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Для синхронизации пользователей с контактами нет страницы&lt;br /&gt;
+Администрирование » Конфигурация » Bitrix24 Users synchronization » Fields mapping&lt;br /&gt;
+Как туда попасть?&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1730&amp;1=default&amp;2=ru&amp;3=" token="g0C_wAd4dEDPAKWgZ2LukjeNCEBFNvxrJO7iora0_Pg"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+&lt;div class="indented"&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;понедельник, февраля 7, 2022 - 08:53&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;Добрый день,
+Перейдите на страницу /admin/config/b24/user/mapping. Должен быть включен модуль b24_user&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1731&amp;1=default&amp;2=ru&amp;3=" token="UiTO9_itnZQLqDTwNqtpRTACJyJo5PX90_9551ZwyDk"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+&lt;/div&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Александр
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;среда, апреля 20, 2022 - 09:34&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Добрый день. Как прописать домен, если у меня не заканчивается на bitrix24.ru, а начинается на b24? Пример b24.domain_name?&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1734&amp;1=default&amp;2=ru&amp;3=" token="divVwdq7rGhkTWubDH4SgtT04ajMdVv2W16x5htU8IE"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+&lt;div class="indented"&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;среда, апреля 20, 2022 - 10:46&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;Добрый день, 
+В настоящий момент это не реализовано. Попробую добавить такую возможность в будущем.&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1735&amp;1=default&amp;2=ru&amp;3=" token="CKNhSyJq51lBPLzDFoO8vj-NlmkKMOztHhLRBCSYgc0"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;среда, апреля 20, 2022 - 10:47&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;Если есть такая возможность, создайте issue на странице модуля на drupal.org.&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1736&amp;1=default&amp;2=ru&amp;3=" token="ObqJL9NrkV5UCAkMLjHoqm4k75Yo-z3Z1Fh8SKC9FYk"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+&lt;/div&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Петр
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;среда, ноября 30, 2022 - 03:18&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;При установке модуля на Drupal 9 сайт вешается в фатальную ошибку, белый экран на всех страницах. Помогает только выключение модуля с помощью drush.&lt;/p&gt;
+&lt;p&gt;GuzzleHttp\Exception\ConnectException: cURL error 6: Could not resolve host: .bitrix24.ru (see &lt;a href="https://curl.haxx.se/libcurl/c/libcurl-errors.html"&gt;https://curl.haxx.se/libcurl/c/libcurl-errors.html&lt;/a&gt;) for &lt;a href="https://.bitrix24.ru/oauth/token/?grant_type=refresh_token&amp;client_id&amp;client_secret&amp;scope=crm&amp;refresh_token&amp;redirect_uri=https%3A//.../b24/oauth"&gt;https://.bitrix24.ru/oauth/token/?grant_type=refresh_token&amp;client_id&amp;cl…&lt;/a&gt; in GuzzleHttp\Handler\CurlFactory::createRejection() (line 210 of /home/..../public_html/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php).&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1746&amp;1=default&amp;2=ru&amp;3=" token="wFvegQjM8auIubzFjl1AYjliPOo1blE7fWsWwirX9u0"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+&lt;div class="indented"&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;среда, ноября 30, 2022 - 11:16&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;Благодарю, исправим&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1749&amp;1=default&amp;2=ru&amp;3=" token="57dVza-GGJSHRjUjHan6n2I9j7F6OY1EA2JHROl_Qz8"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;среда, ноября 30, 2022 - 12:33&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;Исправлено. Но вам в любом случае надо будет установить имя домена своего bitrix24 в настройках модуля. &lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1750&amp;1=default&amp;2=ru&amp;3=" token="UKvNGI-rGtiwAbcRV4CoYz9-JBInagFdTsURs9L-JLE"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+&lt;/div&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Петр
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;среда, ноября 30, 2022 - 13:18&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Спасибо, работает. Еще проблемка, у нас bitrix24.by ))) на него можно настроить?&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1751&amp;1=default&amp;2=ru&amp;3=" token="Q-jtf5eEIfZjRzZr1mk-0pjYRpykKc4J2LzQm-gskkE"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+&lt;div class="indented"&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;среда, ноября 30, 2022 - 14:21&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;На днях сделаем&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1752&amp;1=default&amp;2=ru&amp;3=" token="xbn_qQBDDjv_fXYCX4N9v-KOiEFPYfzZWarVw6cEw94"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+&lt;div class="indented"&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Петр
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;четверг, декабря 8, 2022 - 01:13&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Не делали еще?&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1753&amp;1=default&amp;2=ru&amp;3=" token="-I6L3leXWG_g-IxBUVOSR7TJx_RzbFrnIXRjQ51YLJ8"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+&lt;div class="indented"&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;пятница, декабря 9, 2022 - 10:37&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;Пётр, извините за задержку - только что опубликовал новый релиз с этой возможностью. Кажется, ничего не сломалось, на тестовом сайте отработало.&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1754&amp;1=default&amp;2=ru&amp;3=" token="xuL10aQ2P7es2qJB7Fo5F6ANIJYKbHOQ9DMtLvfAlOU"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+&lt;div class="indented"&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Петр
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;суббота, декабря 10, 2022 - 06:17&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Спасибо огромное! Но после соединения (все прошло отлично) при попытки настроить экспорт из вебформ, когда поля связываешь, после нажатия "сохранить конфигурацию" птичка Enable export становится опять неактивной. В журнале ошибка&lt;br /&gt;
+	Warning: Undefined array key "#title" в Drupal\b24_webform\Form\SettingsForm-&gt;getFields() (строка 125 из /home/***/public_html/modules/contrib/b24/modules/b24_webform/src/Form/SettingsForm.php)&lt;br /&gt;
+#0 /home/***/public_html/core/includes/bootstrap.inc(347): _drupal_error_handler_real()&lt;br /&gt;
+#1 /home/***/public_html/modules/contrib/b24/modules/b24_webform/src/Form/SettingsForm.php(125): _drupal_error_handler()&lt;br /&gt;
+#2 /home/***/public_html/modules/contrib/b24/modules/b24_webform/src/Form/SettingsForm.php(102): Drupal\b24_webform\Form\SettingsForm-&gt;getFields()&lt;br /&gt;
+#3 [internal function]: Drupal\b24_webform\Form\SettingsForm-&gt;buildForm()&lt;br /&gt;
+#4 /home/***/public_html/core/lib/Drupal/Core/Form/FormBuilder.php(531): call_user_func_array()&lt;br /&gt;
+#5 /home/***/public_html/core/lib/Drupal/Core/Form/FormBuilder.php(278): Drupal\Core\Form\FormBuilder-&gt;retrieveForm()&lt;br /&gt;
+#6 /home/***/public_html/core/lib/Drupal/Core/Controller/FormController.php(73): Drupal\Core\Form\FormBuilder-&gt;buildForm()&lt;br /&gt;
+#7 [internal function]: Drupal\Core\Controller\FormController-&gt;getContentResult()&lt;br /&gt;
+#8 /home/***/public_html/core/lib/Drupal/Core/EventSubscriber/EarlyRenderingControllerWrapperSubscriber.php(123): call_user_func_array()&lt;br /&gt;
+#9 /home/***/public_html/core/lib/Drupal/Core/Render/Renderer.php(564): Drupal\Core\EventSubscriber\EarlyRenderingControllerWrapperSubscriber-&gt;Drupal\Core\EventSubscriber\{closure}()&lt;br /&gt;
+#10 /home/***/public_html/core/lib/Drupal/Core/EventSubscriber/EarlyRenderingControllerWrapperSubscriber.php(124): Drupal\Core\Render\Renderer-&gt;executeInRenderContext()&lt;br /&gt;
+#11 /home/***/public_html/core/lib/Drupal/Core/EventSubscriber/EarlyRenderingControllerWrapperSubscriber.php(97): Drupal\Core\EventSubscriber\EarlyRenderingControllerWrapperSubscriber-&gt;wrapControllerExecutionInRenderContext()&lt;br /&gt;
+#12 /home/***/public_html/vendor/symfony/http-kernel/HttpKernel.php(169): Drupal\Core\EventSubscriber\EarlyRenderingControllerWrapperSubscriber-&gt;Drupal\Core\EventSubscriber\{closure}()&lt;br /&gt;
+#13 /home/***/public_html/vendor/symfony/http-kernel/HttpKernel.php(81): Symfony\Component\HttpKernel\HttpKernel-&gt;handleRaw()&lt;br /&gt;
+#14 /home/***/public_html/core/lib/Drupal/Core/StackMiddleware/Session.php(58): Symfony\Component\HttpKernel\HttpKernel-&gt;handle()&lt;br /&gt;
+#15 /home/***/public_html/core/lib/Drupal/Core/StackMiddleware/KernelPreHandle.php(48): Drupal\Core\StackMiddleware\Session-&gt;handle()&lt;br /&gt;
+#16 /home/***/public_html/core/modules/page_cache/src/StackMiddleware/PageCache.php(106): Drupal\Core\StackMiddleware\KernelPreHandle-&gt;handle()&lt;br /&gt;
+#17 /home/***/public_html/core/modules/page_cache/src/StackMiddleware/PageCache.php(85): Drupal\page_cache\StackMiddleware\PageCache-&gt;pass()&lt;br /&gt;
+#18 /home/***/public_html/core/modules/ban/src/BanMiddleware.php(50): Drupal\page_cache\StackMiddleware\PageCache-&gt;handle()&lt;br /&gt;
+#19 /home/***/public_html/core/lib/Drupal/Core/StackMiddleware/ReverseProxyMiddleware.php(48): Drupal\ban\BanMiddleware-&gt;handle()&lt;br /&gt;
+#20 /home/***/public_html/core/lib/Drupal/Core/StackMiddleware/NegotiationMiddleware.php(51): Drupal\Core\StackMiddleware\ReverseProxyMiddleware-&gt;handle()&lt;br /&gt;
+#21 /home/***/public_html/vendor/stack/builder/src/Stack/StackedHttpKernel.php(23): Drupal\Core\StackMiddleware\NegotiationMiddleware-&gt;handle()&lt;br /&gt;
+#22 /home/***/public_html/core/lib/Drupal/Core/DrupalKernel.php(709): Stack\StackedHttpKernel-&gt;handle()&lt;br /&gt;
+#23 /home/***/public_html/index.php(19): Drupal\Core\DrupalKernel-&gt;handle()&lt;br /&gt;
+#24 {main}&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1755&amp;1=default&amp;2=ru&amp;3=" token="fertODvMxcZWgmTk3vW2dfNj2hn998-I8EKprU0zBxs"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+&lt;div class="indented"&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;понедельник, декабря 12, 2022 - 09:31&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;Пётр, вы можете выслать мне на a.zubenko@initlab.ru конфиг вашей формы?&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1756&amp;1=default&amp;2=ru&amp;3=" token="K_Su86oKYQICL72R7Ia3EFZdDPXM6hM71cHjcb1SjVE"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;понедельник, декабря 12, 2022 - 11:47&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;И будет оперативнее, если для таких проблем открывать issue на странице модуля на Drupal.org&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1757&amp;1=default&amp;2=ru&amp;3=" token="tLMX6z_E3z8Sknxf4RhNlfR-iMtAeHGvsbkxVOu_rlc"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;среда, декабря 14, 2022 - 11:41&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;Модуль обновлен&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1758&amp;1=default&amp;2=ru&amp;3=" token="yGEFMOOMNZUDYwI2HREyecWkG70R3eRJK22NNGpY6Xw"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+ 
+      &lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=238&amp;2=comment&amp;3=comment" token="CHQvF8drQT6lrF4i_7o488vWZqPUjZFYKDZHy8lcWuM"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/integraciya-platyozhnoy-sistemy-s-saytom-na-drupal" hreflang="ru"&gt;Интеграция платёжной системы с сайтом на Drupal&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/integraciya-sendpulse-s-saytom-na-drupal" hreflang="ru"&gt;Интеграция Sendpulse с сайтом на Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Fri, 25 Oct 2019 12:07:55 +0000</pubDate>
+    <dc:creator>Алексей Зубенко</dc:creator>
+    <guid isPermaLink="false">238 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/integraciya-sayta-drupal-8-s-crm-bitriks24#comments</comments>
+    </item>
+<item>
+  <title>Drupal + browser-sync</title>
+  <link>https://drupal-coder.ru/blog/drupal-browser-sync</link>
+  <description>
+&lt;span&gt;Drupal + browser-sync&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/59" lang="" about="https://drupal-coder.ru/user/59" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Александр Долженков&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;вт, 07/30/2019 - 21:29&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2019-10/browsersync-and-drupal.png&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;При работе с js хочется, чтобы браузер сам перезагружал страницу, так сказать делал hot reload, или, изменяя стили в css, они автоматически изменились в браузере (инъекция), как, например,  это происходит при работе с React или Vue. Но как же этого добиться с Drupal? Есть много решений, но все они так или иначе используют browser-sync. Browser-sync - это пакет для nodejs, позволяющий синхронизировать несколько браузеров, а также делающий автоматическую перезагрузку страниц и инъекции стилей. Используя связку nodejs + gulp + browser-sync, мы будем делать всю эту магию вместе с Drupal. Мы не будем рассматривать как устанавливать nodejs, но он должен быть у вас установлен. Итак приступим!&lt;/p&gt;
+
+&lt;h3&gt;Gulp&lt;/h3&gt;
+&lt;p&gt;Gulp - замечательный таск-менеджер, гибкий и быстрый. Его роль заключается в отслеживании изменения файлов и последующем запуске browser-sync. Мы не будем
+  подробно разбирать синтаксис конфигураций gulp, но вы подробнее можете ознакомиться в &lt;a href="https://github.com/gulpjs/gulp/blob/v3.9.1/docs/API.md"&gt;документации&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4&gt;Установка&lt;/h4&gt;
+&lt;p&gt;Изначально установим gulp-cli, чтобы иметь возможность вызывать gulp в терминале:&lt;/p&gt;
+&lt;pre&gt;
+&lt;code language="bash"&gt;sudo npm install -g gulp-cli&lt;/code&gt;
+&lt;/pre&gt;
+&lt;p&gt;Далее в директории проекта установим gulp локально:&lt;/p&gt;
+&lt;pre&gt;
+&lt;code language="bash"&gt;sudo npm install -D gulp&lt;/code&gt;
+&lt;/pre&gt;
+&lt;p&gt;Флаг
+  &lt;code&gt;-D&lt;/code&gt; вносит в package.json запись о Gulp в секцию devDependencies, отмечая, что пакет нужен только для разработки.
+&lt;/p&gt;
+&lt;p&gt;Установим browser-sync:&lt;/p&gt;
+&lt;pre&gt;
+&lt;code language="bash"&gt;sudo npm i -D browser-sync&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;h3&gt;Настройка gulp и browser-sync&lt;/h3&gt;
+
+&lt;p&gt;Создадим в корневой директории темы файл
+  &lt;code&gt;gulpfile.js&lt;/code&gt;. Будем использовать строгий режим в javascript. Добавим модули gulp и browser-sync.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code language="javascript"&gt;
+'use strict';
+
+const gulp = require('gulp');
+const browserSync = require('browser-sync');
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Приступим к добавлению задачи для gulp и настройки browser-sync. В функцию
+  &lt;code language="javascript"&gt;gulp.task()&lt;/code&gt; обернем вызов и настройки browser-sync.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code language="javascript"&gt;
+gulp.task('sync', function() {
+  browserSync.init({
+    proxy: domain,
+    port: 8080
+  });
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Разберем код выше поподробнее.
+  &lt;code language="javascript"&gt;browserSync.init()&lt;/code&gt; - это метод browser-sync для инициализации.
+  &lt;code language="javascript"&gt;proxy&lt;/code&gt; позволяет нам проксировать сервер по типу Apache или NGinx. Нужно указать домен или ip сервера. А
+  также нам нужно указать порт, по которому
+  сервер отдает сайт. О других настройках browser-sync можете почитать
+  &lt;a href="https://browsersync.io/docs/options"&gt;тут&lt;/a&gt;.&lt;/p&gt;
+  &lt;p&gt;Если мы вызовем в консоли
+    &lt;code language="bash"&gt;gulp sync&lt;/code&gt;, он применит только последние изменения в файлах. Это неудобно. Нам
+    нужно вызывать browser-sync каждый раз как
+    мы изменяем файл. Будем делать это непосредственно вызовом метода
+    &lt;code language="javascript"&gt;browserSync.watch()&lt;/code&gt;. И теперь наш полный
+    &lt;code&gt;gulpfile.js&lt;/code&gt; выглядит так:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code language="javascript"&gt;
+  'use strict';
+
+  const settings = {
+    domain: 'd7.dev.zz',
+    port: '8080'
+  }
+  
+  const gulp = require('gulp');
+  const browserSync = require('browser-sync');
+  
+  gulp.task('sync', function() {
+    browserSync.init({
+      proxy: settings.domain,
+      port: settings.port
+    });
+  
+    browserSync.watch('./css/*.css').on('change', browserSync.reload);
+  });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;При изменении css gulp вызовет
+  &lt;code language="javascript"&gt;browserSync.reload&lt;/code&gt;, этот метод перезапустит browser-sync и добавит изменения в браузер.&lt;/p&gt;
+
+&lt;p&gt;Вместо
+  &lt;code&gt;'./css/*.css'&lt;/code&gt; подставьте путь к вашим css файлам. Продублировав строку с
+  &lt;code&gt;browserSync.watch()&lt;/code&gt;, можно добавлять отслеживание, например, javascript файлов:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code language="javascript"&gt;
+browserSync.watch('./css/*.css').on('change', browserSync.reload);
+browserSync.watch('./js/*.js').on('change', browserSync.reload);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Стоит отметить, что можно делать перезагрузку даже при изменении шаблонов тем. Нужно только добавить за ними "слежку".&lt;/p&gt;
+
+&lt;h3&gt;Link CSS&lt;/h3&gt;
+&lt;p&gt;Для корректной работы инъекций в браузер нам потребуется установить модуль &lt;a href="https://www.drupal.org/project/link_css"&gt;Link CSS&lt;/a&gt;. Он есть для 7 и 8 версии. Зачем нужен этот модуль? В Drupal все css файлы добавляются на страницу через &lt;code&gt;@import&lt;/code&gt; тега &lt;code&gt;&lt;style&gt;&lt;/style&gt;&lt;/code&gt;, это не позволяет browser-sync делать инъекции. Модуль изменяет подход добавления css файлов, меняя его с &lt;code&gt;@import&lt;/code&gt; на тег &lt;code&gt;&lt;link /&gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3&gt;Использование&lt;/h3&gt;
+&lt;p&gt;Вызвав в консоли &lt;code language="bash"&gt;gulp sync&lt;/code&gt;, мы запустим обработчик gulp, который будет следить за нашими файлами, и при их изменении делать перезагрузку или инъекцию в браузер. Browser-sync в это время будет проксировать сервер с Drupal'ом, и откроет отдельную вкладку в браузере, где будет реагировать на все изменения файлов. Так просто можно добавить hot reload для работы с Drupal.&lt;/p&gt;&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-7" hreflang="ru"&gt;Drupal 7&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-8" hreflang="ru"&gt;Drupal 8&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/nodejs" hreflang="ru"&gt;nodejs&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/gulp" hreflang="ru"&gt;gulp&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;h2 class="block-form-title"&gt;Комментарии&lt;/h2&gt;
+    
+  
+  &lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Павел
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;вторник, июня 16, 2020 - 19:08&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Подскажите как почистить кэш с помощью gulp при редактировании twig шаблонов.&lt;br /&gt;
+browserSync.watch('./templates/*.html.twig').on('change', browserSync.reload);&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=492&amp;1=default&amp;2=ru&amp;3=" token="YtYR5dj9JUz84hjE_dcug6twfyw2h8T7WZoJSEQGCFY"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+ 
+      &lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=228&amp;2=comment&amp;3=comment" token="Zte9ZrY2w56zOLGbfFmBV9L11zaY_w9-V3lQd4WBu8A"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/routing-drupal-8-prosai-hookmenu" hreflang="ru"&gt;Роутинг Drupal 8. Прощай hook_menu.&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/rabota-s-bazoi-dannyh-v-drupal-8" hreflang="ru"&gt;Работа с базой данных в Drupal 8&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/tema-oformleniya-dlya-drupal-8" hreflang="ru"&gt;Тема оформления для Drupal 8&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Tue, 30 Jul 2019 21:29:40 +0000</pubDate>
+    <dc:creator>Александр Долженков</dc:creator>
+    <guid isPermaLink="false">228 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/drupal-browser-sync#comments</comments>
+    </item>
+<item>
+  <title>Drupal 8: Добавляем даные для замены токенов в EmailAction</title>
+  <link>https://drupal-coder.ru/blog/drupal-8-dobavlyaem-danye-dlya-zameny-tokenov-v-emailaction</link>
+  <description>
+&lt;span&gt;Drupal 8: Добавляем даные для замены токенов в EmailAction&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/42" lang="" about="https://drupal-coder.ru/user/42" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Андрей Тымчук&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;пт, 05/31/2019 - 14:07&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2019-10/token_01.png&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Есть в Drupal 8 такой механизм - действия (actions). Он представляет собой систему плагинов, в каждом из которых описывается логика, которая выполняется при выполнении действия. Также есть настраиваемые действия, которые связываются с конфигурационными сущностями.&lt;/p&gt;
+
+&lt;p&gt;В ядре имеется несколько предопределённых типой действий, одним из которых является действие отправки электронной почты - &lt;a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Action%21Plugin%21Action%21EmailAction.php/class/EmailAction/8.7.x"&gt;EmailAction&lt;/a&gt;. С помощью административного интерфейса можно создать своё действие данного типа и задать содержимое письма. Для удобства кастомизации при настройке разрешается использование функционала токенов, однако, как ни странно, "из коробки" заменяются только токены для нод.&lt;/p&gt;
+
+&lt;p&gt;Причина такого поведения в следующем коде (для замены токенов используется то, что лежит в свойстве &lt;em&gt;configuration&lt;/em&gt;):&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #009933; font-style: italic;"&gt;/**
+ * {@inheritdoc}
+ */&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;public&lt;/span&gt; &lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; execute&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$entity&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #009900; font-weight: bold;"&gt;NULL&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #b1b100;"&gt;if&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #990000;"&gt;empty&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$this&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;configuration&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'node'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$this&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;configuration&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'node'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$entity&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+  &lt;span style="color: #339933;"&gt;...&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Если нужны не только ноды, то добавить данные для замены токенов можно следующим образом:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #009933; font-style: italic;"&gt;/** @var \Drupal\system\ActionConfigEntityInterface $entity */&lt;/span&gt;
+&lt;span style="color: #000088;"&gt;$action&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$entity&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getPlugin&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+&lt;span style="color: #b1b100;"&gt;if&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$action&lt;/span&gt; instanceof EmailAction&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #666666; font-style: italic;"&gt;// Хотим использовать токены для пользователя.&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$data&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'user'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #000088;"&gt;$account&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #666666; font-style: italic;"&gt;// Добавляем данные в конфигурацию плагина.&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$config&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$action&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getConfiguration&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$action&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;setConfiguration&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$config&lt;/span&gt; &lt;span style="color: #339933;"&gt;+&lt;/span&gt; &lt;span style="color: #000088;"&gt;$data&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #666666; font-style: italic;"&gt;// Выполняем действие.&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$action&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;execute&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-8" hreflang="ru"&gt;Drupal 8&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=225&amp;2=comment&amp;3=comment" token="HPDFzG4-h-wX24DjfMFof0PqJ5pxbAaeYilZ-jFAA_g"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/routing-drupal-8-prosai-hookmenu" hreflang="ru"&gt;Роутинг Drupal 8. Прощай hook_menu.&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/rabota-s-bazoi-dannyh-v-drupal-8" hreflang="ru"&gt;Работа с базой данных в Drupal 8&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/tema-oformleniya-dlya-drupal-8" hreflang="ru"&gt;Тема оформления для Drupal 8&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/suschnosti-drupal-8" hreflang="ru"&gt;Сущности Drupal 8&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-8-validation-constraints" hreflang="ru"&gt;Drupal 8: Validation Constraints&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Fri, 31 May 2019 14:07:48 +0000</pubDate>
+    <dc:creator>Андрей Тымчук</dc:creator>
+    <guid isPermaLink="false">225 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/drupal-8-dobavlyaem-danye-dlya-zameny-tokenov-v-emailaction#comments</comments>
+    </item>
+<item>
+  <title>Drupal Contribution Weekend 2019</title>
+  <link>https://drupal-coder.ru/blog/drupal-contribution-weekend-2019</link>
+  <description>
+&lt;span&gt;Drupal Contribution Weekend 2019&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/51" lang="" about="https://drupal-coder.ru/user/51" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Сергей Синица&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;ср, 03/06/2019 - 13:01&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2019-10/splash.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;h2&gt;Что такое Drupal Contrib Weekend?&lt;/h2&gt;
+
+25-27 января по всему миру проходил &lt;a href="https://groups.drupal.org/node/534537"&gt;Drupal Contribution Weekend&lt;/a&gt;. Под термином Contribution скрывается работа тысяч разработчиков и активистов международного Drupal-сообщества по проектированию, написанию и отладке кода ядра Drupal и модулей, разработке UI, тестированию, написанию документации, проведению мероприятий для развития и продвижения Drupal. Такая работа, как правило, финансово и организационно поддерживается заинтересованными компаниями, веб-студиями, международной и национальными ассоциациями Drupal. Большой OpenSource проект глобального масштаба развивается не только благодаря поддержке компаний и энтузиазму лучших специалистов мирового уровня. Удаленное взаимодействие тысяч участников поддерживается ИТ-инфраструктурой drupal.org, правилами и стандартами. Drupal Contrib Weekend дает возможность новичкам в Drupal познакомиться с особенностями этой инфраструктуры и традиций и сделать первые шаги в OpenSource. 
+
+&lt;h2&gt;Как Drupal Contrib Weekend проходил в нашей компании?&lt;/h2&gt;
+
+&lt;p&gt;В этом году мы в первый раз организовывали это мероприятие. Основной целью ставили выложить накопившиеся модули и патчи на Drupal.org, выпустить новые релизы поддерживаемых нами модулей. Также мы позвали к нам в офис гостей — заинтересованных в Drupal начинающих разработчиков, студентов, коллег из других веб-студий — с целью провести мастер-класс по работе с drupal.org, релизами, патчами, GIT, портированием модулей на Drupal 8 и рассказать о том, как работает OpenSource проект изнутри. У нас были заранее заготовлены некоторые наработки, модули и патчи, созданные во время поддержки и разработки сайтов и интернет-магазинов на Drupal для наших клиентов.&lt;/p&gt;
+
+&lt;p&gt;Местер-класс проводил Геворг Мкртычян — опытный разработчик, активный член сообщества разработчиков Drupal в России, создатель и модератор русскоязычного Telegram-канала Drupal. Геворг недавно присоединился к нашей команде и значительно усилил нашу компетенцию в Drupal-разработке.&lt;/p&gt;
+
+&lt;p&gt;В ходе мастер-класса Геворг выложил на Drupal.org релиз модуля Online checks via Business.ru (&lt;a href="https://www.drupal.org/project/bcheck"&gt;https://www.drupal.org/project/bcheck&lt;/a&gt;). Решение для ФЗ-54, которое мы используем для интеграции интернет-магазинов на Drupal 7 с онлайн чеками cassa.business.ru.&lt;/p&gt;
+
+&lt;p&gt;Также состоялся первый релиз модуля Performance Monitor (&lt;a href="https://www.drupal.org/project/perfmon"&gt;https://www.drupal.org/project/perfmon&lt;/a&gt;) для Drupal 8. Этот модуль мы используем для тестирование производительности серверов для Drupal-сайтов, сравнения хостинга. Модуль помогает нашим клиентам оптимизировать затраты на хостинг и выбрать оптимальные тарифы и конфигруацию серверов. Геворг является мейнтейнером версии модуля под восьмерку. В ближайшее время мы завершим тестирование работы Drupal 8 на референсном сервере и обновим модуль для сравнения с эталонными значениями.&lt;/p&gt;
+
+&lt;p&gt;Андрей Тымчук, наш опытный разработчик, специализирующийся на поддержке ecommerce сайтов на Drupal, также участвовал в Drupal Contrib Weekend. Андрей сделал релиз своего модуля CDEK API (&lt;a href="https://www.drupal.org/project/cdek_api"&gt;https://www.drupal.org/project/cdek_api&lt;/a&gt;). Модуль упрощает интеграцию интернет-магазинов на Drupal с сервисами службы доставки СДЕК.&lt;/p&gt;
+
+&lt;p&gt;Андрей также является комайнтейнером модуля https://www.drupal.org/project/simple_sitemap. Этот модуль мы используем при поисковой оптимизации (SEO) интернет-магазинов для более быстрой индексации товаров поисковиками. Андрей подготовил и закоммитил патч для поддержки Views, что позволяет создавать списки с отбором товаров по различным параметрам для еще более точного управления процессом индексации товаров интернет-магазинов Яндексом и Google.&lt;/p&gt;
+
+&lt;p&gt;Алексей Зубенко разрабатывал модуль интеграции Drupal с CRM Битрикс 24. Мы внедряем Битрикс 24 для поддержки бизнес-процессов и работы с клиентами одного из интернет-магазинов на Drupal Commerce. Модуль выгружает в Битрикс 24 лиды, сделки и контакты при оформлении заказов в Drupal Commerce, синхронизирует товары. Модуль пока не готов к релизу, однако доступен в sandbox-версии: &lt;a href="https://www.drupal.org/sandbox/alezu/3033545"&gt;https://www.drupal.org/sandbox/alezu/3033545&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;В конце мероприятия, когда все коммиты были отправлены, а релизы выпущены, мы поужинали пиццей и пообщались в дружеской неформальной обстановке. О том как проходил Drupal Contrib Weekend в офисе нашей компании мы сняли небольшое видео:
+
+&lt;/p&gt;&lt;div&gt;&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/oLX6oUtkriI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""&gt;&lt;/iframe&gt;&lt;/div&gt;
+
+
+
+&lt;h2&gt;Почему команда Drupal Coder поддерживает свободное программное обеспечение, OpenSource и контрибутит в Drupal?&lt;/h2&gt;
+
+&lt;p&gt;Идея свободного ПО под различными OpenSource лицензиями привлекает тем, что кооперация, обмен опытом и идеями лучших разработчиков в интернациональном масштабе позволяет создавать более совершенные и современные технологии. В практическом плане технологическое лидерство дает бизнесу и нашим клиентам больше возможностей для реализации самых смелых планов, быстрого вывода на рынок новых продуктов, создания сложных и нестандартных проектов, быстрого развития и внесения изменений в типовые решения. Это становится возможным благодаря коллаборации лучших умов и естественному отбору технологических и организационных решений внутри таких проектов, как Drupal. В этом захватывающем глобальном процессе интересно участвовать. Это отношение разделяют члены нашей команды.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Роман Агабеков:&lt;/strong&gt; «Drupal помогает нам закрывать боли наших клиентов, и наш контрибут — это благодарность за это».&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Андрей Тымчук:&lt;/strong&gt; «[OpenSource и Drupal дает]&lt;br /&gt;
+1) Возможность приобщения к большому и востребованному проекту (в нашем случае это Drupal).&lt;br /&gt;
+2) Возможность поделиться своими наработками с сообществом и обсудить их.&lt;br /&gt;
+3) Возможность показать свои умения и навыки множеству разработчиков и клиентов».&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Геворг Мкртычян:&lt;/strong&gt; «OpenSource дает возможность изучить опыт специалистов со всего мира и поделиться со всем миром своим опытом в благодарность. Контрибют в Drupal, кроме вышесказанного,  дает возможность выявить проблемы в решениях, найти более правильные решения, поделиться идеями и услышать идеи других разработчиков для развития того или иного функционала. А так же исправлять выявленные ошибки друпала и модулей совместно с огромным сообществом разработчиков. Ну и конечно же быть частью этого сообщества. Это круто)»&lt;/p&gt;&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-8" hreflang="ru"&gt;Drupal 8&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=224&amp;2=comment&amp;3=comment" token="itnOa09JDG9A7RDQGnY1h1Jh5Ab9KPQL1OekFVgpadc"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-coder-na-konferencii-drupalcamp-2016" hreflang="ru"&gt;Drupal Coder на конференции DrupalCamp 2016&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/mitap-drupalcamp-cxo-v-krasnodare" hreflang="ru"&gt;Митап DrupalCamp CxO в Краснодаре&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Wed, 06 Mar 2019 13:01:10 +0000</pubDate>
+    <dc:creator>Сергей Синица</dc:creator>
+    <guid isPermaLink="false">224 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/drupal-contribution-weekend-2019#comments</comments>
+    </item>
+<item>
+  <title>Drupal + React</title>
+  <link>https://drupal-coder.ru/blog/drupal-react</link>
+  <description>
+&lt;span&gt;Drupal + React&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/42" lang="" about="https://drupal-coder.ru/user/42" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Андрей Тымчук&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;пн, 05/14/2018 - 15:55&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Headless Drupal - это одна из наиболее актуальных и интересных идей использования Drupal 8. Данный термин подразумевает разделение backend и frontend, при котором Drupal выступает только в роли серверной части, а «клиентом» может быть любой JavaScript-фреймворк, мобильное приложение, ваш собственный «велосипед» и т.д. Основная идея такого подхода заключается в желании полного контроля над отображением контента без необходимости использования тяжёлой системы рендеринга Drupal.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3&gt;RESTful Drupal&lt;/h3&gt;
+
+&lt;p&gt;Когда у Drupal забирают frontend часть, он становится веб-сервисом. В отличие от Drupal 7, в Drupal 8 достаточно включения модуля &lt;a href="https://www.drupal.org/docs/8/api/restful-web-services-api/restful-web-services-api-overview"&gt;RESTful Web Services&lt;/a&gt; (поставляется вместе с ядром) для управления сущностями с помощью REST-запросов. Кроме того, данный модуль позволяет создавать Views, которые будут отдавать контент в REST-формате.&lt;/p&gt;
+
+&lt;p&gt;При необходимости интерфейса администрирования REST-ресурсов можно установить модуль &lt;a href="https://www.drupal.org/project/restui"&gt;REST UI&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Drupal 8 REST UI" data-entity-type="file" data-entity-uuid="25022d99-6c26-404e-99ad-4ffa05882f90" src="https://drupal-coder.ru/sites/default/files/inline-images/restui.png" width="800" height="350" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3&gt;JSON API&lt;/h3&gt;
+
+&lt;p&gt;При проектировании RESTful веб-сервисов стоит также обратить внимание на модуль &lt;a href="https://www.drupal.org/project/jsonapi"&gt;JSON API&lt;/a&gt;, который является реализацией &lt;a href="http://jsonapi.org"&gt;одноимённой спецификации&lt;/a&gt;, определяющей структуру запросов клиента и ответов сервера при извлечении/изменении ресурсов. Для получения функционала модуля требуется только его включение без какой-либо дополнительной настройки. После включения модуля можно управлять сущностями Drupal с помощью стандартных HTTP-запросов GET, POST, PATCH, и DELETE. Проверка доступа к операциям над сущностями выполняется на основе стандартной системы разрешений Drupal.&lt;/p&gt;
+
+&lt;p&gt;Следует понимать, что JSON API полностью основан на сущностях, поэтому его нельзя использовать для операций, не связанных с «CRUD». К примеру, регистрация новой учётной записи, авторизация пользователя или запрос нового пароля не являются частью JSON API. Подобные операции следует выполнять с помощью функционала, который предоставляется ядром Drupal.&lt;/p&gt;
+
+&lt;p&gt;Расширить функционал JSON API можно с помощью модулей &lt;a href="https://www.drupal.org/project/jsonapi_extras"&gt;JSON API Extras&lt;/a&gt; и &lt;a href="https://www.drupal.org/project/jsonapi_defaults"&gt;JSON API Defaults&lt;/a&gt;. Первый даёт возможность тонкой настройки предоставляемых ресурсов, а второй позволяет задать ресурсам простые пути без нагромождения большого количества URL-параметров.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Drupal 8 JSON API Extras" data-entity-type="file" data-entity-uuid="bfeaa47f-1079-47e3-99f6-019265af3609" src="https://drupal-coder.ru/sites/default/files/inline-images/jsonapi-extras.png" width="800" height="361" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Кстати, в скором времени модуль JSON API &lt;a href="https://www.drupal.org/project/jsonapi/issues/2931785"&gt;может быть добавлен&lt;/a&gt; в состав ядра Drupal 8.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3&gt;Интеграция React и Drupal модуля&lt;/h3&gt;
+
+&lt;p&gt;В случае интеграции React с модулем Drupal речь идёт об использовании React-компонентов в функционале модуля. Сгенерированные JavaScript-файлы подключаются с помощью библиотек.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="yaml geshifilter-yaml" style="font-family:monospace;"&gt;&lt;span style="color: #007F45;"&gt;example&lt;/span&gt;:&lt;span style="color: green;"&gt;
+  version&lt;/span&gt;&lt;span style="font-weight: bold; color: brown;"&gt;: &lt;/span&gt;VERSION&lt;span style="color: #007F45;"&gt;
+  js&lt;/span&gt;:&lt;span style="color: green;"&gt;
+    js/bundle/first.bundle.js&lt;/span&gt;&lt;span style="font-weight: bold; color: brown;"&gt;: &lt;/span&gt;&lt;span class="br0"&gt;{&lt;/span&gt;&lt;span class="br0"&gt;}&lt;/span&gt;&lt;span style="color: green;"&gt;
+    js/bundle/second.bundle.js&lt;/span&gt;&lt;span style="font-weight: bold; color: brown;"&gt;: &lt;/span&gt;&lt;span class="br0"&gt;{&lt;/span&gt;&lt;span class="br0"&gt;}&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$build&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#attached'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'library'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'example_module/example'&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;«Общение» компонента с сервером реализуется на основе REST-ресурсов, для определения которых имеет смысл использовать связку модулей RESTful Web Services и JSON API. Рассмотрим несколько примеров запросов к ресурсам (код приведён в формате HTTP).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Создать пользователя&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="text geshifilter-text" style="font-family:monospace;"&gt;POST /entity/user?_format=json HTTP/1.1
+Host: drupal8.example
+Content-Type: application/json
+ 
+{
+  "name": [{ "value": "user@mail.example" }],
+  "pass": [{ "value": "thebestpassword" }],
+  "status": [{ "value": true }]
+}&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Авторизовать пользователя&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="text geshifilter-text" style="font-family:monospace;"&gt;POST /user/login?_format=json HTTP/1.1
+Host: drupal8.example
+Content-Type: application/json
+ 
+{"name": "user@mail.example", "pass": "thebestpassword"}&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Получить токен сессии&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="text geshifilter-text" style="font-family:monospace;"&gt;GET /session/token HTTP/1.1
+Host: drupal8.example&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Выйти из текущего аккаунта&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="text geshifilter-text" style="font-family:monospace;"&gt;POST /user/logout?_format=json HTTP/1.1
+Host: drupal8.example
+Content-Type: application/json&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Получить информацию о пользователе с определённым Email&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="text geshifilter-text" style="font-family:monospace;"&gt;GET /jsonapi/user/user?filter[mail][value]=user@mail.example HTTP/1.1
+Host: drupal8.example&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Получить ближайшие 10 опубликованных статей&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="text geshifilter-text" style="font-family:monospace;"&gt;GET /jsonapi/node/article?filter[status][value]=1&amp;sort=-created&amp;page[limit]=10 HTTP/1.1
+Host: drupal8.example&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3&gt;RESTful Commerce&lt;/h3&gt;
+
+&lt;p&gt;Отдельно стоит отметить управление REST-ресурсами для Commerce. Все данные, представляющие собой сущности могут быть получены с помощью JSON API. Однако для корзины в Commerce не определены REST-ресурсы и она не является сущностью, поэтому взаимодействовать с ней подобным образом нельзя. В данном случае следует использовать модуль &lt;a href="https://www.drupal.org/project/commerce_cart_api"&gt;Commerce Cart API&lt;/a&gt;, который предоставляет REST-ресурсы для получения корзины, а также добавления и удаления позиций.&lt;/p&gt;
+
+&lt;p&gt;В заключении рассмотрим несколько примеров запросов к ресурсам Commerce (код приведён в формате HTTP).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Получить информацию о товаре, включая вариации, по его ID&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="text geshifilter-text" style="font-family:monospace;"&gt;GET /jsonapi/commerce_product/product?filter[product_id][value]=1&amp;include=variations HTTP/1.1
+Host: drupal8.example&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Получить список завершённых заказов&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="text geshifilter-text" style="font-family:monospace;"&gt;GET /jsonapi/commerce_order/default?filter[state][value]=completed HTTP/1.1
+Host: drupal8.example&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Получить информацию о корзине&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="text geshifilter-text" style="font-family:monospace;"&gt;GET /cart?_format=json HTTP/1.1
+Host: drupal8.example&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Добавить товар в корзину&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="text geshifilter-text" style="font-family:monospace;"&gt;POST /cart/add?_format=json HTTP/1.1
+Host: drupal8.example
+Content-Type: application/json
+ 
+[
+  {
+    "purchased_entity_type": "commerce_product_variation",
+    "purchased_entity_id": "1"
+  },
+  {
+    "purchased_entity_type": "commerce_product_variation",
+    "purchased_entity_id": "2"	
+  }
+]&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Удалить товар из корзины&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="text geshifilter-text" style="font-family:monospace;"&gt;DELETE /cart/2/items/10?_format=json HTTP/1.1
+Host: drupal8.example&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-8" hreflang="ru"&gt;Drupal 8&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/react" hreflang="ru"&gt;React&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=148&amp;2=comment&amp;3=comment" token="vmyEvyDHkO205FAqZmhHSW9Hd66MZmekRfQSoDC8gk0"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/ispolzovanie-react-js-komponentov-v-unity" hreflang="ru"&gt;Использование React JS компонентов в Unity&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/react-chekaut-dlya-n1commerce" hreflang="ru"&gt;React чекаут для N1Commerce&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Mon, 14 May 2018 15:55:49 +0000</pubDate>
+    <dc:creator>Андрей Тымчук</dc:creator>
+    <guid isPermaLink="false">148 at https://drupal-coder.ru</guid>
+    </item>
+
+  </channel>
+</rss>

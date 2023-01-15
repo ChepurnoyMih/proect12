@@ -1,0 +1,900 @@
+﻿<!DOCTYPE html>
+<html lang="ru" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
+  <head>
+    <meta charset="utf-8">
+<noscript><style>form.antibot * :not(.antibot-message) { display: none !important; }</style>
+</noscript><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-87805467-1"></script>
+<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag("js", new Date());gtag("set", "developer_id.dMDhkMT", true);gtag("config", "UA-87805467-1", {"groups":"default","anonymize_ip":true,"page_placeholder":"PLACEHOLDER_page_path","allow_ad_personalization_signals":false});</script>
+<meta http-equiv="content-language" content="ru">
+<meta name="description" content="Специалисты нашей компании разработали модуль интеграции Битрикс 24 и Drupal 8.">
+<meta name="keywords" content="создание сайтов на drupal, разработка Drupal-сайтов">
+<meta property="og:type" content="blog">
+<meta property="og:url" content="https://drupal-coder.ru/blog/integraciya-sayta-drupal-8-s-crm-bitriks24">
+<meta property="og:title" content="Интеграция сайта Drupal 8 с CRM Битрикс24">
+<meta property="og:description" content="Специалисты нашей компании разработали модуль интеграции Битрикс 24 и Drupal 8.">
+<meta name="Generator" content="Drupal 9 (https://www.drupal.org)">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="..\sites\default\files\android-chrome-256x256.png" type="image/png">
+<link rel="alternate" hreflang="ru" href="..\blog\integraciya-sayta-drupal-8-s-crm-bitriks24.html">
+<link rel="canonical" href="..\blog\integraciya-sayta-drupal-8-s-crm-bitriks24.html">
+<link rel="shortlink" href="..\blog\integraciya-sayta-drupal-8-s-crm-bitriks24.html">
+
+    <title>Интеграция сайта Drupal 8 с CRM Битрикс24 | drupal-coder.ru</title>
+    <link rel="stylesheet" media="all" href="..\sites\default\files\css\css_y8CdfJDNR-tG0CPnRDokR6Eh9OUJplbHLVQ9A8myecQ.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_tFXlTqkfn6J-Qtpt9xbB8JudSaJfOGxRSmpeidDAzPE.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_n8jXIgnKtlH1lTxShoOalTZ37qm46zy4bSgL_PNgGbg.css">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/@unicorn-fail/drupal-bootstrap-styles@0.0.2/dist/3.4.0/8.x-3.x/drupal-bootstrap.min.css" integrity="sha512-tGFFYdzcicBwsd5EPO92iUIytu9UkQR3tLMbORL9sfi/WswiHkA1O3ri9yHW+5dXk18Rd+pluMeDBrPKSwNCvw==" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_ULmc1mwKFKQRQmxYsjphW6dsh2g6jX4LXXBAtdO0vIE.css">
+
+    
+    <meta name="cmsmagazine" content="3d47b05beba40f3816d9741ee18c01a5">
+
+    
+    
+           <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P4SXQSG');</script>
+<!-- End Google Tag Manager -->
+    
+    
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Bold.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Medium.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Regular.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/fontawesome/webfonts/fa-brands-400.woff2" crossorigin="anonymous">
+    <link rel='manifest' href='..\manifest.json'>
+    <meta name="format-detection" content="telephone=no">
+
+          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MXPCP8Q"></script>
+      </head>
+  <body class="page-node-238 path-node page-node-type-blog has-glyphicons">
+
+                  <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4SXQSG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+      
+          
+
+    <a href="#main-content" class="visually-hidden focusable skip-link">
+      Перейти к основному содержанию
+    </a>
+    
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
+    
+      
+          <header class="navbar navbar-default" id="navbar" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+            <div class="region region-navigation">
+    <section id="block-pikselvkskript" class="block block-block-content block-block-contentbf8d9e8f-617c-4e8f-8501-7586be8255e0 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script>(window.Image ? (new Image()) : document.createElement('img')).src = 'https://vk.com/rtrg?p=VK-RTRG-238064-1VWIQ';</script></div>
+      
+  </section>
+
+<section id="block-globalsitetagadwords" class="block block-block-content block-block-content27617f8e-58d1-4a2a-9f23-31eab95a43c8 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><!-- Global site tag (gtag.js) - AdWords: 948581894 -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=AW-948581894"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-948581894');
+</script></div>
+      
+  </section>
+
+            <a class="logo navbar-btn pull-left" href="..\index.htm" title="Главная" rel="home">
+            <img src="..\themes\custom\bootstrap_dc\images\logo-initlab.svg" alt="Главная" width="156" height="31">
+        </a>
+            
+  </div>
+
+        </div>
+                          <div class="navbar-collapse-wrapper">
+
+            <div class="navbar-collapse collapse">
+                <div class="region region-navigation-collapsible">
+    <nav role="navigation" aria-labelledby="block-bootstrap-dc-main-menu-menu" id="block-bootstrap-dc-main-menu">
+            
+  <h2 class="visually-hidden" id="block-bootstrap-dc-main-menu-menu">Основная навигация</h2>
+  
+
+        
+              <ul class="menu nav navbar-nav">
+                      <li><a href="..\support.html" data-drupal-link-system-path="node/1">Поддержка Drupal</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-admin.html" class="dropdown-toggle" data-toggle="dropdown">DevOps <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\import-migrate-upgrade.html" data-drupal-link-system-path="node/4">Миграция</a>
+                  </li>
+                  <li><a href="..\backup.html" data-drupal-link-system-path="node/3">Бэкапы</a>
+                  </li>
+                  <li><a href="..\drupal-security-audit.html" data-drupal-link-system-path="node/9">Аудит безопасности</a>
+                  </li>
+                  <li><a href="..\boost-drupal.html" data-drupal-link-system-path="node/5">Оптимизация скорости</a>
+                  </li>
+                  <li><a href="..\ssl.html" data-drupal-link-system-path="node/99">Переезд на https</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\blog.html" data-drupal-link-system-path="blog">Блог</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-seo.html" class="dropdown-toggle" data-toggle="dropdown">Продвижение <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\drupal-seo\context.html" data-drupal-link-system-path="node/111">Реклама</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li class="expanded dropdown"><a href="..\team.html" class="dropdown-toggle" data-toggle="dropdown">О нас <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\team.html#team" data-drupal-link-system-path="team">Команда</a>
+                  </li>
+                  <li><a href="..\drupalgive.html" data-drupal-link-system-path="node/135">Drupalgive</a>
+                  </li>
+                  <li><a href="..\drupal-courses.html" data-drupal-link-system-path="node/10">Курсы Drupal</a>
+                  </li>
+                  <li><a href="..\vacancies.html" data-drupal-link-system-path="vacancies">Вакансии</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\happy-customers.html" data-drupal-link-system-path="happy-customers">Проекты</a>
+                  </li>
+                  <li><a href="..\contacts.html" data-drupal-link-system-path="node/86">Контакты</a>
+                  </li>
+              </ul>
+      
+
+
+  </nav>
+
+  </div>
+
+            </div>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+              </div>
+    </header>
+  
+
+      <div class="page-header-big" role="heading">
+        <div class="container">
+            <div class="region region-header">
+        <h1 class="page-header">
+<span>Интеграция сайта Drupal 8 с CRM Битрикс24</span>
+</h1>
+
+<section class="views-element-container block block-views block-views-blockuser-block-1 clearfix" id="block-views-block-user-block-1">
+  
+    
+
+      <div class="form-group"><div class="view view-user view-id-user view-display-id-block_1 js-view-dom-id-867811685396752082ae5a15ed10937825cced96ceabaac727a5f1a5787a9175">
+  
+    
+      
+      <div class="view-content">
+          <div class="views-row"><div class="views-field views-field-user-picture"><div class="field-content">  <img loading="lazy" src="..\sites\default\files\styles\avatar_mini\public\pictures\2019-12\IMG_2497_0.jpg?itok=8NXHrHsQ" width="45" height="45" alt="" typeof="foaf:Image" class="img-responsive">
+
+
+</div></div><div class="views-field views-field-field-name"><div class="field-content">Зубенко Алексей</div></div></div>
+
+    </div>
+  
+          </div>
+</div>
+
+  </section>
+
+<section id="block-yashare" class="block-yashare block block-block-content block-block-contentee72d8fb-02e9-4ef6-8e71-0df16bee86a9 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+<script src="//yastatic.net/share2/share.js"></script>
+<div class="ya-share2" data-services="vkontakte,odnoklassniki,gplus,twitter"></div></div>
+      
+  </section>
+
+
+  </div>
+
+        </div>
+      
+    </div>
+  
+
+<div class="main-wrapper">
+  <div role="main" class="main-container container js-quickedit-main-content">
+    <div class="row">
+
+
+
+            
+                  <section class="col-sm-12">
+
+                
+                
+                
+                                      
+                  
+                          <a id="main-content"></a>
+            <div class="region region-content">
+        <ol class="breadcrumb">
+          <li>
+                  <a href="..\blog.html">Блог</a>
+              </li>
+          <li class="active">
+                  Интеграция сайта Drupal 8 с CRM Битрикс24
+              </li>
+      </ol>
+
+<div data-drupal-messages-fallback="" class="hidden"></div>
+  <article data-history-node-id="238" role="article" about="https://drupal-coder.ru/blog/integraciya-sayta-drupal-8-s-crm-bitriks24" class="blog is-promoted full clearfix">
+
+  
+    
+
+  
+
+  <div class="content">
+    
+    <ul class="links inline list-inline"><li class="comment-add"><a href="..\blog\integraciya-sayta-drupal-8-s-crm-bitriks24.html#comment-form" title="Поделитесь своими мыслями и мнениями." hreflang="ru">Добавить комментарий</a></li></ul>
+            <div class="field field--name-field-blog-img field--type-image field--label-hidden field--item">/sites/default/files/2019-11/b24_drupal_0.jpg</div>
+      <div id="field-language-display"><div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group">
+      <label class="control-label">Language</label>
+  
+  
+  Russian
+
+  
+  
+  </div>
+</div>
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><p>В настоящий момент <a href="https://www.bitrix24.ru/"><em>Битрикс24</em></a> является одним из ведущих решений на рынке CRM и заслуженно занимает одно из ключевых мест в бизнес-процессах многих организаций. Эффективное использование интернет-сайта компании неизбежно подразумевает интеграцию его информационных потоков в структуру CRM.</p>
+
+<p>При этом ввиду направленности компании <em>1С</em> на продвижение собственного продукта на рынке CMS средства интеграции для конкурирующих решений компанией почти не разрабатываются, в результате чего реализация этого функционала зачастую представляет собой однобокие кастомные решения, заточенные под конкретный проекты.</p>
+
+<p>Для сайтов, построенных на CMF <em>Drupal 8</em>, специалистами нашей компании был разработан пакет модулей <a href="https://drupal.org/project/b24">https://drupal.org/project/b24</a>, решающий задачи интеграции с <em>Битрикс24</em> для наиболее востребованных сценариев работы: создание лидов в Битрикс 24 при отправке веб-форм и создание лидов и сделок в Битрикс 24 при добавлении заказов в Drupal Commerce 2.</p>
+
+<p>25 октября 2019 опубликована альфа-версия модулей на Drupal.org. В настоящий момент модуль еще не имеет достаточно стабильной версии, поскольку структура кода и API еще не устоялась и в дальнейшем возможно внесение изменений, которые теоретически могут поломать построенные на его основе сторонние решения. Однако, мы успешно внедряем модуль как на сайтах наших клиентов, так и на наших собственных сайтах так как внутри компании сами используем Битрикс 24 в качестве CRM.</p>
+
+<p>Пакет состоит из основного модуля, обеспечивающего взаимодействие с Битрикс24, а также ряда дополнительных модулей, реализующих конкретный функционал:</p>
+
+<ul><li><strong>b24_commerce</strong> - обеспечивает интеграцию с модулем commerce и реализует экспорт заказов в лиды, контакты и товары на стороне Битрикс24.</li>
+	<li><strong>b24_contact</strong> - экспортирует результаты отправки форм, реализованных модулем contact, входящим в ядро Drupal 8.</li>
+	<li><strong>b24_webform</strong> - аналогично, но уже для форм, сделанных на основе популярного модуля webform.</li>
+	<li><strong>b24_user</strong> - синхронизирует пользователей Drupal со списком контактов в CRM.</li>
+	<li><strong>b24_utm</strong> - реализует учет UTM-меток при экспорте лидов.</li>
+</ul><p>Модуль учитывает оба стандартных режима работы Битрикс24 — классический (создание лида с последующей конвертацией в сделку и контакт) и упрощенный (создание сделки и контакта сразу без создания лида).</p>
+
+<h3>Начало работы и настройка основного модуля</h3>
+
+<p>Для начала работы необходимо внести ряд основных настроек для связи с Битрикс24. На странице для ввода учетных данных (<em>Администрирование » Конфигурация » Bitrix24 » Credentials</em>) укажите домен вашего Битрикс24-сайта. То есть если вы заходите в свою CRM по адресу my-crm.bitrix24.ru, то в это поле следует ввести «my-crm». После сохранения формы в полях ниже для удобства будут сформированы ссылки на страницы вашего Битрикс24, на которых вы должны будете зарегистрировать приложение с правами доступа к CRM и выбранной опцией «<em>Приложение использует только API</em>» (<em>Рис. 1</em>). Для более тонкой настройки модуля может также потребоваться доступ к пользователям.</p>
+<figure role="group" class="align-center"><img alt="Создание приложения в Битрикс24" data-entity-type="file" data-entity-uuid="c103a53e-e6de-4945-bf14-e75d1ddacb56" src="..\sites\default\files\inline-images\1_app_1.png" width="600" height="309" loading="lazy"><figcaption><em>Рис. 1 - Добавление приложения в Битрикс24: необходимые права</em></figcaption></figure><p> </p>
+
+<p>Для корректной аутентификации в полях «Укажите ссылку» следует проставить значение «[адрес_сайта]/b24/oauth» - эта строка также будет показана в описаниях к полям формы (<em>Рис. 2</em>).</p>
+<figure role="group" class="align-center"><img alt="Создание приложения в Битрикс24 - установка callback-страницы" data-entity-type="file" data-entity-uuid="d23189bc-b9fb-420d-b237-b6bc63ed6b99" src="..\sites\default\files\inline-images\1_app_2.png" width="600" height="176" loading="lazy"><figcaption><em>Рис. 2 - Добавление приложения в Битрикс24: установка callback-страницы</em></figcaption></figure><p> </p>
+
+<p>После создания приложения ему будет присвоен код приложения (client_id) и ключ приложения (client_secret). Их необходимо внести в соответствующие поля настроек модуля. После сохранения формы необходимо инициировать первичное получение токена для доступа к приложению, кликнув на ссылку «Get access token» внизу формы (<em>Рис. 3</em>). В дальнейшем токен будет обновляться при каждом обращении к приложению, а также по крону. Поскольку срок жизни токена составляет один час, для сайтов с малой посещаемостью лучшим решением будет установить периодичность запуска крона в один час.</p>
+<figure role="group" class="align-center"><img alt="Настройка основного модуля - учетные данные" data-entity-type="file" data-entity-uuid="69fd8f76-d466-4b66-ab8d-01cb26ca69c2" src="..\sites\default\files\inline-images\2_setting_1.png" width="600" height="238" loading="lazy"><figcaption><em>Рис. 3 - Настройка основного модуля: учетные данные</em></figcaption></figure><p> </p>
+
+<p>После установки данных для доступа к Битрикс24 на странице "<em>Администрирование » Конфигурация » Bitrix24 » Настройки</em>"  можно указать ответственного пользователя, то есть пользователя в CRM, которому будет назначаться вновь созданные лиды и сделки (<em>Рис. 4</em>). Если список выбора пуст, то всего скорее вы забыли дать права своему приложению на доступ к пользователям. При отсутствии этой настройки создаваемые сущности будут назначаться в соответствии с настройками CRM.</p>
+<figure role="group" class="align-center"><img alt="Настройки основного модуля - установка ответственного пользователя" data-entity-type="file" data-entity-uuid="10918d5a-6104-4267-8b99-7507ab27fe90" src="..\sites\default\files\inline-images\2_setting_2.png" width="410" height="216" loading="lazy"><figcaption><em>Рис. 4 - Настройки основного модуля: установка ответственного пользователя</em></figcaption></figure><p> </p>
+
+<h3> </h3>
+
+<h3>b24_contact: Экспорт данных из стандартных контактных форм Drupal (модуль contact)</h3>
+
+<p>Перейдите на страницу настройки соответствующего модуля "<em>Администрирование » Конфигурация » Bitrix24 » Contact Form Setings</em>". Выберите вкладку с названием нужной формы и активируйте чекбокс «Enable Export», после чего отобразится группа полей, каждое из которых соответствует полю лида (<em>Рис. 5</em>). В каждом установите соответствие с полем контактной формы.</p>
+
+<p>В качестве соответствия можно выбрать вариант «Custom», который позволяет ввести свободную строку с поддержкой токенов, однако стоит заметить, что в отличие от webform каждое заполнение формы не является сущностью и передать одно из его значений в виде токенов не получится в виду отсутствия поддержки оных. То есть изменить, к примеру, значение, передаваемое полем «Ваше имя» на «Форма отправлена клиентом [submission:field_name]» не получится. Возможно, это будет реализовано в будущем. Однако глобальные токены вроде [site:name] доступны.</p>
+<figure role="group" class="align-center"><img alt="Настройка экспорта контактных форм Drupal" data-entity-type="file" data-entity-uuid="0506b958-5be0-414d-968e-72f0e115cc54" src="..\sites\default\files\inline-images\3_contact.png" width="600" height="420" loading="lazy"><figcaption><em>Рис. 5 - Настройка экспорта контактных форм Drupal</em></figcaption></figure><h3> </h3>
+
+<h3>b24_webform: Экспорт данных из форм, созданных средствами модуля webform</h3>
+
+<p>Настройки аналогичны предыдущему пункту за исключением более полной поддержки токенов (<em>Рис. 6</em>).</p>
+<figure role="group" class="align-center"><img alt="Настройка экспорта результатов заполнения форм Drupal webforn" data-entity-type="file" data-entity-uuid="6df278d6-4129-41d6-8ad9-0a189484a622" src="..\sites\default\files\inline-images\4_webform.png" width="600" height="274" loading="lazy"><figcaption><em>Рис. 6 - Настройка экспорта результатов заполнения форм Drupal webform</em></figcaption></figure><h3> </h3>
+
+<h3>b24_users: Синхронизация пользователей с контактами</h3>
+
+<p>На странице <em>"Администрирование » Конфигурация » Bitrix24 » Users synchronization" </em>выберите роли пользователей, которые следует синхронизировать с контактами Битрикс24 (Рис. 7).</p>
+<figure role="group" class="align-center"><img alt="Настройка экспорта пользователей - выбор ролей для экспорта" data-entity-type="file" data-entity-uuid="993a4de9-94f8-483c-9895-56b63323b436" src="..\sites\default\files\inline-images\5_users_1.png" width="600" height="191" loading="lazy"><figcaption><em>Рис. 7 - Настройка экспорта пользователей: выбор ролей для экспорта</em></figcaption></figure><p> </p>
+
+<p>После чего необходимо установить соответствия между полями пользователей (имеется также поддержка полей профилей) и полями контактов Битрикс24 на странице "<em>Администрирование » Конфигурация » Bitrix24 Users synchronization » Fields mapping</em>".</p>
+
+<p>Конфигурирование соответствий несколько менее понятный и прозрачный процесс, поскольку здесь нет списков выбора, как это имеет место в настройке экспорта форм, и соответствия назначаются при помощи токенов, что очевидно займет больше времени, однако такой способ предлагает необходимую гибкость и разнообразие в настройке.</p>
+
+<p>Далее можно произвести экспорт пользователей на странице "<em>Администрирование » Конфигурация » Bitrix24 » Users synchronization » Users Export</em>". При этом соответствия между сущностями пользователя Drupal и контакта Битрикс24 сохраняются и при повторном экспорте новые контакты создаваться не будут.</p>
+
+<p>При активации опции «Enable live export» (Рис. 7) все изменения будут отправляться в CRM сразу при создании/редактировании/удалении пользователя.<br>
+Поддерживается также импорт контактов из CRM в пользователи Drupal ("<em>Администрирование » Конфигурация » Bitrix24 » Users synchronization » Users Import</em>"). При этом га страницу импорта можно выбрать, какие дополнительные роли будут назначены импортируемым пользователям.</p>
+
+<h3> </h3>
+
+<h3>b24_commerce: Экспорт заказов и товаров Drupal Commerce</h3>
+
+<p>Настройка экспорта заказов происходит на странице "<em>Администрирование » Конфигурация » Bitrix24 » Commerce Integration</em>". Здесь необходимо установить режим работы CRM (уже упомянутые классический или упрощенный) — к сожалению, в текущем состоянии API Битрикс24 не позволяет получать этот показатель автоматически. При этом в случае упрощенного режима настройки на этом заканчиваются. В случае стандартного режима для каждого типа товаров в отдельности следует выбрать, надо ли управлять конвертацией созданных лидов в контакты и в сделки на стороне модуля. Обычно это происходит на стороне CRM, однако этот функционал можно настроить на стороне Drupal, для чего нужно активировать конвертацию в нужные сущности и указать, на каком этапе жизни заказа это должно происходить (<em>Рис. 8</em>).</p>
+<figure role="group" class="align-center"><img alt="Настройка экспорта заказов Drupal Commerce - выбор режима экспорта" data-entity-type="file" data-entity-uuid="fdbd130f-b3e2-4a9a-ac3e-37f55ff71e32" src="..\sites\default\files\inline-images\6_commerce_1.png" width="600" height="374" loading="lazy"><figcaption><em>Рис. 8 - Настройка экспорта заказов Drupal Commerce: выбор режима экспорта</em></figcaption></figure><p> </p>
+
+<p>Далее на странице "<em>Администрирование » Конфигурация » Bitrix24 » Commerce Integration » Fields Mapping</em>" следует с помощью токенов установить соответствия полей заказа с полями сделок и лидов для каждого из типов товаров. Обратите внимание, что на этой странице в зависимости от конфигурации вашего интернет-магазина может присутствовать несколько вкладок-табов (сверху), каждая из которых соответствует типу товара. Вкладки «Leads» и «Deals» содержат соответствия поле лидов и сделок соответственно (<em>Рис. 9</em>).</p>
+<figure role="group" class="align-center"><img alt="Настройка экспорта заказов Drupal Commerce: соответствие полей" data-entity-type="file" data-entity-uuid="70d5c948-8045-4900-827c-a7bfaa049030" src="..\sites\default\files\inline-images\6_commerce_2.png" width="600" height="256" loading="lazy"><figcaption><em>Рис. 9 - Настройка экспорта заказов Drupal Commerce: соответствие полей</em></figcaption></figure><p> </p>
+
+<p>Для привязки создаваемых лидов и сделок к товарам на стороне Битрикс24 реализован экспорт товаров. Настройка экспорта производится на странице "<em>Администрирование » Конфигурация » Bitrix24 » Commerce Integration » Products Export</em>", где устанавливается магазин, из которого будут экспортироваться товары, а также при необходимости указывается поле, по которому на сайте просходит распределение товаров по разделам каталога. Это позволит сохранить структуру каталога при его экспорте в CRM. Первичный экспорт лучше провести после первичной настройки модуля на этой же странице. В дальнейшем все изменения будут синхронизироваться с CRM автоматически.</p>
+
+<h3><br>
+b24_utm. Учет UTM-меток при экспорте лидов</h3>
+
+<p>Это очень простой функционал, отслеживающий приход посетителя с UTM-меткой и в случае экспорта лида от его лица заполняющий на стороне Битрикс24 соответствующие поля. Для отслеживания меток достаточно включить модуль. Какие бы то ни было настройки в настоящий момент не требуются.</p>
+
+<p> </p>
+
+<h3>Поиск и отслеживание проблем</h3>
+
+<p>Поскольку любая интеграция с внешними сервисами часто сопровождается значительными сложностями в конфигурации, при написании модуля уделено особое внимание логированию результатов запросов к Битрикс24. Поэтому если что-то по вашему мнению пошло не так, нужная информация наверняка находится в логах «<em>/admin/reports/dblog</em>». </p>
+
+<p> </p>
+
+<h3>Итого</h3>
+
+<p>Любой масштабный проект — это не только <s>ценный мех</s> огромное количество рабочих часов и литры выпитого кофе, но и необходимость смотреть значительно шире своего кода, на высоком уровне разбираться в чужой работе и понимать самые разнообразные потребности как всего бизнеса, так и его составляющих — простых сотрудников у монитора. Поэтому мы с радостью примем любые отзывы и советы по поводу работы модуля и дальнейшему развитию функционала.</p>
+</div>
+      
+            <div class="field field--name-field-blog-form field--type-entity-reference field--label-hidden field--item">
+<div class="row">
+      
+<div class="col-md-6 col-xs-12 col-sm-6">
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="block-form-wrapper">
+<h2 class="block-form-title">Заказать интеграцию <br> Drupal с CRM Битрикс 24</h2>
+
+<div class="block-form-description">Справа находится пример контактной формы на Drupal 8 с автоматическим заведением лидов в Битрикс 24. Отправьте нам сообщение через эту форму если вам нужна помощь в интеграции вашего сайта на Drupal с CRM Битрикс 24.</div>
+
+<div class="block-form-contacts">
+  <ul>
+    <li class="block-form-phone"><a href="tel:88002222673">8 800 222-26-73</a></li>
+    <li class="block-form-email"><a href="mailto:info@drupal-coder.ru">info@drupal-coder.ru</a></li>
+  </ul>
+</div>
+</div></div>
+      
+  </div>
+
+<div class="col-md-6 col-xs-12 col-sm-6">
+      
+            <div class="field field--name-field-block-with-form-value field--type-entity-reference field--label-hidden field--item"><form class="contact-message-drupal-bitrix-form contact-message-form contact-form antibot" data-user-info-from-browser="" data-drupal-selector="contact-message-drupal-bitrix-form" data-action="/comment/1022" action="/antibot" method="post" id="contact-message-drupal-bitrix-form" accept-charset="UTF-8">
+  <noscript>
+  <div class="antibot-no-js antibot-message antibot-message-warning">Вы должны включить JavaScript чтобы использовать эту форму.</div>
+</noscript>
+<div class="field--type-string field--name-field-vashe-imya field--widget-string-textfield form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-field-vashe-imya-wrapper" id="edit-field-vashe-imya-wrapper">      <div class="form-item js-form-item form-type-textfield js-form-type-textfield form-item-field-vashe-imya-0-value js-form-item-field-vashe-imya-0-value form-group">
+      <label for="edit-field-vashe-imya-0-value" class="control-label">Ваше имя</label>
+  
+  
+  <input class="js-text-full text-full form-text form-control" data-drupal-selector="edit-field-vashe-imya-0-value" type="text" id="edit-field-vashe-imya-0-value" name="field_vashe_imya[0][value]" value="" size="60" maxlength="255" placeholder="Ваше имя">
+
+  
+  
+  </div>
+
+  </div>
+<div class="field--type-email field--name-field-e-mail field--widget-email-default form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-field-e-mail-wrapper" id="edit-field-e-mail-wrapper">      <div class="form-item js-form-item form-type-email js-form-type-email form-item-field-e-mail-0-value js-form-item-field-e-mail-0-value form-group">
+      <label for="edit-field-e-mail-0-value" class="control-label">E-mail</label>
+  
+  
+  <input data-drupal-selector="edit-field-e-mail-0-value" class="form-email form-control" type="email" id="edit-field-e-mail-0-value" name="field_e_mail[0][value]" value="" size="60" maxlength="254" placeholder="E-mail">
+
+  
+  
+  </div>
+
+  </div>
+<div class="field--type-string field--name-field-telefon field--widget-string-textfield form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-field-telefon-wrapper" id="edit-field-telefon-wrapper">      <div class="form-item js-form-item form-type-textfield js-form-type-textfield form-item-field-telefon-0-value js-form-item-field-telefon-0-value form-group">
+      <label for="edit-field-telefon-0-value" class="control-label">Телефон</label>
+  
+  
+  <input class="js-text-full text-full form-text form-control" data-drupal-selector="edit-field-telefon-0-value" type="text" id="edit-field-telefon-0-value" name="field_telefon[0][value]" value="" size="60" maxlength="255" placeholder="Телефон">
+
+  
+  
+  </div>
+
+  </div>
+<div class="field--type-string-long field--name-field-vash- field--widget-string-textarea form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-field-vash-wrapper" id="edit-field-vash-wrapper">      <div class="form-item js-form-item form-type-textarea js-form-type-textarea form-item-field-vash--0-value js-form-item-field-vash--0-value form-group">
+      <label for="edit-field-vash-0-value" class="control-label">Ваш комментарий</label>
+  
+  
+  <div class="form-textarea-wrapper">
+  <textarea class="js-text-full text-full form-textarea form-control resize-vertical" data-drupal-selector="edit-field-vash-0-value" id="edit-field-vash-0-value" name="field_vash_[0][value]" rows="5" cols="60" placeholder="Ваш комментарий"></textarea>
+</div>
+
+
+  
+  
+  </div>
+
+  </div>
+<input autocomplete="off" data-drupal-selector="form-dweoj3azieea617xzsqnm-70zsw6pce55f0jdlwfhha" type="hidden" name="form_build_id" value="form-dWeOJ3azIEeA617xZsQNM_70zSw6PCE55F0jDlWfHHA"><input data-drupal-selector="edit-contact-message-drupal-bitrix-form" type="hidden" name="form_id" value="contact_message_drupal_bitrix_form"><input data-drupal-selector="edit-antibot-key" type="hidden" name="antibot_key" value=""><div class="form-item js-form-item form-type-checkbox js-form-type-checkbox form-item-fz152-agreement js-form-item-fz152-agreement checkbox">
+  
+  
+  
+
+      <label for="edit-fz152-agreement" class="control-label option js-form-required form-required"><input required="required" data-drupal-selector="edit-fz152-agreement" class="form-checkbox required" type="checkbox" id="edit-fz152-agreement" name="fz152_agreement" value="1" aria-required="true"><span class="custom-checkbox"></span>Отправляя заявку, я даю согласие на <a href="..\privacy-policy.html" target="_blank" rel="nofollow">обработку своих персональных данных</a>.</label>
+  
+  
+  </div>
+<div data-drupal-selector="edit-actions" class="form-actions form-group js-form-wrapper form-wrapper" id="edit-actions"><button data-drupal-selector="edit-submit" class="button button--primary js-form-submit form-submit btn-primary btn" type="submit" id="edit-submit" name="op" value="Отправить заявку">Отправить заявку</button></div>
+
+</form>
+</div>
+      
+  </div>
+
+  </div>
+</div>
+      
+      <div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items">
+              <div class="field--item category-tag"><a href="..\blog\drupal-8.html" hreflang="ru">Drupal 8</a></div>
+              <div class="field--item category-tag"><a href="..\blog\e-commerce.html" hreflang="ru">E-Commerce</a></div>
+              <div class="field--item category-tag"><a href="..\blog\bitriks24.html" hreflang="ru">Битрикс24</a></div>
+              <div class="field--item category-tag"><a href="..\blog\integracii.html" hreflang="ru">интеграции</a></div>
+          </div>
+  
+  <div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above">
+    <div class="field--label">Еще по теме</div>
+          <div class="field--items">
+              <div class="field--item"><a href="..\blog\integraciya-platyozhnoy-sistemy-s-saytom-na-drupal.html" hreflang="ru">Интеграция платёжной системы с сайтом на Drupal</a></div>
+          <div class="field--item"><a href="..\blog\integraciya-sendpulse-s-saytom-na-drupal.html" hreflang="ru">Интеграция Sendpulse с сайтом на Drupal</a></div>
+              </div>
+      </div>
+
+
+      <div class="field-yashare">
+        <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+        <script src="//yastatic.net/share2/share.js"></script>
+        <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+                <div class="ya-share2" id="block-ya-share2" data-services="vkontakte,facebook,odnoklassniki,gplus,twitter"></div>
+        <a href="..\rss.rss" target="_blank"><span class="iconify" id="block-iconify" data-icon="ion:logo-rss" style="color: #da8c2c;" data-width="29" data-height="29"></span></a>
+              </div>
+  </div>
+
+  <section>
+      
+    <h2 class="block-form-title">Комментарии</h2>
+    
+  
+  <div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Егор
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">вторник, ноября 17, 2020 - 15:24</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>Добрый день!<br>
+Поясните пожалуйста, что делать с адресом .../b24/oauth<br>
+На него редиректит, а такой страницы нет на сайте, получаю 404 соответственно. Или ее нужно создать предварительно?<br>
+В Битрикс24 указываю в настройках прав и CRM и пользователи - все безуспешно, нет подключения.</p>
+<p>Спасибо!</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\238\comment\1015.html">Ответить</a></li></ul>
+
+</div>
+
+
+<div class="indented"><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">среда, ноября 18, 2020 - 06:42</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item">Здравствуйте, Егор, 
+
+Страница создается самим модулем, вручную ее добавлять не нужно. Если модуль установлен только что, попробуйте сбросить кэш - возможно, страница еще не появилась. Проверьте, не опечатались ли при указании адреса приложения в настройках Битрикс 24. Сообщите, пожалуйста, о результатах - возможно, это действительно баг, о котором мы пока не знаем.</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\238\comment\1021.html">Ответить</a></li></ul>
+
+</div>
+
+
+<div class="indented"><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Егор
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">среда, ноября 18, 2020 - 08:35</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>Все ок. спасибо!<br>
+Оказывается нужно было прописать путь разрешение для nginx.</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\238\comment\1022.html">Ответить</a></li></ul>
+
+</div>
+
+</div></div><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Евгений
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">пятница, февраля 4, 2022 - 08:10</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>Для синхронизации пользователей с контактами нет страницы<br>
+Администрирование » Конфигурация » Bitrix24 Users synchronization » Fields mapping<br>
+Как туда попасть?</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\238\comment\1730.html">Ответить</a></li></ul>
+
+</div>
+
+
+<div class="indented"><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">понедельник, февраля 7, 2022 - 08:53</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item">Добрый день,
+Перейдите на страницу /admin/config/b24/user/mapping. Должен быть включен модуль b24_user</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\238\comment\1731.html">Ответить</a></li></ul>
+
+</div>
+
+</div><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Александр
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">среда, апреля 20, 2022 - 09:34</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>Добрый день. Как прописать домен, если у меня не заканчивается на bitrix24.ru, а начинается на b24? Пример b24.domain_name?</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\238\comment\1734.html">Ответить</a></li></ul>
+
+</div>
+
+
+<div class="indented"><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">среда, апреля 20, 2022 - 10:46</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item">Добрый день, 
+В настоящий момент это не реализовано. Попробую добавить такую возможность в будущем.</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\238\comment\1735.html">Ответить</a></li></ul>
+
+</div>
+
+<div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">среда, апреля 20, 2022 - 10:47</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item">Если есть такая возможность, создайте issue на странице модуля на drupal.org.</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\238\comment\1736.html">Ответить</a></li></ul>
+
+</div>
+
+</div><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Петр
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">среда, ноября 30, 2022 - 03:18</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>При установке модуля на Drupal 9 сайт вешается в фатальную ошибку, белый экран на всех страницах. Помогает только выключение модуля с помощью drush.</p>
+<p>GuzzleHttp\Exception\ConnectException: cURL error 6: Could not resolve host: .bitrix24.ru (see <a href="https://curl.haxx.se/libcurl/c/libcurl-errors.html">https://curl.haxx.se/libcurl/c/libcurl-errors.html</a>) for <a href="https://.bitrix24.ru/oauth/token/?grant_type=refresh_token&client_id&client_secret&scope=crm&refresh_token&redirect_uri=https%3A//.../b24/oauth">https://.bitrix24.ru/oauth/token/?grant_type=refresh_token&amp;client_id&amp;cl…</a> in GuzzleHttp\Handler\CurlFactory::createRejection() (line 210 of /home/..../public_html/vendor/guzzlehttp/guzzle/src/Handler/CurlFactory.php).</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\238\comment\1746.html">Ответить</a></li></ul>
+
+</div>
+
+
+<div class="indented"><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">среда, ноября 30, 2022 - 11:16</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item">Благодарю, исправим</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\238\comment\1749.html">Ответить</a></li></ul>
+
+</div>
+
+<div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">среда, ноября 30, 2022 - 12:33</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item">Исправлено. Но вам в любом случае надо будет установить имя домена своего bitrix24 в настройках модуля. </div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\238\comment\1750.html">Ответить</a></li></ul>
+
+</div>
+
+</div><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Петр
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">среда, ноября 30, 2022 - 13:18</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>Спасибо, работает. Еще проблемка, у нас bitrix24.by ))) на него можно настроить?</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\238\comment\1751.html">Ответить</a></li></ul>
+
+</div>
+
+
+<div class="indented"><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">среда, ноября 30, 2022 - 14:21</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item">На днях сделаем</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\238\comment\1752.html">Ответить</a></li></ul>
+
+</div>
+
+
+<div class="indented"><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Петр
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">четверг, декабря 8, 2022 - 01:13</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>Не делали еще?</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\238\comment\1753.html">Ответить</a></li></ul>
+
+</div>
+
+
+<div class="indented"><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">пятница, декабря 9, 2022 - 10:37</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item">Пётр, извините за задержку - только что опубликовал новый релиз с этой возможностью. Кажется, ничего не сломалось, на тестовом сайте отработало.</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\238\comment\1754.html">Ответить</a></li></ul>
+
+</div>
+
+
+<div class="indented"><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Петр
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">суббота, декабря 10, 2022 - 06:17</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>Спасибо огромное! Но после соединения (все прошло отлично) при попытки настроить экспорт из вебформ, когда поля связываешь, после нажатия "сохранить конфигурацию" птичка Enable export становится опять неактивной. В журнале ошибка<br>
+	Warning: Undefined array key "#title" в Drupal\b24_webform\Form\SettingsForm-&gt;getFields() (строка 125 из /home/***/public_html/modules/contrib/b24/modules/b24_webform/src/Form/SettingsForm.php)<br>
+#0 /home/***/public_html/core/includes/bootstrap.inc(347): _drupal_error_handler_real()<br>
+#1 /home/***/public_html/modules/contrib/b24/modules/b24_webform/src/Form/SettingsForm.php(125): _drupal_error_handler()<br>
+#2 /home/***/public_html/modules/contrib/b24/modules/b24_webform/src/Form/SettingsForm.php(102): Drupal\b24_webform\Form\SettingsForm-&gt;getFields()<br>
+#3 [internal function]: Drupal\b24_webform\Form\SettingsForm-&gt;buildForm()<br>
+#4 /home/***/public_html/core/lib/Drupal/Core/Form/FormBuilder.php(531): call_user_func_array()<br>
+#5 /home/***/public_html/core/lib/Drupal/Core/Form/FormBuilder.php(278): Drupal\Core\Form\FormBuilder-&gt;retrieveForm()<br>
+#6 /home/***/public_html/core/lib/Drupal/Core/Controller/FormController.php(73): Drupal\Core\Form\FormBuilder-&gt;buildForm()<br>
+#7 [internal function]: Drupal\Core\Controller\FormController-&gt;getContentResult()<br>
+#8 /home/***/public_html/core/lib/Drupal/Core/EventSubscriber/EarlyRenderingControllerWrapperSubscriber.php(123): call_user_func_array()<br>
+#9 /home/***/public_html/core/lib/Drupal/Core/Render/Renderer.php(564): Drupal\Core\EventSubscriber\EarlyRenderingControllerWrapperSubscriber-&gt;Drupal\Core\EventSubscriber\{closure}()<br>
+#10 /home/***/public_html/core/lib/Drupal/Core/EventSubscriber/EarlyRenderingControllerWrapperSubscriber.php(124): Drupal\Core\Render\Renderer-&gt;executeInRenderContext()<br>
+#11 /home/***/public_html/core/lib/Drupal/Core/EventSubscriber/EarlyRenderingControllerWrapperSubscriber.php(97): Drupal\Core\EventSubscriber\EarlyRenderingControllerWrapperSubscriber-&gt;wrapControllerExecutionInRenderContext()<br>
+#12 /home/***/public_html/vendor/symfony/http-kernel/HttpKernel.php(169): Drupal\Core\EventSubscriber\EarlyRenderingControllerWrapperSubscriber-&gt;Drupal\Core\EventSubscriber\{closure}()<br>
+#13 /home/***/public_html/vendor/symfony/http-kernel/HttpKernel.php(81): Symfony\Component\HttpKernel\HttpKernel-&gt;handleRaw()<br>
+#14 /home/***/public_html/core/lib/Drupal/Core/StackMiddleware/Session.php(58): Symfony\Component\HttpKernel\HttpKernel-&gt;handle()<br>
+#15 /home/***/public_html/core/lib/Drupal/Core/StackMiddleware/KernelPreHandle.php(48): Drupal\Core\StackMiddleware\Session-&gt;handle()<br>
+#16 /home/***/public_html/core/modules/page_cache/src/StackMiddleware/PageCache.php(106): Drupal\Core\StackMiddleware\KernelPreHandle-&gt;handle()<br>
+#17 /home/***/public_html/core/modules/page_cache/src/StackMiddleware/PageCache.php(85): Drupal\page_cache\StackMiddleware\PageCache-&gt;pass()<br>
+#18 /home/***/public_html/core/modules/ban/src/BanMiddleware.php(50): Drupal\page_cache\StackMiddleware\PageCache-&gt;handle()<br>
+#19 /home/***/public_html/core/lib/Drupal/Core/StackMiddleware/ReverseProxyMiddleware.php(48): Drupal\ban\BanMiddleware-&gt;handle()<br>
+#20 /home/***/public_html/core/lib/Drupal/Core/StackMiddleware/NegotiationMiddleware.php(51): Drupal\Core\StackMiddleware\ReverseProxyMiddleware-&gt;handle()<br>
+#21 /home/***/public_html/vendor/stack/builder/src/Stack/StackedHttpKernel.php(23): Drupal\Core\StackMiddleware\NegotiationMiddleware-&gt;handle()<br>
+#22 /home/***/public_html/core/lib/Drupal/Core/DrupalKernel.php(709): Stack\StackedHttpKernel-&gt;handle()<br>
+#23 /home/***/public_html/index.php(19): Drupal\Core\DrupalKernel-&gt;handle()<br>
+#24 {main}</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\238\comment\1755.html">Ответить</a></li></ul>
+
+</div>
+
+
+<div class="indented"><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">понедельник, декабря 12, 2022 - 09:31</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item">Пётр, вы можете выслать мне на a.zubenko@initlab.ru конфиг вашей формы?</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\238\comment\1756.html">Ответить</a></li></ul>
+
+</div>
+
+<div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">понедельник, декабря 12, 2022 - 11:47</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item">И будет оперативнее, если для таких проблем открывать issue на странице модуля на Drupal.org</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\238\comment\1757.html">Ответить</a></li></ul>
+
+</div>
+
+<div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">среда, декабря 14, 2022 - 11:41</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item">Модуль обновлен</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\238\comment\1758.html">Ответить</a></li></ul>
+
+</div>
+
+</div></div></div></div></div>
+ 
+      <div class="comment-form-wrapper">
+      <h2 class="block-form-title">Добавить комментарий</h2>
+      <form class="comment-comment-form comment-form antibot" data-drupal-selector="comment-form" data-action="https://drupal-coder.ru/comment/reply/node/238/comment" action="/antibot" method="post" id="comment-form" accept-charset="UTF-8">
+  <noscript>
+  <div class="antibot-no-js antibot-message antibot-message-warning">Вы должны включить JavaScript чтобы использовать эту форму.</div>
+</noscript>
+<div class="form-item js-form-item form-type-textfield js-form-type-textfield form-item-name js-form-item-name form-group">
+      <label for="edit-name--2" class="control-label">Ваше имя</label>
+  
+  
+  <input placeholder="Ваше имя" data-drupal-selector="edit-name" class="form-text form-control" type="text" id="edit-name--2" name="name" value="" size="30" maxlength="60">
+
+  
+  
+  </div>
+<input autocomplete="off" data-drupal-selector="form-ozl8xexsiefjklimyf0gjdulafminiewk3vncs8f00k" type="hidden" name="form_build_id" value="form-OZl8xexSIeFJKLIMYF0gjDUlAfMiNiewk3vNCs8F00k"><input data-drupal-selector="edit-comment-comment-form" type="hidden" name="form_id" value="comment_comment_form"><input data-drupal-selector="edit-antibot-key" type="hidden" name="antibot_key" value=""><div class="field--type-text-long field--name-comment-body field--widget-text-textarea form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-wrapper" id="edit-comment-body-wrapper">      <div class="js-text-format-wrapper text-format-wrapper js-form-item form-item">
+  <div class="form-item js-form-item form-type-textarea js-form-type-textarea form-item-comment-body-0-value js-form-item-comment-body-0-value">
+      <label for="edit-comment-body-0-value" class="control-label js-form-required form-required">Комментарий</label>
+  
+  
+  <div class="form-textarea-wrapper">
+  <textarea class="js-text-full text-full form-textarea required form-control resize-vertical" data-media-embed-host-entity-langcode="ru" data-drupal-selector="edit-comment-body-0-value" id="edit-comment-body-0-value" name="comment_body[0][value]" rows="5" cols="60" placeholder="" required="required" aria-required="true"></textarea>
+</div>
+
+
+  
+  
+  </div>
+<div class="js-filter-wrapper filter-wrapper form-inline form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format" id="edit-comment-body-0-format"><div class="filter-help form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format-help" id="edit-comment-body-0-format-help"><a href="..\filter\tips.html" target="_blank" title="Opens in new window" data-toggle="tooltip" data-drupal-selector="edit-comment-body-0-format-help-about" class="icon-before" id="edit-comment-body-0-format-help-about"><span class="icon glyphicon glyphicon-question-sign" aria-hidden="true"></span>О текстовых форматах</a></div>
+</div>
+
+  </div>
+
+  </div>
+<div data-drupal-selector="edit-actions" class="form-actions form-group js-form-wrapper form-wrapper" id="edit-actions--2"><button data-drupal-selector="edit-submit" class="button button--primary js-form-submit form-submit btn-primary btn" type="submit" id="edit-submit--2" name="op" value="Отправить">Отправить</button></div>
+
+</form>
+
+    </div> 
+  
+</section>
+
+
+</article>
+
+
+  </div>
+
+              </section>
+
+                </div>
+  </div>
+
+
+      <footer class="footer" role="contentinfo">
+      <div class=" container">  
+          <div class="region region-footer">
+    <section id="block-copyright" class="block block-block-content block-block-content263c1cb2-b142-4488-af8e-99f92fcb7640 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="social-links">
+  <ul class="social-links-wrapper">
+    <li class="social-links-item"><a target="_blank" href="https://vk.com/initlab"><i class="fab fa-vk"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://teleg.one/initlabbot" title="Свяжитесь с нами"><i class="fab fa-telegram-plane"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.youtube.com/channel/UCyFEbngMB-bK2ulNtd_W43A"><i class="fab fa-youtube"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://zen.yandex.ru/id/6037ce072f500a068c630fec"><img style="width: 16px; margin-bottom: 5px;" src="..\sites\default\files\icons\zen-icon.svg"></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.facebook.com/initlabkr/"><img style="width: 25px; margin-bottom: 5px;" src="..\sites\default\files\icons\icon-facebook-ru-dc.svg"></a></li>
+  </ul>  
+</div>
+
+<p>ООО «Инитлаб», Краснодар, Россия.
+<a class="goal__tel" href="tel:+78002222673">8 800 222-26-73</a><br>
+Drupal является зарегистрированной торговой маркой Dries Buytaert.</p>
+</div>
+      
+  </section>
+
+
+  </div>
+
+      </div>
+    </footer>
+  </div>
+
+  </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"comment\/1022","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"ru","currentQuery":{"page":0}},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"ajaxPageState":{"libraries":"antibot\/antibot.form,bootstrap\/popover,bootstrap\/theme,bootstrap\/tooltip,bootstrap_dc\/bootstrap-scripts,bootstrap_dc\/dc,bootstrap_dc\/global-styling,bootstrap_dc\/seo,colorbox\/default,colorbox_inline\/colorbox_inline,colorbox_load\/colorbox_load,comment\/drupal.comment-by-viewer,core\/drupal.form,filter\/caption,filter\/drupal.filter,google_analytics\/google_analytics,ng_lightbox\/ng_lightbox,system\/base,views\/views.module","theme":"bootstrap_dc","theme_token":null},"ajaxTrustedUrl":{"form_action_p_pvdeGsVG5zNF_XLGPTvYSKCf43t8qZYSwcfZl2uzM":true,"https:\/\/drupal-coder.ru\/comment\/reply\/node\/238\/comment":true},"colorbox":{"opacity":"0.85","current":"{current} \u0438\u0437 {total}","previous":"\u00ab \u041f\u0440\u0435\u0434\u044b\u0434\u0443\u0449\u0438\u0439","next":"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0439 \u00bb","close":"Close","maxWidth":"98%","maxHeight":"98%","fixed":true,"mobiledetect":true,"mobiledevicewidth":"480px"},"google_analytics":{"account":"UA-87805467-1","trackOutbound":true,"trackMailto":true,"trackTel":true,"trackDownload":true,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip","trackColorbox":true},"bootstrap":{"forms_has_error_value_toggle":1,"modal_animation":1,"modal_backdrop":"true","modal_focus_input":1,"modal_keyboard":1,"modal_select_text":1,"modal_show":1,"modal_size":"","popover_enabled":1,"popover_animation":1,"popover_auto_close":1,"popover_container":"body","popover_content":"","popover_delay":"0","popover_html":0,"popover_placement":"right","popover_selector":"","popover_title":"","popover_trigger":"click","tooltip_enabled":1,"tooltip_animation":1,"tooltip_container":"body","tooltip_delay":"0","tooltip_html":0,"tooltip_placement":"auto left","tooltip_selector":"","tooltip_trigger":"hover"},"field_group":{"html_element":{"mode":"default","context":"view","settings":{"classes":"col-md-6 col-xs-12 col-sm-6","id":"","element":"div","show_label":false,"label_element":"h3","attributes":"","effect":"none","speed":"fast"}}},"antibot":{"forms":{"contact-message-drupal-bitrix-form":{"id":"contact-message-drupal-bitrix-form","key":"CEMgG_CCvBZdzaYBsZQxn14qSAeS_QqCdhmHNyfeMYY"},"comment-form":{"id":"comment-form","key":"5D-i6uDYb-gr3-4qQZFOE5ec3-2jdoq6QSz9J26Pt50"}}},"user":{"uid":0,"permissionsHash":"66bb25c0b665c533dd9436d0cd4e99532a723088208bff0a05f2bf113d3703ac"}}</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="..\sites\default\files\js\js_l7kj413ts0sy1f7dK4QZ7-EXIJ99g8tR1YUHtt5nj_A.js"></script>
+<script src="..\sites\default\files\js\js_d5BC-2wlh3XH4S29GgaPGie7NxyWY0K1EhPg30LGzwA.js"></script>
+<script src="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+<script src="..\sites\default\files\js\js_0JpfcTomuXtSWa_m9aC3Cl6jt3QOGmlwYugQhh4TJxo.js"></script>
+<script src="..\sites\default\files\js\js_ujwG42tv59NDLzAAPHgvLRMtYWXmBeIDFHSWO_WYWK8.js"></script>
+
+  </body>
+</html>

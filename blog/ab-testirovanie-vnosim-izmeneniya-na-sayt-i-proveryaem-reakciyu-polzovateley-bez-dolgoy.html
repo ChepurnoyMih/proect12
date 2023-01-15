@@ -1,0 +1,571 @@
+﻿<!DOCTYPE html>
+<html lang="ru" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
+  <head>
+    <meta charset="utf-8">
+<noscript><style>form.antibot * :not(.antibot-message) { display: none !important; }</style>
+</noscript><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-87805467-1"></script>
+<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag("js", new Date());gtag("set", "developer_id.dMDhkMT", true);gtag("config", "UA-87805467-1", {"groups":"default","anonymize_ip":true,"page_placeholder":"PLACEHOLDER_page_path","allow_ad_personalization_signals":false});</script>
+<meta http-equiv="content-language" content="ru">
+<meta name="description" content="В этой статье мы расскажем о том, как работает A/B тестирование, что можно проверить с его помощью и почему это особенно важный инструмент для e-commerce проектов.">
+<meta name="keywords" content="создание сайтов на drupal, разработка Drupal-сайтов">
+<meta property="og:type" content="blog">
+<meta property="og:url" content="https://drupal-coder.ru/blog/ab-testirovanie-vnosim-izmeneniya-na-sayt-i-proveryaem-reakciyu-polzovateley-bez-dolgoy">
+<meta property="og:title" content="A/B тестирование: вносим изменения на сайт и проверяем реакцию пользователей без долгой разработки">
+<meta property="og:description" content="В этой статье мы расскажем о том, как работает A/B тестирование, что можно проверить с его помощью и почему это особенно важный инструмент для e-commerce проектов.">
+<meta name="Generator" content="Drupal 9 (https://www.drupal.org)">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="..\sites\default\files\android-chrome-256x256.png" type="image/png">
+<link rel="alternate" hreflang="ru" href="ab-testirovanie-vnosim-izmeneniya-na-sayt-i-proveryaem-reakciyu-polzovateley-bez-dolgoy.html">
+<link rel="canonical" href="ab-testirovanie-vnosim-izmeneniya-na-sayt-i-proveryaem-reakciyu-polzovateley-bez-dolgoy.html">
+<link rel="shortlink" href="ab-testirovanie-vnosim-izmeneniya-na-sayt-i-proveryaem-reakciyu-polzovateley-bez-dolgoy.html">
+
+    <title>A/B тестирование: вносим изменения на сайт и проверяем реакцию пользователей без долгой разработки | drupal-coder.ru</title>
+    <link rel="stylesheet" media="all" href="..\sites\default\files\css\css_y8CdfJDNR-tG0CPnRDokR6Eh9OUJplbHLVQ9A8myecQ.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_tFXlTqkfn6J-Qtpt9xbB8JudSaJfOGxRSmpeidDAzPE.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_c0CK9J5WwpjjjzUIU22NJ_K_N6o0HFHz68-eM_V9Q7Q.css">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/@unicorn-fail/drupal-bootstrap-styles@0.0.2/dist/3.4.0/8.x-3.x/drupal-bootstrap.min.css" integrity="sha512-tGFFYdzcicBwsd5EPO92iUIytu9UkQR3tLMbORL9sfi/WswiHkA1O3ri9yHW+5dXk18Rd+pluMeDBrPKSwNCvw==" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_ULmc1mwKFKQRQmxYsjphW6dsh2g6jX4LXXBAtdO0vIE.css">
+
+    
+    <meta name="cmsmagazine" content="3d47b05beba40f3816d9741ee18c01a5">
+
+    
+    
+           <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P4SXQSG');</script>
+<!-- End Google Tag Manager -->
+    
+    
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Bold.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Medium.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Regular.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/fontawesome/webfonts/fa-brands-400.woff2" crossorigin="anonymous">
+    <link rel='manifest' href='..\manifest.json'>
+    <meta name="format-detection" content="telephone=no">
+
+          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MXPCP8Q"></script>
+      </head>
+  <body class="page-node-338 path-node page-node-type-blog has-glyphicons">
+
+                  <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4SXQSG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+      
+          
+
+    <a href="#main-content" class="visually-hidden focusable skip-link">
+      Перейти к основному содержанию
+    </a>
+    
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
+    
+      
+          <header class="navbar navbar-default" id="navbar" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+            <div class="region region-navigation">
+    <section id="block-pikselvkskript" class="block block-block-content block-block-contentbf8d9e8f-617c-4e8f-8501-7586be8255e0 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script>(window.Image ? (new Image()) : document.createElement('img')).src = 'https://vk.com/rtrg?p=VK-RTRG-238064-1VWIQ';</script></div>
+      
+  </section>
+
+<section id="block-globalsitetagadwords" class="block block-block-content block-block-content27617f8e-58d1-4a2a-9f23-31eab95a43c8 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><!-- Global site tag (gtag.js) - AdWords: 948581894 -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=AW-948581894"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-948581894');
+</script></div>
+      
+  </section>
+
+            <a class="logo navbar-btn pull-left" href="..\index.htm" title="Главная" rel="home">
+            <img src="..\themes\custom\bootstrap_dc\images\logo-initlab.svg" alt="Главная" width="156" height="31">
+        </a>
+            
+  </div>
+
+        </div>
+                          <div class="navbar-collapse-wrapper">
+
+            <div class="navbar-collapse collapse">
+                <div class="region region-navigation-collapsible">
+    <nav role="navigation" aria-labelledby="block-bootstrap-dc-main-menu-menu" id="block-bootstrap-dc-main-menu">
+            
+  <h2 class="visually-hidden" id="block-bootstrap-dc-main-menu-menu">Основная навигация</h2>
+  
+
+        
+              <ul class="menu nav navbar-nav">
+                      <li><a href="..\support.html" data-drupal-link-system-path="node/1">Поддержка Drupal</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-admin.html" class="dropdown-toggle" data-toggle="dropdown">DevOps <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\import-migrate-upgrade.html" data-drupal-link-system-path="node/4">Миграция</a>
+                  </li>
+                  <li><a href="..\backup.html" data-drupal-link-system-path="node/3">Бэкапы</a>
+                  </li>
+                  <li><a href="..\drupal-security-audit.html" data-drupal-link-system-path="node/9">Аудит безопасности</a>
+                  </li>
+                  <li><a href="..\boost-drupal.html" data-drupal-link-system-path="node/5">Оптимизация скорости</a>
+                  </li>
+                  <li><a href="..\ssl.html" data-drupal-link-system-path="node/99">Переезд на https</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\blog.html" data-drupal-link-system-path="blog">Блог</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-seo.html" class="dropdown-toggle" data-toggle="dropdown">Продвижение <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\drupal-seo\context.html" data-drupal-link-system-path="node/111">Реклама</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li class="expanded dropdown"><a href="..\team.html" class="dropdown-toggle" data-toggle="dropdown">О нас <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\team.html#team" data-drupal-link-system-path="team">Команда</a>
+                  </li>
+                  <li><a href="..\drupalgive.html" data-drupal-link-system-path="node/135">Drupalgive</a>
+                  </li>
+                  <li><a href="..\drupal-courses.html" data-drupal-link-system-path="node/10">Курсы Drupal</a>
+                  </li>
+                  <li><a href="..\vacancies.html" data-drupal-link-system-path="vacancies">Вакансии</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\happy-customers.html" data-drupal-link-system-path="happy-customers">Проекты</a>
+                  </li>
+                  <li><a href="..\contacts.html" data-drupal-link-system-path="node/86">Контакты</a>
+                  </li>
+              </ul>
+      
+
+
+  </nav>
+
+  </div>
+
+            </div>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+              </div>
+    </header>
+  
+
+      <div class="page-header-big" role="heading">
+        <div class="container">
+            <div class="region region-header">
+        <h1 class="page-header">
+<span>A/B тестирование: вносим изменения на сайт и проверяем реакцию пользователей без долгой разработки </span>
+</h1>
+
+<section class="views-element-container block block-views block-views-blockuser-block-1 clearfix" id="block-views-block-user-block-1">
+  
+    
+
+      <div class="form-group"><div class="view view-user view-id-user view-display-id-block_1 js-view-dom-id-33a3a3da778a2d519e80c9386dae058e1cb6feb38c6a14e9378204ef5b07303e">
+  
+    
+      
+      <div class="view-content">
+          <div class="views-row"><div class="views-field views-field-user-picture"><div class="field-content">  <img loading="lazy" src="..\sites\default\files\styles\avatar_mini\public\pictures\2019-12\IMG_2522_0.jpg?itok=-U8BO7Jh" width="45" height="45" alt="" typeof="foaf:Image" class="img-responsive">
+
+
+</div></div><div class="views-field views-field-field-name"><div class="field-content">Бочкарёва Дарья</div></div></div>
+
+    </div>
+  
+          </div>
+</div>
+
+  </section>
+
+<section id="block-yashare" class="block-yashare block block-block-content block-block-contentee72d8fb-02e9-4ef6-8e71-0df16bee86a9 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+<script src="//yastatic.net/share2/share.js"></script>
+<div class="ya-share2" data-services="vkontakte,odnoklassniki,gplus,twitter"></div></div>
+      
+  </section>
+
+
+  </div>
+
+        </div>
+      
+    </div>
+  
+
+<div class="main-wrapper">
+  <div role="main" class="main-container container js-quickedit-main-content">
+    <div class="row">
+
+
+
+            
+                  <section class="col-sm-12">
+
+                
+                
+                
+                                      
+                  
+                          <a id="main-content"></a>
+            <div class="region region-content">
+        <ol class="breadcrumb">
+          <li>
+                  <a href="..\blog.html">Блог</a>
+              </li>
+          <li class="active">
+                  A/B тестирование: вносим изменения на сайт и проверяем реакцию пользователей без долгой разработки 
+              </li>
+      </ol>
+
+<div data-drupal-messages-fallback="" class="hidden"></div>
+  <article data-history-node-id="338" role="article" about="https://drupal-coder.ru/blog/ab-testirovanie-vnosim-izmeneniya-na-sayt-i-proveryaem-reakciyu-polzovateley-bez-dolgoy" class="blog is-promoted full clearfix">
+
+  
+    
+
+  
+
+  <div class="content">
+    
+    
+            <div class="field field--name-field-blog-img field--type-image field--label-hidden field--item">/sites/default/files/2022-07/shutterstock_2096908426.jpg</div>
+      <div id="field-language-display"><div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group">
+      <label class="control-label">Language</label>
+  
+  
+  Russian
+
+  
+  
+  </div>
+</div>
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><p>Увеличить продажи на сайте помогает привлечение трафика и повышение конверсии. В идеале нужно работать в обоих направлениях, однако контекстная реклама требует постоянных затрат и может быть попросту бессмысленной, если сайт недостаточно хорош с точки зрения клиента. Поэтому в долгосрочной перспективе гораздо эффективнее сосредоточиться на повышении конверсии, которая поможет зарабатывать больше.</p>
+
+<p>Чтобы развивать сайт, нужно постоянно генерировать идеи по его улучшению: совершенствовать дизайн, подгонять юзабилити под нынешние стандарты пользовательского опыта, чтобы повышать конверсию.</p>
+
+<p>Для проверки гипотез по улучшению web-проектов существует A/B тестирование. Оно помогает узнать мнение клиентов на практике и получить конкретную статистику сделать правильные выводы и не нагородить лишнего.</p>
+
+<p>В этой статье мы расскажем о том, как работает A/B тестирование, что можно проверить с его помощью и почему это особенно важный инструмент для e-commerce проектов.<br>
+ </p>
+
+<h2>Что такое A/B тестирование, для чего нужно и как работает</h2>
+
+<p>A/B-тестирование — это инструмент для проверки гипотез и улучшения показателей сайта: конверсии, глубины просмотра и т.д.</p>
+
+<p>Иногда на сайте видны очевидные улучшения: по «жирным» контактам на видном месте будут звонить чаще, чем по мелкому номеру в нижнем углу, информация о доставке должна быть в отдельном разделе, а не спрятана в конце оформления заказа и т.д. Так вот A/B-тестирование проводится, когда улучшено всё, что лежало на поверхности и остались только неочевидные гипотезы: если мы передвинем этот блок, продажи улучшатся? А если сделать кнопку «Купить» больше и зелёной?<br>
+Такие гипотезы может формировать маркетолог на стороне клиента, команда подрядчика или даже сам клиент.</p>
+
+<p>Пример: маркетолог считает, что для улучшения продаж кнопка «В корзину» должна быть круглее и другого цвета. Чтобы проверить эту гипотезу, нам нужно внести эти изменения на страницу, собрать статистику от посетителей сайта и понять, есть ли от этого нужный эффект.</p>
+
+<p>Конечно, мы можем дать разработчикам такую задачу сразу, но есть ряд проблем:</p>
+
+<ul><li>предположение основано на примере более успешного сайта конкурентов, а значит мы не уверены, что это даст весомый результат;</li>
+	<li>разработчики потратят на апгрейд кнопки рабочие часы, которые нужно будет оплатить;</li>
+	<li>если после внедрения эффекта не будет, придётся вернуть кнопку к прошлой версии, а значит снова тратить бюджет на разработку.</li>
+</ul><p>В некоторых случаях A/B-тестирование помогает избежать лишних трат. Можно спокойно отследить динамику и не портить сайт пустыми действиями по типу внедрить-вернуть как было. Но самое главное — оно даёт чёткое понимание, верна ли наша гипотеза и помогает почти гарантированно повысить конверсию и улучшить сайт.</p>
+
+<p>Вносить изменения сходу конечно можно, но лучше делать это с очевидно плохими частями сайта. А в идеале нужно сначала проверить, понравится ли это пользователям и принесёт ли ожидаемый эффект.</p>
+
+<p>Мы создаём две версии страницы — с изменением и без. Половина пользователей попадает на одну версию, половина — на вторую. На основе их реакции (больше или меньше кликают) мы делаем вывод, приносит ли изменённый вариант нужные результаты или лучше оставить как есть, хотя бы до следующей гипотезы.</p>
+
+<p>То есть мы не просто предполагаем и бежим внедрять, а экспериментально оцениваем предпочтения посетителей.</p>
+
+<p>A/B тесты помогают повысить продажи, подобрать идеальные заголовки, упростить пользование сайтом и т.д.</p>
+
+<p>Для начала работы с A/B тестами нужно понимать, какие конкретно показатели мы хотим улучшить, т.е. иметь чёткие метрики: клики по кнопке оплаты, количество заказов, величина среднего чека, заполнение формы, добавление в корзину, глубина просмотра и т.д.</p>
+
+<p>Но каким образом можно внести изменения на сайт при этом ничего на нём не меняя?</p>
+
+<p>Для проведения A/B тестирования существуют специальные инструменты. Мы расскажем об одном из них — Google Optimize.</p>
+
+<h2>Краткое описание и принцип работы Google Optimize</h2>
+
+<p>Мы не дадим подробной инструкции к работе с Google Optimize, а только расскажем о его возможностях.</p>
+<img alt="testing-1" data-entity-type="file" data-entity-uuid="48de7812-2af3-4a40-8077-a35d4f9ba711" src="..\sites\default\files\inline-images\shutterstock_2096908426_0_1.jpg" class="align-center" width="600" height="337" loading="lazy"><p>Принцип создания страниц для A/B теста довольно прост: в специальную строку вводится url нужной страницы, которая открывается во внутреннем редакторе — теперь на ней можно:</p>
+
+<ul><li>поменять местами блоки;</li>
+	<li>поменять расположение элементов;</li>
+	<li>поменять цвета элементов;</li>
+	<li>переименовать кнопки;</li>
+	<li>добавить-удалить блок;</li>
+	<li>изменить заголовки и не только.</li>
+</ul><p>Простые изменения может внести даже новичок. Например, чтобы переименовать кнопку, не нужно особых навыков. Но для некоторых гипотез понадобятся разработчики. Например, если мы хотим протестировать новую кнопку, к которой нужно подключить функционал (добавление в корзину, переход по ссылке и т.д.).</p>
+<img alt="testing-2" data-entity-type="file" data-entity-uuid="ea98c040-5995-41e3-9448-706d6c4f7027" src="..\sites\default\files\inline-images\1 рабочая область_0_1.jpg" class="align-center" width="600" height="284" loading="lazy"><p><em>Рабочая область Google Optimize</em></p>
+
+<p>Также на сайте может быть некачественный код, который исказит результат проверки гипотезы. Плохо свёрстанная страница будет ехать, ломаться и выглядеть небрежно, что наверняка скажется на мнении посетителей.</p>
+
+<p>Привлечение разработчиков в этом случае тоже влечёт затраты, но:</p>
+
+<p>1)    не такие большие, как в случае «а давайте внедрим — ой, нет, верните как было»;<br>
+2)    исправить некачественный код в принципе нужное дело, поэтому хорошие разработчики сделают это в любом случае, только здесь это может быть сопряжено с работой по оптимизации, сразу заточенной на улучшения. </p>
+
+<h2>Цели в Google Analytics</h2>
+
+<p>Когда мы сделали «страницу мечты» с нужными изменениями, нам нужно правильно отследить реакцию пользователей.</p>
+
+<p>Чтобы Google понимал, какие именно параметры мы хотим измерить, нужно задать цель в другом сервисе — Google Analytics. Он работает в связке с Google Optimize и отвечает за то, по каким параметрам мы будем судить об успехе нашей гипотезы.</p>
+
+<p>Google Analytics — это сервис для анализа поведения пользователей на сайте. Здесь можно отслеживать поведение посетителей и важные события (цели), считать конверсию, анализировать эффект от рекламы и т.д.</p>
+
+<p>Цель в Google Analytics – это любое действие посетителей сайта, которое для нас важно: покупка, клик по кнопке или ссылке, оплата покупки, подписка на рассылку и т.д.</p>
+
+<p>Если до этого у вас не были настроены цели Google Analytics, например, под рекламные кампании, то у Google Optimize нет исходных данных, нет результата «до», с которым можно сравнивать наше «после».</p>
+
+<p>Однако переживать не стоит: проверка гипотезы — отличный повод завести эти самые цели. Плюс тестирование частично перекроет проблему, т.к. половина людей попадёт на старый вариант, половина на новый, а значит данные поступят в любом случае. Просто сравнение будет не совсем идеальным, т.к. срез по результатам за полгода показал бы нам более полную картину.</p>
+
+<p>Мы настраиваем или выбираем одну-две цели из Google Analytic, то есть задаем важные для нас параметры: посещение нужной страницы, продолжительность сеанса, количество страниц за сеанс, отказы. Для e-commerce можно измерять более конкретные показатели (если они наша цель, разумеется): добавление в корзину, оформление заказа, увеличение среднего чека, количество товаров в заказе и т.д.</p>
+
+<p>Затем мы распределяем трафик. В классическом A/B тестировании посетителей делят 50/50 — половина видит старую версию страницы, половина новую. Если посещаемость у сайта высокая, соотношение может быть любым — хоть 10/90, главное понимать, получим ли мы полное представление с таким распределением трафика. Важно иметь на руках значимые показатели — 2 человека в день не дадут нужного результата, либо будут формировать полную картину очень долго.</p>
+
+<p>Чтобы ускорить процесс, при любых показателях можно запустить контекстную рекламу на целевую страницу. </p>
+
+<h2>Пример из практики: какие гипотезы мы тестировали на нашем сайте</h2>
+
+<p>Мы немного погрузили вас в то, как устроена система A/B тестирования и теперь покажем на своём примере, какие гипотезы мы проверяли и что у нас получилось.</p>
+
+<h3>1.    Состав команды: опытных разработчиков — на первый план</h3>
+
+<p>Изначально в блоке «Команда» на странице «Поддержка сайтов» было размещено только руководство компании и менеджеры — это довольно популярная тактика, не подумайте, что мы тщеславные.</p>
+<img alt="testing-3" data-entity-type="file" data-entity-uuid="29c802bf-bd85-4e03-aaf8-add338cb7b0e" src="..\sites\default\files\inline-images\2 команда менеджеры_0_1.jpg" class="align-center" width="600" height="439" loading="lazy"><p>Наша гипотеза состояла в том, чтобы добавить в начало списка наших самых опытных разработчиков, указать их профессиональный стаж и сколько лет они работают с Drupal.</p>
+<img alt="testing-4" data-entity-type="file" data-entity-uuid="4e75e704-7ec5-4996-8c24-e03435c013e0" src="..\sites\default\files\inline-images\2 команда программисты_0_1.jpg" class="align-center" width="598" height="600" loading="lazy"><p> </p>
+
+<p>Тестируемый вариант оказался успешнее исходного: длительность сеанса увеличилась, дополнительная метрика — отказы — уменьшилась.</p>
+<img alt="testing-4" data-entity-type="file" data-entity-uuid="e4951806-7be7-4327-8dfc-f93b42738e50" src="..\sites\default\files\inline-images\2 результаты_0_1.jpg" class="align-center" width="600" height="233" loading="lazy"><p><em>Результаты тестирования гипотез</em></p>
+
+<h3>2. Изменили отображение портфолио: логотипы крупных клиентов + релевантные кейсы</h3>
+
+<p>Изначально на странице «Портфолио» были размещены логотипы всех наших клиентов, а после них — список клиентов с кратким описанием каждого проекта и решённых задач. Это помогало потенциальным клиентам найти похожий кейс и понять, справимся ли мы с их задачами. По нашему опыту, это был один из основных факторов принятия решения.  </p>
+<img alt="Initlab Drupal" data-entity-type="file" data-entity-uuid="4ef184e2-0dce-485f-9fc2-30cb5b3761a0" src="..\sites\default\files\inline-images\3 логотипы.jpg" class="align-center" width="494" height="600" loading="lazy"><img alt="Initlab Drupal" data-entity-type="file" data-entity-uuid="6f9ae29b-55dd-485d-a4c6-5964b71e3f79" src="..\sites\default\files\inline-images\3 логотипы 2.jpg" class="align-center" width="465" height="600" loading="lazy"><p>Но после анализа пользовательского поведения мы выяснили, что многие клиенты не долистывают логотипы до списка работ, из чего у нас родилось две гипотезы:</p>
+
+<ul><li>разместить логотипы крупных клиентов + список проектов под ними;</li>
+	<li>разместить только логотипы крупных клиентов чтобы проверить, на самом ли деле список работ помогает заказчикам в принятии решения.</li>
+</ul><img alt="testing-6" data-entity-type="file" data-entity-uuid="49a4c05c-9793-448d-b07e-52493a2cf42b" src="..\sites\default\files\inline-images\3 логотипы + кейсы_1.jpg" class="align-center" width="600" height="435" loading="lazy"><p><em>И точно такой же вариант, только без списка внизу</em></p>
+
+<p>Оригинал проиграл из-за большого количества наших клиентов: людям надоедало скроллить страницу, и они не доходили до списка работ.</p>
+
+<p>Короткий пул логотипов не перекрывает список и позволяет увидеть его начало, что мотивирует человека листать дальше и знакомиться с остальными кейсами. Этот вариант помог увеличить длительность сеанса на странице с клиентами.</p>
+<img alt="Initlab Drupal" data-entity-type="file" data-entity-uuid="b1a4e95a-6c87-49e9-8f3e-8f71e75fe5e9" src="..\sites\default\files\inline-images\3 логотипы результаты.jpg" class="align-center" width="600" height="282" loading="lazy"><p><br><em>Результаты тестирования гипотез</em></p>
+
+<h3>3. Блок текста о Drupal: нужный или лишний? </h3>
+
+<p>О Drupal-разработчиках многое говорит их участие в жизни Drupal-комьюнити. Мы проверяли гипотезу демонстрации экспертности: добавили блок текста с информацией о нашем взаимодействии с Drupal-сообществом.</p>
+<img alt="Initlab Drupal" data-entity-type="file" data-entity-uuid="c3bc185b-0386-4800-9ddf-d2064d81df47" src="..\sites\default\files\inline-images\4 друпал.jpg" class="align-center" width="600" height="362" loading="lazy"><p>Как выяснилось, эта гипотеза была ошибочной: глубина просмотра уменьшилась, а количество отказов увеличилось.</p>
+<img alt="Initlab Drupal" data-entity-type="file" data-entity-uuid="4aa9adf0-605e-4173-910e-0927044b5e11" src="..\sites\default\files\inline-images\4 друпал без.jpg" class="align-center" width="600" height="312" loading="lazy"><p><em>Исходный вариант оказался лучше</em></p>
+
+<p>Краткой информации о команде и наших преимуществах оказалось достаточно.</p>
+<img alt="Initlab Drupal" data-entity-type="file" data-entity-uuid="23d00668-dac5-41ce-8398-0e0ed7df4da1" src="..\sites\default\files\inline-images\4 друпал результаты.jpg" class="align-center" width="600" height="285" loading="lazy"><p><em>Результаты тестирования гипотез</em></p>
+
+<h2>A/B тестирование для e-commerce: улучшайте продажи на вашем сайте</h2>
+
+<p>Как вы заметили, в наших гипотезах фактически нет продаж и чётких конверсий, ведь в случае со сложными услугами ничего не происходит в один клик. Мы ведём многоступенчатый процесс, где основная задача — дать максимум информации о себе.</p>
+
+<p>У интернет-магазинов всё более конкретно — результат за короткий срок можно измерить в деньгах: клики по оплате, заполнение корзины, количество заказов, величина среднего чека и т.д.</p>
+
+<p>Технически в нашем случае счёт тоже идёт на деньги, но на e-commerce проектах можно довести всё до автоматизма, до конкретных заказов. А в нашем бизнесе любое взаимодействие можно считать только очередным шагом к переговорам.</p>
+
+<p>A/B тестирование — это отличный инструмент для e-commerce. Вместо сложной разработки можно легко изменить большинство конверсионных точек и посмотреть на результат.<br>
+Здесь самая сложная и важная часть работы — гипотезы. В идеале они должны опираться на опыт, знания или исследования, а не браться «из космоса». Выше мы писали, что гипотезы может генерировать заказчик, его маркетолог, команда, которая работает над сайтом или все они сообща. Мы считаем, что улучшение сайта — общая задача, поэтому всегда готовы предложить свой опыт и экспертность в этом вопросе.</p>
+
+<p>Что будет, если показать похожие товары на странице оформления заказа? Какой эффект даст продажа комплектом со скидкой? Если поместить непопулярные категории выше в меню, они будут лучше продаваться? </p>
+
+<p>Главное подобрать гипотезу, которая даст понятный результат, а в идеале повысит конверсию на сайте. </p>
+
+<h2>Пример гипотезы для нашего клиента</h2>
+
+<p>Мы помогли сформулировать гипотезу для одного из лучших интернет-магазинов Беларуси <a href="https://www.pnevmoteh.ru/">PNEVMOTEH</a>. Приведём её в качестве примера, чтобы показать, насколько неочевидные вещи могут оказать влияние на конверсию и потребовать подробного анализа. </p>
+
+<p>На сайте клиента под блоком с товаром есть две вкладки: «Расходные материалы» (комплектующие) и «Наборы» — этот же товар в комплекте с тем, что к нему необходимо.</p>
+<img alt="Initlab Drupal" data-entity-type="file" data-entity-uuid="100e918d-bdad-476e-8895-1c0fb3558a1c" src="..\sites\default\files\inline-images\5 пневмотех.jpg" class="align-center" width="600" height="169" loading="lazy"><p>Наша гипотеза: активная вкладка (то есть открытая изначально, стоящая на первом месте) более заметна, следовательно, товар в ней более востребован и увеличивает сумму чека.</p>
+<img alt="Initlab Drupal" data-entity-type="file" data-entity-uuid="a10ce6df-1025-4e79-a802-3144bcdcd97f" src="..\sites\default\files\inline-images\5 пневмотех (2).jpg" class="align-center" width="600" height="320" loading="lazy"><p>Сейчас активная вкладка, т.е. первая — «Расходные материалы». Для проверки гипотезы нужно поставить на её место «Наборы».</p>
+
+<p>Это поможет нам понять, что нужнее людям и что эффективнее увеличит средний чек: активная продажа комплектующих или наборов.</p>
+
+<p>Чтобы проверить эффективность этой гипотезы, нам нужны метрики:</p>
+
+<p>Мы добавим в Google Analytics целевое действие «Купить набор», если его там ещё нет, затем измерим эффективность по этой цели + поставим дополнительную цель — «Сумма покупки», чтобы проверить, действительно ли товар в комплекте с расходными материалами покупают лучше и стоит это дороже.</p>
+
+<p>После этого мы запустим A/B тестирование, получим результаты и сделаем выводы. Вот такое гипотетическое A/B-тестирование у нас получилось.</p>
+
+<h2>Нужно ли вашему сайту A/B тестирование?</h2>
+
+<p>Мы считаем, что нет таких сайтов, которым вообще не нужно проверять гипотезы. Стандарты пользовательского опыта, актуальный дизайн, качество конверсионных точек — всегда есть, что улучшить.</p>
+
+<p>Не обязательно превращать A/B тестирование в конвейер и бесконечно проверять, на сколько мм вправо сдвинуть кнопку, чтобы случилось чудо. Нужно определиться с приоритетами, собрать по ним статистику и работать над их улучшением. И никакой магии.</p>
+
+<p>Мы проводим A/B тестирование в рамках поддержки сайтов.<br>
+Если вы хотите проверить гипотезы на своём Drupal-сайте, <a href="..\support.html">обращайтесь к нам</a>. </p>
+</div>
+      
+  <div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above">
+    <div class="field--label">Еще по теме</div>
+          <div class="field--items">
+              <div class="field--item"><a href="tekhnologiya-google-amp-dlya-saytov-na-drupal-bystraya-zagruzka-stranic-sayta-s-mobilnogo.html" hreflang="ru">Технология Google AMP для сайтов на Drupal: быстрая загрузка страниц сайта с мобильного телефона</a></div>
+          <div class="field--item"><a href="uluchshenie-parametrov-core-web-vitals-na-drupal-saytakh.html" hreflang="ru">Улучшение параметров Core Web Vitals на Drupal-сайтах</a></div>
+              </div>
+      </div>
+
+
+      <div class="field-yashare">
+        <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+        <script src="//yastatic.net/share2/share.js"></script>
+        <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+                <div class="ya-share2" id="block-ya-share2" data-services="vkontakte,facebook,odnoklassniki,gplus,twitter"></div>
+        <a href="..\rss.rss" target="_blank"><span class="iconify" id="block-iconify" data-icon="ion:logo-rss" style="color: #da8c2c;" data-width="29" data-height="29"></span></a>
+              </div>
+  </div>
+
+  <section>
+  
+  
+ 
+      <div class="comment-form-wrapper">
+      <h2 class="block-form-title">Добавить комментарий</h2>
+      <form class="comment-comment-form comment-form antibot" data-drupal-selector="comment-form" data-action="https://drupal-coder.ru/comment/reply/node/338/comment" action="/antibot" method="post" id="comment-form" accept-charset="UTF-8">
+  <noscript>
+  <div class="antibot-no-js antibot-message antibot-message-warning">Вы должны включить JavaScript чтобы использовать эту форму.</div>
+</noscript>
+<div class="form-item js-form-item form-type-textfield js-form-type-textfield form-item-name js-form-item-name form-group">
+      <label for="edit-name" class="control-label">Ваше имя</label>
+  
+  
+  <input placeholder="Ваше имя" data-drupal-selector="edit-name" class="form-text form-control" type="text" id="edit-name" name="name" value="" size="30" maxlength="60">
+
+  
+  
+  </div>
+<input autocomplete="off" data-drupal-selector="form-inkduf8wzh2x6dgud5xv3nmsjrgq1dsfebeadfefojk" type="hidden" name="form_build_id" value="form-INKDUF8WZH2X6Dgud5Xv3NMsjRGq1dsfebeAdfefOjk"><input data-drupal-selector="edit-comment-comment-form" type="hidden" name="form_id" value="comment_comment_form"><input data-drupal-selector="edit-antibot-key" type="hidden" name="antibot_key" value=""><div class="field--type-text-long field--name-comment-body field--widget-text-textarea form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-wrapper" id="edit-comment-body-wrapper">      <div class="js-text-format-wrapper text-format-wrapper js-form-item form-item">
+  <div class="form-item js-form-item form-type-textarea js-form-type-textarea form-item-comment-body-0-value js-form-item-comment-body-0-value">
+      <label for="edit-comment-body-0-value" class="control-label js-form-required form-required">Комментарий</label>
+  
+  
+  <div class="form-textarea-wrapper">
+  <textarea class="js-text-full text-full form-textarea required form-control resize-vertical" data-media-embed-host-entity-langcode="ru" data-drupal-selector="edit-comment-body-0-value" id="edit-comment-body-0-value" name="comment_body[0][value]" rows="5" cols="60" placeholder="" required="required" aria-required="true"></textarea>
+</div>
+
+
+  
+  
+  </div>
+<div class="js-filter-wrapper filter-wrapper form-inline form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format" id="edit-comment-body-0-format"><div class="filter-help form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format-help" id="edit-comment-body-0-format-help"><a href="..\filter\tips.html" target="_blank" title="Opens in new window" data-toggle="tooltip" data-drupal-selector="edit-comment-body-0-format-help-about" class="icon-before" id="edit-comment-body-0-format-help-about"><span class="icon glyphicon glyphicon-question-sign" aria-hidden="true"></span>О текстовых форматах</a></div>
+</div>
+
+  </div>
+
+  </div>
+<div data-drupal-selector="edit-actions" class="form-actions form-group js-form-wrapper form-wrapper" id="edit-actions"><button data-drupal-selector="edit-submit" class="button button--primary js-form-submit form-submit btn-primary btn" type="submit" id="edit-submit" name="op" value="Отправить">Отправить</button></div>
+
+</form>
+
+    </div> 
+  
+</section>
+
+
+</article>
+
+
+  </div>
+
+              </section>
+
+                </div>
+  </div>
+
+
+      <footer class="footer" role="contentinfo">
+      <div class=" container">  
+          <div class="region region-footer">
+    <section id="block-footerphone" class="block block-block-content block-block-content07b69e1d-d1db-4e8b-bb14-dc4563ef50bc clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="block-form-contacts">
+  <ul>
+    <li class="block-form-phone"><a href="tel:88002222673">8 800 222-26-73</a></li>
+  </ul>
+</div></div>
+      
+  </section>
+
+<section id="block-copyright" class="block block-block-content block-block-content263c1cb2-b142-4488-af8e-99f92fcb7640 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="social-links">
+  <ul class="social-links-wrapper">
+    <li class="social-links-item"><a target="_blank" href="https://vk.com/initlab"><i class="fab fa-vk"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://teleg.one/initlabbot" title="Свяжитесь с нами"><i class="fab fa-telegram-plane"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.youtube.com/channel/UCyFEbngMB-bK2ulNtd_W43A"><i class="fab fa-youtube"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://zen.yandex.ru/id/6037ce072f500a068c630fec"><img style="width: 16px; margin-bottom: 5px;" src="..\sites\default\files\icons\zen-icon.svg"></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.facebook.com/initlabkr/"><img style="width: 25px; margin-bottom: 5px;" src="..\sites\default\files\icons\icon-facebook-ru-dc.svg"></a></li>
+  </ul>  
+</div>
+
+<p>ООО «Инитлаб», Краснодар, Россия.
+<a class="goal__tel" href="tel:+78002222673">8 800 222-26-73</a><br>
+Drupal является зарегистрированной торговой маркой Dries Buytaert.</p>
+</div>
+      
+  </section>
+
+
+  </div>
+
+      </div>
+    </footer>
+  </div>
+
+  </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"node\/338","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"ru"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"ajaxPageState":{"libraries":"antibot\/antibot.form,bootstrap\/popover,bootstrap\/theme,bootstrap\/tooltip,bootstrap_dc\/bootstrap-scripts,bootstrap_dc\/dc,bootstrap_dc\/global-styling,bootstrap_dc\/seo,colorbox\/default,colorbox_inline\/colorbox_inline,colorbox_load\/colorbox_load,filter\/drupal.filter,google_analytics\/google_analytics,ng_lightbox\/ng_lightbox,system\/base,views\/views.module","theme":"bootstrap_dc","theme_token":null},"ajaxTrustedUrl":{"https:\/\/drupal-coder.ru\/comment\/reply\/node\/338\/comment":true},"colorbox":{"opacity":"0.85","current":"{current} \u0438\u0437 {total}","previous":"\u00ab \u041f\u0440\u0435\u0434\u044b\u0434\u0443\u0449\u0438\u0439","next":"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0439 \u00bb","close":"Close","maxWidth":"98%","maxHeight":"98%","fixed":true,"mobiledetect":true,"mobiledevicewidth":"480px"},"google_analytics":{"account":"UA-87805467-1","trackOutbound":true,"trackMailto":true,"trackTel":true,"trackDownload":true,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip","trackColorbox":true},"bootstrap":{"forms_has_error_value_toggle":1,"modal_animation":1,"modal_backdrop":"true","modal_focus_input":1,"modal_keyboard":1,"modal_select_text":1,"modal_show":1,"modal_size":"","popover_enabled":1,"popover_animation":1,"popover_auto_close":1,"popover_container":"body","popover_content":"","popover_delay":"0","popover_html":0,"popover_placement":"right","popover_selector":"","popover_title":"","popover_trigger":"click","tooltip_enabled":1,"tooltip_animation":1,"tooltip_container":"body","tooltip_delay":"0","tooltip_html":0,"tooltip_placement":"auto left","tooltip_selector":"","tooltip_trigger":"hover"},"antibot":{"forms":{"comment-form":{"id":"comment-form","key":"5D-i6uDYb-gr3-4qQZFOE5ec3-2jdoq6QSz9J26Pt50"}}},"user":{"uid":0,"permissionsHash":"66bb25c0b665c533dd9436d0cd4e99532a723088208bff0a05f2bf113d3703ac"}}</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="..\sites\default\files\js\js_kFVTvKCxW3cWmdAcJABrE5Fa90cD_Go5IxgQw9oFgJ0.js"></script>
+<script src="..\sites\default\files\js\js_d5BC-2wlh3XH4S29GgaPGie7NxyWY0K1EhPg30LGzwA.js"></script>
+<script src="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+<script src="..\sites\default\files\js\js_CNCJCgJnATwdWHfgCEncmZchd6pVQciEiBxkoYS9btY.js"></script>
+<script src="..\sites\default\files\js\js_PZPdVr1rIFXjUagjykPULRTCC8T4ZfIghTqFAwKg6ZI.js"></script>
+
+  </body>
+</html>

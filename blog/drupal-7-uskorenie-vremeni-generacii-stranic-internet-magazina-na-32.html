@@ -1,0 +1,583 @@
+﻿<!DOCTYPE html>
+<html lang="ru" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
+  <head>
+    <meta charset="utf-8">
+<noscript><style>form.antibot * :not(.antibot-message) { display: none !important; }</style>
+</noscript><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-87805467-1"></script>
+<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag("js", new Date());gtag("set", "developer_id.dMDhkMT", true);gtag("config", "UA-87805467-1", {"groups":"default","anonymize_ip":true,"page_placeholder":"PLACEHOLDER_page_path","allow_ad_personalization_signals":false});</script>
+<meta http-equiv="content-language" content="ru">
+<meta name="description" content="Скорость загрузки сайта влияет на конверсию. Скорость загрузки страниц влияет на их ранжирование в поиске Google и Яндекс. Известны случаи увеличения количества заказов на 40% или увеличения выручки на 13% в результате ускорения загрузки сайта.">
+<meta name="keywords" content="создание сайтов на drupal, разработка Drupal-сайтов">
+<meta property="og:type" content="blog">
+<meta property="og:url" content="https://drupal-coder.ru/blog/drupal-7-uskorenie-vremeni-generacii-stranic-internet-magazina-na-32">
+<meta property="og:title" content="Drupal 7: ускорение времени генерации страниц интернет-магазина на 32%">
+<meta property="og:description" content="Скорость загрузки сайта влияет на конверсию. Скорость загрузки страниц влияет на их ранжирование в поиске Google и Яндекс. Известны случаи увеличения количества заказов на 40% или увеличения выручки на 13% в результате ускорения загрузки сайта.">
+<meta name="Generator" content="Drupal 9 (https://www.drupal.org)">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="..\sites\default\files\android-chrome-256x256.png" type="image/png">
+<link rel="alternate" hreflang="ru" href="drupal-7-uskorenie-vremeni-generacii-stranic-internet-magazina-na-32.html">
+<link rel="alternate" hreflang="en" href="https://drupal-coding.com/blog/drupal-7-32-faster-online-store-page-generation">
+<link rel="canonical" href="drupal-7-uskorenie-vremeni-generacii-stranic-internet-magazina-na-32.html">
+<link rel="shortlink" href="drupal-7-uskorenie-vremeni-generacii-stranic-internet-magazina-na-32.html">
+
+    <title>Drupal 7: ускорение времени генерации страниц интернет-магазина на 32% | drupal-coder.ru</title>
+    <link rel="stylesheet" media="all" href="..\sites\default\files\css\css_y8CdfJDNR-tG0CPnRDokR6Eh9OUJplbHLVQ9A8myecQ.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_tFXlTqkfn6J-Qtpt9xbB8JudSaJfOGxRSmpeidDAzPE.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_tiHWxVMqXqb3XBQjaiqSWuXpyLjKUnG2GMAOzbL8UPs.css">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/@unicorn-fail/drupal-bootstrap-styles@0.0.2/dist/3.4.0/8.x-3.x/drupal-bootstrap.min.css" integrity="sha512-tGFFYdzcicBwsd5EPO92iUIytu9UkQR3tLMbORL9sfi/WswiHkA1O3ri9yHW+5dXk18Rd+pluMeDBrPKSwNCvw==" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_ULmc1mwKFKQRQmxYsjphW6dsh2g6jX4LXXBAtdO0vIE.css">
+
+    
+    <meta name="cmsmagazine" content="3d47b05beba40f3816d9741ee18c01a5">
+
+    
+    
+           <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P4SXQSG');</script>
+<!-- End Google Tag Manager -->
+    
+    
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Bold.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Medium.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Regular.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/fontawesome/webfonts/fa-brands-400.woff2" crossorigin="anonymous">
+    <link rel='manifest' href='..\manifest.json'>
+    <meta name="format-detection" content="telephone=no">
+
+          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MXPCP8Q"></script>
+      </head>
+  <body class="page-node-236 path-node page-node-type-blog has-glyphicons">
+
+                  <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4SXQSG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+      
+          
+
+    <a href="#main-content" class="visually-hidden focusable skip-link">
+      Перейти к основному содержанию
+    </a>
+    
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
+    
+      
+          <header class="navbar navbar-default" id="navbar" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+            <div class="region region-navigation">
+    <section id="block-pikselvkskript" class="block block-block-content block-block-contentbf8d9e8f-617c-4e8f-8501-7586be8255e0 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script>(window.Image ? (new Image()) : document.createElement('img')).src = 'https://vk.com/rtrg?p=VK-RTRG-238064-1VWIQ';</script></div>
+      
+  </section>
+
+<section id="block-globalsitetagadwords" class="block block-block-content block-block-content27617f8e-58d1-4a2a-9f23-31eab95a43c8 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><!-- Global site tag (gtag.js) - AdWords: 948581894 -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=AW-948581894"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-948581894');
+</script></div>
+      
+  </section>
+
+            <a class="logo navbar-btn pull-left" href="..\index.htm" title="Главная" rel="home">
+            <img src="..\themes\custom\bootstrap_dc\images\logo-initlab.svg" alt="Главная" width="156" height="31">
+        </a>
+            
+  </div>
+
+        </div>
+                          <div class="navbar-collapse-wrapper">
+
+            <div class="navbar-collapse collapse">
+                <div class="region region-navigation-collapsible">
+    <nav role="navigation" aria-labelledby="block-bootstrap-dc-main-menu-menu" id="block-bootstrap-dc-main-menu">
+            
+  <h2 class="visually-hidden" id="block-bootstrap-dc-main-menu-menu">Основная навигация</h2>
+  
+
+        
+              <ul class="menu nav navbar-nav">
+                      <li><a href="..\support.html" data-drupal-link-system-path="node/1">Поддержка Drupal</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-admin.html" class="dropdown-toggle" data-toggle="dropdown">DevOps <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\import-migrate-upgrade.html" data-drupal-link-system-path="node/4">Миграция</a>
+                  </li>
+                  <li><a href="..\backup.html" data-drupal-link-system-path="node/3">Бэкапы</a>
+                  </li>
+                  <li><a href="..\drupal-security-audit.html" data-drupal-link-system-path="node/9">Аудит безопасности</a>
+                  </li>
+                  <li><a href="..\boost-drupal.html" data-drupal-link-system-path="node/5">Оптимизация скорости</a>
+                  </li>
+                  <li><a href="..\ssl.html" data-drupal-link-system-path="node/99">Переезд на https</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\blog.html" data-drupal-link-system-path="blog">Блог</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-seo.html" class="dropdown-toggle" data-toggle="dropdown">Продвижение <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\drupal-seo\context.html" data-drupal-link-system-path="node/111">Реклама</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li class="expanded dropdown"><a href="..\team.html" class="dropdown-toggle" data-toggle="dropdown">О нас <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\team.html#team" data-drupal-link-system-path="team">Команда</a>
+                  </li>
+                  <li><a href="..\drupalgive.html" data-drupal-link-system-path="node/135">Drupalgive</a>
+                  </li>
+                  <li><a href="..\drupal-courses.html" data-drupal-link-system-path="node/10">Курсы Drupal</a>
+                  </li>
+                  <li><a href="..\vacancies.html" data-drupal-link-system-path="vacancies">Вакансии</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\happy-customers.html" data-drupal-link-system-path="happy-customers">Проекты</a>
+                  </li>
+                  <li><a href="..\contacts.html" data-drupal-link-system-path="node/86">Контакты</a>
+                  </li>
+              </ul>
+      
+
+
+  </nav>
+
+  </div>
+
+            </div>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+              </div>
+    </header>
+  
+
+      <div class="page-header-big" role="heading">
+        <div class="container">
+            <div class="region region-header">
+        <h1 class="page-header">
+<span>Drupal 7: ускорение времени генерации страниц интернет-магазина на 32%</span>
+</h1>
+
+<section class="views-element-container block block-views block-views-blockuser-block-1 clearfix" id="block-views-block-user-block-1">
+  
+    
+
+      <div class="form-group"><div class="view view-user view-id-user view-display-id-block_1 js-view-dom-id-c1f6b7f9b9c4b864e0ee20a4042705468c43fa8dce1d89cdf10c877a1318418e">
+  
+    
+      
+      <div class="view-content">
+          <div class="views-row"><div class="views-field views-field-user-picture"><div class="field-content">  <img loading="lazy" src="..\sites\default\files\styles\avatar_mini\public\pictures\2019-12\avatar.jpg?itok=fGoezcsO" width="45" height="45" alt="" typeof="foaf:Image" class="img-responsive">
+
+
+</div></div><div class="views-field views-field-field-name"><div class="field-content">Тымчук Андрей</div></div></div>
+
+    </div>
+  
+          </div>
+</div>
+
+  </section>
+
+<section id="block-yashare" class="block-yashare block block-block-content block-block-contentee72d8fb-02e9-4ef6-8e71-0df16bee86a9 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+<script src="//yastatic.net/share2/share.js"></script>
+<div class="ya-share2" data-services="vkontakte,odnoklassniki,gplus,twitter"></div></div>
+      
+  </section>
+
+
+  </div>
+
+        </div>
+      
+    </div>
+  
+
+<div class="main-wrapper">
+  <div role="main" class="main-container container js-quickedit-main-content">
+    <div class="row">
+
+
+
+            
+                  <section class="col-sm-12">
+
+                
+                
+                
+                                      
+                  
+                          <a id="main-content"></a>
+            <div class="region region-content">
+        <ol class="breadcrumb">
+          <li>
+                  <a href="..\blog.html">Блог</a>
+              </li>
+          <li class="active">
+                  Drupal 7: ускорение времени генерации страниц интернет-магазина на 32%
+              </li>
+      </ol>
+
+<div data-drupal-messages-fallback="" class="hidden"></div>
+  <article data-history-node-id="236" role="article" about="https://drupal-coder.ru/blog/drupal-7-uskorenie-vremeni-generacii-stranic-internet-magazina-na-32" class="blog is-promoted full clearfix">
+
+  
+    
+
+  
+
+  <div class="content">
+    
+    
+            <div class="field field--name-field-blog-img field--type-image field--label-hidden field--item">/sites/default/files/2019-09/EDf41xbXkAEQRn8_0.jpg</div>
+      <div id="field-language-display"><div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group">
+      <label class="control-label">Language</label>
+  
+  
+  Russian
+
+  
+  
+  </div>
+</div>
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><p>Скорость загрузки сайта влияет на <a href="https://medium.com/@vikigreen/impact-of-slow-page-load-time-on-website-performance-40d5c9ce568a">конверсию</a>. Скорость загрузки страниц <a href="https://webmasters.googleblog.com/2018/01/using-page-speed-in-mobile-search.html">влияет на их ранжирование</a> в поиске Google и Яндекс. <a href="https://habr.com/ru/post/300210/">Известны случаи</a> увеличения количества заказов на 40% или увеличения выручки на 13% в результате ускорения загрузки сайта. Наша команда регулярно выполняет работы по оптимизации Drupal-сайтов и серверов для <a href="..\boost-drupal.html">ускорения загрузки сайтов на Drupal</a>.</p>
+
+<p>Одной из ключевых метрик скорости загрузки сайта является время генерации страницы веб-сервером. В работе по оптимизации сайта и сервера для уменьшения времени генерации страниц участвуют наши системные администраторы и специалисты DevOps, разработчики, специалисты со стороны заказчика и хостинг-провайдера. Мы используем профилировку XDebug медленных страниц, и анализ времени выполнения отдельных функций PHP для поиска и устранения узких мест в коде сайта. Применяем сервис мониторинга NewRelic для сбора агрегированной статистики времени обработки запроса загрузки страниц сервером. Анализируем статистику выполнения запросов к MySQL и Solr.</p>
+
+<p>Публикуем кейс ускорения времени обработки запроса загрузки страниц интернет-магазина на 32% после решения распространенной проблемы для сайтов на Drupal.</p>
+
+
+<h3>Проблема</h3>
+
+<p>Есть в Drupal 7 давняя особенность - форма автоматически кэшируется при использовании <a href="https://api.drupal.org/api/drupal/includes%21ajax.inc/group/ajax/7.x">AJAX фреймворка</a>. При каждом выводе такой формы в таблице <em>cache_form</em> создаётся две записи (одна для структуры формы и одна для её состояния). Кэширование необходимо для корректной работы AJAX обработчика, которому нужно знать структуру и последнее состояние формы.</p>
+
+<p>В случае, когда таких форм на странице много, возникает проблема быстрого роста количества записей в таблице <em>cache_form</em>. Особенно остро эта проблема проявляется при использовании AJAX кнопки "Добавить в корзину" в Commerce. К примеру, вывод 50 товаров на странице каталога приведёт к созданию 100 записей в таблице <em>cache_form</em> при каждом просмотре страницы. На высокопосещаемом сайте это приводит к тому, что таблица <em>cache_form</em> может иметь размер в несколько десятков гигабайт.</p>
+
+<p>Также стоит учитывать тот факт, что кэш форм в Drupal 7 тесно связан с кэшем страниц и с минимальным временем жизни кэша (задаётся на странице <em>Производительность</em>). Если удалить кэш формы раньше, чем кэш страницы, возникнет ошибка "Некорректные POST-данные формы" при взаимодействии с формой. Если задать минимальное время жизни кэша, устаревший кэш форм не будет очищаться в течение установленного времени.</p>
+
+<p>Для исправления вышеуказанной проблемы уже существует несколько решений:</p>
+
+<ul><li>Переменная <em>form_cache_expiration</em>. Данная переменная была <a href="https://www.drupal.org/node/2857751">добавлена</a> в версии 7.61 и позволяет управлять временем хранения кэша форм, которое по умолчанию равно 6 часам. Основной недостаток заключается в сильной зависимости от механизма очистки устаревшего кэша, без своевременного вмешательства которого, размер <em>cache_form</em> будет продолжать расти;</li>
+	<li>Модуль <a href="https://www.drupal.org/project/optimizedb">OptimizeDB</a>. Позволяет гибко настроить очистку таблицы <em>cache_form</em> по cron. Можно задать полную очистку таблицы или очистку только устаревших записей. Может возникать ошибка "Некорректные POST-данные формы", размер таблицы <em>cache_form</em> всё равно может остаться большим;</li>
+	<li>Модуль <a href="https://www.drupal.org/project/safe_cache_form_clear">Safe cache_form Clear</a>. Предоставляет Drush команду для очистки устаревших записей в таблице <em>cache_form</em>. Недостатки аналогичны предыдущему модулю;</li>
+	<li>Модуль <a href="http://xandeadx.ru/blog/drupal/751">Commerce Fast Ajax Add to Cart</a>. Решение от <a href="https://www.drupal.org/u/xandeadx">xandeadx</a>, направленное на корень проблемы - кэширование стандартной формы Drupal Commerce добавления в корзину. <span>Минус решения, как ни странно, в том, что AJAX фреймворк не используется, а для нашего проекта разработчиками уже был написан нестандартный диалог добавления в корзину с использованием AJAX-команд Drupal</span>. Кроме того, это решение не универсально и работает только для формы добавления товара в корзину;</li>
+	<li>Патч <a href="https://www.drupal.org/files/issues/2019-03-19/2819375-94.patch">#94</a> из этого <a href="https://www.drupal.org/project/drupal/issues/2819375">issue</a>. Кроме применения патча потребуется дописать обработчик для нужной формы. Это решение может работать нестабильно для страниц с множественным выводом форм. Не работает для страниц со случайным списком товаров. Ну и уже большой минус в том, что надо патчить ядро.</li>
+</ul><p> </p>
+
+<h3>Решение</h3>
+
+<p>Для примера возьмём чистую установку Drupal 7.67 с модулем Commerce 1.15. Реализуем страницы каталога с помощью Views. На каждой странице выведем по 50 товаров, в каждом тизере товара выведем кнопку добавления в корзину. Для удобства сгенерируем товары с помощью модуля <a href="https://www.drupal.org/project/commerce_devel">Commerce Devel</a>. Для AJAX-ификации кнопки добавления товара в корзину используем модуль <a href="https://www.drupal.org/project/dc_ajax_add_cart">Commerce Ajax Add to Cart</a>. Открываем страницу каталога и проверяем - в таблице <em>cache_form</em> появилось 100 новых записей, проблема воспроизведена.</p>
+
+<p>Решение, предлагаемое в данной статье, частично основывается на данном <a href="https://www.drupal.org/project/drupal/issues/2819375#comment-12637823">комментарии</a>. Для его реализации потребуется создать небольшой кастомный модуль или добавить код в уже имеющийся. В нашем примере это будет модуль <em>custom</em>.</p>
+
+<p>Первым делом определим путь для нового AJAX-обработчика формы. По своей структуре он похож на определение пути <em>"system/ajax"</em> в модуле <em>system</em>.</p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #009933; font-style: italic;">/**
+ * Implements hook_menu().
+ */</span>
+<span style="color: #000000; font-weight: bold;">function</span> custom_menu<span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span>
+  <span style="color: #000088;">$items</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'custom/form/ajax'</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #990000;">array</span><span style="color: #009900;">(</span>
+    <span style="color: #0000ff;">'title'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'AJAX callback'</span><span style="color: #339933;">,</span>
+    <span style="color: #0000ff;">'page callback'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'custom_form_ajax_callback'</span><span style="color: #339933;">,</span>
+    <span style="color: #0000ff;">'delivery callback'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'ajax_deliver'</span><span style="color: #339933;">,</span>
+    <span style="color: #0000ff;">'access arguments'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #990000;">array</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'access content'</span><span style="color: #009900;">)</span><span style="color: #339933;">,</span>
+    <span style="color: #0000ff;">'theme callback'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'ajax_base_page_theme'</span><span style="color: #339933;">,</span>
+    <span style="color: #0000ff;">'type'</span> <span style="color: #339933;">=&gt;</span> MENU_CALLBACK<span style="color: #339933;">,</span>
+  <span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+  <span style="color: #b1b100;">return</span> <span style="color: #000088;">$items</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">}</span></pre></div></pre>
+
+<p>Изменим путь AJAX-обработчика у кнопки добавления товара в корзину (свойство <em>path</em>). Здесь важно не путать свойства <em>path</em> и <em>callback</em> - первое определяет адрес, на который будет отправлен AJAX-запрос, а второе указывает функцию, которая при этом запросе будет вызвана для формирования ответа. Как правило, <em>path</em> не указывают и берётся значение по умолчанию <em>"system/ajax"</em>, его и требуется поменять. Также принудительно отключим кэширование интересующей нас формы.</p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #009933; font-style: italic;">/**
+ * Implements hook_form_alter().
+ */</span>
+<span style="color: #000000; font-weight: bold;">function</span> custom_form_alter<span style="color: #009900;">(</span><span style="color: #339933;">&amp;</span><span style="color: #000088;">$form</span><span style="color: #339933;">,</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$form_state</span><span style="color: #339933;">,</span> <span style="color: #000088;">$form_id</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span><span style="color: #990000;">strpos</span><span style="color: #009900;">(</span><span style="color: #000088;">$form_id</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'commerce_cart_add_to_cart_form'</span><span style="color: #009900;">)</span> <span style="color: #339933;">!==</span> <span style="color: #009900; font-weight: bold;">FALSE</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span>
+    <span style="color: #666666; font-style: italic;">// Указываем, что хотим самостоятельно обработать AJAX-запрос к форме.</span>
+    <span style="color: #000088;">$form</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'submit'</span><span style="color: #009900;">]</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'#ajax'</span><span style="color: #009900;">]</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'path'</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #0000ff;">'custom/form/ajax'</span><span style="color: #339933;">;</span>
+ 
+    <span style="color: #666666; font-style: italic;">// Отключаем кэширование формы.</span>
+    <span style="color: #000088;">$form_state</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'no_cache'</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">TRUE</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">}</span>
+<span style="color: #009900;">}</span></pre></div></pre>
+
+<p>Наконец, реализуем функцию <em>custom_form_ajax_callback()</em>, которую ранее указали в определении пути <em>"custom/form/ajax"</em>. Код функции частично повторяет код функций <em>ajax_get_form()</em> и <em>ajax_form_callback()</em>. Основная идея заключается в том, что нужно получить правильное состояние формы без использования кэша, так как мы его уже отключили. Важно отметить, что приведённый далее код универсален и может быть применен для отключения кеширования других AJAX-форм, за исключением блока, в котором выполняется формирование товарной позиции. Именно в данном блоке происходит построение состояния формы, необходимого для корректной валидации и сабмита. Для поддержки атрибутов товаров потребуется доработка этого кода. Для других форм потребуется написать аналогичный код.</p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #009933; font-style: italic;">/**
+ * Menu callback; handles Ajax requests for forms without caching.
+ *
+ * @return array|null
+ *   Array of ajax commands or NULL on failure.
+ */</span>
+<span style="color: #000000; font-weight: bold;">function</span> custom_form_ajax_callback<span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span>
+  <span style="color: #666666; font-style: italic;">// Проверяем, что обрабатываем AJAX-запрос к форме.</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span><span style="color: #990000;">isset</span><span style="color: #009900;">(</span><span style="color: #000088;">$_POST</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'form_id'</span><span style="color: #009900;">]</span><span style="color: #009900;">)</span> <span style="color: #339933;">&amp;&amp;</span> <span style="color: #990000;">isset</span><span style="color: #009900;">(</span><span style="color: #000088;">$_POST</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'form_build_id'</span><span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span>
+    <span style="color: #000088;">$form_build_id</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$_POST</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'form_build_id'</span><span style="color: #009900;">]</span><span style="color: #339933;">;</span>
+    <span style="color: #000088;">$form_id</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$_POST</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'form_id'</span><span style="color: #009900;">]</span><span style="color: #339933;">;</span>
+    <span style="color: #000088;">$commands</span> <span style="color: #339933;">=</span> <span style="color: #990000;">array</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+ 
+    <span style="color: #666666; font-style: italic;">// Инициализируем состояние формы.</span>
+    <span style="color: #000088;">$form_state</span> <span style="color: #339933;">=</span> form_state_defaults<span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+    <span style="color: #000088;">$form_state</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'build_info'</span><span style="color: #009900;">]</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'args'</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #990000;">array</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+ 
+    <span style="color: #666666; font-style: italic;">// Заполняем состояние формы. Данный код уникален в рамках обрабатываемой формы.</span>
+    <span style="color: #666666; font-style: italic;">// Проверяем, что форма является формой добавления товара в корзину.</span>
+    <span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span><span style="color: #990000;">strpos</span><span style="color: #009900;">(</span><span style="color: #000088;">$form_id</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'commerce_cart_add_to_cart_form_'</span><span style="color: #009900;">)</span> <span style="color: #339933;">===</span> <span style="color: #cc66cc;">0</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span>
+      <span style="color: #000088;">$product</span> <span style="color: #339933;">=</span> commerce_product_load<span style="color: #009900;">(</span><span style="color: #000088;">$_POST</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'product_id'</span><span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+ 
+      <span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span><span style="color: #339933;">!</span><span style="color: #990000;">empty</span><span style="color: #009900;">(</span><span style="color: #000088;">$product</span><span style="color: #009900;">)</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span>
+        <span style="color: #666666; font-style: italic;">// Формируем сущность товарной позиции на основе данных отправленной формы.</span>
+        <span style="color: #000088;">$line_item</span> <span style="color: #339933;">=</span> commerce_product_line_item_new<span style="color: #009900;">(</span><span style="color: #000088;">$product</span><span style="color: #339933;">,</span> <span style="color: #000088;">$_POST</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'quantity'</span><span style="color: #009900;">]</span> ?? <span style="color: #cc66cc;">1</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+        <span style="color: #000088;">$line_item</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">data</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'context'</span><span style="color: #009900;">]</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'product_ids'</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #990000;">array</span><span style="color: #009900;">(</span><span style="color: #000088;">$product</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">product_id</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+        <span style="color: #000088;">$line_item</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">data</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'context'</span><span style="color: #009900;">]</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'add_to_cart_combine'</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">TRUE</span><span style="color: #339933;">;</span>
+ 
+        <span style="color: #666666; font-style: italic;">// Добавляем товарную позицию в состояние формы.</span>
+        <span style="color: #000088;">$form_state</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'build_info'</span><span style="color: #009900;">]</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'args'</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #990000;">array</span><span style="color: #009900;">(</span><span style="color: #000088;">$line_item</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">}</span>
+    <span style="color: #009900;">}</span>
+ 
+    <span style="color: #666666; font-style: italic;">// Строим форму, будут вызваны билдеры и соответствующие хуки.</span>
+    <span style="color: #000088;">$form</span> <span style="color: #339933;">=</span> drupal_retrieve_form<span style="color: #009900;">(</span><span style="color: #000088;">$form_id</span><span style="color: #339933;">,</span> <span style="color: #000088;">$form_state</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+    drupal_prepare_form<span style="color: #009900;">(</span><span style="color: #000088;">$form_id</span><span style="color: #339933;">,</span> <span style="color: #000088;">$form</span><span style="color: #339933;">,</span> <span style="color: #000088;">$form_state</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+    <span style="color: #000088;">$form</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'#build_id_old'</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$form_build_id</span><span style="color: #339933;">;</span>
+ 
+    <span style="color: #666666; font-style: italic;">// Обрабатываем форму аналогично тому, как это сделано в ajax_get_form().</span>
+    <span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span><span style="color: #000088;">$form</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'#build_id_old'</span><span style="color: #009900;">]</span> <span style="color: #339933;">!=</span> <span style="color: #000088;">$form</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'#build_id'</span><span style="color: #009900;">]</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span>
+      <span style="color: #000088;">$commands</span><span style="color: #009900;">[</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> ajax_command_update_build_id<span style="color: #009900;">(</span><span style="color: #000088;">$form</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">}</span>
+    <span style="color: #000088;">$form_state</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'no_redirect'</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">TRUE</span><span style="color: #339933;">;</span>
+    <span style="color: #000088;">$form_state</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'rebuild_info'</span><span style="color: #009900;">]</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'copy'</span><span style="color: #009900;">]</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'#build_id'</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">TRUE</span><span style="color: #339933;">;</span>
+    <span style="color: #000088;">$form_state</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'rebuild_info'</span><span style="color: #009900;">]</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'copy'</span><span style="color: #009900;">]</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'#action'</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #009900; font-weight: bold;">TRUE</span><span style="color: #339933;">;</span>
+    <span style="color: #000088;">$form_state</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'input'</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$_POST</span><span style="color: #339933;">;</span>
+ 
+    <span style="color: #666666; font-style: italic;">// Обрабатываем форму аналогично тому, как это сделано в ajax_form_callback().</span>
+    drupal_process_form<span style="color: #009900;">(</span><span style="color: #000088;">$form</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'#form_id'</span><span style="color: #009900;">]</span><span style="color: #339933;">,</span> <span style="color: #000088;">$form</span><span style="color: #339933;">,</span> <span style="color: #000088;">$form_state</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span><span style="color: #339933;">!</span><span style="color: #990000;">empty</span><span style="color: #009900;">(</span><span style="color: #000088;">$form_state</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'triggering_element'</span><span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span>
+      <span style="color: #000088;">$callback</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$form_state</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'triggering_element'</span><span style="color: #009900;">]</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'#ajax'</span><span style="color: #009900;">]</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'callback'</span><span style="color: #009900;">]</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">}</span>
+    <span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span><span style="color: #339933;">!</span><span style="color: #990000;">empty</span><span style="color: #009900;">(</span><span style="color: #000088;">$callback</span><span style="color: #009900;">)</span> <span style="color: #339933;">&amp;&amp;</span> <span style="color: #990000;">is_callable</span><span style="color: #009900;">(</span><span style="color: #000088;">$callback</span><span style="color: #009900;">)</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span>
+      <span style="color: #000088;">$result</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$callback</span><span style="color: #009900;">(</span><span style="color: #000088;">$form</span><span style="color: #339933;">,</span> <span style="color: #000088;">$form_state</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+      <span style="color: #b1b100;">if</span> <span style="color: #009900;">(</span><span style="color: #339933;">!</span><span style="color: #009900;">(</span><span style="color: #990000;">is_array</span><span style="color: #009900;">(</span><span style="color: #000088;">$result</span><span style="color: #009900;">)</span> <span style="color: #339933;">&amp;&amp;</span> <span style="color: #990000;">isset</span><span style="color: #009900;">(</span><span style="color: #000088;">$result</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'#type'</span><span style="color: #009900;">]</span><span style="color: #009900;">)</span> <span style="color: #339933;">&amp;&amp;</span> <span style="color: #000088;">$result</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'#type'</span><span style="color: #009900;">]</span> <span style="color: #339933;">==</span> <span style="color: #0000ff;">'ajax'</span><span style="color: #009900;">)</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span>
+        <span style="color: #000088;">$result</span> <span style="color: #339933;">=</span> <span style="color: #990000;">array</span><span style="color: #009900;">(</span>
+          <span style="color: #0000ff;">'#type'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'ajax'</span><span style="color: #339933;">,</span>
+          <span style="color: #0000ff;">'#commands'</span> <span style="color: #339933;">=&gt;</span> ajax_prepare_response<span style="color: #009900;">(</span><span style="color: #000088;">$result</span><span style="color: #009900;">)</span><span style="color: #339933;">,</span>
+        <span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+      <span style="color: #009900;">}</span>
+      <span style="color: #000088;">$result</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'#commands'</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #990000;">array_merge</span><span style="color: #009900;">(</span><span style="color: #000088;">$commands</span><span style="color: #339933;">,</span> <span style="color: #000088;">$result</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'#commands'</span><span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+      <span style="color: #b1b100;">return</span> <span style="color: #000088;">$result</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">}</span>
+  <span style="color: #009900;">}</span>
+  <span style="color: #b1b100;">return</span> <span style="color: #009900; font-weight: bold;">NULL</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">}</span></pre></div></pre>
+
+<p> </p>
+
+<h3>Результаты</h3>
+
+<p>В нашем примере добавление вышеуказанного кода приводит к сохранению AJAX-функционала кнопки добавления товара в корзину при отключённом кэшировании формы. Обновление страницы каталога более не приводит к созданию 100 записей в таблице <em>cache_form</em>. Результат обработки AJAX-запроса аналогичен результату обработки при использовании кэша. Изменения формы, добавленные в рамках Drupal API (например, атрибуты товаров) либо потребуют небольших изменений в коде (построения состояния формы), либо не потребуют их вообще.</p>
+
+<p>Кроме того, интересен результат применения решения на реальном проекте, для которого оно и было реализовано:</p>
+
+<ul><li>Количество SELECT запросов к таблице <em>cache_form</em> уменьшилось в 10 раз;</li>
+	<li>Количество INSERT запросов к таблице <em>cache_form</em> уменьшилось в 10 раз;</li>
+	<li>Среднее время обработки запроса сервером уменьшилось на 32% (с 352 до 241 миллисекунд).</li>
+</ul><p>Более подробно статистика отображена на скриншотах.</p>
+<figure role="group"><img alt="Скриншот 1" data-entity-type="file" data-entity-uuid="804ff2fd-8595-4dff-a3d5-c30d3b5cc54c" src="..\sites\default\files\inline-images\screenshot1.png"><figcaption>Количество SELECT и INSERT запросов в минуту к таблице <em>cache_form</em>.</figcaption></figure><p> </p>
+
+<p> </p>
+<figure role="group"><img alt="Скриншот 2" data-entity-type="file" data-entity-uuid="b3458bc7-4686-48b5-bb0f-db986c0015d7" src="..\sites\default\files\inline-images\screenshot2_2.png"><figcaption>Трудоёмкость INSERT запросов к таблице <em>cache_form</em>.</figcaption></figure><p> </p>
+
+<p> </p>
+<figure role="group"><img alt="Скриншот 3" data-entity-type="file" data-entity-uuid="f28374a7-6eb5-411c-9467-53933aa800ac" src="..\sites\default\files\inline-images\screenshot3_0.png"><figcaption>Количество INSERT запросов в минуту.</figcaption></figure><p> </p>
+
+<p> </p>
+<figure role="group"><img alt="Скриншот 4" data-entity-type="file" data-entity-uuid="2a885d43-4c3c-4074-bbc8-abb26f06df47" src="..\sites\default\files\inline-images\screenshot4_0.png"><figcaption>Количество SELECT и INSERT запросов в минуту к таблице <em>cache_form</em>.</figcaption></figure><p> </p>
+
+<p> </p>
+<figure role="group"><img alt="Скриншот 5" data-entity-type="file" data-entity-uuid="ae3029eb-21cc-464a-84d4-10a11bd657f1" src="..\sites\default\files\inline-images\screenshot5.png"><figcaption>Время обработки запроса сервером до изменений.</figcaption></figure><p> </p>
+<figure role="group"><img alt="Скриншот 6" data-entity-type="file" data-entity-uuid="3afe426f-a775-49ad-be17-25f08eb6e7cc" src="..\sites\default\files\inline-images\screenshot6.png"><figcaption>Время обработки запроса сервером после изменений.</figcaption></figure><p>Как видно, среднее время от запроса до ответа сервера APP SERVER уменьшилось с 352 до 241 миллисекунд. Размер таблицы <em>cache_form</em> уменьшился с ~10Гб до 200Мб.</p>
+
+<p>Дальнейшие доработки других форм сайта аналогичным способом позволят улучшить еще эти показатели.</p></div>
+      
+      <div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items">
+              <div class="field--item category-tag"><a href="drupal-7.html" hreflang="ru">Drupal 7</a></div>
+              <div class="field--item category-tag"><a href="keysy.html" hreflang="ru">кейсы</a></div>
+          </div>
+  
+  <div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above">
+    <div class="field--label">Еще по теме</div>
+          <div class="field--items">
+              <div class="field--item"><a href="nastroyka-keshirovaniya-dannykh-apgreyd-servera-uskorenie-raboty-sayta-v-30-raz.html" hreflang="ru">Настройка кэширования данных. Апгрейд сервера. Ускорение работы сайта в 30 раз! </a></div>
+          <div class="field--item"><a href="uskorenie-raboty-s-udalennymi-saytami-pri-lokalnoy-razrabotke.html" hreflang="ru">Ускорение работы с удаленными сайтами при локальной разработке</a></div>
+              </div>
+      </div>
+
+
+      <div class="field-yashare">
+        <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+        <script src="//yastatic.net/share2/share.js"></script>
+        <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+                <div class="ya-share2" id="block-ya-share2" data-services="vkontakte,facebook,odnoklassniki,gplus,twitter"></div>
+        <a href="..\rss.rss" target="_blank"><span class="iconify" id="block-iconify" data-icon="ion:logo-rss" style="color: #da8c2c;" data-width="29" data-height="29"></span></a>
+              </div>
+  </div>
+
+  <section>
+  
+  
+ 
+      <div class="comment-form-wrapper">
+      <h2 class="block-form-title">Добавить комментарий</h2>
+      <form class="comment-comment-form comment-form antibot" data-drupal-selector="comment-form" data-action="https://drupal-coder.ru/comment/reply/node/236/comment" action="/antibot" method="post" id="comment-form" accept-charset="UTF-8">
+  <noscript>
+  <div class="antibot-no-js antibot-message antibot-message-warning">Вы должны включить JavaScript чтобы использовать эту форму.</div>
+</noscript>
+<div class="form-item js-form-item form-type-textfield js-form-type-textfield form-item-name js-form-item-name form-group">
+      <label for="edit-name" class="control-label">Ваше имя</label>
+  
+  
+  <input placeholder="Ваше имя" data-drupal-selector="edit-name" class="form-text form-control" type="text" id="edit-name" name="name" value="" size="30" maxlength="60">
+
+  
+  
+  </div>
+<input autocomplete="off" data-drupal-selector="form-oam7hos7cseqhvmqprgyop5y1qgeogxin1xfrcf0sdq" type="hidden" name="form_build_id" value="form-oaM7hOS7CseqHvMQPRGyop5y1QgeOGXIN1XfrCF0sDQ"><input data-drupal-selector="edit-comment-comment-form" type="hidden" name="form_id" value="comment_comment_form"><input data-drupal-selector="edit-antibot-key" type="hidden" name="antibot_key" value=""><div class="field--type-text-long field--name-comment-body field--widget-text-textarea form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-wrapper" id="edit-comment-body-wrapper">      <div class="js-text-format-wrapper text-format-wrapper js-form-item form-item">
+  <div class="form-item js-form-item form-type-textarea js-form-type-textarea form-item-comment-body-0-value js-form-item-comment-body-0-value">
+      <label for="edit-comment-body-0-value" class="control-label js-form-required form-required">Комментарий</label>
+  
+  
+  <div class="form-textarea-wrapper">
+  <textarea class="js-text-full text-full form-textarea required form-control resize-vertical" data-media-embed-host-entity-langcode="ru" data-drupal-selector="edit-comment-body-0-value" id="edit-comment-body-0-value" name="comment_body[0][value]" rows="5" cols="60" placeholder="" required="required" aria-required="true"></textarea>
+</div>
+
+
+  
+  
+  </div>
+<div class="js-filter-wrapper filter-wrapper form-inline form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format" id="edit-comment-body-0-format"><div class="filter-help form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format-help" id="edit-comment-body-0-format-help"><a href="..\filter\tips.html" target="_blank" title="Opens in new window" data-toggle="tooltip" data-drupal-selector="edit-comment-body-0-format-help-about" class="icon-before" id="edit-comment-body-0-format-help-about"><span class="icon glyphicon glyphicon-question-sign" aria-hidden="true"></span>О текстовых форматах</a></div>
+</div>
+
+  </div>
+
+  </div>
+<div data-drupal-selector="edit-actions" class="form-actions form-group js-form-wrapper form-wrapper" id="edit-actions"><button data-drupal-selector="edit-submit" class="button button--primary js-form-submit form-submit btn-primary btn" type="submit" id="edit-submit" name="op" value="Отправить">Отправить</button></div>
+
+</form>
+
+    </div> 
+  
+</section>
+
+
+</article>
+
+
+  </div>
+
+              </section>
+
+                </div>
+  </div>
+
+
+      <footer class="footer" role="contentinfo">
+      <div class=" container">  
+          <div class="region region-footer">
+    <section id="block-footerphone" class="block block-block-content block-block-content07b69e1d-d1db-4e8b-bb14-dc4563ef50bc clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="block-form-contacts">
+  <ul>
+    <li class="block-form-phone"><a href="tel:88002222673">8 800 222-26-73</a></li>
+  </ul>
+</div></div>
+      
+  </section>
+
+<section id="block-copyright" class="block block-block-content block-block-content263c1cb2-b142-4488-af8e-99f92fcb7640 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="social-links">
+  <ul class="social-links-wrapper">
+    <li class="social-links-item"><a target="_blank" href="https://vk.com/initlab"><i class="fab fa-vk"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://teleg.one/initlabbot" title="Свяжитесь с нами"><i class="fab fa-telegram-plane"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.youtube.com/channel/UCyFEbngMB-bK2ulNtd_W43A"><i class="fab fa-youtube"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://zen.yandex.ru/id/6037ce072f500a068c630fec"><img style="width: 16px; margin-bottom: 5px;" src="..\sites\default\files\icons\zen-icon.svg"></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.facebook.com/initlabkr/"><img style="width: 25px; margin-bottom: 5px;" src="..\sites\default\files\icons\icon-facebook-ru-dc.svg"></a></li>
+  </ul>  
+</div>
+
+<p>ООО «Инитлаб», Краснодар, Россия.
+<a class="goal__tel" href="tel:+78002222673">8 800 222-26-73</a><br>
+Drupal является зарегистрированной торговой маркой Dries Buytaert.</p>
+</div>
+      
+  </section>
+
+
+  </div>
+
+      </div>
+    </footer>
+  </div>
+
+  </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"node\/236","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"ru"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"ajaxPageState":{"libraries":"antibot\/antibot.form,bootstrap\/popover,bootstrap\/theme,bootstrap\/tooltip,bootstrap_dc\/bootstrap-scripts,bootstrap_dc\/dc,bootstrap_dc\/global-styling,bootstrap_dc\/seo,colorbox\/default,colorbox_inline\/colorbox_inline,colorbox_load\/colorbox_load,filter\/caption,filter\/drupal.filter,geshifilter\/geshifilter,google_analytics\/google_analytics,ng_lightbox\/ng_lightbox,system\/base,views\/views.module","theme":"bootstrap_dc","theme_token":null},"ajaxTrustedUrl":{"https:\/\/drupal-coder.ru\/comment\/reply\/node\/236\/comment":true},"colorbox":{"opacity":"0.85","current":"{current} \u0438\u0437 {total}","previous":"\u00ab \u041f\u0440\u0435\u0434\u044b\u0434\u0443\u0449\u0438\u0439","next":"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0439 \u00bb","close":"Close","maxWidth":"98%","maxHeight":"98%","fixed":true,"mobiledetect":true,"mobiledevicewidth":"480px"},"google_analytics":{"account":"UA-87805467-1","trackOutbound":true,"trackMailto":true,"trackTel":true,"trackDownload":true,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip","trackColorbox":true},"bootstrap":{"forms_has_error_value_toggle":1,"modal_animation":1,"modal_backdrop":"true","modal_focus_input":1,"modal_keyboard":1,"modal_select_text":1,"modal_show":1,"modal_size":"","popover_enabled":1,"popover_animation":1,"popover_auto_close":1,"popover_container":"body","popover_content":"","popover_delay":"0","popover_html":0,"popover_placement":"right","popover_selector":"","popover_title":"","popover_trigger":"click","tooltip_enabled":1,"tooltip_animation":1,"tooltip_container":"body","tooltip_delay":"0","tooltip_html":0,"tooltip_placement":"auto left","tooltip_selector":"","tooltip_trigger":"hover"},"antibot":{"forms":{"comment-form":{"id":"comment-form","key":"5D-i6uDYb-gr3-4qQZFOE5ec3-2jdoq6QSz9J26Pt50"}}},"user":{"uid":0,"permissionsHash":"66bb25c0b665c533dd9436d0cd4e99532a723088208bff0a05f2bf113d3703ac"}}</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="..\sites\default\files\js\js_kFVTvKCxW3cWmdAcJABrE5Fa90cD_Go5IxgQw9oFgJ0.js"></script>
+<script src="..\sites\default\files\js\js_d5BC-2wlh3XH4S29GgaPGie7NxyWY0K1EhPg30LGzwA.js"></script>
+<script src="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+<script src="..\sites\default\files\js\js_CNCJCgJnATwdWHfgCEncmZchd6pVQciEiBxkoYS9btY.js"></script>
+<script src="..\sites\default\files\js\js_PZPdVr1rIFXjUagjykPULRTCC8T4ZfIghTqFAwKg6ZI.js"></script>
+
+  </body>
+</html>

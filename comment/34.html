@@ -1,0 +1,714 @@
+﻿<!DOCTYPE html>
+<html lang="ru" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
+  <head>
+    <meta charset="utf-8">
+<noscript><style>form.antibot * :not(.antibot-message) { display: none !important; }</style>
+</noscript><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-87805467-1"></script>
+<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag("js", new Date());gtag("set", "developer_id.dMDhkMT", true);gtag("config", "UA-87805467-1", {"groups":"default","anonymize_ip":true,"page_placeholder":"PLACEHOLDER_page_path","allow_ad_personalization_signals":false});</script>
+<meta http-equiv="content-language" content="ru">
+<meta name="description" content="Обзор основных принципов построения запросов к базе данных в Drupal 8.">
+<meta name="keywords" content="создание сайтов на drupal, разработка Drupal-сайтов">
+<meta property="og:type" content="blog">
+<meta property="og:url" content="https://drupal-coder.ru/blog/rabota-s-bazoi-dannyh-v-drupal-8">
+<meta property="og:title" content="Работа с базой данных в Drupal 8">
+<meta property="og:description" content="Обзор основных принципов построения запросов к базе данных в Drupal 8.">
+<meta name="Generator" content="Drupal 9 (https://www.drupal.org)">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="..\sites\default\files\android-chrome-256x256.png" type="image/png">
+<link rel="alternate" hreflang="ru" href="..\blog\rabota-s-bazoi-dannyh-v-drupal-8.html">
+<link rel="canonical" href="..\blog\rabota-s-bazoi-dannyh-v-drupal-8.html">
+<link rel="shortlink" href="..\blog\rabota-s-bazoi-dannyh-v-drupal-8.html">
+
+    <title>Работа с базой данных в Drupal 8 | drupal-coder.ru</title>
+    <link rel="stylesheet" media="all" href="..\sites\default\files\css\css_y8CdfJDNR-tG0CPnRDokR6Eh9OUJplbHLVQ9A8myecQ.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_tFXlTqkfn6J-Qtpt9xbB8JudSaJfOGxRSmpeidDAzPE.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_l8G4voaHcf64TEU2r2Yyz9f53nJ0vU-50MrP1M5xhmk.css">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/@unicorn-fail/drupal-bootstrap-styles@0.0.2/dist/3.4.0/8.x-3.x/drupal-bootstrap.min.css" integrity="sha512-tGFFYdzcicBwsd5EPO92iUIytu9UkQR3tLMbORL9sfi/WswiHkA1O3ri9yHW+5dXk18Rd+pluMeDBrPKSwNCvw==" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_ULmc1mwKFKQRQmxYsjphW6dsh2g6jX4LXXBAtdO0vIE.css">
+
+    
+    <meta name="cmsmagazine" content="3d47b05beba40f3816d9741ee18c01a5">
+
+    
+    
+           <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P4SXQSG');</script>
+<!-- End Google Tag Manager -->
+    
+    
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Bold.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Medium.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Regular.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/fontawesome/webfonts/fa-brands-400.woff2" crossorigin="anonymous">
+    <link rel='manifest' href='..\manifest.json'>
+    <meta name="format-detection" content="telephone=no">
+
+          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MXPCP8Q"></script>
+      </head>
+  <body class="page-node-116 path-node page-node-type-blog has-glyphicons">
+
+                  <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4SXQSG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+      
+          
+
+    <a href="#main-content" class="visually-hidden focusable skip-link">
+      Перейти к основному содержанию
+    </a>
+    
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
+    
+      
+          <header class="navbar navbar-default" id="navbar" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+            <div class="region region-navigation">
+    <section id="block-pikselvkskript" class="block block-block-content block-block-contentbf8d9e8f-617c-4e8f-8501-7586be8255e0 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script>(window.Image ? (new Image()) : document.createElement('img')).src = 'https://vk.com/rtrg?p=VK-RTRG-238064-1VWIQ';</script></div>
+      
+  </section>
+
+<section id="block-globalsitetagadwords" class="block block-block-content block-block-content27617f8e-58d1-4a2a-9f23-31eab95a43c8 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><!-- Global site tag (gtag.js) - AdWords: 948581894 -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=AW-948581894"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-948581894');
+</script></div>
+      
+  </section>
+
+            <a class="logo navbar-btn pull-left" href="..\index.htm" title="Главная" rel="home">
+            <img src="..\themes\custom\bootstrap_dc\images\logo-initlab.svg" alt="Главная" width="156" height="31">
+        </a>
+            
+  </div>
+
+        </div>
+                          <div class="navbar-collapse-wrapper">
+
+            <div class="navbar-collapse collapse">
+                <div class="region region-navigation-collapsible">
+    <nav role="navigation" aria-labelledby="block-bootstrap-dc-main-menu-menu" id="block-bootstrap-dc-main-menu">
+            
+  <h2 class="visually-hidden" id="block-bootstrap-dc-main-menu-menu">Основная навигация</h2>
+  
+
+        
+              <ul class="menu nav navbar-nav">
+                      <li><a href="..\support.html" data-drupal-link-system-path="node/1">Поддержка Drupal</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-admin.html" class="dropdown-toggle" data-toggle="dropdown">DevOps <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\import-migrate-upgrade.html" data-drupal-link-system-path="node/4">Миграция</a>
+                  </li>
+                  <li><a href="..\backup.html" data-drupal-link-system-path="node/3">Бэкапы</a>
+                  </li>
+                  <li><a href="..\drupal-security-audit.html" data-drupal-link-system-path="node/9">Аудит безопасности</a>
+                  </li>
+                  <li><a href="..\boost-drupal.html" data-drupal-link-system-path="node/5">Оптимизация скорости</a>
+                  </li>
+                  <li><a href="..\ssl.html" data-drupal-link-system-path="node/99">Переезд на https</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\blog.html" data-drupal-link-system-path="blog">Блог</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-seo.html" class="dropdown-toggle" data-toggle="dropdown">Продвижение <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\drupal-seo\context.html" data-drupal-link-system-path="node/111">Реклама</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li class="expanded dropdown"><a href="..\team.html" class="dropdown-toggle" data-toggle="dropdown">О нас <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\team.html#team" data-drupal-link-system-path="team">Команда</a>
+                  </li>
+                  <li><a href="..\drupalgive.html" data-drupal-link-system-path="node/135">Drupalgive</a>
+                  </li>
+                  <li><a href="..\drupal-courses.html" data-drupal-link-system-path="node/10">Курсы Drupal</a>
+                  </li>
+                  <li><a href="..\vacancies.html" data-drupal-link-system-path="vacancies">Вакансии</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\happy-customers.html" data-drupal-link-system-path="happy-customers">Проекты</a>
+                  </li>
+                  <li><a href="..\contacts.html" data-drupal-link-system-path="node/86">Контакты</a>
+                  </li>
+              </ul>
+      
+
+
+  </nav>
+
+  </div>
+
+            </div>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+              </div>
+    </header>
+  
+
+      <div class="page-header-big" role="heading">
+        <div class="container">
+            <div class="region region-header">
+        <h1 class="page-header">
+<span>Работа с базой данных в Drupal 8</span>
+</h1>
+
+<section class="views-element-container block block-views block-views-blockuser-block-1 clearfix" id="block-views-block-user-block-1">
+  
+    
+
+      <div class="form-group"><div class="view view-user view-id-user view-display-id-block_1 js-view-dom-id-91094f9769913c57a4e582ae96713a409a5b3f601d65abbd6701e0988abc1f65">
+  
+    
+      
+      <div class="view-content">
+          <div class="views-row"><div class="views-field views-field-user-picture"><div class="field-content">  <img loading="lazy" src="..\sites\default\files\styles\avatar_mini\public\pictures\2019-12\avatar.jpg?itok=fGoezcsO" width="45" height="45" alt="" typeof="foaf:Image" class="img-responsive">
+
+
+</div></div><div class="views-field views-field-field-name"><div class="field-content">Тымчук Андрей</div></div></div>
+
+    </div>
+  
+          </div>
+</div>
+
+  </section>
+
+<section id="block-yashare" class="block-yashare block block-block-content block-block-contentee72d8fb-02e9-4ef6-8e71-0df16bee86a9 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+<script src="//yastatic.net/share2/share.js"></script>
+<div class="ya-share2" data-services="vkontakte,odnoklassniki,gplus,twitter"></div></div>
+      
+  </section>
+
+
+  </div>
+
+        </div>
+      
+    </div>
+  
+
+<div class="main-wrapper">
+  <div role="main" class="main-container container js-quickedit-main-content">
+    <div class="row">
+
+
+
+            
+                  <section class="col-sm-12">
+
+                
+                
+                
+                                      
+                  
+                          <a id="main-content"></a>
+            <div class="region region-content">
+        <ol class="breadcrumb">
+          <li>
+                  <a href="..\blog.html">Блог</a>
+              </li>
+          <li class="active">
+                  Работа с базой данных в Drupal 8
+              </li>
+      </ol>
+
+<div data-drupal-messages-fallback="" class="hidden"></div>
+  <article data-history-node-id="116" role="article" about="https://drupal-coder.ru/blog/rabota-s-bazoi-dannyh-v-drupal-8" class="blog is-promoted full clearfix">
+
+  
+    
+
+  
+
+  <div class="content">
+    
+    <ul class="links inline list-inline"><li class="comment-add"><a href="..\blog\rabota-s-bazoi-dannyh-v-drupal-8.html#comment-form" title="Поделитесь своими мыслями и мнениями." hreflang="ru">Добавить комментарий</a></li></ul><div id="field-language-display"><div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group">
+      <label class="control-label">Language</label>
+  
+  
+  Russian
+
+  
+  
+  </div>
+</div>
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><p lang="zxx" xml:lang="zxx" xml:lang="zxx"><span>Одним из нововведений Drupal 7 был объектно-ориентированный подход в системе построения запросов к базе данных. Работа системы строилась на таких функциях, как db_select, db_update, db_insert и т.д. Поддерживалось также и прямое написание запросов на основе функций db_query и db_query_range. Основные плюсы данного похода заключаются в отсутствии привязки к определённой СУБД и удобстве поддержки кода. В Drupal 8 все эти функции помечены, как <strong>deprecated </strong><span>(с выходом Drupal 9 будут удалены из ядра), и выполнение запросов к базе данных рекомендуется выполнять на основе системы соответствующих классов.</span></span></p>
+
+<p lang="zxx" xml:lang="zxx" xml:lang="zxx">Общие принципы взаимодействия с базой данных в Drupal 8 строятся на получении объекта подключения к текущей базе данных и вызове методов данного объекта для построения конечного запроса и получения результата его выполнения. Получить объект подключения можно с помощью контейнера сервисов (класс <a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal.php/class/Drupal/8.3.x"><em>Drupal</em></a>), используя его статический метод <a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal.php/function/Drupal%3A%3Adatabase/8.3.x"><em>database()</em></a>. После получения объекта подключения нужно получить объект, соответствующий требуемому типу запроса. Как и в седьмой версии, в Drupal 8 построение запроса выполняется на основе таких методов, как <a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Database%21Query%21SelectInterface.php/function/SelectInterface%3A%3Afields/8.3.x"><em>fields()</em></a>, <a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Database%21Query%21SelectInterface.php/function/SelectInterface%3A%3Ajoin/8.3.x"><em>join()</em></a>, <a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Database%21Query%21ConditionInterface.php/function/ConditionInterface%3A%3Acondition/8.3.x"><em>condition()</em></a> и т. д. Выполнить запрос можно обращением к методу <a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Database%21Query%21SelectInterface.php/function/SelectInterface%3A%3Aexecute/8.3.x"><em>execute()</em></a>.</p>
+
+<p lang="zxx" xml:lang="zxx" xml:lang="zxx"> </p>
+
+<h3>Выборка</h3>
+
+<p lang="zxx" xml:lang="zxx" xml:lang="zxx">Самый часто используемый способ "общения" с базой данных - это выборка. При разработке модулей не раз приходится сталкиваться с необходимостью получения данных из таблиц контрибных модулей или ядра Drupal. Получить объект SELECT-запроса можно с помощью метода <a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Database%21Connection.php/function/Connection%3A%3Aselect/8.3.x"><em>select()</em></a> из объекта подключения. Рассмотрим примеры основных SELECT-запросов:</p>
+
+<p lang="zxx" xml:lang="zxx" xml:lang="zxx"><strong>1) Простейшая выборка с условием</strong></p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$query</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">database</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">select</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'node_field_data'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'nfd'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fields</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'nfd'</span><span style="color: #339933;">,</span> <span style="color: #009900;">[</span><span style="color: #0000ff;">'uid'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'title'</span><span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">condition</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'nfd.nid'</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">1</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$result</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">execute</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fetchAll</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p>В данном примере выполняется выбор значений полей <em>uid</em> и <em>title</em> таблицы <em>node_field_data</em> при условии, что значение в поле <em>nid</em> равно единице. Результат выполнения запроса формируется в виде массива, каждое значение которого будет объектом класса <a href="http://php.net/manual/ru/reserved.classes.php"><em>stdClass</em></a> и будет содержать значения выбранных записей. Добавлять  поля в запросе можно также с помощью метода <a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Database%21Query%21SelectInterface.php/function/SelectInterface%3A%3AaddField/8.3.x"><em>addField()</em></a>. По умолчанию в методе <a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Database%21Query%21ConditionInterface.php/function/ConditionInterface%3A%3Acondition/8.3.x"><em>condition()</em></a> используется оператор равенства, но можно использовать и другие операторы, передав оператор в качестве третьего параметра.</p>
+
+<p><strong>2) Выборка одного значения</strong></p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$query</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">database</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">select</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'node_field_data'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'nfd'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addField</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'nfd'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'title'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">condition</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'nfd.nid'</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">1</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$result</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">execute</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fetchField</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p>В переменной <em>$result</em> будет содержаться прямое значение поля <em>title.</em> В случае наличия нескольких полей в результирующей записи, будет использовано первое из них. В случае наличия нескольких записей, будет использовано первое поле первой записи.</p>
+
+<p><strong>3) Выборка первой записи</strong></p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$query</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">database</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">select</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'node_field_data'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'nfd'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fields</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'nfd'</span><span style="color: #339933;">,</span> <span style="color: #009900;">[</span><span style="color: #0000ff;">'nid'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'title'</span><span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">condition</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'nfd.type'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'article'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$result</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">execute</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fetchAssoc</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p>В переменной <em>$result</em> будет содержаться первая запись результата выборки в виде ассоциативного массива. Для получения записи в виде объекта нужно использовать метод <em><a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Database%21StatementInterface.php/function/StatementInterface%3A%3AfetchObject/8.3.x">fetchObject()</a></em>.</p>
+
+<p><strong>4) Выборка первой колонки в виде простого массива</strong></p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$query</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">database</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">select</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'node_field_data'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'nfd'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addField</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'nfd'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'title'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">condition</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'nfd.type'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'article'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$result</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">execute</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fetchCol</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p>В переменной <em>$result</em> будет содержаться одномерный массив, содержащий значения поля title всех выбранных записей.</p>
+
+<p><strong>5) Объединение таблиц в выборке</strong></p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$query</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">database</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">select</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'node_field_data'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'nfd'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addField</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'nfd'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'title'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addField</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'ufd'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'name'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #990000;">join</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'users_field_data'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ufd'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'ufd.uid = nfd.uid'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">condition</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'nfd.type'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'article'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$result</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">execute</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fetchAll</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p>Объединять таблицы в запросе также можно посредством методов <em><a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Database%21Query%21SelectInterface.php/function/SelectInterface%3A%3AinnerJoin/8.3.x">innerJoin()</a></em> (к слову метод <a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Database%21Query%21SelectInterface.php/function/SelectInterface%3A%3Ajoin/8.3.x"><em>join()</em></a> - это синоним данного метода) и <a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Database%21Query%21SelectInterface.php/function/SelectInterface%3A%3AleftJoin/8.3.x"><em>leftJoin()</em></a>.</p>
+
+<p><strong>6) Выбор определённого диапазона записей</strong></p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$query</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">database</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">select</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'node_field_data'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'nfd'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fields</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'nfd'</span><span style="color: #339933;">,</span> <span style="color: #009900;">[</span><span style="color: #0000ff;">'nid'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'title'</span><span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">condition</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'nfd.type'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'article'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #990000;">range</span><span style="color: #009900;">(</span><span style="color: #cc66cc;">0</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">10</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$result</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">execute</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fetchAll</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p>С помощью метода <a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Database%21Query%21SelectInterface.php/function/SelectInterface%3A%3Arange/8.3.x"><em>range()</em></a> можно управлять диапазоном выбираемых записей. Метод имеет два параметра: первый - позиция начала диапазона, второй - количество выбираемых записей с начала диапазона.</p>
+
+<p><strong>7) Использование условий ИЛИ в выборке</strong></p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$condition_or</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> \Drupal\Core\Database\Query\Condition<span style="color: #009900;">(</span><span style="color: #0000ff;">'OR'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$condition_or</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">condition</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'nfd.nid'</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">5</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$condition_or</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">condition</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'nfd.nid'</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">7</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+ 
+<span style="color: #000088;">$query</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">database</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">select</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'node_field_data'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'nfd'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fields</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'nfd'</span><span style="color: #339933;">,</span> <span style="color: #009900;">[</span><span style="color: #0000ff;">'nid'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'title'</span><span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">condition</span><span style="color: #009900;">(</span><span style="color: #000088;">$condition_or</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$result</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">execute</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fetchAll</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p>В переменной <em>$result</em> будут две записи - для ноды с <em>nid</em> 5 и для ноды с <em>nid</em> 7. </p>
+
+<p><strong>8) Подсчёт числа записей в выборке</strong></p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$query</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">database</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">select</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'node_field_data'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'nfd'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fields</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'nfd'</span><span style="color: #339933;">,</span> <span style="color: #009900;">[</span><span style="color: #0000ff;">'nid'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'title'</span><span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">condition</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'nfd.type'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'article'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$result</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">countQuery</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">execute</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fetchField</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p><strong>9) Проверка значений на NULL</strong></p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$query</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">database</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">select</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'example'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'e'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fields</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'e'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">isNull</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'e.field_null'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">isNotNull</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'e.field_not_null'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$result</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">execute</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fetchAll</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p><strong>10) Применение сложных выражений в выборке</strong></p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$query</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">database</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">select</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'node_field_data'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'nfd'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fields</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'nfd'</span><span style="color: #339933;">,</span> <span style="color: #009900;">[</span><span style="color: #0000ff;">'nid'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'title'</span><span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addExpression</span><span style="color: #009900;">(</span><span style="color: #0000ff;">"DATE_FORMAT(FROM_UNIXTIME(nfd.created), '<span style="color: #009933; font-weight: bold;">%e</span> <span style="color: #009933; font-weight: bold;">%b</span> %Y')"</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'node_created'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$result</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">execute</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fetchAll</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p><strong>11) Группировка записей выборки</strong></p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$query</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">database</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">select</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'node_field_data'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'nfd'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addField</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'nfd'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'type'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">addExpression</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'COUNT(*)'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'count'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">groupBy</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'nfd.type'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$result</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">execute</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fetchAll</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p><strong>12) Применение сложных условий в запросе</strong></p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$query</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">database</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">select</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'node_field_data'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'nfd'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fields</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'nfd'</span><span style="color: #339933;">,</span> <span style="color: #009900;">[</span><span style="color: #0000ff;">'nid'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'title'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'type'</span><span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">where</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'DAY(FROM_UNIXTIME(nfd.created)) = :day'</span><span style="color: #339933;">,</span> <span style="color: #009900;">[</span><span style="color: #0000ff;">':day'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #cc66cc;">7</span><span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$result</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">execute</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fetchAll</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p>Отмечу, что метод <a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Database%21Query%21ConditionInterface.php/function/ConditionInterface%3A%3Awhere/8.3.x"><em>where()</em></a> можно использовать не только в контексте SELECT-запросов. Например, его можно применить в запросе UPDATE или DELETE.</p>
+
+<p><strong>13) Сортировка выбранных записей</strong></p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$query</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">database</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">select</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'node_field_data'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'nfd'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fields</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'nfd'</span><span style="color: #339933;">,</span> <span style="color: #009900;">[</span><span style="color: #0000ff;">'nid'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'title'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'type'</span><span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">orderBy</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'nfd.title'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$result</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">execute</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fetchAll</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p>Направление сортировки можно задать посредством второго параметра метода <a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Database%21Query%21SelectInterface.php/function/SelectInterface%3A%3AorderBy/8.3.x"><em>orderBy()</em></a>, который по умолчанию равен "ASC". Сделать рандомную сортировку можно на основе метода <a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Database%21Query%21SelectInterface.php/function/SelectInterface%3A%3AorderRandom/8.3.x"><em>orderRandom()</em></a>.</p>
+
+<p> </p>
+
+<h3>Вставка и изменение</h3>
+
+<p>В случае, когда требуется добавление или изменение данных в определённой таблице, лучше обратиться к Drupal API (если таблица относится к ядру) или API контрибного модуля (если таблица относится к контрибному модулю). Однако, если вы создаёте собственный модуль, который оперирует своими таблицами, то операции добавления и изменения придётся описывать вручную.</p>
+
+<p>Объект UPDATE-запроса получить можно с помощью метода <a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Database%21Connection.php/function/Connection%3A%3Aupdate/8.3.x"><em>update()</em></a> из объекта подключения, а объект INSERT-запроса - с помощью метода <a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Database%21Connection.php/function/Connection%3A%3Ainsert/8.3.x"><em>insert()</em></a>. Аналогично предыдущему разделу, рассмотрим основные примеры запросов:</p>
+
+<p><strong>1) Обновление записей</strong></p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$query</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">database</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">update</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'example'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fields</span><span style="color: #009900;">(</span><span style="color: #009900;">[</span>
+  <span style="color: #0000ff;">'field_1'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$value_1</span><span style="color: #339933;">,</span>
+  <span style="color: #0000ff;">'field_2'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$value_2</span><span style="color: #339933;">,</span>
+  <span style="color: #0000ff;">'field_3'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$value_3</span><span style="color: #339933;">,</span>
+<span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">condition</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'field_4'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$value_4</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">execute</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p>В результате выполнения этого кода в таблице <em>example</em> будут обновлены поля <em>field_1</em>, <em>field_2</em> и <em>field_3</em> (они получат значения <em>$value_1</em>, <em>$value_2</em> и <em>$value_3</em> соответственно) для записей, в которых поле <em>field_4</em> равно <em>$value_4</em>.</p>
+
+<p><strong>2) Применение сложных выражений при обновлении</strong></p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$query</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">database</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">update</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'example'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">expression</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'field_1'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'field_1 + :amount'</span><span style="color: #339933;">,</span> <span style="color: #009900;">[</span><span style="color: #0000ff;">':amount'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #cc66cc;">100</span><span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">expression</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'field_3'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'field_2'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">execute</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p>Если нужно применить сложное выражение для обновления данных, то следует использовать метод <a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Database%21Query%21Update.php/function/Update%3A%3Aexpression/8.3.x"><em>expression()</em></a>. Он содержит три параметра - обновляемое поле, выражение, аргументы для выражения. В данном примере для всех записей численное поле <em>field_1</em>, будет увеличено на 100, а поле <em>field_3</em> получит значения из <em>field_2</em>.</p>
+
+<p><strong>3) Добавление одной записи</strong></p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$query</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">database</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">insert</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'example'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fields</span><span style="color: #009900;">(</span><span style="color: #009900;">[</span>
+  <span style="color: #0000ff;">'field_1'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$value_1</span><span style="color: #339933;">,</span>
+  <span style="color: #0000ff;">'field_2'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$value_2</span><span style="color: #339933;">,</span>
+  <span style="color: #0000ff;">'field_3'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$value_3</span><span style="color: #339933;">,</span>
+<span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">execute</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p>Стоит отметить, что метод <a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Database%21Query%21InsertTrait.php/function/InsertTrait%3A%3Afields/8.3.x"><em>fields()</em></a> может принимать один или два параметра. Если первый параметр - ассоциативный массив, то ключи массива должны соответствовать полям таблицы, а значения - добавляемым значениям. В этом случае второй параметр опускается. Если первый параметр обычный массив, то он соответствует полям таблицы и нужно передать второй параметр, который должен содержать добавляемые значения в порядке, соответствующем порядку полей в первом параметре. Если второй параметр опущен, добавляемые значения нужно передать на основе метода <a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Database%21Query%21InsertTrait.php/function/InsertTrait%3A%3Avalues/8.3.x"><em>values()</em></a>.</p>
+
+<p><strong>4) Добавление нескольких записей</strong></p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$values</span> <span style="color: #339933;">=</span> <span style="color: #009900;">[</span>
+  <span style="color: #009900;">[</span><span style="color: #000088;">$value_1</span><span style="color: #339933;">,</span> <span style="color: #000088;">$value_2</span><span style="color: #339933;">,</span> <span style="color: #000088;">$value_3</span><span style="color: #009900;">]</span><span style="color: #339933;">,</span>
+  <span style="color: #009900;">[</span><span style="color: #000088;">$value_4</span><span style="color: #339933;">,</span> <span style="color: #000088;">$value_5</span><span style="color: #339933;">,</span> <span style="color: #000088;">$value_6</span><span style="color: #009900;">]</span><span style="color: #339933;">,</span>
+  <span style="color: #009900;">[</span><span style="color: #000088;">$value_7</span><span style="color: #339933;">,</span> <span style="color: #000088;">$value_8</span><span style="color: #339933;">,</span> <span style="color: #000088;">$value_9</span><span style="color: #009900;">]</span><span style="color: #339933;">,</span>
+<span style="color: #009900;">]</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">database</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">insert</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'example'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fields</span><span style="color: #009900;">(</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'field_1'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'field_2'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'field_3'</span><span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #b1b100;">foreach</span> <span style="color: #009900;">(</span><span style="color: #000088;">$values</span> <span style="color: #b1b100;">as</span> <span style="color: #000088;">$record</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span>
+  <span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">values</span><span style="color: #009900;">(</span><span style="color: #000088;">$record</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">}</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">execute</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p><strong>5) Добавление или обновление в зависимости от наличия записи</strong></p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$query</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">database</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">upsert</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'example'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">fields</span><span style="color: #009900;">(</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'field_id'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'field_1'</span><span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">values</span><span style="color: #009900;">(</span><span style="color: #009900;">[</span><span style="color: #000088;">$id</span><span style="color: #339933;">,</span> <span style="color: #000088;">$value_1</span><span style="color: #009900;">]</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #990000;">key</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'field_id'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">execute</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p>Часть бывают случаи, что в зависимости от контекста нужно либо обновить запись, либо добавить новую. Реализация предварительного SELECT-запроса проверки наличия записи с дальнейшей условной конструкцией - это плохой тон. В Drupal 8 для этого имеется объект UPSERT-запроса (в Drupal 7 кстати такого типа запросов нет). Получить этот объект можно с помощью метода <a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Database%21Connection.php/function/Connection%3A%3Aupsert/8.3.x"><em>upsert()</em></a>. Объект UPSERT-запроса обязательно должен содержать ключевое поле, по которому будет выполняться проверка существования записи. Поле должно быть уникальным в рамках таблицы. Добавить ключевое поле можно вызовом метода <a href="https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Database%21Query%21Upsert.php/function/Upsert%3A%3Akey/8.3.x"><em>key()</em></a>.</p>
+
+<p>Относительно обновления и добавления записей стоит ещё сказать, что метод <em>execute()</em> в случае операции обновления возвращает количество обновлённых записей, а в случае операции добавления - идентификатор добавленной записи, при условии, что добавлялась одна запись. Если добавлялось множество записей, возвращаемый идентификатор не определён.</p>
+
+<p> </p>
+
+<h3>Удаление</h3>
+
+<p>Иногда записи нужно и удалять. В случае таблиц модулей или ядра также следует использовать только соответствующее API. Ну, а для удаления данных из своих таблиц смело используйте объект DELETE-запроса, который, как вы, наверное, догадались, можно получить с помощью метода <a href="https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Database!Connection.php/function/Connection%3A%3Adelete/8.3.x"><em>delete()</em></a>.</p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$query</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">database</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">delete</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'example'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">condition</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'field'</span><span style="color: #339933;">,</span> <span style="color: #000088;">$value</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$query</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">execute</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p>Построение условий для запроса удаления идентично построению для запросов выборки и изменения (можно использовать проверку на NULL, сложные выражения и т.д.), а метод <em>execute()</em> возвращает количество удалённых записей.</p>
+
+<p> </p>
+
+<h3>В виде заключения</h3>
+
+<p lang="zxx" xml:lang="zxx" xml:lang="zxx">В общем и целом структура построения запросов к базе данных в Drupal 8 не сильно изменилась относительно Drupal 7. Однако появились некоторые приятные и удобные вещи (например, запрос UPSERT). К слову, когда у вас не получается составить нужный запрос на основе объектной модели, вы всегда можете на свой страх и риск (если вы плохой SQL-щик) выполнить прямой запрос к базе данных с помощью метода <a href="https://api.drupal.org/api/drupal/core!lib!Drupal!Core!Database!Connection.php/function/Connection%3A%3Aquery/8.3.x"><em>query()</em></a> объекта подключения. Метод в качестве входных параметров может принимать строку с запросом к базе данных.</p>
+
+<h3>Материалы для изучения</h3>
+
+<ol><li lang="zxx" xml:lang="zxx" xml:lang="zxx"><a href="https://www.anubavam.com/blogs/simplifying-database-queries-drupal-7-vs-drupal-8">Основные отличия в построении запросов к БД между Drupal 8 и Drupal 7</a></li>
+	<li lang="zxx" xml:lang="zxx" xml:lang="zxx"><a href="https://www.drupal.org/docs/8/api/database-api/database-api-overview">Обзор Drupal 8 Database API</a></li>
+	<li lang="zxx" xml:lang="zxx" xml:lang="zxx"><a href="http://www.eilyin.name/note/database-queries-drupal-8-7">Drupal 8 - запросы к базе данных</a></li>
+</ol></div>
+      
+      <div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items">
+              <div class="field--item category-tag"><a href="..\blog\drupal-8.html" hreflang="ru">Drupal 8</a></div>
+              <div class="field--item category-tag"><a href="..\blog\drupal.html" hreflang="ru">Drupal</a></div>
+          </div>
+  
+
+      <div class="field-yashare">
+        <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+        <script src="//yastatic.net/share2/share.js"></script>
+        <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+                <div class="ya-share2" id="block-ya-share2" data-services="vkontakte,facebook,odnoklassniki,gplus,twitter"></div>
+        <a href="..\rss.rss" target="_blank"><span class="iconify" id="block-iconify" data-icon="ion:logo-rss" style="color: #da8c2c;" data-width="29" data-height="29"></span></a>
+              </div>
+  </div>
+
+  <section>
+      
+    <h2 class="block-form-title">Комментарии</h2>
+    
+  
+  <div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Ольга Тимцова
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">среда, июня 13, 2018 - 22:49</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>Благодарю! Интересно так !</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\116\comment\24.html">Ответить</a></li></ul>
+
+</div>
+
+<div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Сергей
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">суббота, июня 30, 2018 - 12:22</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>&gt;&gt; Направление сортировки можно задать посредством второго параметра метода groupBy(), который по умолчанию равен "ASC"</p>
+<p>orderBy() же. Поправьте, пожалуйста.</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\116\comment\34.html">Ответить</a></li></ul>
+
+</div>
+
+
+<div class="indented"><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">понедельник, июля 2, 2018 - 10:32</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item">Исправили, спасибо!</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\116\comment\35.html">Ответить</a></li></ul>
+
+</div>
+
+</div><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Олег
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">четверг, сентября 27, 2018 - 04:57</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>Спасибо, Андрей!</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\116\comment\75.html">Ответить</a></li></ul>
+
+</div>
+
+
+ 
+      <div class="comment-form-wrapper">
+      <h2 class="block-form-title">Добавить комментарий</h2>
+      <form class="comment-comment-form comment-form antibot" data-drupal-selector="comment-form" data-action="https://drupal-coder.ru/comment/reply/node/116/comment" action="/antibot" method="post" id="comment-form" accept-charset="UTF-8">
+  <noscript>
+  <div class="antibot-no-js antibot-message antibot-message-warning">Вы должны включить JavaScript чтобы использовать эту форму.</div>
+</noscript>
+<div class="form-item js-form-item form-type-textfield js-form-type-textfield form-item-name js-form-item-name form-group">
+      <label for="edit-name" class="control-label">Ваше имя</label>
+  
+  
+  <input placeholder="Ваше имя" data-drupal-selector="edit-name" class="form-text form-control" type="text" id="edit-name" name="name" value="" size="30" maxlength="60">
+
+  
+  
+  </div>
+<input autocomplete="off" data-drupal-selector="form-e5xwbarxkx-srciaomxohg7jfrxlshvc8pqgu-ih3qk" type="hidden" name="form_build_id" value="form-E5XWBarxkX-srCiaOmXOHg7JFrXlShVc8pqgU-Ih3qk"><input data-drupal-selector="edit-comment-comment-form" type="hidden" name="form_id" value="comment_comment_form"><input data-drupal-selector="edit-antibot-key" type="hidden" name="antibot_key" value=""><div class="field--type-text-long field--name-comment-body field--widget-text-textarea form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-wrapper" id="edit-comment-body-wrapper">      <div class="js-text-format-wrapper text-format-wrapper js-form-item form-item">
+  <div class="form-item js-form-item form-type-textarea js-form-type-textarea form-item-comment-body-0-value js-form-item-comment-body-0-value">
+      <label for="edit-comment-body-0-value" class="control-label js-form-required form-required">Комментарий</label>
+  
+  
+  <div class="form-textarea-wrapper">
+  <textarea class="js-text-full text-full form-textarea required form-control resize-vertical" data-media-embed-host-entity-langcode="ru" data-drupal-selector="edit-comment-body-0-value" id="edit-comment-body-0-value" name="comment_body[0][value]" rows="5" cols="60" placeholder="" required="required" aria-required="true"></textarea>
+</div>
+
+
+  
+  
+  </div>
+<div class="js-filter-wrapper filter-wrapper form-inline form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format" id="edit-comment-body-0-format"><div class="filter-help form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format-help" id="edit-comment-body-0-format-help"><a href="..\filter\tips.html" target="_blank" title="Opens in new window" data-toggle="tooltip" data-drupal-selector="edit-comment-body-0-format-help-about" class="icon-before" id="edit-comment-body-0-format-help-about"><span class="icon glyphicon glyphicon-question-sign" aria-hidden="true"></span>О текстовых форматах</a></div>
+</div>
+
+  </div>
+
+  </div>
+<div data-drupal-selector="edit-actions" class="form-actions form-group js-form-wrapper form-wrapper" id="edit-actions"><button data-drupal-selector="edit-submit" class="button button--primary js-form-submit form-submit btn-primary btn" type="submit" id="edit-submit" name="op" value="Отправить">Отправить</button></div>
+
+</form>
+
+    </div> 
+  
+</section>
+
+
+</article>
+
+
+  </div>
+
+              </section>
+
+                </div>
+  </div>
+
+
+      <footer class="footer" role="contentinfo">
+      <div class=" container">  
+          <div class="region region-footer">
+    <section id="block-footerphone" class="block block-block-content block-block-content07b69e1d-d1db-4e8b-bb14-dc4563ef50bc clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="block-form-contacts">
+  <ul>
+    <li class="block-form-phone"><a href="tel:88002222673">8 800 222-26-73</a></li>
+  </ul>
+</div></div>
+      
+  </section>
+
+<section id="block-copyright" class="block block-block-content block-block-content263c1cb2-b142-4488-af8e-99f92fcb7640 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="social-links">
+  <ul class="social-links-wrapper">
+    <li class="social-links-item"><a target="_blank" href="https://vk.com/initlab"><i class="fab fa-vk"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://teleg.one/initlabbot" title="Свяжитесь с нами"><i class="fab fa-telegram-plane"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.youtube.com/channel/UCyFEbngMB-bK2ulNtd_W43A"><i class="fab fa-youtube"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://zen.yandex.ru/id/6037ce072f500a068c630fec"><img style="width: 16px; margin-bottom: 5px;" src="..\sites\default\files\icons\zen-icon.svg"></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.facebook.com/initlabkr/"><img style="width: 25px; margin-bottom: 5px;" src="..\sites\default\files\icons\icon-facebook-ru-dc.svg"></a></li>
+  </ul>  
+</div>
+
+<p>ООО «Инитлаб», Краснодар, Россия.
+<a class="goal__tel" href="tel:+78002222673">8 800 222-26-73</a><br>
+Drupal является зарегистрированной торговой маркой Dries Buytaert.</p>
+</div>
+      
+  </section>
+
+
+  </div>
+
+      </div>
+    </footer>
+  </div>
+
+  </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"comment\/34","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"ru","currentQuery":{"page":0}},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"ajaxPageState":{"libraries":"antibot\/antibot.form,bootstrap\/popover,bootstrap\/theme,bootstrap\/tooltip,bootstrap_dc\/bootstrap-scripts,bootstrap_dc\/dc,bootstrap_dc\/global-styling,bootstrap_dc\/seo,colorbox\/default,colorbox_inline\/colorbox_inline,colorbox_load\/colorbox_load,comment\/drupal.comment-by-viewer,filter\/drupal.filter,geshifilter\/geshifilter,google_analytics\/google_analytics,ng_lightbox\/ng_lightbox,system\/base,views\/views.module","theme":"bootstrap_dc","theme_token":null},"ajaxTrustedUrl":{"https:\/\/drupal-coder.ru\/comment\/reply\/node\/116\/comment":true},"colorbox":{"opacity":"0.85","current":"{current} \u0438\u0437 {total}","previous":"\u00ab \u041f\u0440\u0435\u0434\u044b\u0434\u0443\u0449\u0438\u0439","next":"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0439 \u00bb","close":"Close","maxWidth":"98%","maxHeight":"98%","fixed":true,"mobiledetect":true,"mobiledevicewidth":"480px"},"google_analytics":{"account":"UA-87805467-1","trackOutbound":true,"trackMailto":true,"trackTel":true,"trackDownload":true,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip","trackColorbox":true},"bootstrap":{"forms_has_error_value_toggle":1,"modal_animation":1,"modal_backdrop":"true","modal_focus_input":1,"modal_keyboard":1,"modal_select_text":1,"modal_show":1,"modal_size":"","popover_enabled":1,"popover_animation":1,"popover_auto_close":1,"popover_container":"body","popover_content":"","popover_delay":"0","popover_html":0,"popover_placement":"right","popover_selector":"","popover_title":"","popover_trigger":"click","tooltip_enabled":1,"tooltip_animation":1,"tooltip_container":"body","tooltip_delay":"0","tooltip_html":0,"tooltip_placement":"auto left","tooltip_selector":"","tooltip_trigger":"hover"},"antibot":{"forms":{"comment-form":{"id":"comment-form","key":"5D-i6uDYb-gr3-4qQZFOE5ec3-2jdoq6QSz9J26Pt50"}}},"user":{"uid":0,"permissionsHash":"66bb25c0b665c533dd9436d0cd4e99532a723088208bff0a05f2bf113d3703ac"}}</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="..\sites\default\files\js\js_2omCfdjRPteGoPcs4txReDz1ziq8dw_NERpcaIRsDPk.js"></script>
+<script src="..\sites\default\files\js\js_U0-ei-DZ6u8k-JNjuYyeU7SkryXEZZ54qVWXctdF9xs.js"></script>
+<script src="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+<script src="..\sites\default\files\js\js_0JpfcTomuXtSWa_m9aC3Cl6jt3QOGmlwYugQhh4TJxo.js"></script>
+<script src="..\sites\default\files\js\js_s-3xOYzWEgR_FYD47Em71gucXCZV2wtpxM9O-gGfPco.js"></script>
+
+  </body>
+</html>

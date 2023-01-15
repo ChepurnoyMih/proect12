@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:og="http://ogp.me/ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:schema="http://schema.org/" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" version="2.0" xml:base="https://drupal-coder.ru/">
+  <channel>
+    <title>контекстная реклама</title>
+    <link>https://drupal-coder.ru/</link>
+    <description/>
+    <language>ru</language>
+    
+    <item>
+  <title>Кейс по повышению качества контекстной рекламы</title>
+  <link>https://drupal-coder.ru/blog/keys-po-povysheniyu-kachestva-kontekstnoy-reklamy</link>
+  <description>
+&lt;span&gt;Кейс по повышению качества контекстной рекламы&lt;/span&gt;
+
+&lt;span&gt;&lt;span lang="" about="https://drupal-coder.ru/user/65" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Никита&lt;/span&gt;&lt;/span&gt;
+
+&lt;span&gt;вт, 11/14/2017 - 13:39&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2019-10/trading_graph.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;h2&gt;&lt;strong&gt;Цели:&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;К нам в управление поступили готовые рекламные кампании клиента, настроенные другим агентством. Цель рекламных кампаний — привлечение целевого трафика на корпоративный сайт-витрину элитных дверей.&lt;br /&gt;
+Кампании содержали более 1000 объявлений для нескольких городов России.&lt;br /&gt;
+Была поставлена задача снижения ежемесячного бюджета и повышение эффективности рекламы.&lt;br /&gt;
+Мы проанализировали рекламные кампании, целевую аудиторию и внесли масштабные изменения.&lt;/p&gt;
+
+&lt;h2&gt;&lt;strong&gt;Значения до оптимизации:&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;h3&gt;&lt;strong&gt;AdWords:&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;ol&gt;&lt;li&gt;Отказы из рекламы на сайте составляли 38.7% за период с 1 мая по 14 августа 2017.&lt;/li&gt;
+	&lt;li&gt;До оптимизации значение CTR объявлений колебалось в районе 45%, при этом были снижения и рост показателей до 32 и 65% соответственно.&lt;/li&gt;
+	&lt;li&gt;Процент п&lt;span&gt;оказов был в районе 30%. &lt;/span&gt;&lt;/li&gt;
+	&lt;li&gt;Средняя цена клика — 11 рублей.&lt;/li&gt;
+	&lt;li&gt;Минимальная стоимость рекламы в неделю была от 6 500 до 14 000 рублей.&lt;/li&gt;
+&lt;/ol&gt;&lt;h3&gt;&lt;strong&gt;Я.Директ:&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;ol&gt;&lt;li&gt;Средний показатель отказов Яндекс.Директ с 1 мая по 14 августа 2017 составил 37.5%&lt;/li&gt;
+	&lt;li&gt;До оптимизации значение CTR на поиске составляло 7.5%, на площадках поисковых партнёров Яндекса составлял 0.2%&lt;img alt="Показатели Я.Директ до изменений" data-entity-type="file" data-entity-uuid="4c6d278a-0c09-4f7f-a049-28bd03035eb1" src="https://drupal-coder.ru/sites/default/files/inline-images/directOld.png" class="align-center" width="600" height="377" loading="lazy" /&gt;&lt;p&gt; &lt;/p&gt;
+	&lt;/li&gt;
+	&lt;li&gt;Стоимость клика - 22 рубля на поиске, 11 рублей на площадках.&lt;/li&gt;
+	&lt;li&gt;Стоимость рекламы в неделю равнялась 10 000 рублей.&lt;/li&gt;
+&lt;/ol&gt;&lt;h2&gt;&lt;strong&gt;Работы, которые были проведены:&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;ol&gt;&lt;li&gt;Удалены нецелевые ключевые слова. Кампании содержали большое количество ключевых слов со всевозможным вхождением слова «двери», но не приносящих целевых клиентов сайту: какие двери, смотреть дверь, цвет дверей, новые двери и т. д.&lt;/li&gt;
+	&lt;li&gt;Изменена устаревшая структура 1 ключевое слово - одно объявление. Такая стратегия не является выигрышной, учитывая статус «Мало показов» в Яндекс.Директе.&lt;/li&gt;
+	&lt;li&gt;Добавлены расширения «Цены» и «Адрес» для более релевантного показа. Расширение с ценой, сразу же указывает на элитный сегмент и отсекает клики эконом-покупателей.&lt;/li&gt;
+	&lt;li&gt;Было добавлено множество минус-слов для отсечения пользователей, которые используют информационные запросы и ищут информацию о дверях (как, какие, куда, установить, для дачи и т.д.)&lt;/li&gt;
+	&lt;li&gt;Для того, чтобы поднять рейтинги групп объявлений, в некоторые объявления были добавлены дополнительные ключевые слова для большего соответствия поисковым запросам и текстам объявлений.&lt;/li&gt;
+	&lt;li&gt;Были изменены тексты объявлений на более удачные.&lt;/li&gt;
+	&lt;li&gt;Для Я.Директа был настроен биддер, который отслеживает изменения в аукционах и соответственно изменяет ставки, чтобы оставаться на верхних позициях в рекламных объявлениях.&lt;/li&gt;
+&lt;/ol&gt;&lt;h2&gt;&lt;strong&gt;Результаты:&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;ol&gt;&lt;li&gt;Общий показатель отказов посетителей, пришедших из рекламы, уменьшился с 37% до 21%.
+	&lt;p&gt;В AdWords мы уменьшили количество отказов на 30% от предыдущего показателя. Значение отказов снизилось с 38.7% до 28.2%. В Я.Директе получилось сократить отказы с 37.5% до 20%.&lt;br /&gt;
+	 &lt;/p&gt;
+	&lt;img alt="Показатель отказов" data-entity-type="file" data-entity-uuid="20f0b303-cc15-4f48-87fd-49db3046f64f" src="https://drupal-coder.ru/sites/default/files/inline-images/1case.jpg" class="align-center" width="600" height="183" loading="lazy" /&gt;&lt;/li&gt;
+	&lt;li&gt;После оптимизации среднее значение CTR на на площадках поисковых партнёров Яндекса увеличилось в 3 раза и составило 0.7%, на поиске увеличилась до 8,5%.&lt;img alt="Таблица по поисковым площадкам" data-entity-type="file" data-entity-uuid="5373d88c-757c-493e-b758-8eb7ab820773" src="https://drupal-coder.ru/sites/default/files/inline-images/2case.jpg" class="align-center" width="600" height="79" loading="lazy" /&gt;&lt;p&gt; &lt;/p&gt;
+	&lt;/li&gt;
+	&lt;li&gt;Цена клика в Я.Директе на площадках снизилась с 11 до 9 рублей. Цена клика в Я.Директе на поиске выросла на 1 рубль и составила 23,5 рублей.&lt;br /&gt;
+	В AdWords цену клика пришлось увеличить. После значительного сокращения ключевых слов, мы получили недостаточный охват аудитории. А так как изначально он был только 30%, то чтобы его повысить, увеличили среднюю цену клика на 5 рублей до 16 рублей. Теперь объявления в AdWords показываются в более чем в 80% случаев.&lt;img alt="Процент полученных показов" data-entity-type="file" data-entity-uuid="094ca82d-a38c-4f15-9bbf-8c1a6ab904c1" src="https://drupal-coder.ru/sites/default/files/inline-images/3case.jpg" class="align-center" width="600" height="243" loading="lazy" /&gt;&lt;p&gt; &lt;/p&gt;
+	&lt;/li&gt;
+	&lt;li&gt;Глубина просмотра на сайте для посетителей из рекламы возросла на 35% и достигла среднего показателя 2х страниц, после перехода по рекламному объявлению:&lt;img alt="Показатель глубины просмотров" data-entity-type="file" data-entity-uuid="477559dd-48ff-44f0-9050-47a0d4b8afdb" src="https://drupal-coder.ru/sites/default/files/inline-images/4case.jpg" class="align-center" width="600" height="177" loading="lazy" /&gt;&lt;p&gt; &lt;/p&gt;
+	&lt;/li&gt;
+	&lt;li&gt;Среднее время, проведенное на сайте, для посетителей из Google AdWords и Я.Директа увеличилось в 2 раза, с 0:40 до 1:20, что вместе с другими показателями подтверждает, что мы попали в целевой сегмент.&lt;img alt="Показатель времени, проводимого пользователем на сайте" data-entity-type="file" data-entity-uuid="66ba3ba4-751b-490b-a580-17ba12bfccc1" src="https://drupal-coder.ru/sites/default/files/inline-images/5case.jpg" class="align-center" width="600" height="172" loading="lazy" /&gt;&lt;p&gt; &lt;/p&gt;
+	&lt;/li&gt;
+	&lt;li&gt;Стоимость рекламной кампании в AdWords после всех изменений составляет 2500 в неделю, в Яндекс Директе после завершения настройки стоимость рекламной кампании составляет 2000 рублей в неделю.&lt;/li&gt;
+&lt;/ol&gt;&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/kontekstnaa-reklama" hreflang="ru"&gt;контекстная реклама&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/adirekt" hreflang="ru"&gt;Я.Директ&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/google-adwords" hreflang="ru"&gt;Google Adwords&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/analytics" hreflang="ru"&gt;Analytics&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/ametrika" hreflang="ru"&gt;Я.Метрика&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=130&amp;2=comment&amp;3=comment" token="NWcf-8TCY2KsWPDJQiStJOK_g5y-dKRde_qUH0SRpVA"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/my-na-seminare-ot-google-reklama-v-google-adwords" hreflang="ru"&gt;Мы на семинаре от Google "Реклама в Google AdWords"&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Tue, 14 Nov 2017 13:39:42 +0000</pubDate>
+    <dc:creator>Никита</dc:creator>
+    <guid isPermaLink="false">130 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/keys-po-povysheniyu-kachestva-kontekstnoy-reklamy#comments</comments>
+    </item>
+
+  </channel>
+</rss>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:og="http://ogp.me/ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:schema="http://schema.org/" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" version="2.0" xml:base="https://drupal-coder.ru/">
+  <channel>
+    <title>jQuery</title>
+    <link>https://drupal-coder.ru/</link>
+    <description/>
+    <language>ru</language>
+    
+    <item>
+  <title>Использование новых версий jQuery в старых версиях Drupal</title>
+  <link>https://drupal-coder.ru/blog/jquery-v-drupal</link>
+  <description>
+&lt;span&gt;Использование новых версий jQuery в старых версиях Drupal&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/42" lang="" about="https://drupal-coder.ru/user/42" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Андрей Тымчук&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;вт, 07/25/2017 - 16:46&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;При поддержке старых версий Drupal (в данной статье речь идёт о Drupal 6 и Drupal 7) часто возникает необходимость использования актуальной (современной) версии jQuery. И если в случае с самописными скриптами можно обойтись версией из ядра, то в случае использования готового jQuery плагина этот вариант может не подойти. К примеру, в Drupal 6 вы не сможете использовать такой популярный плагин, как &lt;a href="https://harvesthq.github.io/chosen"&gt;Chosen&lt;/a&gt;, поскольку он просто не заработает на том jQuery, что есть в ядре. К слову о версиях: из "коробки" Drupal 7 предоставляет jQuery версии 1.4.4, а Drupal 6 - версии 1.2.6. Просто взять и обновить jQuery в ядре Drupal нельзя по двум причинам. Во-первых, это вездесущие проблемы с дальнейшим обновлением ядра. Во-вторых, скрипты Drupal и контрибных модулей не будут работать с новой версией. Безусловно можно использовать модуль &lt;a href="https://www.drupal.org/project/jquery_update"&gt;jQuery Update&lt;/a&gt;. Он решает большинство проблем с jQuery в Drupal 7, но для Drupal 6 в настоящее время практически бесполезен -  Chosen не заработает даже с этим модулем. Можно, конечно, использовать старые (совсем старые) версии нужных плагинов или самому реализовать их функционал, но это никому не нужный труд. К счастью, есть и другие варианты решения вышеописанной проблемы. Об одном из таких решений далее и пойдёт речь.&lt;/p&gt;
+
+&lt;p&gt;Первым делом стоит отметить, что jQuery позволяет запускать на странице другие версии jQuery. Достигается это засчёт использования функции &lt;em&gt;&lt;a href="https://api.jquery.com/jquery.noconflict"&gt;noConflict()&lt;/a&gt;&lt;/em&gt;. На её основе построена логика работы модуля &lt;a href="https://www.drupal.org/project/jqmulti"&gt;jQuery Multi&lt;/a&gt;. Код "обработки" новой версии jQuery находится в файле &lt;em&gt;js/switch.js&lt;/em&gt; относительно директории модуля.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="javascript geshifilter-javascript" style="font-family:monospace;"&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000066; font-weight: bold;"&gt;function&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;$&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #006600; font-style: italic;"&gt;// Put together the name of the new jQuery variable.&lt;/span&gt;
+  &lt;span style="color: #000066; font-weight: bold;"&gt;var&lt;/span&gt; version &lt;span style="color: #339933;"&gt;=&lt;/span&gt; $&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;.&lt;span style="color: #660066;"&gt;jquery&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #000066; font-weight: bold;"&gt;var&lt;/span&gt; versionName &lt;span style="color: #339933;"&gt;=&lt;/span&gt; version.&lt;span style="color: #660066;"&gt;replace&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009966; font-style: italic;"&gt;/\./g&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #3366CC;"&gt;''&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #006600; font-style: italic;"&gt;// Save the new version of jQuery globally and restore Drupal version.&lt;/span&gt;
+  window&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #3366CC;"&gt;'jq'&lt;/span&gt; &lt;span style="color: #339933;"&gt;+&lt;/span&gt; versionName&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; jQuery.&lt;span style="color: #660066;"&gt;noConflict&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #003366; font-weight: bold;"&gt;true&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;jQuery&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Как видно из кода - новая версия jQuery будет доступна в переменной &lt;em&gt;jq{%version}&lt;/em&gt;, старая версия будет по-прежнему доступна в переменной &lt;em&gt;jQuery&lt;/em&gt; или её синониме &lt;em&gt;$&lt;/em&gt;. Например, при использовании версии 3.1.1, переменная будет &lt;em&gt;jq311&lt;/em&gt;. С этого момента уже можно работать с новой версией (скрипты, использующие старую версию не сломаются), однако, это не совсем удобно, так как по общеиспользуемому синониму &lt;em&gt;$&lt;/em&gt; будет доступна старая версия, что не подходит для использования сторонних плагинов. Также подобный подход отразится на поддержке и переносимости кода.&lt;/p&gt;
+
+&lt;p&gt;Следующими немаловажными достоинствами модуля &lt;a href="https://www.drupal.org/project/jqmulti"&gt;jQuery Multi&lt;/a&gt; является интеграция с модулем &lt;a href="https://www.drupal.org/project/libraries"&gt;Libraries API&lt;/a&gt; и возможность определения скриптов, которые должны отрабатывать с новой версией jQuery на основе хуков &lt;em&gt;hook_jqmulti_files()&lt;/em&gt; и &lt;em&gt;hook_jqmulti_libraries()&lt;/em&gt;. Библиотеки, которые расположены в &lt;em&gt;sites/all/libraries&lt;/em&gt; модуль определяет самостоятельно и ими можно управлять на странице настроек модуля.&lt;/p&gt;
+
+&lt;p&gt;Эти скрипты будут загружены после загрузки новой версии jQuery, но до файла switch.js, что позволит выполнить код в контексте новой версии. Это уже позволяет использовать сторонние плагины без изменения их кода (Chosen заработает). Стоит отметить, что данный подход не решает проблему с написанием ряда callback-функций.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="javascript geshifilter-javascript" style="font-family:monospace;"&gt;Drupal.&lt;span style="color: #660066;"&gt;behaviors&lt;/span&gt;.&lt;span style="color: #660066;"&gt;mySiteExampleBehavior&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000066; font-weight: bold;"&gt;function&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;context&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #006600; font-style: italic;"&gt;// Custom behavior logic.&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Внутри функции &lt;em&gt;mySiteExampleBehavior()&lt;/em&gt; использование синонима &lt;em&gt;$&lt;/em&gt; приведёт к использованию старой версии jQuery, даже если скрипт будет загружен до файла switch.js. Для использования нового jQuery после кода switch.js всё ещё нужно обращаться к переменной &lt;em&gt;jq311&lt;/em&gt;, что неудобно. Для решения этой проблемы напишем скрипт в одном из самописных модулей:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="javascript geshifilter-javascript" style="font-family:monospace;"&gt;Drupal.&lt;span style="color: #660066;"&gt;mySiteExample&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; Drupal.&lt;span style="color: #660066;"&gt;mySiteExample&lt;/span&gt; &lt;span style="color: #339933;"&gt;||&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000066; font-weight: bold;"&gt;function&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;$&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #006600; font-style: italic;"&gt;// Set additional jQuery variable name globally.&lt;/span&gt;
+  &lt;span style="color: #000066; font-weight: bold;"&gt;var&lt;/span&gt; version &lt;span style="color: #339933;"&gt;=&lt;/span&gt; $&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;.&lt;span style="color: #660066;"&gt;jquery&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #000066; font-weight: bold;"&gt;var&lt;/span&gt; versionName &lt;span style="color: #339933;"&gt;=&lt;/span&gt; version.&lt;span style="color: #660066;"&gt;replace&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009966; font-style: italic;"&gt;/\./g&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #3366CC;"&gt;''&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  Drupal.&lt;span style="color: #660066;"&gt;mySiteExample&lt;/span&gt;.&lt;span style="color: #660066;"&gt;jQueryVariable&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #3366CC;"&gt;'jq'&lt;/span&gt; &lt;span style="color: #339933;"&gt;+&lt;/span&gt; versionName&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;jQuery&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;В коде модуля реализуем хук &lt;em&gt;hook_jqmulti_files()&lt;/em&gt; и выведем скрипт на &lt;em&gt;hook_init()&lt;/em&gt;:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #009933; font-style: italic;"&gt;/**
+ * Implements hook_jqmulti_files().
+ */&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; example_jqmulti_files&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #666666; font-style: italic;"&gt;// Set files to be loaded with jQuery Multi's jQuery library.&lt;/span&gt;
+  &lt;span style="color: #b1b100;"&gt;return&lt;/span&gt; &lt;span style="color: #990000;"&gt;array&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;
+    drupal_get_path&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'module'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'example'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #339933;"&gt;.&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'/js/example.js'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+ 
+&lt;span style="color: #009933; font-style: italic;"&gt;/**
+ * Implements hook_init().
+ */&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; example_init&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  drupal_add_js&lt;span style="color: #009900;"&gt;(&lt;/span&gt;drupal_get_path&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'module'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'example'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #339933;"&gt;.&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'/js/example.js'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Код скрипта example.js будет выполнен в контексте новой версии jQuery, а название переменной, по которой можно будет получить к ней доступ, будет сохранено в &lt;em&gt;Drupal.mySiteExample.jQueryVariable&lt;/em&gt;. Для использования новой версии jQuery по синониму &lt;em&gt;$&lt;/em&gt; достаточно добавить следующую обёртку в скрипте: &lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="javascript geshifilter-javascript" style="font-family:monospace;"&gt;Drupal.&lt;span style="color: #660066;"&gt;mySiteExample&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; Drupal.&lt;span style="color: #660066;"&gt;mySiteExample&lt;/span&gt; &lt;span style="color: #339933;"&gt;||&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+Drupal.&lt;span style="color: #660066;"&gt;mySiteExample&lt;/span&gt;.&lt;span style="color: #660066;"&gt;jQueryVariable&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; Drupal.&lt;span style="color: #660066;"&gt;mySiteExample&lt;/span&gt;.&lt;span style="color: #660066;"&gt;jQueryVariable&lt;/span&gt; &lt;span style="color: #339933;"&gt;||&lt;/span&gt; &lt;span style="color: #3366CC;"&gt;'jQuery'&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000066; font-weight: bold;"&gt;function&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;$&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+ 
+  &lt;span style="color: #006600; font-style: italic;"&gt;// Your code here.&lt;/span&gt;
+ 
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;window&lt;span style="color: #009900;"&gt;[&lt;/span&gt;Drupal.&lt;span style="color: #660066;"&gt;mySiteExample&lt;/span&gt;.&lt;span style="color: #660066;"&gt;jQueryVariable&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Переменная &lt;em&gt;$ &lt;/em&gt;внутри вышеуказанной функции будет относиться к новой версии jQuery, а вне функции - к jQuery из ядра Drupal. Подробно почитать о вариантах использования новых версий jQuery в Drupal можно на &lt;a href="https://www.drupal.org/docs/7/theming/using-newer-versions-of-jquery"&gt;странице официальной документации&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/jquery" hreflang="ru"&gt;jQuery&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=115&amp;2=comment&amp;3=comment" token="gFN8jhSbSeHPGEnQ_K51Zbf2O_Ey2QhbB1_dHD-jzos"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;</description>
+  <pubDate>Tue, 25 Jul 2017 16:46:29 +0000</pubDate>
+    <dc:creator>Андрей Тымчук</dc:creator>
+    <guid isPermaLink="false">115 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/jquery-v-drupal#comments</comments>
+    </item>
+
+  </channel>
+</rss>

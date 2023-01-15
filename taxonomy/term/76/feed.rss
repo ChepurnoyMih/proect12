@@ -1,0 +1,1279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:og="http://ogp.me/ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:schema="http://schema.org/" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" version="2.0" xml:base="https://drupal-coder.ru/">
+  <channel>
+    <title>Drupal 7</title>
+    <link>https://drupal-coder.ru/</link>
+    <description/>
+    <language>ru</language>
+    
+    <item>
+  <title>Ускорение работы с удаленными сайтами при локальной разработке</title>
+  <link>https://drupal-coder.ru/blog/uskorenie-raboty-s-udalennymi-saytami-pri-lokalnoy-razrabotke</link>
+  <description>
+&lt;span&gt;Ускорение работы с удаленными сайтами при локальной разработке&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/64" lang="" about="https://drupal-coder.ru/user/64" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Алексей Зубенко&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;вт, 08/31/2021 - 13:25&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;В работе программиста много времени отнимают процессы, к программированию относящиеся лишь косвенно. Лично у меня каждый новый, либо надолго забытый проект начинается с продолжительного разворачивания локального окружения, которое состоит не только в клонировании гит-репозитория на локальный компьютер, но также копировании не содержащихся в гите статичных файлов и базы данных. Со временем актуальность локального окружения падает, и часть процесса приходится повторять заново. Еще несколько лет назад я неизменно заходил на сервер, делал дамп БД и архив файлов, которые выкачивал и разворачивал локально. Сейчас появились некоторые инструменты, которые хоть и требуют определенной начальной настройки, но в дальнейшем сильно упрощают жизнь.&lt;/p&gt;
+
+&lt;h3&gt;1. Подключение к удаленному серверу.&lt;/h3&gt;
+
+&lt;p&gt;Итак, вы получили доступы к серверу, на котором работает сайт. Первым делом надо озаботиться тем, чтобы раз и навсегда забыть пароль к нему и осуществлять доступ исключительно с помощью SSH-ключа. Поэтому заходим к себе в каталог ~/.ssh и смотрим ранее сгенерированные ключи. Там их, как водится, одна или более пар - закрытый и открытый ключ в каждой. Всего скорее вы найдете что-то вроде &lt;code&gt;id_rsa&lt;/code&gt; и &lt;code&gt;id_rsa.pub&lt;/code&gt;. Если вы ничего не увидели, то ключ можно сгенерировать командой ssh-keygen. Вам надо будет выбрать название для файла ключа и, если вы поборник безопасности, придумать для него пароль (что я бы не рекомендовал делать в целях упрощения пользования им).&lt;/p&gt;
+
+&lt;p&gt;Итак, теперь у нас есть ключ, и нам надо закинуть его публичную часть на сервер, а точнее - дописать содержимое ключа в файл &lt;code&gt;~/.ssh/authorized_keys&lt;/code&gt;. Публичную - это ту, что имеет расширение &lt;code&gt;.pub&lt;/code&gt;, всё, что без него, - это ваша личная собственность, и за пределы вашего компьютера уходить не должно. Раньше я делал это через файл-менеджер, однако иногда права доступа настроены таким образом, что сделать это проблематично. Безотказный вариант - использовать специальную команду в консоли. Пусть наш логин на сервере будет &lt;code&gt;username&lt;/code&gt;, а домен - &lt;code&gt;servername.ru&lt;/code&gt;, тогда команда будет выглядеть следующим образом:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;span class="geshifilter"&gt;&lt;code class="bash geshifilter-bash"&gt;ssh-copy-id &lt;span style="color: #660033;"&gt;-i&lt;/span&gt; ~&lt;span style="color: #000000; font-weight: bold;"&gt;/&lt;/span&gt;.ssh&lt;span style="color: #000000; font-weight: bold;"&gt;/&lt;/span&gt;id_rsa.pub username&lt;span style="color: #000000; font-weight: bold;"&gt;@&lt;/span&gt;servername.ru&lt;/code&gt;&lt;/span&gt;&lt;/pre&gt;
+
+&lt;p&gt;Если вы подключаетесь по нестандартному порту, добавьте в конце &lt;code&gt;--p[номер порта]&lt;/code&gt; (например, &lt;code&gt;-p22222&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Меняете имя файла ключа на свой, а логин и url сервера на нужные, отправляете и, если все верно, единожды вводите пароль. Все - ключ скопирован, и вы можете проверить, как всё работает, попытавшись подключиться: &lt;code&gt;ssh username@servername.ru&lt;code&gt;.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Про пароль теперь можно забыть, что уже хорошо, но запоминать имя пользователя и домен (а то и ip-адрес) тоже не очень бы хотелось, к тому же через пару лет работы таких записей соберется не один десяток и хранить это в голове или где бы то ни было станет невыносимо.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Значительно проще было бы запоминать короткий алиас подключения, а про остальное забыть, как про страшный сон. Например, &lt;em&gt;username@servername.ru&lt;/em&gt; обозвать &lt;em&gt;srv&lt;/em&gt;. И это возможно - заходим в файл &lt;code&gt;~/.ssh/config&lt;/code&gt; (если нет, то создаем его) и добавляем в него следующие строчки:&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;&lt;code&gt;
+&lt;code language="bash"&gt;
+host srv
+hostname servername.ru  
+user username
+port 22222 # это только если порт нестандартный
+&lt;/code&gt;&lt;/code&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Сохраняем, выполняем в консоли &lt;code&gt;ssh srv&lt;/code&gt; и - профит! Есть и иные параметры подключения, но они далеко за пределами обычной работы и всего скорее после краткого гугления вы найдете свой особенный вариант настройки, если стандартный не подойдет.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Главное здесь - называть подключения так, чтобы они были максимально коротки, но при этом чётко ассоциировались с проектом. Наверняка у вас будут подключения к рабочему сайту и его варианту для разработки. Какой бы домен/поддомен не имел последний, наиболее логичным будет назвать его, добавив к алиасу основного подключения суффикс &lt;code&gt;_dev&lt;/code&gt;. Так, если у нас &lt;code&gt;srv&lt;/code&gt; - это алиас для прода, то к деву будет логично подключаться через &lt;code&gt;srv_dev&lt;/code&gt;. Адреса девов меняются, а краткое слово "дев" всегда будет однозначно характеризовать нам то, что... что оно &lt;a href="https://drupal-coder.ru/sites/default/files/images/klichko.jpg"&gt;должно характеризовать&lt;/a&gt;).&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3&gt;&lt;code&gt;&lt;code&gt;2. Настройка удаленных алиасов для консольной утилиты drush&lt;/code&gt;&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Drupal поддерживает мультисайтинг. То есть на одной кодовой базе может работать более одного сайта. Для обеспечения возможности работы с несколькими сайтами на уровне утилиты drush были внедрены алиасы сайтов. В режиме мультисайтинга они позволяют из одного рабочего каталога выполнять команды для разных сайтов, в этом каталоге работающих. Но помимо этого, мы можем также указывать среди алиасов удаленные сайты, что открывает нам дополнительные возможности.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;В версиях Drupal 7 и Drupal 8/9 настройка осуществляется немного по-разному, что приводит в особенностям при разворачивании локального окружения.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4&gt;&lt;code&gt;&lt;code&gt;Настройка алиасов drush Для Drupal 7&lt;/code&gt;&lt;/code&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Алиасы сайтов для Drupal 7 настраиваются глобально для текущего пользователя ОС и по сути не имеют отношения к конкретному проекту, так как описываются за его пределами.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;В папке пользователя создаем папку .drush, и в нем - файл aliases.drushrc.php примерно со следующим содержимым:&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;&lt;code&gt;
+&lt;code language="php"&gt;
+&lt;?php
+
+$aliases['prod'] = array(
+  'remote-host' =&gt; 'servername.ru', // адрес для подключения
+  'remote-user' =&gt; 'username', // имя пользователя
+  'root' =&gt; '/home/username/web/servername.ru/html', // каталог установки сайта
+  'uri' =&gt; 'https://servername.ru', // URL сайта
+  'ssh-options' =&gt; '-p 22222' // дополнительные опции для подключения, например, порт
+);
+&lt;/code&gt;
+&lt;/code&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Это вариант для идеальных условий, который, тем не менее, срабатывает для большинства случаев. Иногда требуются дополнительные параметры, как, например, пути к каталогу установки drush, к статичным файлам и т.п. Пример файла настроек алиасов со всеми возможными значениями можно посмотреть &lt;a href="https://github.com/drush-ops/drush/blob/8.x/examples/example.aliases.drushrc.php"&gt;здесь&lt;/a&gt;.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Казалось бы, всё легко, но если локально вы работаете с docker-окружением (а это наверняка так), то вам надо пробросить этот файл в контейнер. Я пользуюсь &lt;a href="https://lando.dev/"&gt;Lando&lt;/a&gt; и для проброса использую следующую &lt;a href="https://docs.lando.dev/config/drupal7.html#aliases"&gt;инструкцию&lt;/a&gt;. Аналогично можно сделать для &lt;a href="https://docs.docksal.io/tools/drush/#site-aliases"&gt;docksal&lt;/a&gt;. Адепты docker4drupal, думаю, разберутся и без дополнительных пояснений - им в конфигах копаться не впервой.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4&gt;&lt;code&gt;&lt;code&gt;Настройка алиасов drush Для Drupal 8&lt;/code&gt;&lt;/code&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Здесь всё стало логичнее: конфигурация алиасов - это уже часть проекта. В каталоге проекта создается папка drush/sites, и в ней - файл self.sites.yml с соответствующим содержимым:&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;&lt;code&gt;
+&lt;code language="yaml"&gt;
+prod:
+  host: servername.ru
+  user: username
+  root: /home/username/web/servername.ru/html
+  uri: https://servername.ru
+&lt;/code&gt;&lt;/code&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Полный пример файла, как всегда - в &lt;a href="https://github.com/drush-ops/drush/blob/master/examples/example.site.yml"&gt;репозитории&lt;/a&gt; проекта. &lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3&gt;&lt;br /&gt;&lt;code&gt;&lt;code&gt;3. Использование алиасов drush&lt;/code&gt;&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Итак, мы сконфигурировали алиасы сайтов для drush и теперь можем попробовать их в деле. Сбрасываем кэш drush, выполнив &lt;code&gt;drush cc drush&lt;/code&gt; (если вы используете docker, предварительно зайдите в контейнер), и пытаемся получить информацию от удаленного сайта &lt;code&gt;drush @prod st&lt;/code&gt;. В ответ мы должны увидеть то, что обычно видим при выполнении привычного &lt;span class="geshifilter"&gt;&lt;code class="bash geshifilter-bash"&gt;drush st&lt;/code&gt;&lt;/span&gt;, но уже в контексте удаленного сайта. Также пробуем получить ссылку для авторизации (вы ведь уже забыли пароль?) - &lt;code&gt;drush @prod uli&lt;/code&gt;. Работает? Переходим к самому интересному.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Пока вы были в отпуске, сайт ушёл далеко вперёд? Пора актуализировать БД. Сделаем это по-модному. Для начала раз и навсегда запоминаем, что в стандартной односайтовой установке текущий сайт обозначается алиасом &lt;code&gt;@self&lt;/code&gt;. Теперь выполняем&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;&lt;code&gt;&lt;code&gt;drush sql-sync @prod @self&lt;/code&gt;&lt;/code&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Если нам повезёт, то мы увидим процесс авторизации, создания дампа на удаленном сайте, скачивания его и разворачивания на локальной установке. Если этого не произошло - что-то в вашей конфигурации алиаса не так и всего скорее придётся немного погуглить. Часто проблема возникает, если в настройках не указаны пути к папке и к исполняемому файлу drush.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Мы актуализировали БД и обнаружили, что все последние новости с пустыми картинками - нет новых файлов. Не беда, выполняем&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;&lt;code&gt;&lt;code&gt;drush rsync @prod:%files @self:%files&lt;/code&gt;&lt;/code&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Как вы поняли, &lt;code&gt;%files&lt;/code&gt; - это переменная, в которой хранится путь к каталогу &lt;code&gt;public://&lt;/code&gt; удаленного сайта (который обычно &lt;code&gt;/sites/default/files/&lt;/code&gt;). Порой эту переменную надо особо определить, о чём выше, но обычно всё происходит без лишних сложностей. Впрочем, вместо &lt;code&gt;%files&lt;/code&gt; может быть любой каталог сайта.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Теперь о страшном. С самого начала я думал, что произойдёт, если случайно перепутать алиасы местами и запустить &lt;code&gt;drush sql-sync @self @prod&lt;/code&gt;. И вот как-то я попробовал это сделать. Ничего не вышло, Drush отказал мне. Не знаю, сделано ли это ограничение для алиаса @prod, или вообще нельзя выкатить свой дамп на удаленную БД, но по крайней мере в этой фобии можно себя успокоить.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3&gt;&lt;code&gt;&lt;code&gt;4. Хитрости при дампе БД&lt;/code&gt;&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Порой нам встречаются сайты, база данных которых разрослась до многих гигабайт, и скачивание и разворачивание такого гиганта занимает много ценного рабочего (или не очень) времени. Причём значительную часть этого объема занимают таблицы, где хранится кэш.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Решаем вопрос следующим образом (рецепт для Drupal 7). В папке &lt;code&gt;.drush&lt;/code&gt; на сайте создаем файл &lt;code&gt;.drushrc.php&lt;/code&gt; (если его там еще нет), где прописываем список таблиц, которые надо пропускать при создании дампа. Например:&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;&lt;code&gt;
+&lt;code language="php"&gt;
+&lt;?php
+
+$options['structure-tables']['common'] = array('cache', 'cache_admin_menu', 'cache_block', 'cache_bootstrap', 'cache_commerce_shipping_rates', 'cache_entity_comment', 'cache_entity_commerce_customer_profile', 'cache_entity_commerce_line_item', 'cache_entity_commerce_order', 'cache_entity_commerce_product', 'cache_entity_field_collection_item', 'cache_entity_file', 'cache_entity_node', 'cache_entity_taxonomy_term', 'cache_entity_taxonomy_vocabulary', 'cache_entity_user', 'cache_features', 'cache_feeds_http', 'cache_field', 'cache_filter', 'cache_form', 'cache_hacked', 'cache_image', 'cache_libraries', 'cache_menu', 'cache_metatag', 'cache_page', 'cache_path', 'cache_rules', 'cache_session_cache', 'cache_token', 'cache_ultimate_cron', 'cache_update', 'cache_variable', 'cache_views', 'cache_views_data');
+&lt;/code&gt;
+&lt;/code&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Впрочем, всего скорее, сейчас уже должна быть доступна запись с wildcard:&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;&lt;code&gt;
+&lt;code language="php"&gt;
+$options['structure-tables']['common'] = array('cache', 'cache_*');&lt;/code&gt;&lt;/code&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Теперь при синхронизации (да и просто при создании дампа) добавляем ссылку на этот список: &lt;code&gt;--structure-tables-key=common&lt;/code&gt;, например:&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;&lt;code&gt;&lt;code&gt;
+drush sql-sync @prod_ru @ru --structure-tables-key=common&lt;/code&gt;&lt;/code&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;&lt;code&gt;&lt;code&gt;Заключение&lt;/code&gt;&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Это лишь небольшая часть ухищрений, к которым можно прибегнуть для автоматизации ежедневной рутины. Порой может показаться, что для малых и нерегулярных проектов игра не стоит свеч и потерянного на настройку времени, но если проект большой, и вы часто к нему обращаетесь, в будущем это сэкономит вам много нервов и к тому же подарит новые навыки, которые в нашем деле никогда не бывают лишними.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/programmirovanie" hreflang="ru"&gt;Программирование&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/performance" hreflang="ru"&gt;performance&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-7" hreflang="ru"&gt;Drupal 7&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=290&amp;2=comment&amp;3=comment" token="s_rgntqZMesJQZpzsucmqiXzu5rAh9JFWG31guqpjAk"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-7-uskorenie-vremeni-generacii-stranic-internet-magazina-na-32" hreflang="ru"&gt;Drupal 7: ускорение времени генерации страниц интернет-магазина на 32%&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/nastroyka-keshirovaniya-dannykh-apgreyd-servera-uskorenie-raboty-sayta-v-30-raz" hreflang="ru"&gt;Настройка кэширования данных. Апгрейд сервера. Ускорение работы сайта в 30 раз! &lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Tue, 31 Aug 2021 13:25:22 +0000</pubDate>
+    <dc:creator>Алексей Зубенко</dc:creator>
+    <guid isPermaLink="false">290 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>Правильные ответы сервера для ускорения индексации сайта</title>
+  <link>https://drupal-coder.ru/blog/pravilnye-otvety-servera-dlya-uskoreniya-indeksacii-sayta</link>
+  <description>
+&lt;span&gt;Правильные ответы сервера для ускорения индексации сайта&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/93" lang="" about="https://drupal-coder.ru/user/93" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Геворг Мкртчян&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;ср, 10/14/2020 - 06:50&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Клиенты часто обращаются к нам после проведения SEO аудита за оптимизацией сайта на Drupal. Список рекомендаций практически всегда один и тот же, за исключением индивидуальных особенностей поддерживаемого проекта. Проанализировав статистику, заметили, что хоть нашу проблему и включают в отчет, заказчики и исполнители чаще всего игнорируют ее, потому что информации и опыта оказывается слишком мало. Это проблема - правильные заголовки ответа от сервера. Выдача корректных заголовков позволяет ускорить индексацию новых и измененных страниц сайта в несколько раз. &lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Получен код 304 Not Modified. Если страница не изменилась с момента последнего обращения робота, рекомендуется выдавать этот код. Это ускорит индексирование и уменьшит трафик.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Источник: &lt;/em&gt;&lt;a href="https://yandex.ua/support/webmaster/error-dictionary/http-codes.html#http-codes"&gt;&lt;em&gt;https://yandex.ua/support/webmaster/error-dictionary/http-codes.html#http-codes&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Для начала разберемся, что это за заголовок ответа сервера и за что он отвечает. &lt;/p&gt;
+
+&lt;p&gt;Когда пользователь заходит на определенный сайт в браузере, при отсутствии запрета на кеширование со стороны сервера, он сохраняет страницу у себя в кеше. При следующих посещениях браузер запрашивает информацию об актуальности (валидности) сохраненного кеша, и если файлы, сохраненные в кеше актуальны, то повторно с сервера данные не загружаются, а пользователь видит локально сохраненные данные из кеша браузера. &lt;/p&gt;
+
+&lt;p&gt;На сегодняшний день существуют разные механизмы кеширования, о которых можно почитать &lt;a href="https://developer.mozilla.org/ru/docs/Web/HTTP/%D0%9A%D1%8D%D1%88%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5"&gt;тут&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Нас интересует механизм кеширования с временной меткой. При посещении страницы браузер и сервер обмениваются заголовками. Заголовки, которые отправляет браузер на сервер, называют “Заголовки запроса”. А полученные в ответ заголовки от сервера называют “Заголовки ответа”. &lt;/p&gt;
+
+&lt;p&gt;В заголовках ответа должна хранится строка Last-Modified с указанием даты последнего изменения файла. При первом посещении браузер кеширует файл и фиксирует указанную дату в кеше. При последующих посещениях в заголовки запроса добавляется строка If-Modified-since с указанием даты изменения закешированного файла. Сервер проверяет, если файл изменился после указанной даты, то выдает браузеру измененный файл с новой временной меткой Last-Modified. А если файл не изменился с указанной даты - то сервер возвращает заголовок ответа с кодом “304 Not Modified”. В том случае браузер не загружает данные с сервера и выводит файл из кеша.&lt;/p&gt;
+
+&lt;p&gt;Modified”. В том случае браузер не загружает данные с сервера и выводит файл из кеша. &lt;/p&gt;
+
+&lt;p&gt;В 1999 году был принят протокол  HTTP/1.1, в котором появился  более надежный механизм кеширования E-tag. Но проверка валидности кеша по временной метке все еще важна. &lt;/p&gt;
+
+&lt;p&gt;Дело в том, что поисковые системы при проверке сайта не сохраняют данные о метках кеша (E-tag), а также информацию о дате последнего изменения страницы (Last-modified). Но при этом они хранят информацию о последнем посещении страницы ботом. При следующих посещениях бот поисковой системы в качестве заголовка запроса  If-Modified-Since передает дату последнего посещения. И если страница не изменилась после указанной даты (возвращается ответ 304 Not Modified), то бот просто пропускает страницу и продолжает поиск нового и измененного контента по сайту. &lt;/p&gt;
+
+&lt;p&gt;Давайте посчитаем:&lt;/p&gt;
+
+&lt;p&gt;Допустим на сайте есть 10000 товаров. Бот за 1 проход по сайту индексирует не более 1000 страниц (цифра выдуманная, реальные данные про настройки ботов нам не известны). Бот посещает сайт каждые 2 дня, для индексации. И все страницы уже добавлены в индекс. &lt;/p&gt;
+
+&lt;p&gt;Предположим, что после последней индексации у нас изменились цены и скорректированы описания на определенные категории товаров (2000 товаров) и добавились новые товары (500 товаров). &lt;/p&gt;
+
+&lt;p&gt;При некорректной обработке заголовков if-modified since для индексации бот должен пройти по всем страницам сайта. Учитывая вводные данные получится, что для индексации 2000 измененных страниц и 500 новых бот должен просмотреть все страницы сайта. (15000) страниц = 11 посещений сайта = 22 дня. &lt;/p&gt;
+
+&lt;p&gt;Если же заголовки отдаются корректно, то все не измененные страницы будут проигнорированы ботом из-за заголовка 304 Not Modifed. В этом случае для индексации останется 2500 страниц = 3 посещения = 6 дней.&lt;/p&gt;
+
+&lt;p&gt;Получается, что ваши потенциальные покупатели в поисковой выдаче увидят изменения намного раньше, если настроены корректные заголовки. &lt;/p&gt;
+
+&lt;p&gt;В CMS Drupal давно известна проблема с правильными ответами сервера, в частности с корректной выдачей заголовка ответа 304 Not-Modified. Проверка на заголовки кеширования происходит следующим образом: чтобы друпал вернул указанный заголовок, необходимо, чтобы заголовки запросов соответствовали следующим критериям: &lt;/p&gt;
+
+&lt;ol&gt;&lt;li&gt;Есть заголовок If-None-Match и есть заголовок If-Modified-Since;&lt;/li&gt;
+	&lt;li&gt;Значение If-Modified-Since должно быть равно последнему значению Last-modified;&lt;/li&gt;
+	&lt;li&gt;Значение If-None-Match должно быть равно значению E-tag.&lt;/li&gt;
+&lt;/ol&gt;&lt;p&gt;В описанных пунктах есть несколько несоответствий официальной спецификации:&lt;/p&gt;
+
+&lt;ol&gt;&lt;li&gt;В &lt;a href="https://tools.ietf.org/html/rfc7232#section-3.3"&gt;RFC 7232 (Секция 3-3)&lt;/a&gt; говорится, что получатель (сервер)  обязан игнорировать If-Modified-Since, если в запросе есть заголовок If-None-Match. &lt;/li&gt;
+	&lt;li&gt;В &lt;a href="https://tools.ietf.org/html/rfc2616##section-13.3.4"&gt;RFC 2616 (Секция 13.3.4)&lt;/a&gt; говорится, что If-Modified-Since не должен возвращать 304  Not-Modifed, если не все остальные заголовки валидны. &lt;/li&gt;
+&lt;/ol&gt;&lt;p&gt;Учитывая данные 2 пункта можем сделать вывод, что для корректной проверки If-Modified-Since заголовка нужно убедиться, что заголовок If-None-Match отсутствует или валиден, перед тем как проверять If-Modified-Since заголовок. &lt;/p&gt;
+
+&lt;p&gt;Но самая большая проблема указана в пункте 3 “Значение If-None-Match должно быть равно значению E-tag”. Как уже выше говорилось, браузеры сохраняют метку, полученную из заголовка ответа Last-Modified и в будущем передают именно ее для проверки на сервер. Поисковые системы же передают дату последнего посещения, и в 99.99% случаев эта дата не будет совпадать с датой последнего изменения страницы. А это значит, что поисковый бот гарантировано не будет получать ответ “304 Not Modified” на все запросы к Drupal сайту. &lt;/p&gt;
+
+&lt;p&gt;Данная проблема присутствует как в 7 так и в 8 версии Drupal.&lt;/p&gt;
+
+&lt;p&gt;Мы создали патчи  для 7-ой и 8-ой версии. &lt;/p&gt;
+
+&lt;p&gt;Drupal 7 - &lt;a href="https://www.drupal.org/project/drupal/issues/3055984#comment-13213469"&gt;https://www.drupal.org/project/drupal/issues/3055984#comment-13213469&lt;/a&gt; &lt;/p&gt;
+
+&lt;p&gt;Drupal 8 - &lt;a href="https://www.drupal.org/project/drupal/issues/2259489#comment-13134143"&gt;https://www.drupal.org/project/drupal/issues/2259489#comment-13134143&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Приятным бонусом стало то, что в Drupal 8 применимо внедрение зависимостей (Dependency Injection). Это в свою очередь предоставляет возможность менять все, что пожелаете, с помощью переопределения классов сервисов. И это позволило нам создать небольшой модуль &lt;a href="https://www.drupal.org/project/lastmodified_since"&gt;&lt;strong&gt;Last Modified since header fix&lt;/strong&gt;&lt;/a&gt;, который можно установить на ваш сайт до принятия патча разработчиками ядра Drupal 8. Модуль выполняет необходимые настройки и выдает корректные заголовки кеширования. &lt;/p&gt;
+
+&lt;p&gt;Пользователям Drupal 7 придется использовать существующий патч на ядро. &lt;/p&gt;
+
+&lt;p&gt;Нужно отметить, что некоторые серверы (хостинг) настроены так, что веб-сервер сам контролирует вышеуказанные заголовки и выдает их корректно. В этом случае проблему можно сразу и не заметить, но при переезде сайта на другой хост, она может “всплыть”. &lt;/p&gt;
+
+&lt;hr /&gt;&lt;p&gt;В данном контексте страница - это HTML файл страницы и все файлы, которые необходимы для отображения данной страницы, полученные с сервера.&lt;/p&gt;&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/prodvizenie-saitov" hreflang="ru"&gt;Продвижение сайтов&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/seo" hreflang="ru"&gt;SEO&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-7" hreflang="ru"&gt;Drupal 7&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-8" hreflang="ru"&gt;Drupal 8&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=266&amp;2=comment&amp;3=comment" token="8fEI7N9n01EddQ0Ug03YejZAPosvCE9slAcfuGxj-AI"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;</description>
+  <pubDate>Wed, 14 Oct 2020 06:50:29 +0000</pubDate>
+    <dc:creator>Геворг Мкртчян</dc:creator>
+    <guid isPermaLink="false">266 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/pravilnye-otvety-servera-dlya-uskoreniya-indeksacii-sayta#comments</comments>
+    </item>
+<item>
+  <title>Drupal: Модуль CDEK API</title>
+  <link>https://drupal-coder.ru/blog/drupal-modul-cdek-api</link>
+  <description>
+&lt;span&gt;Drupal: Модуль CDEK API&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/42" lang="" about="https://drupal-coder.ru/user/42" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Андрей Тымчук&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;вт, 09/29/2020 - 10:01&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;В начале сентября ветки 8.x-2.x и 7.x-2.x, разрабатываемого мною модуля &lt;a href="https://www.drupal.org/project/cdek_api"&gt;CDEK API&lt;/a&gt;, добрались до полноценных релизов - все задуманные фичи реализованы и протестированы. В данной статье кратко расскажу о том, какие у модуля возможности и как их использовать.&lt;/p&gt;
+
+&lt;p&gt;Напомню, что модуль позволяет взаимодействовать с API сервиса доставки &lt;a href="https://cdek.ru"&gt;СДЭК&lt;/a&gt; и будет полезен исключительно для разработчиков, так как сам по себе он ничего не делает, не дополняет, не расширяет.&lt;/p&gt;
+
+&lt;p&gt;Главное отличие от веток 8.x-1.x и 7.x-1.x — это использование PHP библиотеки &lt;a href="https://github.com/sanmai/cdek-sdk"&gt;CDEK SDK&lt;/a&gt; для взаимодействия с API. Ставится библиотека с помощью Composer, для версии в Drupal 7 потребуется модуль Composer Manager.&lt;/p&gt;
+
+&lt;p&gt;Ветка 8.x-2.x потребует Drupal версии 8.8 или выше (Drupal 9 тоже поддерживается). Для ветки 7.x-2.x потребуется PHP версии 7.0 или выше.&lt;/p&gt;
+
+&lt;h2&gt;Настройка&lt;/h2&gt;
+
+&lt;p&gt;Страница настроек модуля позволяет:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;Задать учётные данные для выполнения авторизованных запросов к API;&lt;/li&gt;
+	&lt;li&gt;Включить тестовый режим (все запросы будут отправляться на тестовый сервер);&lt;/li&gt;
+	&lt;li&gt;Задать таймаут для запросов к API;&lt;/li&gt;
+	&lt;li&gt;Включить кэширование данных (список ПВЗ);&lt;/li&gt;
+	&lt;li&gt;Задать время хранения кэша.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;img alt="Настройки" data-entity-type="file" data-entity-uuid="eb0c0f34-ad15-4998-bfb5-48e7d945583a" src="https://drupal-coder.ru/sites/default/files/inline-images/settings2.png" width="600" height="619" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Базовое использование&lt;/h2&gt;
+
+&lt;p&gt;Основа модуля — это сервис &lt;code&gt;cdek_api&lt;/code&gt;. Рассмотрим ряд примеров:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$client&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; \Drupal&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;service&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'cdek_api'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getCdekClient&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Получаем объект клиента с учётом настроек. Далее с помощью клиента можно выполнить любой запрос, который описан в &lt;a href="https://cdek-sdk.readthedocs.io"&gt;документации&lt;/a&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$points&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; \Drupal&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;service&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'cdek_api'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getPickupPoints&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Получаем список всех ПВЗ (пункт выдачи заказа). Если кэширование включено, то полученные данные будут сохранены в отдельном кэш-бине. Кроме того, независимо от настроек, все данные сохраняются в статическом кэше. Следует отметить, что полный список имеет большой объём. В случае хранения кэша в базе данных и при возникновении ошибки при его записи следует увеличить значение параметра &lt;code&gt;innodb_log_file_size&lt;/code&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$request&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000000; font-weight: bold;"&gt;new&lt;/span&gt; PvzListRequest&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000088;"&gt;$request&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;setCityId&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #cc66cc;"&gt;435&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000088;"&gt;$request&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;setCash&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900; font-weight: bold;"&gt;TRUE&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000088;"&gt;$request&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;setDressingRoom&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900; font-weight: bold;"&gt;TRUE&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+&lt;span style="color: #000088;"&gt;$points&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; \Drupal&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;service&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'cdek_api'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getPickupPoints&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$request&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;При запросе ПВЗ можно использовать фильтры. Для этого нужно в метод передать объект запроса с нужными параметрами. Списки с использованием фильтров также кэшируются.&lt;/p&gt;
+
+&lt;hr /&gt;&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$point&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; \Drupal&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;service&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'cdek_api'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getPickupPoint&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'KSD11'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Получаем конкретный ПВЗ по его коду.&lt;/p&gt;
+
+&lt;hr /&gt;&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$service&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; \Drupal&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;service&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'cdek_api'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+&lt;span style="color: #000088;"&gt;$countries&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$service&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getCountries&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000088;"&gt;$regions&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$service&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getRegions&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000088;"&gt;$cities&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$service&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getCities&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Получаем список доступных стран, регионов и городов. Данные списки строятся на основе списка ПВЗ, поэтому сами не кэшируются.&lt;/p&gt;
+
+&lt;hr /&gt;&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$request&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000000; font-weight: bold;"&gt;new&lt;/span&gt; PvzListRequest&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000088;"&gt;$request&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;setCountryId&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #cc66cc;"&gt;1&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+&lt;span style="color: #000088;"&gt;$cities&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; \Drupal&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;service&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'cdek_api'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getCities&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$request&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Фильтры также доступны.&lt;/p&gt;
+
+&lt;hr /&gt;&lt;p&gt;Если необходимо внести изменения в список ПВЗ, то нужно создать обработчик события &lt;code&gt;cdek_api.pickup_points&lt;/code&gt;. Например, в указанном ниже примере название ПВЗ заменяется на его адрес.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000000; font-weight: bold;"&gt;&lt;?php&lt;/span&gt;
+ 
+&lt;span style="color: #000000; font-weight: bold;"&gt;namespace&lt;/span&gt; Drupal\example\EventSubscriber&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+&lt;span style="color: #000000; font-weight: bold;"&gt;use&lt;/span&gt; Symfony\Component\EventDispatcher\EventSubscriberInterface&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;use&lt;/span&gt; Drupal\cdek_api\Event\PickupPointsEvent&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;use&lt;/span&gt; Drupal\cdek_api\Event\CdekApiEvents&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+&lt;span style="color: #009933; font-style: italic;"&gt;/**
+ * An example event subscriber.
+ */&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;class&lt;/span&gt; ExampleEventSubscriber &lt;span style="color: #000000; font-weight: bold;"&gt;implements&lt;/span&gt; EventSubscriberInterface &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+ 
+  &lt;span style="color: #009933; font-style: italic;"&gt;/**
+   * {@inheritdoc}
+   */&lt;/span&gt;
+  &lt;span style="color: #000000; font-weight: bold;"&gt;public&lt;/span&gt; static &lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; getSubscribedEvents&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+    &lt;span style="color: #b1b100;"&gt;return&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;
+      CdekApiEvents&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;PICKUP_POINTS&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'alterPickupPoints'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+    &lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+ 
+  &lt;span style="color: #009933; font-style: italic;"&gt;/**
+   * React to a list of pickup points being loaded.
+   *
+   * @param \Drupal\cdek_api\Event\PickupPointsEvent $event
+   *   The pickup points event.
+   */&lt;/span&gt;
+  &lt;span style="color: #000000; font-weight: bold;"&gt;public&lt;/span&gt; &lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; alterPickupPoints&lt;span style="color: #009900;"&gt;(&lt;/span&gt;PickupPointsEvent &lt;span style="color: #000088;"&gt;$event&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$points&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$event&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getPoints&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+    &lt;span style="color: #b1b100;"&gt;foreach&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$points&lt;/span&gt; &lt;span style="color: #b1b100;"&gt;as&lt;/span&gt; &lt;span style="color: #000088;"&gt;$point&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+      &lt;span style="color: #000088;"&gt;$point&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;Name&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$point&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;Address&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$event&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;setPoints&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$points&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+ 
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;В Drupal 7 сервисов и событий нет, поэтому код для 7.x-2.x будет отличаться.&lt;/p&gt;
+
+&lt;p&gt;Нужно обращаться напрямую к классу…&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$client&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; CdekApi&lt;span style="color: #339933;"&gt;::&lt;/span&gt;&lt;span style="color: #004000;"&gt;getInstance&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;getCdekClient&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;…и вместо обработки события использовать реализацию хука &lt;code&gt;hook_cdek_api_pickup_points_alter()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #009933; font-style: italic;"&gt;/**
+ * Implements hook_cdek_api_pickup_points_alter().
+ */&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; example_cdek_api_pickup_points_alter&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #990000;"&gt;array&lt;/span&gt; &lt;span style="color: #339933;"&gt;&amp;&lt;/span&gt;&lt;span style="color: #000088;"&gt;$points&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #990000;"&gt;array&lt;/span&gt; &lt;span style="color: #000088;"&gt;$params&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #b1b100;"&gt;foreach&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$points&lt;/span&gt; &lt;span style="color: #b1b100;"&gt;as&lt;/span&gt; &lt;span style="color: #000088;"&gt;$point&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$point&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;Name&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$point&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;Address&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;h2&gt;Элемент формы для выбора ПВЗ&lt;/h2&gt;
+
+&lt;p&gt;Модуль предоставляет два элемента формы, первый из которых — это элемент для иерархического выбора ПВЗ относительно выбранных значений страны/региона/города.&lt;/p&gt;
+
+&lt;p&gt;Чтобы использовать элемент, достаточно внутри формы указать следующий код:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'point'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;
+  &lt;span style="color: #0000ff;"&gt;'#type'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'cdek_select'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img alt="Элемент формы для выбора ПВЗ" data-entity-type="file" data-entity-uuid="c9d6cf76-295d-49c8-9e4a-789859d7081f" src="https://drupal-coder.ru/sites/default/files/inline-images/form-element-1.png" width="300" height="229" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Можно использовать стандартные свойства, применимые к стандартным элементам — &lt;code&gt;#title&lt;/code&gt;, &lt;code&gt;#description&lt;/code&gt;, &lt;code&gt;#required&lt;/code&gt; и другие. Значением элемента при сабмите формы будет код выбранного ПВЗ. Можно также указывать значение по умолчанию с помощью &lt;code&gt;#default_value&lt;/code&gt;, которое должно являться кодом существующего ПВЗ.&lt;/p&gt;
+
+&lt;p&gt;Кроме того, для изменения поведения и/или отображения элемента можно использовать дополнительное свойство &lt;code&gt;#cdek_request&lt;/code&gt;, в котором нужно будет передать объект запроса аналогично тому как это используется в методе &lt;code&gt;getPickupPoints()&lt;/code&gt; для фильтрации списка. Таким образом, можно изменять список ПВЗ, который будет доступен для выбора.&lt;/p&gt;
+
+&lt;p&gt;При этом, если в запросе указан фильтр по городу, то не будут отображаться элементы для выбора города, региона и страны. Если указан фильтр по региону, то не будут отображаться элементы для выбора региона и страны. Если указан фильтр по стране, то не будет отображаться элемент для выбора страны.&lt;/p&gt;
+
+&lt;p&gt;По умолчанию элементы для выбора страны/региона/города/пункта являются выпадающими списками. Их отображение можно кастомизировать с помощью прямого указания их структуры.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'point'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;
+  &lt;span style="color: #0000ff;"&gt;'#type'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'cdek_select'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+  &lt;span style="color: #0000ff;"&gt;'country'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'#type'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'radios'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'#title'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #009900; font-weight: bold;"&gt;NULL&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+  &lt;span style="color: #0000ff;"&gt;'region'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'#access'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #009900; font-weight: bold;"&gt;FALSE&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;h2&gt;Виджет&lt;/h2&gt;
+
+&lt;p&gt;Второй элемент представляет собой интеграцию с виджетом ПВЗ (&lt;a href="https://widget.cdek.ru"&gt;https://widget.cdek.ru&lt;/a&gt;). На сайте СДЭК указано следующее описание виджета:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Виджет предназначен для отображения актуальной информации о пунктах самовывоза СДЭК с привязкой их к карте, возможностью расчета доставки (сроков и стоимости) для указанных габаритов товаров. Виджет может быть отображен как статичный элемент на странице, так и всплывающим окном.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Элемент может быть использован как внутри формы, так и внутри обычного рендер массива. Если элемент используется в контексте формы, то он предназначен для выбора ПВЗ и панель с выбором варианта доставки будет скрыта. Выбранный ПВЗ будет отображаться в дочернем элементе над виджетом. Если элемент используется вне формы, то виджет считается информационным и выбор ПВЗ в нём запрещён.&lt;/p&gt;
+
+&lt;p&gt;В рамках одной страницы рекомендуется использовать не более одного виджета, в противном случае поведение не известно. Чтобы использовать элемент, достаточно указать следующий код:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'point'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;
+  &lt;span style="color: #0000ff;"&gt;'#type'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'cdek_widget'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+  &lt;span style="color: #0000ff;"&gt;'#cdek_widget_options'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'defaultCity'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'Краснодар'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'cityFrom'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'Москва'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img alt="Виджет" data-entity-type="file" data-entity-uuid="cbc34fbf-5925-4048-b752-e95605f092e5" src="https://drupal-coder.ru/sites/default/files/inline-images/form-element3.png" width="800" height="538" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;p&gt;В свойстве &lt;code&gt;#cdek_widget_options&lt;/code&gt; указывается массив настроек виджета. Подробнее о настройках можно прочитать в документации виджета. Настройки &lt;code&gt;link&lt;/code&gt; и &lt;code&gt;servicepath&lt;/code&gt; указывать бессмысленно, так как они будут перезаписаны. Если указать настройку &lt;code&gt;popup&lt;/code&gt; со значением TRUE, то виджет будет отображён в виде всплывающего окна.&lt;/p&gt;
+
+&lt;p&gt;К элементу применимы стандартные свойства элементов формы. Значение по умолчанию должно являться кодом существующего ПВЗ.&lt;/p&gt;
+
+&lt;p&gt;С помощью свойства &lt;code&gt;#cdek_widget_popup_title&lt;/code&gt; можно задать текст ссылки, нажатие которой приводит к открытию виджета в режиме всплывающего окна.&lt;/p&gt;
+
+&lt;p&gt;Свойство &lt;code&gt;#cdek_widget_tariff_list&lt;/code&gt; предназначено для указания списка тарифов, который будет использован контроллером виджета при расчёте стоимости для каждого из типов доставки (&lt;strong&gt;courier&lt;/strong&gt; или &lt;strong&gt;pickup&lt;/strong&gt;). Если список тарифов не указан, то для расчёта будет использован тариф под номером &lt;strong&gt;1&lt;/strong&gt;. Для того, чтобы контроллер мог получить доступ к тарифам, список сохраняется в кэше.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'point'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;
+  &lt;span style="color: #0000ff;"&gt;'#type'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'cdek_widget'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+  &lt;span style="color: #0000ff;"&gt;'#cdek_widget_options'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'defaultCity'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'Краснодар'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'cityFrom'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'Москва'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+  &lt;span style="color: #0000ff;"&gt;'#cdek_widget_tariff_list'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'courier'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #cc66cc;"&gt;233&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;137&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;139&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;16&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;18&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;11&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;1&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;3&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;61&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;60&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;59&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;58&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;57&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;83&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'pickup'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #cc66cc;"&gt;234&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;136&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;138&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;15&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;17&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;10&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;12&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;5&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;62&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;63&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;На данный момент модуль не имеет перевода на русский язык, поэтому все обозначения и описания внутри виджета отображаются на английском языке. Виджет можно локализовать вручную - все строки для перевода находятся в методе &lt;code&gt;WidgetController::doActionLang()&lt;/code&gt;. В случае Drupal 7 - это функция &lt;code&gt;cdek_api_widget_action_lang()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Элемент виджета также предоставляет API со стороны JavaScript. В процессе работы виджета возникают события: &lt;code&gt;cdekApiWidgetReady&lt;/code&gt;, &lt;code&gt;cdekApiWidgetDeliveryCalculated&lt;/code&gt;, &lt;code&gt;cdekApiWidgetPointSelected&lt;/code&gt; и &lt;code&gt;cdekApiWidgetCourierSelected&lt;/code&gt;. Они соответствуют событиям &lt;code&gt;onReady&lt;/code&gt;, &lt;code&gt;onCalculate&lt;/code&gt;, &lt;code&gt;onChoose&lt;/code&gt; и &lt;code&gt;onChooseProfile&lt;/code&gt;, которые описаны в документации виджета. Отличие заключается в отсутствии привязки к объекту виджета, так как событие вызывается для оболочки элемента. Соответственно, подписаться на событие можно с помощью стандартных средств jQuery.&lt;/p&gt;&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-7" hreflang="ru"&gt;Drupal 7&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-8" hreflang="ru"&gt;Drupal 8&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=265&amp;2=comment&amp;3=comment" token="oDTTj6SHpFvGYUI319oXvKTZNvcKlQalAHTJrUNU044"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/modul-performance-monitor-ocenka-proizvoditelnosti-sistemnogo-okruzheniya" hreflang="ru"&gt;Модуль Performance Monitor - оценка производительности системного окружения&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/moy-dostupnyy-vsem-sekretnyy-drupal-modul-dlya-uluchsheniya-seo-ustanovili-bolee-tysyachi-raz" hreflang="ru"&gt;Мой доступный всем секретный Drupal-модуль для улучшения SEO установили более тысячи раз&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/seo-prodvizhenie-internet-magazinov-na-drupal-sozdali-modul-kotoryy-prevraschaet-svoystva" hreflang="ru"&gt;SEO-продвижение интернет-магазинов на Drupal: создали модуль, который превращает свойства товаров в осмысленные заголовки&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Tue, 29 Sep 2020 10:01:02 +0000</pubDate>
+    <dc:creator>Андрей Тымчук</dc:creator>
+    <guid isPermaLink="false">265 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/drupal-modul-cdek-api#comments</comments>
+    </item>
+<item>
+  <title>Drupal 7: ускорение времени генерации страниц интернет-магазина на 32%</title>
+  <link>https://drupal-coder.ru/blog/drupal-7-uskorenie-vremeni-generacii-stranic-internet-magazina-na-32</link>
+  <description>
+&lt;span&gt;Drupal 7: ускорение времени генерации страниц интернет-магазина на 32%&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/42" lang="" about="https://drupal-coder.ru/user/42" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Андрей Тымчук&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;пн, 09/23/2019 - 11:11&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2019-09/EDf41xbXkAEQRn8_0.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Скорость загрузки сайта влияет на &lt;a href="https://medium.com/@vikigreen/impact-of-slow-page-load-time-on-website-performance-40d5c9ce568a"&gt;конверсию&lt;/a&gt;. Скорость загрузки страниц &lt;a href="https://webmasters.googleblog.com/2018/01/using-page-speed-in-mobile-search.html"&gt;влияет на их ранжирование&lt;/a&gt; в поиске Google и Яндекс. &lt;a href="https://habr.com/ru/post/300210/"&gt;Известны случаи&lt;/a&gt; увеличения количества заказов на 40% или увеличения выручки на 13% в результате ускорения загрузки сайта. Наша команда регулярно выполняет работы по оптимизации Drupal-сайтов и серверов для &lt;a href="https://drupal-coder.ru/boost-drupal"&gt;ускорения загрузки сайтов на Drupal&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Одной из ключевых метрик скорости загрузки сайта является время генерации страницы веб-сервером. В работе по оптимизации сайта и сервера для уменьшения времени генерации страниц участвуют наши системные администраторы и специалисты DevOps, разработчики, специалисты со стороны заказчика и хостинг-провайдера. Мы используем профилировку XDebug медленных страниц, и анализ времени выполнения отдельных функций PHP для поиска и устранения узких мест в коде сайта. Применяем сервис мониторинга NewRelic для сбора агрегированной статистики времени обработки запроса загрузки страниц сервером. Анализируем статистику выполнения запросов к MySQL и Solr.&lt;/p&gt;
+
+&lt;p&gt;Публикуем кейс ускорения времени обработки запроса загрузки страниц интернет-магазина на 32% после решения распространенной проблемы для сайтов на Drupal.&lt;/p&gt;
+
+
+&lt;h3&gt;Проблема&lt;/h3&gt;
+
+&lt;p&gt;Есть в Drupal 7 давняя особенность - форма автоматически кэшируется при использовании &lt;a href="https://api.drupal.org/api/drupal/includes%21ajax.inc/group/ajax/7.x"&gt;AJAX фреймворка&lt;/a&gt;. При каждом выводе такой формы в таблице &lt;em&gt;cache_form&lt;/em&gt; создаётся две записи (одна для структуры формы и одна для её состояния). Кэширование необходимо для корректной работы AJAX обработчика, которому нужно знать структуру и последнее состояние формы.&lt;/p&gt;
+
+&lt;p&gt;В случае, когда таких форм на странице много, возникает проблема быстрого роста количества записей в таблице &lt;em&gt;cache_form&lt;/em&gt;. Особенно остро эта проблема проявляется при использовании AJAX кнопки "Добавить в корзину" в Commerce. К примеру, вывод 50 товаров на странице каталога приведёт к созданию 100 записей в таблице &lt;em&gt;cache_form&lt;/em&gt; при каждом просмотре страницы. На высокопосещаемом сайте это приводит к тому, что таблица &lt;em&gt;cache_form&lt;/em&gt; может иметь размер в несколько десятков гигабайт.&lt;/p&gt;
+
+&lt;p&gt;Также стоит учитывать тот факт, что кэш форм в Drupal 7 тесно связан с кэшем страниц и с минимальным временем жизни кэша (задаётся на странице &lt;em&gt;Производительность&lt;/em&gt;). Если удалить кэш формы раньше, чем кэш страницы, возникнет ошибка "Некорректные POST-данные формы" при взаимодействии с формой. Если задать минимальное время жизни кэша, устаревший кэш форм не будет очищаться в течение установленного времени.&lt;/p&gt;
+
+&lt;p&gt;Для исправления вышеуказанной проблемы уже существует несколько решений:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;Переменная &lt;em&gt;form_cache_expiration&lt;/em&gt;. Данная переменная была &lt;a href="https://www.drupal.org/node/2857751"&gt;добавлена&lt;/a&gt; в версии 7.61 и позволяет управлять временем хранения кэша форм, которое по умолчанию равно 6 часам. Основной недостаток заключается в сильной зависимости от механизма очистки устаревшего кэша, без своевременного вмешательства которого, размер &lt;em&gt;cache_form&lt;/em&gt; будет продолжать расти;&lt;/li&gt;
+	&lt;li&gt;Модуль &lt;a href="https://www.drupal.org/project/optimizedb"&gt;OptimizeDB&lt;/a&gt;. Позволяет гибко настроить очистку таблицы &lt;em&gt;cache_form&lt;/em&gt; по cron. Можно задать полную очистку таблицы или очистку только устаревших записей. Может возникать ошибка "Некорректные POST-данные формы", размер таблицы &lt;em&gt;cache_form&lt;/em&gt; всё равно может остаться большим;&lt;/li&gt;
+	&lt;li&gt;Модуль &lt;a href="https://www.drupal.org/project/safe_cache_form_clear"&gt;Safe cache_form Clear&lt;/a&gt;. Предоставляет Drush команду для очистки устаревших записей в таблице &lt;em&gt;cache_form&lt;/em&gt;. Недостатки аналогичны предыдущему модулю;&lt;/li&gt;
+	&lt;li&gt;Модуль &lt;a href="http://xandeadx.ru/blog/drupal/751"&gt;Commerce Fast Ajax Add to Cart&lt;/a&gt;. Решение от &lt;a href="https://www.drupal.org/u/xandeadx"&gt;xandeadx&lt;/a&gt;, направленное на корень проблемы - кэширование стандартной формы Drupal Commerce добавления в корзину. &lt;span&gt;Минус решения, как ни странно, в том, что AJAX фреймворк не используется, а для нашего проекта разработчиками уже был написан нестандартный диалог добавления в корзину с использованием AJAX-команд Drupal&lt;/span&gt;. Кроме того, это решение не универсально и работает только для формы добавления товара в корзину;&lt;/li&gt;
+	&lt;li&gt;Патч &lt;a href="https://www.drupal.org/files/issues/2019-03-19/2819375-94.patch"&gt;#94&lt;/a&gt; из этого &lt;a href="https://www.drupal.org/project/drupal/issues/2819375"&gt;issue&lt;/a&gt;. Кроме применения патча потребуется дописать обработчик для нужной формы. Это решение может работать нестабильно для страниц с множественным выводом форм. Не работает для страниц со случайным списком товаров. Ну и уже большой минус в том, что надо патчить ядро.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt; &lt;/p&gt;
+
+&lt;h3&gt;Решение&lt;/h3&gt;
+
+&lt;p&gt;Для примера возьмём чистую установку Drupal 7.67 с модулем Commerce 1.15. Реализуем страницы каталога с помощью Views. На каждой странице выведем по 50 товаров, в каждом тизере товара выведем кнопку добавления в корзину. Для удобства сгенерируем товары с помощью модуля &lt;a href="https://www.drupal.org/project/commerce_devel"&gt;Commerce Devel&lt;/a&gt;. Для AJAX-ификации кнопки добавления товара в корзину используем модуль &lt;a href="https://www.drupal.org/project/dc_ajax_add_cart"&gt;Commerce Ajax Add to Cart&lt;/a&gt;. Открываем страницу каталога и проверяем - в таблице &lt;em&gt;cache_form&lt;/em&gt; появилось 100 новых записей, проблема воспроизведена.&lt;/p&gt;
+
+&lt;p&gt;Решение, предлагаемое в данной статье, частично основывается на данном &lt;a href="https://www.drupal.org/project/drupal/issues/2819375#comment-12637823"&gt;комментарии&lt;/a&gt;. Для его реализации потребуется создать небольшой кастомный модуль или добавить код в уже имеющийся. В нашем примере это будет модуль &lt;em&gt;custom&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Первым делом определим путь для нового AJAX-обработчика формы. По своей структуре он похож на определение пути &lt;em&gt;"system/ajax"&lt;/em&gt; в модуле &lt;em&gt;system&lt;/em&gt;.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #009933; font-style: italic;"&gt;/**
+ * Implements hook_menu().
+ */&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; custom_menu&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$items&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'custom/form/ajax'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #990000;"&gt;array&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'title'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'AJAX callback'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'page callback'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'custom_form_ajax_callback'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'delivery callback'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'ajax_deliver'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'access arguments'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #990000;"&gt;array&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'access content'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'theme callback'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'ajax_base_page_theme'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'type'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; MENU_CALLBACK&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #b1b100;"&gt;return&lt;/span&gt; &lt;span style="color: #000088;"&gt;$items&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Изменим путь AJAX-обработчика у кнопки добавления товара в корзину (свойство &lt;em&gt;path&lt;/em&gt;). Здесь важно не путать свойства &lt;em&gt;path&lt;/em&gt; и &lt;em&gt;callback&lt;/em&gt; - первое определяет адрес, на который будет отправлен AJAX-запрос, а второе указывает функцию, которая при этом запросе будет вызвана для формирования ответа. Как правило, &lt;em&gt;path&lt;/em&gt; не указывают и берётся значение по умолчанию &lt;em&gt;"system/ajax"&lt;/em&gt;, его и требуется поменять. Также принудительно отключим кэширование интересующей нас формы.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #009933; font-style: italic;"&gt;/**
+ * Implements hook_form_alter().
+ */&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; custom_form_alter&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #339933;"&gt;&amp;&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #339933;"&gt;&amp;&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #000088;"&gt;$form_id&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #b1b100;"&gt;if&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #990000;"&gt;strpos&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form_id&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'commerce_cart_add_to_cart_form'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #339933;"&gt;!==&lt;/span&gt; &lt;span style="color: #009900; font-weight: bold;"&gt;FALSE&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+    &lt;span style="color: #666666; font-style: italic;"&gt;// Указываем, что хотим самостоятельно обработать AJAX-запрос к форме.&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'submit'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#ajax'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'path'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'custom/form/ajax'&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+    &lt;span style="color: #666666; font-style: italic;"&gt;// Отключаем кэширование формы.&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'no_cache'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #009900; font-weight: bold;"&gt;TRUE&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Наконец, реализуем функцию &lt;em&gt;custom_form_ajax_callback()&lt;/em&gt;, которую ранее указали в определении пути &lt;em&gt;"custom/form/ajax"&lt;/em&gt;. Код функции частично повторяет код функций &lt;em&gt;ajax_get_form()&lt;/em&gt; и &lt;em&gt;ajax_form_callback()&lt;/em&gt;. Основная идея заключается в том, что нужно получить правильное состояние формы без использования кэша, так как мы его уже отключили. Важно отметить, что приведённый далее код универсален и может быть применен для отключения кеширования других AJAX-форм, за исключением блока, в котором выполняется формирование товарной позиции. Именно в данном блоке происходит построение состояния формы, необходимого для корректной валидации и сабмита. Для поддержки атрибутов товаров потребуется доработка этого кода. Для других форм потребуется написать аналогичный код.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #009933; font-style: italic;"&gt;/**
+ * Menu callback; handles Ajax requests for forms without caching.
+ *
+ * @return array|null
+ *   Array of ajax commands or NULL on failure.
+ */&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; custom_form_ajax_callback&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #666666; font-style: italic;"&gt;// Проверяем, что обрабатываем AJAX-запрос к форме.&lt;/span&gt;
+  &lt;span style="color: #b1b100;"&gt;if&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #990000;"&gt;isset&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$_POST&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'form_id'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #339933;"&gt;&amp;&amp;&lt;/span&gt; &lt;span style="color: #990000;"&gt;isset&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$_POST&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'form_build_id'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$form_build_id&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$_POST&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'form_build_id'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$form_id&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$_POST&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'form_id'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$commands&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #990000;"&gt;array&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+    &lt;span style="color: #666666; font-style: italic;"&gt;// Инициализируем состояние формы.&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; form_state_defaults&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'build_info'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'args'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #990000;"&gt;array&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+    &lt;span style="color: #666666; font-style: italic;"&gt;// Заполняем состояние формы. Данный код уникален в рамках обрабатываемой формы.&lt;/span&gt;
+    &lt;span style="color: #666666; font-style: italic;"&gt;// Проверяем, что форма является формой добавления товара в корзину.&lt;/span&gt;
+    &lt;span style="color: #b1b100;"&gt;if&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #990000;"&gt;strpos&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form_id&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'commerce_cart_add_to_cart_form_'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #339933;"&gt;===&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;0&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+      &lt;span style="color: #000088;"&gt;$product&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; commerce_product_load&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$_POST&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'product_id'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+      &lt;span style="color: #b1b100;"&gt;if&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #339933;"&gt;!&lt;/span&gt;&lt;span style="color: #990000;"&gt;empty&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$product&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+        &lt;span style="color: #666666; font-style: italic;"&gt;// Формируем сущность товарной позиции на основе данных отправленной формы.&lt;/span&gt;
+        &lt;span style="color: #000088;"&gt;$line_item&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; commerce_product_line_item_new&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$product&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #000088;"&gt;$_POST&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'quantity'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; ?? &lt;span style="color: #cc66cc;"&gt;1&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+        &lt;span style="color: #000088;"&gt;$line_item&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;data&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'context'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'product_ids'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #990000;"&gt;array&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$product&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;product_id&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+        &lt;span style="color: #000088;"&gt;$line_item&lt;/span&gt;&lt;span style="color: #339933;"&gt;-&gt;&lt;/span&gt;&lt;span style="color: #004000;"&gt;data&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'context'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'add_to_cart_combine'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #009900; font-weight: bold;"&gt;TRUE&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+        &lt;span style="color: #666666; font-style: italic;"&gt;// Добавляем товарную позицию в состояние формы.&lt;/span&gt;
+        &lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'build_info'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'args'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #990000;"&gt;array&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$line_item&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+      &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+    &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+ 
+    &lt;span style="color: #666666; font-style: italic;"&gt;// Строим форму, будут вызваны билдеры и соответствующие хуки.&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$form&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; drupal_retrieve_form&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form_id&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    drupal_prepare_form&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form_id&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#build_id_old'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$form_build_id&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+    &lt;span style="color: #666666; font-style: italic;"&gt;// Обрабатываем форму аналогично тому, как это сделано в ajax_get_form().&lt;/span&gt;
+    &lt;span style="color: #b1b100;"&gt;if&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#build_id_old'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;!=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#build_id'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+      &lt;span style="color: #000088;"&gt;$commands&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; ajax_command_update_build_id&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'no_redirect'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #009900; font-weight: bold;"&gt;TRUE&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'rebuild_info'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'copy'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#build_id'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #009900; font-weight: bold;"&gt;TRUE&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'rebuild_info'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'copy'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#action'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #009900; font-weight: bold;"&gt;TRUE&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'input'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$_POST&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+    &lt;span style="color: #666666; font-style: italic;"&gt;// Обрабатываем форму аналогично тому, как это сделано в ajax_form_callback().&lt;/span&gt;
+    drupal_process_form&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#form_id'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    &lt;span style="color: #b1b100;"&gt;if&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #339933;"&gt;!&lt;/span&gt;&lt;span style="color: #990000;"&gt;empty&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'triggering_element'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+      &lt;span style="color: #000088;"&gt;$callback&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'triggering_element'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#ajax'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'callback'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+    &lt;span style="color: #b1b100;"&gt;if&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #339933;"&gt;!&lt;/span&gt;&lt;span style="color: #990000;"&gt;empty&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$callback&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #339933;"&gt;&amp;&amp;&lt;/span&gt; &lt;span style="color: #990000;"&gt;is_callable&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$callback&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+      &lt;span style="color: #000088;"&gt;$result&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$callback&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+      &lt;span style="color: #b1b100;"&gt;if&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #339933;"&gt;!&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #990000;"&gt;is_array&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$result&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #339933;"&gt;&amp;&amp;&lt;/span&gt; &lt;span style="color: #990000;"&gt;isset&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$result&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#type'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #339933;"&gt;&amp;&amp;&lt;/span&gt; &lt;span style="color: #000088;"&gt;$result&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#type'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;==&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'ajax'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+        &lt;span style="color: #000088;"&gt;$result&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #990000;"&gt;array&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;
+          &lt;span style="color: #0000ff;"&gt;'#type'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'ajax'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+          &lt;span style="color: #0000ff;"&gt;'#commands'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; ajax_prepare_response&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$result&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+        &lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+      &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+      &lt;span style="color: #000088;"&gt;$result&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#commands'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #990000;"&gt;array_merge&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$commands&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #000088;"&gt;$result&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#commands'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+      &lt;span style="color: #b1b100;"&gt;return&lt;/span&gt; &lt;span style="color: #000088;"&gt;$result&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+  &lt;span style="color: #b1b100;"&gt;return&lt;/span&gt; &lt;span style="color: #009900; font-weight: bold;"&gt;NULL&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h3&gt;Результаты&lt;/h3&gt;
+
+&lt;p&gt;В нашем примере добавление вышеуказанного кода приводит к сохранению AJAX-функционала кнопки добавления товара в корзину при отключённом кэшировании формы. Обновление страницы каталога более не приводит к созданию 100 записей в таблице &lt;em&gt;cache_form&lt;/em&gt;. Результат обработки AJAX-запроса аналогичен результату обработки при использовании кэша. Изменения формы, добавленные в рамках Drupal API (например, атрибуты товаров) либо потребуют небольших изменений в коде (построения состояния формы), либо не потребуют их вообще.&lt;/p&gt;
+
+&lt;p&gt;Кроме того, интересен результат применения решения на реальном проекте, для которого оно и было реализовано:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;Количество SELECT запросов к таблице &lt;em&gt;cache_form&lt;/em&gt; уменьшилось в 10 раз;&lt;/li&gt;
+	&lt;li&gt;Количество INSERT запросов к таблице &lt;em&gt;cache_form&lt;/em&gt; уменьшилось в 10 раз;&lt;/li&gt;
+	&lt;li&gt;Среднее время обработки запроса сервером уменьшилось на 32% (с 352 до 241 миллисекунд).&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Более подробно статистика отображена на скриншотах.&lt;/p&gt;
+&lt;figure role="group"&gt;&lt;img alt="Скриншот 1" data-entity-type="file" data-entity-uuid="804ff2fd-8595-4dff-a3d5-c30d3b5cc54c" src="https://drupal-coder.ru/sites/default/files/inline-images/screenshot1.png" /&gt;&lt;figcaption&gt;Количество SELECT и INSERT запросов в минуту к таблице &lt;em&gt;cache_form&lt;/em&gt;.&lt;/figcaption&gt;&lt;/figure&gt;&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+&lt;figure role="group"&gt;&lt;img alt="Скриншот 2" data-entity-type="file" data-entity-uuid="b3458bc7-4686-48b5-bb0f-db986c0015d7" src="https://drupal-coder.ru/sites/default/files/inline-images/screenshot2_2.png" /&gt;&lt;figcaption&gt;Трудоёмкость INSERT запросов к таблице &lt;em&gt;cache_form&lt;/em&gt;.&lt;/figcaption&gt;&lt;/figure&gt;&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+&lt;figure role="group"&gt;&lt;img alt="Скриншот 3" data-entity-type="file" data-entity-uuid="f28374a7-6eb5-411c-9467-53933aa800ac" src="https://drupal-coder.ru/sites/default/files/inline-images/screenshot3_0.png" /&gt;&lt;figcaption&gt;Количество INSERT запросов в минуту.&lt;/figcaption&gt;&lt;/figure&gt;&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+&lt;figure role="group"&gt;&lt;img alt="Скриншот 4" data-entity-type="file" data-entity-uuid="2a885d43-4c3c-4074-bbc8-abb26f06df47" src="https://drupal-coder.ru/sites/default/files/inline-images/screenshot4_0.png" /&gt;&lt;figcaption&gt;Количество SELECT и INSERT запросов в минуту к таблице &lt;em&gt;cache_form&lt;/em&gt;.&lt;/figcaption&gt;&lt;/figure&gt;&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+&lt;figure role="group"&gt;&lt;img alt="Скриншот 5" data-entity-type="file" data-entity-uuid="ae3029eb-21cc-464a-84d4-10a11bd657f1" src="https://drupal-coder.ru/sites/default/files/inline-images/screenshot5.png" /&gt;&lt;figcaption&gt;Время обработки запроса сервером до изменений.&lt;/figcaption&gt;&lt;/figure&gt;&lt;p&gt; &lt;/p&gt;
+&lt;figure role="group"&gt;&lt;img alt="Скриншот 6" data-entity-type="file" data-entity-uuid="3afe426f-a775-49ad-be17-25f08eb6e7cc" src="https://drupal-coder.ru/sites/default/files/inline-images/screenshot6.png" /&gt;&lt;figcaption&gt;Время обработки запроса сервером после изменений.&lt;/figcaption&gt;&lt;/figure&gt;&lt;p&gt;Как видно, среднее время от запроса до ответа сервера APP SERVER уменьшилось с 352 до 241 миллисекунд. Размер таблицы &lt;em&gt;cache_form&lt;/em&gt; уменьшился с ~10Гб до 200Мб.&lt;/p&gt;
+
+&lt;p&gt;Дальнейшие доработки других форм сайта аналогичным способом позволят улучшить еще эти показатели.&lt;/p&gt;&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-7" hreflang="ru"&gt;Drupal 7&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/keysy" hreflang="ru"&gt;кейсы&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=236&amp;2=comment&amp;3=comment" token="oeCJgT6oShZee1DrgYluYnBEIgVjdlVT5GAHh287l0s"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/nastroyka-keshirovaniya-dannykh-apgreyd-servera-uskorenie-raboty-sayta-v-30-raz" hreflang="ru"&gt;Настройка кэширования данных. Апгрейд сервера. Ускорение работы сайта в 30 раз! &lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/uskorenie-raboty-s-udalennymi-saytami-pri-lokalnoy-razrabotke" hreflang="ru"&gt;Ускорение работы с удаленными сайтами при локальной разработке&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Mon, 23 Sep 2019 11:11:39 +0000</pubDate>
+    <dc:creator>Андрей Тымчук</dc:creator>
+    <guid isPermaLink="false">236 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/drupal-7-uskorenie-vremeni-generacii-stranic-internet-magazina-na-32#comments</comments>
+    </item>
+<item>
+  <title>Drupal + browser-sync</title>
+  <link>https://drupal-coder.ru/blog/drupal-browser-sync</link>
+  <description>
+&lt;span&gt;Drupal + browser-sync&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/59" lang="" about="https://drupal-coder.ru/user/59" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Александр Долженков&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;вт, 07/30/2019 - 21:29&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2019-10/browsersync-and-drupal.png&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;При работе с js хочется, чтобы браузер сам перезагружал страницу, так сказать делал hot reload, или, изменяя стили в css, они автоматически изменились в браузере (инъекция), как, например,  это происходит при работе с React или Vue. Но как же этого добиться с Drupal? Есть много решений, но все они так или иначе используют browser-sync. Browser-sync - это пакет для nodejs, позволяющий синхронизировать несколько браузеров, а также делающий автоматическую перезагрузку страниц и инъекции стилей. Используя связку nodejs + gulp + browser-sync, мы будем делать всю эту магию вместе с Drupal. Мы не будем рассматривать как устанавливать nodejs, но он должен быть у вас установлен. Итак приступим!&lt;/p&gt;
+
+&lt;h3&gt;Gulp&lt;/h3&gt;
+&lt;p&gt;Gulp - замечательный таск-менеджер, гибкий и быстрый. Его роль заключается в отслеживании изменения файлов и последующем запуске browser-sync. Мы не будем
+  подробно разбирать синтаксис конфигураций gulp, но вы подробнее можете ознакомиться в &lt;a href="https://github.com/gulpjs/gulp/blob/v3.9.1/docs/API.md"&gt;документации&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4&gt;Установка&lt;/h4&gt;
+&lt;p&gt;Изначально установим gulp-cli, чтобы иметь возможность вызывать gulp в терминале:&lt;/p&gt;
+&lt;pre&gt;
+&lt;code language="bash"&gt;sudo npm install -g gulp-cli&lt;/code&gt;
+&lt;/pre&gt;
+&lt;p&gt;Далее в директории проекта установим gulp локально:&lt;/p&gt;
+&lt;pre&gt;
+&lt;code language="bash"&gt;sudo npm install -D gulp&lt;/code&gt;
+&lt;/pre&gt;
+&lt;p&gt;Флаг
+  &lt;code&gt;-D&lt;/code&gt; вносит в package.json запись о Gulp в секцию devDependencies, отмечая, что пакет нужен только для разработки.
+&lt;/p&gt;
+&lt;p&gt;Установим browser-sync:&lt;/p&gt;
+&lt;pre&gt;
+&lt;code language="bash"&gt;sudo npm i -D browser-sync&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;h3&gt;Настройка gulp и browser-sync&lt;/h3&gt;
+
+&lt;p&gt;Создадим в корневой директории темы файл
+  &lt;code&gt;gulpfile.js&lt;/code&gt;. Будем использовать строгий режим в javascript. Добавим модули gulp и browser-sync.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code language="javascript"&gt;
+'use strict';
+
+const gulp = require('gulp');
+const browserSync = require('browser-sync');
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Приступим к добавлению задачи для gulp и настройки browser-sync. В функцию
+  &lt;code language="javascript"&gt;gulp.task()&lt;/code&gt; обернем вызов и настройки browser-sync.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code language="javascript"&gt;
+gulp.task('sync', function() {
+  browserSync.init({
+    proxy: domain,
+    port: 8080
+  });
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Разберем код выше поподробнее.
+  &lt;code language="javascript"&gt;browserSync.init()&lt;/code&gt; - это метод browser-sync для инициализации.
+  &lt;code language="javascript"&gt;proxy&lt;/code&gt; позволяет нам проксировать сервер по типу Apache или NGinx. Нужно указать домен или ip сервера. А
+  также нам нужно указать порт, по которому
+  сервер отдает сайт. О других настройках browser-sync можете почитать
+  &lt;a href="https://browsersync.io/docs/options"&gt;тут&lt;/a&gt;.&lt;/p&gt;
+  &lt;p&gt;Если мы вызовем в консоли
+    &lt;code language="bash"&gt;gulp sync&lt;/code&gt;, он применит только последние изменения в файлах. Это неудобно. Нам
+    нужно вызывать browser-sync каждый раз как
+    мы изменяем файл. Будем делать это непосредственно вызовом метода
+    &lt;code language="javascript"&gt;browserSync.watch()&lt;/code&gt;. И теперь наш полный
+    &lt;code&gt;gulpfile.js&lt;/code&gt; выглядит так:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code language="javascript"&gt;
+  'use strict';
+
+  const settings = {
+    domain: 'd7.dev.zz',
+    port: '8080'
+  }
+  
+  const gulp = require('gulp');
+  const browserSync = require('browser-sync');
+  
+  gulp.task('sync', function() {
+    browserSync.init({
+      proxy: settings.domain,
+      port: settings.port
+    });
+  
+    browserSync.watch('./css/*.css').on('change', browserSync.reload);
+  });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;При изменении css gulp вызовет
+  &lt;code language="javascript"&gt;browserSync.reload&lt;/code&gt;, этот метод перезапустит browser-sync и добавит изменения в браузер.&lt;/p&gt;
+
+&lt;p&gt;Вместо
+  &lt;code&gt;'./css/*.css'&lt;/code&gt; подставьте путь к вашим css файлам. Продублировав строку с
+  &lt;code&gt;browserSync.watch()&lt;/code&gt;, можно добавлять отслеживание, например, javascript файлов:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code language="javascript"&gt;
+browserSync.watch('./css/*.css').on('change', browserSync.reload);
+browserSync.watch('./js/*.js').on('change', browserSync.reload);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Стоит отметить, что можно делать перезагрузку даже при изменении шаблонов тем. Нужно только добавить за ними "слежку".&lt;/p&gt;
+
+&lt;h3&gt;Link CSS&lt;/h3&gt;
+&lt;p&gt;Для корректной работы инъекций в браузер нам потребуется установить модуль &lt;a href="https://www.drupal.org/project/link_css"&gt;Link CSS&lt;/a&gt;. Он есть для 7 и 8 версии. Зачем нужен этот модуль? В Drupal все css файлы добавляются на страницу через &lt;code&gt;@import&lt;/code&gt; тега &lt;code&gt;&lt;style&gt;&lt;/style&gt;&lt;/code&gt;, это не позволяет browser-sync делать инъекции. Модуль изменяет подход добавления css файлов, меняя его с &lt;code&gt;@import&lt;/code&gt; на тег &lt;code&gt;&lt;link /&gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3&gt;Использование&lt;/h3&gt;
+&lt;p&gt;Вызвав в консоли &lt;code language="bash"&gt;gulp sync&lt;/code&gt;, мы запустим обработчик gulp, который будет следить за нашими файлами, и при их изменении делать перезагрузку или инъекцию в браузер. Browser-sync в это время будет проксировать сервер с Drupal'ом, и откроет отдельную вкладку в браузере, где будет реагировать на все изменения файлов. Так просто можно добавить hot reload для работы с Drupal.&lt;/p&gt;&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-7" hreflang="ru"&gt;Drupal 7&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-8" hreflang="ru"&gt;Drupal 8&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/nodejs" hreflang="ru"&gt;nodejs&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/gulp" hreflang="ru"&gt;gulp&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;h2 class="block-form-title"&gt;Комментарии&lt;/h2&gt;
+    
+  
+  &lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Павел
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;вторник, июня 16, 2020 - 19:08&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Подскажите как почистить кэш с помощью gulp при редактировании twig шаблонов.&lt;br /&gt;
+browserSync.watch('./templates/*.html.twig').on('change', browserSync.reload);&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=492&amp;1=default&amp;2=ru&amp;3=" token="YtYR5dj9JUz84hjE_dcug6twfyw2h8T7WZoJSEQGCFY"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+ 
+      &lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=228&amp;2=comment&amp;3=comment" token="Zte9ZrY2w56zOLGbfFmBV9L11zaY_w9-V3lQd4WBu8A"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/routing-drupal-8-prosai-hookmenu" hreflang="ru"&gt;Роутинг Drupal 8. Прощай hook_menu.&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/rabota-s-bazoi-dannyh-v-drupal-8" hreflang="ru"&gt;Работа с базой данных в Drupal 8&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/tema-oformleniya-dlya-drupal-8" hreflang="ru"&gt;Тема оформления для Drupal 8&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Tue, 30 Jul 2019 21:29:40 +0000</pubDate>
+    <dc:creator>Александр Долженков</dc:creator>
+    <guid isPermaLink="false">228 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/drupal-browser-sync#comments</comments>
+    </item>
+<item>
+  <title>Множественное поле в кастомной форме Drupal 7</title>
+  <link>https://drupal-coder.ru/blog/mnozhestvennoe-pole-v-kastomnoy-forme-drupal-7</link>
+  <description>
+&lt;span&gt;Множественное поле в кастомной форме Drupal 7&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/42" lang="" about="https://drupal-coder.ru/user/42" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Андрей Тымчук&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;пт, 03/23/2018 - 13:12&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Возникла недавно необходимость повторить функционал множественного поля из Field API в самописной форме, чтобы можно было добавлять значения без перезагрузки страницы. В Form API подобного функционала нет, а толковых статей с примерами я не нашёл (в документации есть &lt;a href="https://api.drupal.org/api/examples/form_example%21form_example_tutorial.inc/function/form_example_tutorial_9/7.x-1.x"&gt;пример&lt;/a&gt;, демонстрирующий нечто подобное, однако, там используется обновление страницы). Но не беда, всё, что нужно, можно подсмотреть в модуле &lt;em&gt;Field&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Создание множественного поля будем рассматривать на примере самописной формы конфигурации. Представим, что нужна возможность задать неограниченное число текстовых значений в одной из переменных модуля.&lt;/p&gt;
+
+&lt;p&gt;В модуле &lt;em&gt;Field&lt;/em&gt; нас интересует файл &lt;em&gt;field.form.inc&lt;/em&gt; - он содержит функцию &lt;a href="https://api.drupal.org/api/drupal/modules%21field%21field.form.inc/function/field_multiple_value_form/7.x"&gt;&lt;em&gt;field_multiple_value_form()&lt;/em&gt;&lt;/a&gt;, которая отвечает за вывод множественных полей в форме. Так как в параметрах данной функции надо передавать информацию о поле, то использовать функцию напрямую мы не можем. Первым делом напишем итоговый вид формы конфигурации.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #009933; font-style: italic;"&gt;/**
+ * Example config form with multiple field.
+ */&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; example_config_form&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #339933;"&gt;&amp;&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$element_name&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'example_config_items'&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$item_element&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #990000;"&gt;array&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#type'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'textfield'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$items&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; variable_get&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$element_name&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #990000;"&gt;array&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #000088;"&gt;$element_name&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; example_multiple_value_form&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$element_name&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #000088;"&gt;$item_element&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #000088;"&gt;$items&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#submit'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'example_config_form_submit'&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #b1b100;"&gt;return&lt;/span&gt; system_settings_form&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+ 
+&lt;span style="color: #009933; font-style: italic;"&gt;/**
+ * Submit callback for example_config_form().
+ */&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; example_config_form_submit&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #339933;"&gt;&amp;&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  form_state_values_clean&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$items&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #339933;"&gt;&amp;&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'values'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'example_config_items'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$items&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #990000;"&gt;array_values&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #990000;"&gt;array_filter&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$items&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;За создание множественного поля будет отвечать функция &lt;em&gt;example_multiple_value_form()&lt;/em&gt;. В качестве параметров она принимает: уникальное имя элемента, структуру построения одиночного элемента, список значений множественного поля и текущее состояние формы. Реализуем данную функцию на основе кода функции &lt;em&gt;field_multiple_value_form()&lt;/em&gt;.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #009933; font-style: italic;"&gt;/**
+ * Custom version of field_multiple_value_form() for Form API elements.
+ *
+ * @param string $element_name
+ *   The element name.
+ * @param array $item_element
+ *   Build array of single item.
+ * @param array $items
+ *   Element items values.
+ * @param array $form_state
+ *   Current form state.
+ *
+ * @return array
+ *   Multiple element build array.
+ */&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; example_multiple_value_form&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$element_name&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #000088;"&gt;$item_element&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #000088;"&gt;$items&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #339933;"&gt;&amp;&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #b1b100;"&gt;if&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #339933;"&gt;!&lt;/span&gt;&lt;span style="color: #990000;"&gt;isset&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'storage'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'example_multiple_value_form'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #000088;"&gt;$element_name&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+    &lt;span style="color: #666666; font-style: italic;"&gt;// Initialize storage for element items count.&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$items_count&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #990000;"&gt;count&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$items&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'storage'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'example_multiple_value_form'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #000088;"&gt;$element_name&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$items_count&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$max&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'storage'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'example_multiple_value_form'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #000088;"&gt;$element_name&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$wrapper_id&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; drupal_html_id&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$element_name&lt;/span&gt; &lt;span style="color: #339933;"&gt;.&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'-add-more-wrapper'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+  &lt;span style="color: #000088;"&gt;$element&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #990000;"&gt;array&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #b1b100;"&gt;for&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$delta&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;0&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt; &lt;span style="color: #000088;"&gt;$delta&lt;/span&gt; &lt;span style="color: #339933;"&gt;&lt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$max&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt; &lt;span style="color: #000088;"&gt;$delta&lt;/span&gt;&lt;span style="color: #339933;"&gt;++&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$element&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #000088;"&gt;$delta&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$item_element&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    &lt;span style="color: #666666; font-style: italic;"&gt;// Set default value, if exists.&lt;/span&gt;
+    &lt;span style="color: #b1b100;"&gt;if&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #990000;"&gt;isset&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$items&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #000088;"&gt;$delta&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+      &lt;span style="color: #000088;"&gt;$element&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #000088;"&gt;$delta&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#default_value'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$items&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #000088;"&gt;$delta&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+  &lt;span style="color: #b1b100;"&gt;if&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$element&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+    &lt;span style="color: #666666; font-style: italic;"&gt;// Set "add more" button.&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$element&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'add_more'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #990000;"&gt;array&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;
+      &lt;span style="color: #0000ff;"&gt;'#type'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'submit'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+      &lt;span style="color: #0000ff;"&gt;'#name'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #990000;"&gt;strtr&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$element_name&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'-'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'_'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #339933;"&gt;.&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'_add_more'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+      &lt;span style="color: #0000ff;"&gt;'#value'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; t&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'Add another item'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+      &lt;span style="color: #0000ff;"&gt;'#limit_validation_errors'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #990000;"&gt;array&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+      &lt;span style="color: #0000ff;"&gt;'#submit'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #990000;"&gt;array&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'example_add_more_submit'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+      &lt;span style="color: #0000ff;"&gt;'#ajax'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #990000;"&gt;array&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;
+        &lt;span style="color: #0000ff;"&gt;'callback'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'example_add_more_js'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+        &lt;span style="color: #0000ff;"&gt;'wrapper'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #000088;"&gt;$wrapper_id&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+        &lt;span style="color: #0000ff;"&gt;'effect'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'fade'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+      &lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+    &lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$element&lt;/span&gt; &lt;span style="color: #339933;"&gt;+=&lt;/span&gt; &lt;span style="color: #990000;"&gt;array&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;
+      &lt;span style="color: #0000ff;"&gt;'#tree'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #009900; font-weight: bold;"&gt;TRUE&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+      &lt;span style="color: #0000ff;"&gt;'#theme'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'example_multiple_value_form'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+      &lt;span style="color: #0000ff;"&gt;'#example_multiple_value_element_name'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #000088;"&gt;$element_name&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+      &lt;span style="color: #0000ff;"&gt;'#prefix'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'&lt;div id="'&lt;/span&gt; &lt;span style="color: #339933;"&gt;.&lt;/span&gt; &lt;span style="color: #000088;"&gt;$wrapper_id&lt;/span&gt; &lt;span style="color: #339933;"&gt;.&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'"&gt;'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+      &lt;span style="color: #0000ff;"&gt;'#suffix'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'&lt;/div&gt;'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+      &lt;span style="color: #0000ff;"&gt;'#max_delta'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #000088;"&gt;$max&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+    &lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+  &lt;span style="color: #b1b100;"&gt;return&lt;/span&gt; &lt;span style="color: #000088;"&gt;$element&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;Ряд комментариев по вышеуказанной функции:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;Текущее количество элементов в множественном поле будет хранится в &lt;em&gt;$form_state&lt;/em&gt; (для этого требуется уникальность передаваемого имени);&lt;/li&gt;
+	&lt;li&gt;За добавление новых элементов будет отвечать кнопка &lt;em&gt;"Add another item"&lt;/em&gt;, которая будет обработана AJAX-фреймворком Drupal. Для кнопки определены два обработчика: &lt;em&gt;example_add_more_submit()&lt;/em&gt; и &lt;em&gt;example_add_more_js()&lt;/em&gt;. Первый отвечает за непосредственную работу с формой, а второй - за добавление HTML-контента при нажатии на кнопку;&lt;/li&gt;
+	&lt;li&gt;Свойство &lt;em&gt;#limit_validation_errors&lt;/em&gt; предотвратит валидацию формы при добавлении новых элементов. Значение свойства можно оставить пустым, как в примере, либо перечислить элементы, валидацию которых нужно выполнить;&lt;/li&gt;
+	&lt;li&gt;Свойство &lt;em&gt;#example_multiple_value_element_name&lt;/em&gt; понадобится для определения имени элемента при обработке AJAX-запроса;&lt;/li&gt;
+	&lt;li&gt;Для темизации определяется тема &lt;em&gt;example_multiple_value_form&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Определим функцию темизации множественного поля. Она будет очень простой, так как будет содержать только последовательный рендеринг внутренних элементов.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #009933; font-style: italic;"&gt;/**
+ * Implements hook_theme().
+ */&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; example_theme&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$existing&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #000088;"&gt;$type&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #000088;"&gt;$theme&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #000088;"&gt;$path&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #b1b100;"&gt;return&lt;/span&gt; &lt;span style="color: #990000;"&gt;array&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;
+    &lt;span style="color: #666666; font-style: italic;"&gt;// Custom theme for multiple value Form API element.&lt;/span&gt;
+    &lt;span style="color: #0000ff;"&gt;'example_multiple_value_form'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #990000;"&gt;array&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;
+      &lt;span style="color: #0000ff;"&gt;'render element'&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&gt;&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'element'&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+    &lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+ 
+&lt;span style="color: #009933; font-style: italic;"&gt;/**
+ * Returns HTML for an multiple form element.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - element: A render element representing the form element.
+ *
+ * @return string
+ *   The HTML output.
+ */&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; theme_example_multiple_value_form&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$variables&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$element&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$variables&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'element'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$output&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;''&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+  &lt;span style="color: #b1b100;"&gt;foreach&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;element_children&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$element&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #b1b100;"&gt;as&lt;/span&gt; &lt;span style="color: #000088;"&gt;$key&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+    &lt;span style="color: #000088;"&gt;$output&lt;/span&gt; &lt;span style="color: #339933;"&gt;.=&lt;/span&gt; drupal_render&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$element&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #000088;"&gt;$key&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+  &lt;span style="color: #b1b100;"&gt;return&lt;/span&gt; &lt;span style="color: #000088;"&gt;$output&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;Перейдём к обработчикам кнопки. Они похожи на функции &lt;em&gt;field_add_more_submit()&lt;/em&gt; и &lt;em&gt;field_add_more_js()&lt;/em&gt;, которые применяются в модуле &lt;em&gt;Field&lt;/em&gt;, и которые напрямую также использовать нельзя из-за необходимости передачи информации о поле.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="php geshifilter-php" style="font-family:monospace;"&gt;&lt;span style="color: #009933; font-style: italic;"&gt;/**
+ * Clone of field_add_more_submit() for Form API elements.
+ */&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; example_add_more_submit&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #339933;"&gt;&amp;&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$button&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'triggering_element'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #666666; font-style: italic;"&gt;// Go one level up in the form, to the elements container.&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$element&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; drupal_array_get_nested_value&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #990000;"&gt;array_slice&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$button&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#array_parents'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;0&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #339933;"&gt;-&lt;/span&gt;&lt;span style="color: #cc66cc;"&gt;1&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$element_name&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$element&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#example_multiple_value_element_name'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #666666; font-style: italic;"&gt;// Increment the items count.&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'storage'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'example_multiple_value_form'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #000088;"&gt;$element_name&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;++;&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'rebuild'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #009900; font-weight: bold;"&gt;TRUE&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+ 
+&lt;span style="color: #009933; font-style: italic;"&gt;/**
+ * Clone of field_add_more_js() for Form API elements.
+ */&lt;/span&gt;
+&lt;span style="color: #000000; font-weight: bold;"&gt;function&lt;/span&gt; example_add_more_js&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$button&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$form_state&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'triggering_element'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #666666; font-style: italic;"&gt;// Go one level up in the form, to the elements container.&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$element&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; drupal_array_get_nested_value&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$form&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #990000;"&gt;array_slice&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$button&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#array_parents'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #cc66cc;"&gt;0&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; &lt;span style="color: #339933;"&gt;-&lt;/span&gt;&lt;span style="color: #cc66cc;"&gt;1&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #666666; font-style: italic;"&gt;// Add a DIV around the delta receiving the Ajax effect.&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$delta&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000088;"&gt;$element&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#max_delta'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$element&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #000088;"&gt;$delta&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#prefix'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'&lt;div class="ajax-new-content"&gt;'&lt;/span&gt; &lt;span style="color: #339933;"&gt;.&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #990000;"&gt;isset&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$element&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #000088;"&gt;$delta&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#prefix'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; ? &lt;span style="color: #000088;"&gt;$element&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #000088;"&gt;$delta&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#prefix'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;:&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;''&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #000088;"&gt;$element&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #000088;"&gt;$delta&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#suffix'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #990000;"&gt;isset&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000088;"&gt;$element&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #000088;"&gt;$delta&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#suffix'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; ? &lt;span style="color: #000088;"&gt;$element&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #000088;"&gt;$delta&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt;&lt;span style="color: #009900;"&gt;[&lt;/span&gt;&lt;span style="color: #0000ff;"&gt;'#suffix'&lt;/span&gt;&lt;span style="color: #009900;"&gt;]&lt;/span&gt; &lt;span style="color: #339933;"&gt;:&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;''&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #339933;"&gt;.&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;'&lt;/div&gt;'&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #b1b100;"&gt;return&lt;/span&gt; &lt;span style="color: #000088;"&gt;$element&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/pre&gt;
+
+&lt;p&gt;На этом процесс добавления множественного поля завершён. Форма конфигурации будет иметь вид, подобный тому, что продемонстрирован на расположенном далее скриншоте. При желании можно добавить управление весами значений, как в виджете множественного поля из Field API, что позволит менять расположение значений. Отмечу, что с помощью функции &lt;em&gt;example_multiple_value_form()&lt;/em&gt; можно создавать множественные поля с любым типом элемента (то есть в &lt;em&gt;$item_element&lt;/em&gt; можно задать любую необходимую структуру).&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Множественное поле в кастомной форме Drupal 7" data-entity-type="file" data-entity-uuid="4240d5e8-25a0-49df-9838-d1a88dc8bc5e" src="https://drupal-coder.ru/sites/default/files/inline-images/custom-multiple-value-form-element.png" width="600" height="348" loading="lazy" /&gt;&lt;/p&gt;&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-7" hreflang="ru"&gt;Drupal 7&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=142&amp;2=comment&amp;3=comment" token="Gi91w6AaKqT9rOJRR4AYACGBRd50aonujw32eH7ykoU"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/obmen-tovarami-i-zakazami-internet-magazinov-na-drupal-7-s-1s-predpriyatie-moysklad-klass365" hreflang="ru"&gt;Обмен товарами и заказами интернет-магазинов на Drupal 7 с 1С: Предприятие, МойСклад, Класс365&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-7-uskorenie-vremeni-generacii-stranic-internet-magazina-na-32" hreflang="ru"&gt;Drupal 7: ускорение времени генерации страниц интернет-магазина на 32%&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/pravilnye-otvety-servera-dlya-uskoreniya-indeksacii-sayta" hreflang="ru"&gt;Правильные ответы сервера для ускорения индексации сайта&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Fri, 23 Mar 2018 13:12:52 +0000</pubDate>
+    <dc:creator>Андрей Тымчук</dc:creator>
+    <guid isPermaLink="false">142 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/mnozhestvennoe-pole-v-kastomnoy-forme-drupal-7#comments</comments>
+    </item>
+<item>
+  <title>Создание пользовательских команд Drush</title>
+  <link>https://drupal-coder.ru/blog/sozdanie-polzovatelskih-komand-drush</link>
+  <description>
+&lt;span&gt;Создание пользовательских команд Drush&lt;/span&gt;
+
+&lt;span&gt;&lt;span lang="" about="https://drupal-coder.ru/user/85" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Chubov Roman&lt;/span&gt;&lt;/span&gt;
+
+&lt;span&gt;ср, 03/14/2018 - 19:22&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;&lt;strong&gt;Drush&lt;/strong&gt; - это мощный инструмент командной строки, который поставляется с множеством полезных команд, позволяющих уменьшить количество шаблонных действий при работе с Drupal. В данной статье мы рассмотрим создание собственных drush команд на примере команды, которая будет выводить на экран заголовок ноды по переданному ей в аргументе nid.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Drush command" class="img-responsive" data-entity-type="file" data-entity-uuid="1ce6726e-1c02-4ac5-8046-8dda4dd2fb2c" src="https://drupal-coder.ru/sites/default/files/inline-images/tZPF7nVISNE_kopia.jpg" width="600" height="243" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Создание Drush команд в Drupal 7&lt;/h2&gt;
+
+&lt;p&gt;Для того чтобы добавить кастомную drush команду, мы должны создать собственный модуль и добавить в него файл с именем модуля, который заканчивается на drush.inc. В этом файле нужно реализовать drush_hook_command() и определить в нем нашу команду print-node-title.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code language="php"&gt;
+/**
+ * Implements hook_drush_command().
+ */
+function my_module_drush_command() {
+  $items = array();
+  $items['print-node-title'] = array(
+    'description' =&gt; 'Displays the node title by nid',
+    'aliases' =&gt; array('pnt'),
+    'callback' =&gt; 'drush_print_node_title',
+    'arguments'   =&gt; array('nid' =&gt; 'Node nid'),
+    'bootstrap'   =&gt; DRUSH_BOOTSTRAP_DRUSH,
+  );
+
+  return $items;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Рассмотрим параметры нашей команды более подробно:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li lang="zxx" xml:lang="zxx" xml:lang="zxx"&gt;&lt;strong&gt;description&lt;/strong&gt; - краткое описание команды;&lt;/li&gt;
+	&lt;li lang="zxx" xml:lang="zxx" xml:lang="zxx"&gt;&lt;strong&gt;aliases&lt;/strong&gt; - синоним команды;&lt;/li&gt;
+	&lt;li lang="zxx" xml:lang="zxx" xml:lang="zxx"&gt;&lt;strong&gt;callback&lt;/strong&gt; - функция, которую вызовет команда;&lt;/li&gt;
+	&lt;li lang="zxx" xml:lang="zxx" xml:lang="zxx"&gt;&lt;strong&gt;arguments&lt;/strong&gt; - массив аргументов;.&lt;/li&gt;
+	&lt;li lang="zxx" xml:lang="zxx" xml:lang="zxx"&gt;&lt;strong&gt;bootstrap&lt;/strong&gt; - уровень загрузки Drupal.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Также, можно добавить более подробное описание команды для справки. Для этого нужно реализовать hook_drush_help():&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code language="php"&gt;
+/**
+ * Implements hook_drush_help().
+ */
+function my_module_drush_help($section) {
+  switch ($section) {
+    case 'drush:print-node-title':
+      return dt('Displays the node title by nid.');
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Далее нам остается только добавить коллбэк функцию, которая будет вызвана drush:  &lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code language="php"&gt;
+/**
+ * Command callback.
+ */
+function drush_print_node_title($nid) {
+  $query = db_select('node', 'n');
+  $query-&gt;fields('n', array('title'));
+  $query-&gt;condition('n.nid', $nid);
+  $result = $query-&gt;execute();
+  while ($entry = $result-&gt;fetchAssoc()) {
+      drush_print($entry['title']);
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Чтобы проверить работу новой команды, включаем модуль, переходим в командную строку и запускаем только что созданную команду:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code language="bash"&gt;
+drush pnt node_nid
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Если на сайте существует нода с таким nid, то drush выведет на экран ее заголовок.  &lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h2&gt;Создание Drush команд в Drupal 8&lt;/h2&gt;
+
+&lt;p&gt;Создание пользовательских команд drush в восьмерке делается аналогично. Для этого создаем кастомный модуль и добавляем в него файл module_name.drush.inc. Реализация вышеописанной команды print-node-title в drupal 8 будет выглядеть следующим образом:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code language="php"&gt;
+&lt;?php
+
+/**
+ * Implements hook_drush_help().
+ */
+function my_module_drush_help($section) {
+  switch ($section) {
+    case 'drush:print-node-title':
+      return dt('Displays the node title by nid.');
+  }
+}
+
+/**
+ * Implements hook_drush_command().
+ */
+function my_module_drush_command() {
+  $items = array();
+  $items['print-node-title'] = array(
+    'description' =&gt; dt('Displays the node title by nid'),
+    'aliases' =&gt; array('pnt'),
+    'callback' =&gt; 'drush_print_node_title',
+    'arguments'   =&gt; array('nid' =&gt; 'Node nid'),
+    'bootstrap'   =&gt; DRUSH_BOOTSTRAP_DRUSH,
+  );
+
+  return $items;
+}
+
+/**
+ * Command callback.
+ */
+function drush_print_node_title($nid) {
+  $query = \Drupal::database()-&gt;select('node_field_data', 'n');
+  $query-&gt;fields('n', array('title'));
+  $query-&gt;condition('n.nid', $nid);
+  $result = $query-&gt;execute();
+  while ($entry = $result-&gt;fetchAssoc()) {
+    drush_print($entry['title']);
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-7" hreflang="ru"&gt;Drupal 7&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-8" hreflang="ru"&gt;Drupal 8&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=141&amp;2=comment&amp;3=comment" token="yeVoi7hyE5wgtqWutKPWCkSUemYGk2jLh1Z182UA2Yg"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;</description>
+  <pubDate>Wed, 14 Mar 2018 19:22:17 +0000</pubDate>
+    <dc:creator>Chubov Roman</dc:creator>
+    <guid isPermaLink="false">141 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/sozdanie-polzovatelskih-komand-drush#comments</comments>
+    </item>
+
+  </channel>
+</rss>

@@ -1,0 +1,598 @@
+﻿<!DOCTYPE html>
+<html lang="ru" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
+  <head>
+    <meta charset="utf-8">
+<noscript><style>form.antibot * :not(.antibot-message) { display: none !important; }</style>
+</noscript><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-87805467-1"></script>
+<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag("js", new Date());gtag("set", "developer_id.dMDhkMT", true);gtag("config", "UA-87805467-1", {"groups":"default","anonymize_ip":true,"page_placeholder":"PLACEHOLDER_page_path","allow_ad_personalization_signals":false});</script>
+<meta http-equiv="content-language" content="ru">
+<meta name="description" content="Возможности, которые привнесли в работу программиста системы контроля версий, подняли ее на совершенно иной уровень. И если поначалу, особенно на простых проектах, новый багаж необходимых для этого знаний и навыков несколько пугает — да что там говорить, в первое время заметно замедляет работу,— то со временем с переходом на более сложные задачи становится уже не просто необычным средством бэкапа, а одним из основных инструментов, сохраняющим огромное количество времени, нервов и, в конечном итоге, денег.">
+<meta name="keywords" content="создание сайтов на drupal, разработка Drupal-сайтов">
+<meta property="og:type" content="blog">
+<meta property="og:url" content="https://drupal-coder.ru/blog/primer-raboty-nad-proektom-v-sisteme-kontrola-versii-git">
+<meta property="og:title" content="Пример работы над проектом в системе контроля версий (git)">
+<meta property="og:description" content="Возможности, которые привнесли в работу программиста системы контроля версий, подняли ее на совершенно иной уровень. И если поначалу, особенно на простых проектах, новый багаж необходимых для этого знаний и навыков несколько пугает — да что там говорить, в первое время заметно замедляет работу,— то со временем с переходом на более сложные задачи становится уже не просто необычным средством бэкапа, а одним из основных инструментов, сохраняющим огромное количество времени, нервов и, в конечном итоге, денег.">
+<meta name="Generator" content="Drupal 9 (https://www.drupal.org)">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="..\sites\default\files\android-chrome-256x256.png" type="image/png">
+<link rel="alternate" hreflang="ru" href="primer-raboty-nad-proektom-v-sisteme-kontrola-versii-git.html">
+<link rel="canonical" href="primer-raboty-nad-proektom-v-sisteme-kontrola-versii-git.html">
+<link rel="shortlink" href="primer-raboty-nad-proektom-v-sisteme-kontrola-versii-git.html">
+
+    <title>Пример работы над проектом в системе контроля версий (git) | drupal-coder.ru</title>
+    <link rel="stylesheet" media="all" href="..\sites\default\files\css\css_y8CdfJDNR-tG0CPnRDokR6Eh9OUJplbHLVQ9A8myecQ.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_tFXlTqkfn6J-Qtpt9xbB8JudSaJfOGxRSmpeidDAzPE.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_l8G4voaHcf64TEU2r2Yyz9f53nJ0vU-50MrP1M5xhmk.css">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/@unicorn-fail/drupal-bootstrap-styles@0.0.2/dist/3.4.0/8.x-3.x/drupal-bootstrap.min.css" integrity="sha512-tGFFYdzcicBwsd5EPO92iUIytu9UkQR3tLMbORL9sfi/WswiHkA1O3ri9yHW+5dXk18Rd+pluMeDBrPKSwNCvw==" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_ULmc1mwKFKQRQmxYsjphW6dsh2g6jX4LXXBAtdO0vIE.css">
+
+    
+    <meta name="cmsmagazine" content="3d47b05beba40f3816d9741ee18c01a5">
+
+    
+    
+           <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P4SXQSG');</script>
+<!-- End Google Tag Manager -->
+    
+    
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Bold.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Medium.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Regular.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/fontawesome/webfonts/fa-brands-400.woff2" crossorigin="anonymous">
+    <link rel='manifest' href='..\manifest.json'>
+    <meta name="format-detection" content="telephone=no">
+
+          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MXPCP8Q"></script>
+      </head>
+  <body class="page-node-145 path-node page-node-type-blog has-glyphicons">
+
+                  <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4SXQSG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+      
+          
+
+    <a href="#main-content" class="visually-hidden focusable skip-link">
+      Перейти к основному содержанию
+    </a>
+    
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
+    
+      
+          <header class="navbar navbar-default" id="navbar" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+            <div class="region region-navigation">
+    <section id="block-pikselvkskript" class="block block-block-content block-block-contentbf8d9e8f-617c-4e8f-8501-7586be8255e0 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script>(window.Image ? (new Image()) : document.createElement('img')).src = 'https://vk.com/rtrg?p=VK-RTRG-238064-1VWIQ';</script></div>
+      
+  </section>
+
+<section id="block-globalsitetagadwords" class="block block-block-content block-block-content27617f8e-58d1-4a2a-9f23-31eab95a43c8 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><!-- Global site tag (gtag.js) - AdWords: 948581894 -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=AW-948581894"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-948581894');
+</script></div>
+      
+  </section>
+
+            <a class="logo navbar-btn pull-left" href="..\index.htm" title="Главная" rel="home">
+            <img src="..\themes\custom\bootstrap_dc\images\logo-initlab.svg" alt="Главная" width="156" height="31">
+        </a>
+            
+  </div>
+
+        </div>
+                          <div class="navbar-collapse-wrapper">
+
+            <div class="navbar-collapse collapse">
+                <div class="region region-navigation-collapsible">
+    <nav role="navigation" aria-labelledby="block-bootstrap-dc-main-menu-menu" id="block-bootstrap-dc-main-menu">
+            
+  <h2 class="visually-hidden" id="block-bootstrap-dc-main-menu-menu">Основная навигация</h2>
+  
+
+        
+              <ul class="menu nav navbar-nav">
+                      <li><a href="..\support.html" data-drupal-link-system-path="node/1">Поддержка Drupal</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-admin.html" class="dropdown-toggle" data-toggle="dropdown">DevOps <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\import-migrate-upgrade.html" data-drupal-link-system-path="node/4">Миграция</a>
+                  </li>
+                  <li><a href="..\backup.html" data-drupal-link-system-path="node/3">Бэкапы</a>
+                  </li>
+                  <li><a href="..\drupal-security-audit.html" data-drupal-link-system-path="node/9">Аудит безопасности</a>
+                  </li>
+                  <li><a href="..\boost-drupal.html" data-drupal-link-system-path="node/5">Оптимизация скорости</a>
+                  </li>
+                  <li><a href="..\ssl.html" data-drupal-link-system-path="node/99">Переезд на https</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\blog.html" data-drupal-link-system-path="blog">Блог</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-seo.html" class="dropdown-toggle" data-toggle="dropdown">Продвижение <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\drupal-seo\context.html" data-drupal-link-system-path="node/111">Реклама</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li class="expanded dropdown"><a href="..\team.html" class="dropdown-toggle" data-toggle="dropdown">О нас <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\team.html#team" data-drupal-link-system-path="team">Команда</a>
+                  </li>
+                  <li><a href="..\drupalgive.html" data-drupal-link-system-path="node/135">Drupalgive</a>
+                  </li>
+                  <li><a href="..\drupal-courses.html" data-drupal-link-system-path="node/10">Курсы Drupal</a>
+                  </li>
+                  <li><a href="..\vacancies.html" data-drupal-link-system-path="vacancies">Вакансии</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\happy-customers.html" data-drupal-link-system-path="happy-customers">Проекты</a>
+                  </li>
+                  <li><a href="..\contacts.html" data-drupal-link-system-path="node/86">Контакты</a>
+                  </li>
+              </ul>
+      
+
+
+  </nav>
+
+  </div>
+
+            </div>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+              </div>
+    </header>
+  
+
+      <div class="page-header-big" role="heading">
+        <div class="container">
+            <div class="region region-header">
+        <h1 class="page-header">
+<span>Пример работы над проектом в системе контроля версий (git)</span>
+</h1>
+
+<section class="views-element-container block block-views block-views-blockuser-block-1 clearfix" id="block-views-block-user-block-1">
+  
+    
+
+      <div class="form-group"><div class="view view-user view-id-user view-display-id-block_1 js-view-dom-id-aa3349f89d0f9abb36e0935bdb94388a93982115e6045ecf7f909fb8e948a74b">
+  
+    
+      
+      <div class="view-content">
+          <div class="views-row"><div class="views-field views-field-user-picture"><div class="field-content">  <img loading="lazy" src="..\sites\default\files\styles\avatar_mini\public\pictures\2019-12\IMG_2497_0.jpg?itok=8NXHrHsQ" width="45" height="45" alt="" typeof="foaf:Image" class="img-responsive">
+
+
+</div></div><div class="views-field views-field-field-name"><div class="field-content">Зубенко Алексей</div></div></div>
+
+    </div>
+  
+          </div>
+</div>
+
+  </section>
+
+<section id="block-yashare" class="block-yashare block block-block-content block-block-contentee72d8fb-02e9-4ef6-8e71-0df16bee86a9 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+<script src="//yastatic.net/share2/share.js"></script>
+<div class="ya-share2" data-services="vkontakte,odnoklassniki,gplus,twitter"></div></div>
+      
+  </section>
+
+
+  </div>
+
+        </div>
+      
+    </div>
+  
+
+<div class="main-wrapper">
+  <div role="main" class="main-container container js-quickedit-main-content">
+    <div class="row">
+
+
+
+            
+                  <section class="col-sm-12">
+
+                
+                
+                
+                                      
+                  
+                          <a id="main-content"></a>
+            <div class="region region-content">
+        <ol class="breadcrumb">
+          <li>
+                  <a href="..\blog.html">Блог</a>
+              </li>
+          <li class="active">
+                  Пример работы над проектом в системе контроля версий (git)
+              </li>
+      </ol>
+
+<div data-drupal-messages-fallback="" class="hidden"></div>
+  <article data-history-node-id="145" role="article" about="https://drupal-coder.ru/blog/primer-raboty-nad-proektom-v-sisteme-kontrola-versii-git" class="blog is-promoted full clearfix">
+
+  
+    
+
+  
+
+  <div class="content">
+    
+    <div id="field-language-display"><div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group">
+      <label class="control-label">Language</label>
+  
+  
+  Russian
+
+  
+  
+  </div>
+</div>
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><p>Возможности, которые привнесли в работу программиста системы контроля версий, подняли ее на совершенно иной уровень. И если поначалу, особенно на простых проектах, новый багаж необходимых для этого знаний и навыков несколько пугает — да что там говорить, в первое время заметно замедляет работу,— то со временем с переходом на более сложные задачи становится уже не просто необычным средством бэкапа, а одним из основных инструментов, сохраняющим огромное количество времени, нервов и, в конечном итоге, денег.</p>
+
+<p>И тут главное выбрать рабочий процесс, который бы максимально удовлетворял запросам компании. Об одном из таких шаблонов я бы хотел рассказать. Я сам познакомился с GIT сравнительно недавно, а вплотную использую его не более полугода, поэтому мое описание вряд ли будет претендовать на полноту. Однако, возможно, именно такое объяснение на пальцах поможет правильно понять необходимые основы.</p>
+
+<p>Цепочка применения изменений в нашем случае будет выглядеть как «Feature» -&gt; «Dev» -&gt; «Production». Между «dev» и «production» еще может возникать «stage», но это уже зависит от конкретных особенностей проекта, в том числе финансовых.</p>
+
+<p>То есть изменения, внесенные в проект разработчиком, переносятся на тестовый сайт, где происходит необходимое тестирование. После принятия решения о пригодности изменений они заливаются на stage, равный во всех отношениях «боевой» площадке и далее уже копируются на нее.</p>
+
+<p><strong>Как это выглядит на пальцах?</strong></p>
+
+<p>Программист на локальной машине создает новую ветку, в котрой он будет работать над поставленной задачей. И тут надо запомнить первую и одну из самых главных тонкостей - ветка создается только от актуальной основной («master») ветки.</p>
+
+<p>Почему именно так? Какими бы не были схожими ваши ветки, они все разные, причем иногда разные кардинально - начиная от прав доступа к файлам и заканчивая порой совершенно неопределимыми различиями, исток которых, по всей видимости, кроется чуть ли не в рознящихся контрольных суммах. Однако в конечном итоге любые изменения будут заливаться в основную ветку, на которой работает production. И стоит при создании новой ветки по невнимательности отнаследоваться от другой — и долгие часы разруливания конфликтов вам обеспечены.</p>
+
+<p>То есть что бы ни происходило в нашей голове, мы должны сделать следующие шаги:</p>
+
+<p>Переключаемся на основную ветку:</p>
+
+<pre>
+git checkout master</pre>
+
+<p>Обновляем ее:</p>
+
+<pre>
+git pull -p</pre>
+
+<p>В общих чертах pull состоит из двух компонентов: команды fetch, которая подтягивает изменения с удаленного репозитория, и команды merge, которая совмещает эти изменения с вашей локальной веткой.</p>
+
+<p>Параметр «-p» слабо документирован, однако очень приятен в работе. Формально он никак не относится к самой команде pull, потому вы вряд ли найдете упоминание о нем в ее описании. Однако он передается в fetch, что приводит к удалению всех локальных веток, которые ранее существовали, но были удалены из удаленного репозитория. По сути это избавляет вас от исторического мусора, который со временем начинает доставлять боль при выводе списка веток, не говоря уже о невозможности пользоваться атодополнением.</p>
+
+<p>Создаем feature-ветку</p>
+
+<pre>
+git checkout -b [название-ветки]</pre>
+
+<p>Давайте договоримся, что далее будем ее назвать, например «task-name»</p>
+
+<p>Теперь можно работать в свое удовольствие, ну или ради чего вы там все это затеяли.</p>
+
+<p>Интересное начинается позже. Пока мы пишем код, тем же занимаются и наши коллеги. Да, порой это трудно признать, но помимо вас тоже есть люди, которые работают. И в основную ветку начинают заливаться изменения, которые все далее и далее отдаляют ее от вашей. Простейший алгоритм слияния изменений, который используется гитом (включение или кода между соседними одинаковыми строками) уже не сработает - структура master изменилась. То есть если мы закончим нашу работу, тщательно протестируем все локально и начнем сливать все в master, то увидим кучу незнакомого кода, который, как кажется, специально написан в самых неподходящих местах, чтобы испортить нашу жизнь.</p>
+
+<p>Как избежать этого? Если честно, то, к сожалению, практически никак. Рано или поздно нам придется исправлять возникающие конфликты. Вопрос — когда и сколько сразу. Здесь есть два подхода.</p>
+
+<p>Если коротко, то первый состоит в том, чтобы сделать это в самом конце, когда будем сливать изменения в вышестоящую ветку (в нашем случае это ветка, соответствующая stage-сайту). У этого метода есть свои преимущества, но все равно будет много боли, причем сразу. При этом психологически будет сложнее, потому что в уме вы свою работу уже сделали и хочется поскорее про нее забыть, как про страшный сон.</p>
+
+<p>Вторая состоит в использовании rebase. Что это за зверь такой, надо сказать, я не сразу понял. Каждый раз, когда я в чтении мануалов доходил до этого момента, глаза застилала пелена и с мыслью о том, что уж это-то мне точно не пригодится еще пару лет, я шел прокрастинировать дальше.</p>
+
+<p>На самом деле все достаточно просто. Rebase - это процесс подтягивания изменений с основной ветки (вообще, с любой, но мы сейчас не об этом) в вашу. Иначе говоря, каждый божий день, перед работой и перед отправкой изменений на удаленный репозиторий вы заливаете все последние изменения с той ветки, от которой отнаследовались при создании вашей (конечно же, от master) и исправляете небольшую порцию конфликтов, если они есть.</p>
+
+<p>Далее мы предполагаем, что вы находитесь на своей feature-ветке.</p>
+
+<p>Ребейз можно делать на локальную ветку и тогда это будет выглядеть так:</p>
+
+<pre>
+git rebase master</pre>
+
+<p>Но на самом деле это не сильно удобно, потому что локальная ветка имеет все шансы быть неактуальной (а регулярно переключаться на нее и делать git pull просто так на всякий случай - занятие, как бы это сказать, из области психиатрии). Поэтому мы сделаем иначе:</p>
+
+<pre>
+git pull -r origin master</pre>
+
+<p>То есть все примерно то же самое, но мы ребейзим не на локальный, а на удаленный, оригинальный master, как бы далеко он не ушел от локального.</p>
+
+<p>В процессе ребейза все ваши коммиты последовательно сливаются в master.</p>
+
+<p>При возникновении конфликтов, о чем git нам непременно сообщит кучей гневных сообщений, мы их правим (некоторые подробности чуть ниже по тексту), добавляем исправленные файлы:</p>
+
+<pre>
+git add -u</pre>
+
+<p>и продолжаем процесс ребейза:</p>
+
+<pre>
+git rebase --continue</pre>
+
+<p>Исправление текущего конфликта в редких случаях можно пропустить:</p>
+
+<pre>
+git rebase --skip</pre>
+
+<p>Или полностью откатить весь процесс:</p>
+
+<pre>
+git rebase --abort</pre>
+
+<p>Небольшая неожиданность возникнет при попытке залить отребейзенную ветку на удаленный репозиторий. Обычный git push уже не сработает, потому что с точки зрения репозитория ваша локальная и удаленная ветки расходятся и не могут быть слиты, что совершенно правильно.</p>
+
+<p>Поэтому мы будем вынуждены отправить нашу измененную ветку насильно:</p>
+
+<pre>
+git push -f</pre>
+
+<p>И здесь кроется небольшой недостаток метода, так как история изменений при этом теряется, и если вы накосячили с ребейзом, исправить содеянное будет уже не так легко. Поэтому если изменений много и они существенные, то перед началом ребейза не лишним будет подстраховаться и сделать копию ветки:</p>
+
+<pre>
+git checkout -b task-name-backup</pre>
+
+<p>И не забудьте переключиться назад перед ребейзом и дальнейшей работой:</p>
+
+<pre>
+git checkout task-name</pre>
+
+<p>И обязательно, в самом конце, когда все и везде протестировано и уже есть добро на перенос вашей работы на рабочий сайт, снова сделать ребейз, чтобы merge в master не вызвал неожиданностей.</p>
+
+<p>Но это чуть позже. Сейчас мы уверены, что все хорошо и можно отдавать работу на тестирование. Мы делаем мерж в ветку, на которой работает дев-сайт. Могу поспорить, что она так и называется — dev.</p>
+
+<p>Ребейзим ветку на master (не обязательно, но не помешает, к тому же должно уменьшить расхождение между dev и master):</p>
+
+<pre>
+git pull -r origin master</pre>
+
+<p>Переключаемся на dev и актуализируем ее:</p>
+
+<pre>
+git checkout dev
+git pull</pre>
+
+<p>Внимание - короткая дорога:</p>
+
+<pre>
+git checkout -B dev origin/dev</pre>
+
+<p>Так мы одномоментно переключимся и сбросим ветку до состояния origin - меньше телодвижений всяко приятней.</p>
+
+<p>Сливаем ветки:</p>
+
+<pre>
+git merge task-name</pre>
+
+<p>С большой степенью вероятности получаем конфликты, количество которых зависит от нашей кармы.</p>
+
+<p>Смотрим список того, что конфликтует:</p>
+
+<pre>
+git status</pre>
+
+<p>Проводим некоторое время над разрешением конфликтов. Все конфликты git отмечает примерно следующим образом:</p>
+
+<pre>
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+    &lt;link type="text/css" rel="stylesheet" media="all" href="style.css" /&gt;
+=======
+    &lt;!-- no style --&gt;
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; task-name</pre>
+
+<p>Собственно, по этим многочисленным угловым скобкам и можно провести поиск в каждом конфликтующем файле.</p>
+
+<p>В принципе, этой разметки и должной степени сосредоточенности должно хватить на разруливание всего этого ужаса. В особо сложных случаях можно воспользоваться каким-нибудь инструментом по разрешению merge-конфликтов, которые, в частности, есть почти у каждого серьезного IDE. Хотя это по большей части даст вам лишь более человечный интерфейс.</p>
+
+<p>Учтите, неизвестный вам код в большинстве случаев не нужно удалять - его потом другие люди искать будут.</p>
+
+<p>Как и вслучае с ребейзом, процесс мержа можно откатить:</p>
+
+<pre>
+git merge --abort</pre>
+
+<p>Когда все конфликты разрешены, а соответствующее им обрамление удалено, делаем git add исправленных файлов. Впрочем, делаем в большинстве случаев добавление всех измененных файлов:</p>
+
+<pre>
+git add -u</pre>
+
+<p>Создаем коммит с указанием того, что решали конфликты слияния (далее дева этот коммит не пойдет и карму нам не испортит)</p>
+
+<pre>
+git commit -m "Task-name - fixing merge conflicts"</pre>
+
+<p>И заливаем все это на удаленный репозиторий.</p>
+
+<pre>
+git push</pre>
+
+<p>Далее специально обученные люди решают, насколько ваше творение соответствует общественным ожиданиям, однако рано или поздно будет принято решение мержить ветку в production.</p>
+
+<p>И тут еще одна тонкость. Я бы сказал - жирность: dev и master сайты находятся в этой цепочке не последовательно, а параллельно. Иными словами, мы не переносим изменения из dev в master. Feature-ветка мержится в master напрямую. Во многом именно поэтому мы наследуемся именно от мастера и регулярно на этот мастер ребейзим.</p>
+
+<p>Конечно, такой процесс неизбежно приведет к росту расхождений между рабочим и тестовым сайтом, но по мере необходимости последний можно актуализировать, попросту делая push --force мастера в дев.</p>
+
+<p><strong>Какие могут быть проблемы и как их избежать</strong></p>
+
+<p>Никак. Если проект большой, то так или иначе вы будете сталкиваться с необходимостью при решении конфликтов разбираться не только в своем, но и в чужом коде. И здесь важно не только обеспечить работоспособность своего функционала, но и не сломать чужой. Для этого нужно при необходимости тесно контактировать с другими разработчиками и никогда не действовать по принципу «что это тут за лишний код понапоявлялся... скопирую-ка я в этой файл содержимое своей ветки». Иначе отдельный котел вам будет обеспечен, и хорошо, если в иной жизни, а не в этой, причем вечером и в пятницу.</p>
+
+<p>Очень хорошо, если ваши коллеги руководствуются теми же принципами. В таком случае вы будете избавлены от неожиданностей, когда заказчик начинает обвинять вас в поломке, при этом ни он и ни вы до поры до времени даже не подозреваете, что порядочный кусок кода был удален нерадивым сотрудником.</p>
+
+<p>Ну и, безусловно, основная доля серьезных проблем возникает, если вы или кто-то из сотрудников нарушает основные правила работы с репозиторием - начинают ветку не от master или даже работают непосредственно в master.</p>
+
+<p><strong>Итого</strong></p>
+
+<p>В любом деле понимание приходит по большей части с опытом, поэтому даже если вы освоили теорию и красиво рисуете схемы ветвления на бумаге, это не избавит вас от необходимости хождения по граблям. Это нормально. Главное - делать правильные выводы из каждого такого случая.</p></div>
+      
+      <div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items">
+              <div class="field--item category-tag"><a href="git.html" hreflang="ru">git</a></div>
+              <div class="field--item category-tag"><a href="svn.html" hreflang="ru">svn</a></div>
+          </div>
+  
+
+      <div class="field-yashare">
+        <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+        <script src="//yastatic.net/share2/share.js"></script>
+        <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+                <div class="ya-share2" id="block-ya-share2" data-services="vkontakte,facebook,odnoklassniki,gplus,twitter"></div>
+        <a href="..\rss.rss" target="_blank"><span class="iconify" id="block-iconify" data-icon="ion:logo-rss" style="color: #da8c2c;" data-width="29" data-height="29"></span></a>
+              </div>
+  </div>
+
+  <section>
+  
+  
+ 
+      <div class="comment-form-wrapper">
+      <h2 class="block-form-title">Добавить комментарий</h2>
+      <form class="comment-comment-form comment-form antibot" data-drupal-selector="comment-form" data-action="https://drupal-coder.ru/comment/reply/node/145/comment" action="/antibot" method="post" id="comment-form" accept-charset="UTF-8">
+  <noscript>
+  <div class="antibot-no-js antibot-message antibot-message-warning">Вы должны включить JavaScript чтобы использовать эту форму.</div>
+</noscript>
+<div class="form-item js-form-item form-type-textfield js-form-type-textfield form-item-name js-form-item-name form-group">
+      <label for="edit-name" class="control-label">Ваше имя</label>
+  
+  
+  <input placeholder="Ваше имя" data-drupal-selector="edit-name" class="form-text form-control" type="text" id="edit-name" name="name" value="" size="30" maxlength="60">
+
+  
+  
+  </div>
+<input autocomplete="off" data-drupal-selector="form-ys-f52eudokifevsfauv3xn0y-pwhkxp7gg0avmd53m" type="hidden" name="form_build_id" value="form-yS_F52euDoKIfevsFAuv3Xn0Y_pwHkXP7gg0aVmD53M"><input data-drupal-selector="edit-comment-comment-form" type="hidden" name="form_id" value="comment_comment_form"><input data-drupal-selector="edit-antibot-key" type="hidden" name="antibot_key" value=""><div class="field--type-text-long field--name-comment-body field--widget-text-textarea form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-wrapper" id="edit-comment-body-wrapper">      <div class="js-text-format-wrapper text-format-wrapper js-form-item form-item">
+  <div class="form-item js-form-item form-type-textarea js-form-type-textarea form-item-comment-body-0-value js-form-item-comment-body-0-value">
+      <label for="edit-comment-body-0-value" class="control-label js-form-required form-required">Комментарий</label>
+  
+  
+  <div class="form-textarea-wrapper">
+  <textarea class="js-text-full text-full form-textarea required form-control resize-vertical" data-media-embed-host-entity-langcode="ru" data-drupal-selector="edit-comment-body-0-value" id="edit-comment-body-0-value" name="comment_body[0][value]" rows="5" cols="60" placeholder="" required="required" aria-required="true"></textarea>
+</div>
+
+
+  
+  
+  </div>
+<div class="js-filter-wrapper filter-wrapper form-inline form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format" id="edit-comment-body-0-format"><div class="filter-help form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format-help" id="edit-comment-body-0-format-help"><a href="..\filter\tips.html" target="_blank" title="Opens in new window" data-toggle="tooltip" data-drupal-selector="edit-comment-body-0-format-help-about" class="icon-before" id="edit-comment-body-0-format-help-about"><span class="icon glyphicon glyphicon-question-sign" aria-hidden="true"></span>О текстовых форматах</a></div>
+</div>
+
+  </div>
+
+  </div>
+<div data-drupal-selector="edit-actions" class="form-actions form-group js-form-wrapper form-wrapper" id="edit-actions"><button data-drupal-selector="edit-submit" class="button button--primary js-form-submit form-submit btn-primary btn" type="submit" id="edit-submit" name="op" value="Отправить">Отправить</button></div>
+
+</form>
+
+    </div> 
+  
+</section>
+
+
+</article>
+
+
+  </div>
+
+              </section>
+
+                </div>
+  </div>
+
+
+      <footer class="footer" role="contentinfo">
+      <div class=" container">  
+          <div class="region region-footer">
+    <section id="block-footerphone" class="block block-block-content block-block-content07b69e1d-d1db-4e8b-bb14-dc4563ef50bc clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="block-form-contacts">
+  <ul>
+    <li class="block-form-phone"><a href="tel:88002222673">8 800 222-26-73</a></li>
+  </ul>
+</div></div>
+      
+  </section>
+
+<section id="block-copyright" class="block block-block-content block-block-content263c1cb2-b142-4488-af8e-99f92fcb7640 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="social-links">
+  <ul class="social-links-wrapper">
+    <li class="social-links-item"><a target="_blank" href="https://vk.com/initlab"><i class="fab fa-vk"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://teleg.one/initlabbot" title="Свяжитесь с нами"><i class="fab fa-telegram-plane"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.youtube.com/channel/UCyFEbngMB-bK2ulNtd_W43A"><i class="fab fa-youtube"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://zen.yandex.ru/id/6037ce072f500a068c630fec"><img style="width: 16px; margin-bottom: 5px;" src="..\sites\default\files\icons\zen-icon.svg"></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.facebook.com/initlabkr/"><img style="width: 25px; margin-bottom: 5px;" src="..\sites\default\files\icons\icon-facebook-ru-dc.svg"></a></li>
+  </ul>  
+</div>
+
+<p>ООО «Инитлаб», Краснодар, Россия.
+<a class="goal__tel" href="tel:+78002222673">8 800 222-26-73</a><br>
+Drupal является зарегистрированной торговой маркой Dries Buytaert.</p>
+</div>
+      
+  </section>
+
+
+  </div>
+
+      </div>
+    </footer>
+  </div>
+
+  </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"node\/145","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"ru"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"ajaxPageState":{"libraries":"antibot\/antibot.form,bootstrap\/popover,bootstrap\/theme,bootstrap\/tooltip,bootstrap_dc\/bootstrap-scripts,bootstrap_dc\/dc,bootstrap_dc\/global-styling,bootstrap_dc\/seo,colorbox\/default,colorbox_inline\/colorbox_inline,colorbox_load\/colorbox_load,filter\/drupal.filter,geshifilter\/geshifilter,google_analytics\/google_analytics,ng_lightbox\/ng_lightbox,system\/base,views\/views.module","theme":"bootstrap_dc","theme_token":null},"ajaxTrustedUrl":{"https:\/\/drupal-coder.ru\/comment\/reply\/node\/145\/comment":true},"colorbox":{"opacity":"0.85","current":"{current} \u0438\u0437 {total}","previous":"\u00ab \u041f\u0440\u0435\u0434\u044b\u0434\u0443\u0449\u0438\u0439","next":"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0439 \u00bb","close":"Close","maxWidth":"98%","maxHeight":"98%","fixed":true,"mobiledetect":true,"mobiledevicewidth":"480px"},"google_analytics":{"account":"UA-87805467-1","trackOutbound":true,"trackMailto":true,"trackTel":true,"trackDownload":true,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip","trackColorbox":true},"bootstrap":{"forms_has_error_value_toggle":1,"modal_animation":1,"modal_backdrop":"true","modal_focus_input":1,"modal_keyboard":1,"modal_select_text":1,"modal_show":1,"modal_size":"","popover_enabled":1,"popover_animation":1,"popover_auto_close":1,"popover_container":"body","popover_content":"","popover_delay":"0","popover_html":0,"popover_placement":"right","popover_selector":"","popover_title":"","popover_trigger":"click","tooltip_enabled":1,"tooltip_animation":1,"tooltip_container":"body","tooltip_delay":"0","tooltip_html":0,"tooltip_placement":"auto left","tooltip_selector":"","tooltip_trigger":"hover"},"antibot":{"forms":{"comment-form":{"id":"comment-form","key":"5D-i6uDYb-gr3-4qQZFOE5ec3-2jdoq6QSz9J26Pt50"}}},"user":{"uid":0,"permissionsHash":"66bb25c0b665c533dd9436d0cd4e99532a723088208bff0a05f2bf113d3703ac"}}</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="..\sites\default\files\js\js_kFVTvKCxW3cWmdAcJABrE5Fa90cD_Go5IxgQw9oFgJ0.js"></script>
+<script src="..\sites\default\files\js\js_d5BC-2wlh3XH4S29GgaPGie7NxyWY0K1EhPg30LGzwA.js"></script>
+<script src="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+<script src="..\sites\default\files\js\js_CNCJCgJnATwdWHfgCEncmZchd6pVQciEiBxkoYS9btY.js"></script>
+<script src="..\sites\default\files\js\js_PZPdVr1rIFXjUagjykPULRTCC8T4ZfIghTqFAwKg6ZI.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:og="http://ogp.me/ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:schema="http://schema.org/" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" version="2.0" xml:base="https://drupal-coder.ru/">
+  <channel>
+    <title>Unity</title>
+    <link>https://drupal-coder.ru/</link>
+    <description/>
+    <language>ru</language>
+    
+    <item>
+  <title>Использование React JS компонентов в Unity</title>
+  <link>https://drupal-coder.ru/blog/ispolzovanie-react-js-komponentov-v-unity</link>
+  <description>
+&lt;span&gt;Использование React JS компонентов в Unity&lt;/span&gt;
+
+&lt;span&gt;&lt;span lang="" about="https://drupal-coder.ru/user/86" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;a.savinov&lt;/span&gt;&lt;/span&gt;
+
+&lt;span&gt;ср, 05/16/2018 - 12:39&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p dir="ltr"&gt;Доброго времени суток. В данной статье рассматривается пример реализации ReactJS-компонента в мобильном приложении, разработанном на движке Unity 2017.4 LTS. Польза владения таким инструментом обусловлена тем, что на момент написания настоящей статьи ReactJS является самой популярной библиотекой для создания веб-компонентов, и таких компонентов уже написано превеликое множество. Так почему бы этим не воспользоваться? Можно просто вставить готовый веб-компонент, который визуально будет неотличим от компонента интерфейса, реализованного на движке. Кроме того, даже если Вы не нашли нужное, то очевидно, что верстать и добавлять интерактив с помощью HTML+CSS+JS гораздо проще и приятнее, чем в Unity. Конечно, придется реализовать взаимодействие веб-компонента и приложения, о чем будет рассказано в статье.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Начнем с почвы. Для того, чтобы встроить React-компонент в мобильное приложение нам нужны React-компонент и мобильное приложение. Исходный код React-компонента Вы можете найти по &lt;a href="https://github.com/svnvav/about-component"&gt;этой&lt;/a&gt; ссылке, а проект Unity с уже встроенным WebView - по &lt;a href="https://github.com/svnvav/unity-webview-react"&gt;этой&lt;/a&gt;. WebView в данном контексте - это специальная обертка над встроенным в устройство браузером для вывода веб-страниц внутри приложения. В своих проектах мы используем две различных кроссплатформенных реализации WebView: &lt;a href="https://assetstore.unity.com/packages/tools/integration/cross-platform-native-plugins-ultra-pack-31086"&gt;платную&lt;/a&gt; и &lt;a href="https://github.com/gree/unity-webview"&gt;бесплатную&lt;/a&gt;. В примере, естественно, используется бесплатная.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Итак, с одной стороны имеется инструмент, позволяющий выводить Веб-страницы в приложении, реагировать на событие загрузки страницы при помощи одного callback-метода, принимать и обрабатывать сообщения от браузера при помощи другого, а также выполнять JavaScript-код. С другой - обыкновенный Веб-компонент, скрипт для которого написан на ReactJS. Цель - подружить обе стороны.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;В общем случае нет необходимости как-то менять Веб-компонент для отображения через WebView, поскольку WebView использует встроенный в устройство браузер. При такой постановке страница выведется как есть. Нас такой расклад не устроил по двум причинам: во-первых, мы разрабатываем мобильное приложение, во-вторых, хотелось бы при инициализации React-компонента сразу передать ему нужные данные.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Первое накладывает свой отпечаток на файле HTML-разметки, в котором рендерится компонент. А именно, в содержимое тега &lt;head/&gt; мы поместили следующую мета-информацию.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="html5 geshifilter-html5" style="font-family:monospace;"&gt; &lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;
+
+&lt;p dir="ltr"&gt;Решение второй задачи, как можно видеть в предоставленном примере, заключается в том, что мы оборачиваем инициализацию ReactDOM.render() в функцию с параметром для данных, которую затем вызовем из приложения.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="javascript geshifilter-javascript" style="font-family:monospace;"&gt;window.&lt;span style="color: #660066;"&gt;createAboutComponent&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #000066; font-weight: bold;"&gt;function&lt;/span&gt; &lt;span style="color: #009900;"&gt;(&lt;/span&gt;data&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+    ReactDOM.&lt;span style="color: #660066;"&gt;render&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt; document.&lt;span style="color: #660066;"&gt;getElementById&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #3366CC;"&gt;'container'&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;
+
+&lt;p dir="ltr"&gt;С обыкновенными React-компонентами разобрались. Далее мы хотели улучшить компонент, добавив возможность передавать сообщения приложению. В предложенной реализации Webview это осуществляется при помощи объекта window.Unity, который содержит функцию call, обеспечивающую передачу строки в callback-метод C#. Для удобства лучше вынести взаимодействие компонента с Unity в отдельный скрипт.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="javascript geshifilter-javascript" style="font-family:monospace;"&gt;&lt;span style="color: #000066; font-weight: bold;"&gt;function&lt;/span&gt; createAPIObject&lt;span style="color: #009900;"&gt;(&lt;/span&gt;w&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #000066; font-weight: bold;"&gt;const&lt;/span&gt; APIObject &lt;span style="color: #339933;"&gt;=&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+ 
+    &lt;span style="color: #006600; font-style: italic;"&gt;//Закрывает Webview в приложении&lt;/span&gt;
+    close&lt;span style="color: #339933;"&gt;:&lt;/span&gt; &lt;span style="color: #000066; font-weight: bold;"&gt;function&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+      &lt;span style="color: #000066; font-weight: bold;"&gt;if&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;window.&lt;span style="color: #660066;"&gt;Unity&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; window.&lt;span style="color: #660066;"&gt;Unity&lt;/span&gt;.&lt;span style="color: #660066;"&gt;call&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #3366CC;"&gt;"close"&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+ 
+  &lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+  APIObject.&lt;span style="color: #660066;"&gt;close&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; APIObject.&lt;span style="color: #660066;"&gt;close&lt;/span&gt;.&lt;span style="color: #660066;"&gt;bind&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;APIObject&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+  &lt;span style="color: #000066; font-weight: bold;"&gt;return&lt;/span&gt; APIObject&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+ 
+let api&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+&lt;span style="color: #006600; font-style: italic;"&gt;//Инициализация объекта API&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #000066; font-weight: bold;"&gt;function&lt;/span&gt; Init&lt;span style="color: #009900;"&gt;(&lt;/span&gt;w&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  &lt;span style="color: #000066; font-weight: bold;"&gt;if&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;&lt;span style="color: #339933;"&gt;!&lt;/span&gt;w.&lt;span style="color: #660066;"&gt;unityApi&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+    api &lt;span style="color: #339933;"&gt;=&lt;/span&gt; createAPIObject&lt;span style="color: #009900;"&gt;(&lt;/span&gt;w&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+    w.&lt;span style="color: #660066;"&gt;unityApi&lt;/span&gt; &lt;span style="color: #339933;"&gt;=&lt;/span&gt; api&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;}&lt;/span&gt; &lt;span style="color: #000066; font-weight: bold;"&gt;else&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+    api &lt;span style="color: #339933;"&gt;=&lt;/span&gt; w.&lt;span style="color: #660066;"&gt;unityApi&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+  &lt;span style="color: #009900;"&gt;}&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #009900;"&gt;(&lt;/span&gt;window&lt;span style="color: #009900;"&gt;)&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;
+ 
+&lt;span style="color: #FF0000;"&gt;export&lt;/span&gt; &lt;span style="color: #000066; font-weight: bold;"&gt;default&lt;/span&gt; &lt;span style="color: #009900;"&gt;{&lt;/span&gt;
+  close&lt;span style="color: #339933;"&gt;:&lt;/span&gt; api.&lt;span style="color: #660066;"&gt;close&lt;/span&gt;&lt;span style="color: #339933;"&gt;,&lt;/span&gt;
+&lt;span style="color: #009900;"&gt;}&lt;/span&gt;&lt;span style="color: #339933;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;
+
+&lt;p dir="ltr"&gt;Теперь, добавляя в скрипт зависимость import unityApi from '../utils/unityApi';&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;разработчик получает доступ к функциям взаимодействия с Unity приложением.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Далее перейдем к нюансам в Unity. Есть две проблемы, причем, одна только с Android, другая со всеми, кроме Android. В Android, как известно, всё содержимое приложения есть Java-архив, из-за чего Unity приходится особым образом взаимодействовать с внутренними файлами, а именно при помощи класса www. Но, поскольку наш Веб-компонент поставляется как HTML файл с зависимостями, ссылки на нутро apk не работают. Проблему решает перенос таких файлов в persistentDataPath на время работы приложения. Пример реализации копирования файлов можно посмотреть в классе WebViewController, область Loading region.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;В других системах, в том числе и в редакторе Unity, реализация WebView от Gree по каким-то причинам не инициализирует объект window.Unity. Исправим:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;div class="geshifilter"&gt;&lt;pre class="csharp geshifilter-csharp" style="font-family:monospace;"&gt;WebView&lt;span style="color: #008000;"&gt;.&lt;/span&gt;&lt;span style="color: #0000FF;"&gt;EvaluateJS&lt;/span&gt;&lt;span style="color: #008000;"&gt;(&lt;/span&gt;&lt;span style="color: #666666;"&gt;@"
+	window.Unity = {
+		call: function(msg) { 
+		  var iframe = document.createElement('IFRAME'); 
+		  iframe.setAttribute('src', 'unity:' + msg); 
+		  document.documentElement.appendChild(iframe); 
+		  iframe.parentNode.removeChild(iframe); 
+		  iframe = null; 
+	    } 
+	};
+"&lt;/span&gt;&lt;span style="color: #008000;"&gt;)&lt;/span&gt;&lt;span style="color: #008000;"&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/pre&gt;
+
+&lt;p dir="ltr"&gt;Теперь callback Webview обрабатывает строку сообщения, переданную из браузера.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Осталось реализовать загрузку файла с Веб-компонентом и инициализировать его, передав нужные данные, что и сделано в методе WebViewController.LoadPage, который принимает в качестве параметров имя HTML-файла и строку JS кода для исполнения. В примере загружается страница характеристик товара и передается JSON-объект, представляющий данные для отображения. Важно отметить, что выполнение JS-кода необходимо осуществлять только после загрузки файла с компонентом и всех необходимых зависимостей. По этой причине переданная в обработчик WebView JS-строка сначала сохраняется в переменную и только по вызову callback-метода onLoad передается на исполнение.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;На этом все. В заключение важно сказать, что созданные для мобильного приложения веб-компоненты обладают всеми преимуществами, которые предоставляет библиотека React, как, например, динамическая загрузка страницы и стилей. Богатая экосистема и компонентный подход позволяют многократно переиспользовать уже написанный код, не прибегая к существенным временным затратам. Кроме того, Facebook, как разработчик этой библиотеки, предоставляет отличные средства отладки React-компонентов в браузере, что в совокупе заметно ускоряет процесс создания конечного продукта в сравнении с другими известными JavaScript-фреймворками. По этим причинам React уже на протяжении более чем двух лет занимает позицию самой популярной библиотеки для Frontend-разработки и сохраняет такой статус к середине 2018 года.&lt;/p&gt;&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/react" hreflang="ru"&gt;React&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/unity" hreflang="ru"&gt;Unity&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=149&amp;2=comment&amp;3=comment" token="24KR1-tRKtPIrH8ngBO9o7ojxUdHa5v1mTgtA2NfNVc"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-react" hreflang="ru"&gt;Drupal + React&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/react-chekaut-dlya-n1commerce" hreflang="ru"&gt;React чекаут для N1Commerce&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Wed, 16 May 2018 12:39:18 +0000</pubDate>
+    <dc:creator>a.savinov</dc:creator>
+    <guid isPermaLink="false">149 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/ispolzovanie-react-js-komponentov-v-unity#comments</comments>
+    </item>
+
+  </channel>
+</rss>

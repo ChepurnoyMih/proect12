@@ -1,0 +1,563 @@
+﻿<!DOCTYPE html>
+<html lang="ru" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
+  <head>
+    <meta charset="utf-8">
+<noscript><style>form.antibot * :not(.antibot-message) { display: none !important; }</style>
+</noscript><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-87805467-1"></script>
+<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag("js", new Date());gtag("set", "developer_id.dMDhkMT", true);gtag("config", "UA-87805467-1", {"groups":"default","anonymize_ip":true,"page_placeholder":"PLACEHOLDER_page_path","allow_ad_personalization_signals":false});</script>
+<meta http-equiv="content-language" content="ru">
+<meta name="description" content="В этой статье мы расскажем о том, как в Initlab организована гибкая разработка и как она помогает нам параллельно поддерживать и улучшать сайты наших клиентов.">
+<meta name="keywords" content="создание сайтов на drupal, разработка Drupal-сайтов">
+<meta property="og:type" content="blog">
+<meta property="og:url" content="https://drupal-coder.ru/blog/kak-gibkaya-razrabotka-i-planiruemyy-byudzhet-pomogayut-nam-podderzhivat-i-razvivat-sayty">
+<meta property="og:title" content="Как гибкая разработка и планируемый бюджет помогают нам поддерживать и развивать сайты клиентов. Опыт IT-компании.">
+<meta property="og:description" content="В этой статье мы расскажем о том, как в Initlab организована гибкая разработка и как она помогает нам параллельно поддерживать и улучшать сайты наших клиентов.">
+<meta name="Generator" content="Drupal 9 (https://www.drupal.org)">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="..\sites\default\files\android-chrome-256x256.png" type="image/png">
+<link rel="alternate" hreflang="ru" href="kak-gibkaya-razrabotka-i-planiruemyy-byudzhet-pomogayut-nam-podderzhivat-i-razvivat-sayty.html">
+<link rel="canonical" href="kak-gibkaya-razrabotka-i-planiruemyy-byudzhet-pomogayut-nam-podderzhivat-i-razvivat-sayty.html">
+<link rel="shortlink" href="kak-gibkaya-razrabotka-i-planiruemyy-byudzhet-pomogayut-nam-podderzhivat-i-razvivat-sayty.html">
+
+    <title>Как гибкая разработка и планируемый бюджет помогают нам поддерживать и развивать сайты клиентов. Опыт IT-компании. | drupal-coder.ru</title>
+    <link rel="stylesheet" media="all" href="..\sites\default\files\css\css_y8CdfJDNR-tG0CPnRDokR6Eh9OUJplbHLVQ9A8myecQ.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_tFXlTqkfn6J-Qtpt9xbB8JudSaJfOGxRSmpeidDAzPE.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_c0CK9J5WwpjjjzUIU22NJ_K_N6o0HFHz68-eM_V9Q7Q.css">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/@unicorn-fail/drupal-bootstrap-styles@0.0.2/dist/3.4.0/8.x-3.x/drupal-bootstrap.min.css" integrity="sha512-tGFFYdzcicBwsd5EPO92iUIytu9UkQR3tLMbORL9sfi/WswiHkA1O3ri9yHW+5dXk18Rd+pluMeDBrPKSwNCvw==" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_ULmc1mwKFKQRQmxYsjphW6dsh2g6jX4LXXBAtdO0vIE.css">
+
+    
+    <meta name="cmsmagazine" content="3d47b05beba40f3816d9741ee18c01a5">
+
+    
+    
+           <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P4SXQSG');</script>
+<!-- End Google Tag Manager -->
+    
+    
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Bold.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Medium.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Regular.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/fontawesome/webfonts/fa-brands-400.woff2" crossorigin="anonymous">
+    <link rel='manifest' href='..\manifest.json'>
+    <meta name="format-detection" content="telephone=no">
+
+          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MXPCP8Q"></script>
+      </head>
+  <body class="page-node-347 path-node page-node-type-blog has-glyphicons">
+
+                  <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4SXQSG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+      
+          
+
+    <a href="#main-content" class="visually-hidden focusable skip-link">
+      Перейти к основному содержанию
+    </a>
+    
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
+    
+      
+          <header class="navbar navbar-default" id="navbar" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+            <div class="region region-navigation">
+    <section id="block-pikselvkskript" class="block block-block-content block-block-contentbf8d9e8f-617c-4e8f-8501-7586be8255e0 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script>(window.Image ? (new Image()) : document.createElement('img')).src = 'https://vk.com/rtrg?p=VK-RTRG-238064-1VWIQ';</script></div>
+      
+  </section>
+
+<section id="block-globalsitetagadwords" class="block block-block-content block-block-content27617f8e-58d1-4a2a-9f23-31eab95a43c8 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><!-- Global site tag (gtag.js) - AdWords: 948581894 -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=AW-948581894"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-948581894');
+</script></div>
+      
+  </section>
+
+            <a class="logo navbar-btn pull-left" href="..\index.htm" title="Главная" rel="home">
+            <img src="..\themes\custom\bootstrap_dc\images\logo-initlab.svg" alt="Главная" width="156" height="31">
+        </a>
+            
+  </div>
+
+        </div>
+                          <div class="navbar-collapse-wrapper">
+
+            <div class="navbar-collapse collapse">
+                <div class="region region-navigation-collapsible">
+    <nav role="navigation" aria-labelledby="block-bootstrap-dc-main-menu-menu" id="block-bootstrap-dc-main-menu">
+            
+  <h2 class="visually-hidden" id="block-bootstrap-dc-main-menu-menu">Основная навигация</h2>
+  
+
+        
+              <ul class="menu nav navbar-nav">
+                      <li><a href="..\support.html" data-drupal-link-system-path="node/1">Поддержка Drupal</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-admin.html" class="dropdown-toggle" data-toggle="dropdown">DevOps <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\import-migrate-upgrade.html" data-drupal-link-system-path="node/4">Миграция</a>
+                  </li>
+                  <li><a href="..\backup.html" data-drupal-link-system-path="node/3">Бэкапы</a>
+                  </li>
+                  <li><a href="..\drupal-security-audit.html" data-drupal-link-system-path="node/9">Аудит безопасности</a>
+                  </li>
+                  <li><a href="..\boost-drupal.html" data-drupal-link-system-path="node/5">Оптимизация скорости</a>
+                  </li>
+                  <li><a href="..\ssl.html" data-drupal-link-system-path="node/99">Переезд на https</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\blog.html" data-drupal-link-system-path="blog">Блог</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-seo.html" class="dropdown-toggle" data-toggle="dropdown">Продвижение <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\drupal-seo\context.html" data-drupal-link-system-path="node/111">Реклама</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li class="expanded dropdown"><a href="..\team.html" class="dropdown-toggle" data-toggle="dropdown">О нас <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\team.html#team" data-drupal-link-system-path="team">Команда</a>
+                  </li>
+                  <li><a href="..\drupalgive.html" data-drupal-link-system-path="node/135">Drupalgive</a>
+                  </li>
+                  <li><a href="..\drupal-courses.html" data-drupal-link-system-path="node/10">Курсы Drupal</a>
+                  </li>
+                  <li><a href="..\vacancies.html" data-drupal-link-system-path="vacancies">Вакансии</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\happy-customers.html" data-drupal-link-system-path="happy-customers">Проекты</a>
+                  </li>
+                  <li><a href="..\contacts.html" data-drupal-link-system-path="node/86">Контакты</a>
+                  </li>
+              </ul>
+      
+
+
+  </nav>
+
+  </div>
+
+            </div>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+              </div>
+    </header>
+  
+
+      <div class="page-header-big" role="heading">
+        <div class="container">
+            <div class="region region-header">
+        <h1 class="page-header">
+<span>Как гибкая разработка и планируемый бюджет помогают нам поддерживать и развивать сайты клиентов. Опыт IT-компании.</span>
+</h1>
+
+<section class="views-element-container block block-views block-views-blockuser-block-1 clearfix" id="block-views-block-user-block-1">
+  
+    
+
+      <div class="form-group"><div class="view view-user view-id-user view-display-id-block_1 js-view-dom-id-2b5edd7179062d8ef5c23b83b66f13823310f86d0953ef4a2276a67ca08e2335">
+  
+    
+      
+      <div class="view-content">
+          <div class="views-row"><div class="views-field views-field-user-picture"><div class="field-content">  <img loading="lazy" src="..\sites\default\files\styles\avatar_mini\public\pictures\2019-12\IMG_2472_0.jpg?itok=HBh09VCv" width="45" height="45" alt="" typeof="foaf:Image" class="img-responsive">
+
+
+</div></div><div class="views-field views-field-field-name"><div class="field-content">Синица Сергей</div></div></div>
+
+    </div>
+  
+          </div>
+</div>
+
+  </section>
+
+<section id="block-yashare" class="block-yashare block block-block-content block-block-contentee72d8fb-02e9-4ef6-8e71-0df16bee86a9 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+<script src="//yastatic.net/share2/share.js"></script>
+<div class="ya-share2" data-services="vkontakte,odnoklassniki,gplus,twitter"></div></div>
+      
+  </section>
+
+
+  </div>
+
+        </div>
+      
+    </div>
+  
+
+<div class="main-wrapper">
+  <div role="main" class="main-container container js-quickedit-main-content">
+    <div class="row">
+
+
+
+            
+                  <section class="col-sm-12">
+
+                
+                
+                
+                                      
+                  
+                          <a id="main-content"></a>
+            <div class="region region-content">
+        <ol class="breadcrumb">
+          <li>
+                  <a href="..\blog.html">Блог</a>
+              </li>
+          <li class="active">
+                  Как гибкая разработка и планируемый бюджет помогают нам поддерживать и развивать сайты клиентов. Опыт IT-компании.
+              </li>
+      </ol>
+
+<div data-drupal-messages-fallback="" class="hidden"></div>
+  <article data-history-node-id="347" role="article" about="https://drupal-coder.ru/blog/kak-gibkaya-razrabotka-i-planiruemyy-byudzhet-pomogayut-nam-podderzhivat-i-razvivat-sayty" class="blog is-promoted full clearfix">
+
+  
+    
+
+  
+
+  <div class="content">
+    
+    
+            <div class="field field--name-field-blog-img field--type-image field--label-hidden field--item">/sites/default/files/2022-09/shutterstock_2150398279.jpg</div>
+      <div id="field-language-display"><div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group">
+      <label class="control-label">Language</label>
+  
+  
+  Russian
+
+  
+  
+  </div>
+</div>
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><p>Чтобы занимать лидирующие позиции в своей отрасли, бизнесу нужно постоянно развиваться. Уже недостаточно просто сделать сайт и ждать клиентов.<br>
+ <br>
+Настоящих лидеров отличает то, что они нацелены на регулярный апгрейд своего представительства в сети: пробуют новое, тестируют гипотезы и хотят воплощать идеи в жизнь за минимальное время.<br>
+ <br>
+Если вы нацелены на масштаб, мало ставить фрилансеру задачи из разряда «поменять картинку на главной». Нужно доверить развитие своего интернет-проекта тем, кто будет поддерживать его в рабочем состоянии и параллельно улучшать.<br>
+ <br>
+Мы в Initlab убеждены, что <strong>сайт — это процесс</strong>, а не готовое решение. Постоянное планирование, баланс между решением текущих задач и введением новых функций: сделали, проанализировали, наметили улучшения — эта песня без конца, начинай сначала.<br>
+ <br>
+Наша задача не просто поправлять мелкие недостатки — мы заинтересованы в долгосрочном развитии сайта клиента. Ради этого мы столько лет в IT.<br>
+ <br>
+В этой статье мы расскажем о том, как в Initlab организована гибкая разработка и как она помогает нам параллельно поддерживать и улучшать сайты наших клиентов.</p>
+
+<p><img alt="Initlab Drupal" data-entity-type="file" data-entity-uuid="5590be2d-8e15-49ca-9184-8c48f15e7c75" src="..\sites\default\files\inline-images\shutterstock_2043234731.jpg" width="600" height="375" loading="lazy"><br>
+ </p>
+
+<h2>Коротко о себе и наших клиентах</h2>
+
+<p>Мы — Initlab. Крутая команда специалистов с опытом от двадцати лет в web-разработке и от 15 лет в Drupal. Нас зовут, когда сделано простое и осталось сложное. Когда все отказались или всё сломали. Когда масштабные проекты, которые заказчик хочет развивать.<br>
+ <br>
+В 2020 году наш клиент <a href="https://www.pnevmoteh.ru/">PNEVMOTEH</a> получил премию «E-COMMERCE» как лучший интернет-магазин среди малого бизнеса.  В 2022 компания сменила весовую категорию и стала вторым лучшим интернет-магазином Беларуси, уступив место только МТС. Есть над чем работать и к чему стремиться.</p>
+
+<p><img alt="Пневмотех " data-entity-type="file" data-entity-uuid="303ea7a8-35f0-477f-9b51-1c0d34497c68" src="..\sites\default\files\inline-images\пневмотех.jpg" width="318" height="423" loading="lazy"></p>
+
+<p>Другой наш клиент — завод <a href="https://alvero-dveri.ru/">«Альверо»</a>, из-за специфики бизнеса делал упор на офлайн-продажи. Качество премиум-дверей клиенту лучше оценить лично: потрогать материал, изучить фурнитуру, послушать продавца. С приходом пандемии потребовалось дополнить модель продаж системой онлайн-заказов. При разработке сайтов мы закладываем архитектурные решения, которые предполагают развитие и расширение. Поэтому задача от клиента поступила на подготовленную почву: мы внедрили онлайн-заказ на сайт суммарно за 30 часов. Без грамотной архитектуры на это ушло бы от месяца и больше.</p>
+
+<p><a href="https://www.rastl.ru/">RASTL.RU</a> — интернет-магазин, который уже более 10 лет на рынке текстильных товаров. Их сайт — один из основных инструментов продаж, над которым мы также постоянно работаем. В 2021 году государство потребовало маркировать текстиль и одежду по системе «Честный ЗНАК», что повлекло за собой ряд проблем с онлайн-торговлей. Благодаря тому, что наш разработчик до этого написал и внедрил на RASTL.RU специальный модуль для отправки чеков по 54-ФЗ, мы смогли без труда доработать его архитектуру так, чтобы нужная информация уходила теперь и в систему ЧЗ. Об этом мы писали <a href="keys-kak-my-nastraivali-markirovku-chekov-po-sisteme-chestnyy-znak-integraciya-onlayn-kass-s.html">здесь</a>.</p>
+
+<p>Разумеется, это не все наши клиенты, а лишь мини-кейсы для примера. Но всё, что мы описали, работает слаженно и быстро решается благодаря гибкой разработке.</p>
+
+<p><img alt="Initlab Drupal" data-entity-type="file" data-entity-uuid="3d1b1030-f86a-46cd-b592-fe7b903c7f63" src="..\sites\default\files\inline-images\shutterstock_2096393167.jpg" width="600" height="470" loading="lazy"></p>
+
+<h2>Как строится гибкая разработка</h2>
+
+<p>Мы не скажем ничего нового тем, кто слышал про Agile или Канбан. Но если вы хотите узнать про очевидную пользу такого подхода, оставайтесь на линии.<br>
+ <br>
+В классической поддержке сайта сценарий такой:<br>
+ <br>
+заказчику говорят цену за час работы→ подписывается договор→ задачи дают исполнителям→их выполняют.<br>
+ <br>
+В случае с гибкой разработкой, после обращения клиента, происходит следующее:<br>
+ <br><strong>1. Рассчитываем примерное время, которое уйдёт на всё запланированное. </strong>Ключевое слово — примерное. Мы не даём точную оценку на доработку сайта в случаях: 1) если сайт делали не мы и не знаем, как он написан; 2) если нам предстоит делать нечто новое и мы пока не понимаем, что и сколько займёт. Мы даём ориентировочную оценку по запросу клиента, исходя из нашего опыта.</p>
+
+<p><strong>2. Согласовываем оптимальный бюджет в месяц.</strong> В классической ситуации клиент получает счёт в конце месяца/квартала по факту выполненных работ. Для гибкой разработки нужно, чтобы клиент определил сумму, которую готов вкладывать в поддержку и развитие сайта в месяц, а мы рассчитали, хватит ли её для занятости нужного состава команды и планируемых задач. Для чего это служит, расскажем ниже. Когда бюджет согласован, мы подписываем договор.</p>
+
+<p><strong>3. Расставляем приоритеты по задачам. </strong>Что нужно сделать срочно, что пока терпит, а что делаем на оставшийся бюджет? Чаще всего распределяет задачи по важности клиент, особенно если проект большой и дел там невпроворот. Со своей стороны мы даём список задач, о которых клиент с его позиции может не задумываться: тестирование сайта, устранение технического долга и т.п.</p>
+
+<p><strong>4. Распределяем бюджет между всеми задачами, которые планируем.</strong> Самому важному пункту — отдельный раздел.</p>
+
+<h2>Распределяем бюджет</h2>
+
+<p>Все проекты разные и одного рецепта нет, поэтому в качестве примера мы опишем типовой вариант того, куда уходят средства. Итак,<br>
+ <br><strong>1. Контроль состояния сайта с помощью ручных и автоматических тестов.</strong> Работает ли корзина? Какой результат даёт поиск по сайту? Не поехала ли вёрстка? Всё это нужно проверять после каждого изменения/обновления. На маленьких проектах хватает человеческих сил, на крупных уже нужна автоматизация.</p>
+
+<p>На постоянное тестирование уходит примерно 20% бюджета.</p>
+
+<p><strong>2. Проблемы, баги, оперативные задачи</strong> — из разряда «всё бросить и бежать чинить корзину». На это мы выделяем примерно 30% бюджета.<br>
+ <br><strong>3. Технический долг — устранение накопленных ошибок и недоделок.</strong> Прошлые разработчики не всегда оставляют сайт в идеальном состоянии. Мелкие недочёты могут замедлять сайт и усложнять разработку. На устранение технического долга уходит около 10% бюджета.<br>
+ <br><strong>4. Обновление до актуальных версий ПО сайта.</strong> Например, апгрейд Drupal с 7 до 9 версии. На это закладываем около 10%<br>
+ <br><strong>5. Новые бизнес-функции.</strong> Мы с заказчиком составляем road-map: каким будет сайт через год-два и какие функции он хочет там видеть. Для большого бизнеса это едва ли не самая необходимая часть работы, поэтому на неё уходит порядка 30% бюджета.<br>
+ <br>
+Если «дожать» смысл, то всё вышесказанное помогает нам держать на проекте баланс: решать срочные задачи, параллельно гармоничного развивать проект. Грубо говоря, тушить пожар и одновременно сажать новые деревья — это и есть гибкая разработка.<br>
+ <br>
+Процентовку из нашего «примера в вакууме» можно распределять как угодно в соответствии с текущими целями и задачами. Мы бережём до конца месяца 30% на срочные задачи, но ничего не случается? Выделенные на это часы можно потратить на обновление безопасности. Закрыли технический долг, который мешал нормальной работе быстрее, чем планировали? Оставшийся бюджет пустим на что-то другое.</p>
+
+<p>Пока проект развивается, мы всё время анализируем, нужны ли ему новые бизнес-функции, работаем над ускорением сайта, обновляем все доступные модули Drupal. Если сайт развивается вширь — у него появляются языковые версии, то наша задача создавать его копии. На масштабных проектах нужно сделать так, чтобы изменения вносились в одном месте, а обновлялись на пяти сайтах.<br>
+ <br>
+Поддержка сайта это не только текущие задачи. Это мысли на перспективу, поддержание состояния готовности к росту бизнеса, его расширению и развитию.</p>
+
+<h2>Распределение задач</h2>
+
+<p>Для клиента всё это может звучать пугающе. Откуда ему знать, что мы разобрались с основными проблемами и начали улучшать проект по нашему плану. Как говорится, звучит красиво, но чем докажешь? Один из наших главных принципов — открытость. И его легко соблюдать с помощью сервиса постановки и контроля задач (трекера).<br>
+ <br>
+Мы даём клиенту доступ к трекеру и учим им пользоваться. Здесь можно следить за всеми процессами. Но в первую очередь вместе с заказчиком мы заводим нужные задачи в систему и расставляем их приоритеты. В любой момент можно добавить, изменить или уточнить то, что нужно.</p>
+
+<p>Задачи распределяются между прикрепленными к проекту специалистами в порядке приоритета по их специализации (фронт, бек, администрирование и т.д.)<br>
+ <br>
+Мы вносим правки на сайт по готовности, а не дожидаясь конца месяца, очередной итерации или оплаты за задачу. Для нас, как и для нашего клиента, результат первичен.</p>
+
+<h2>Страхи клиентов: отсутствие задач, пауза на проекте и затягивание сроков</h2>
+
+<p>На практике мы сталкивались с разным отношением к планируемому бюджету, который важен для гибкой разработки. Перечислим некоторые из них<br>
+ <br><em><strong>— Давайте когда будут задачи, тогда и оплатим.<br>
+ </strong></em><br>
+Суть планирования бюджета в резервировании времени разработчика. Если специалист не занят вашим проектом, скорее всего он занят другим и выдернуть его оттуда сложно — он своё время распределяет там, где есть план работ и понятный заработок. Как только на него упадут задачи с внепланового проекта, скорее всего он будет очень долго до него добираться, потому что график забит. Если заказчик готов ждать месяцами, то такой формат работы в принципе возможен. <br>
+ <br><strong><em>— А если задач не будет/их будет мало/у бизнеса будут трудности, а бюджет уже оплачен?</em></strong><br>
+ <br>
+Здесь всё просто: если задач мало — мы перераспределяем время на то, что не связано с бизнесом напрямую: рефакторинг кода, настройка тестирования и т.д. То есть на имеющийся бюджет готовим сайт к будущему росту, чтобы ускорить и упростить будущие процессы.<br>
+ <br>
+Если задач больше, чем бюджета — договариваемся на увеличение бюджета (если бизнес готов), либо «охлаждаем пыл» и фокусируемся только на важном. Если у бизнеса проблемы, разумеется, мы можем поставить процесс на паузу. Но здесь нужно понимать, что разработчикам требуется время, чтобы отключить сервисы и потом они разойдутся по другим проектам. Когда работы возобновятся, будет необходим повторный онбординг и некоторое время, чтобы собрать нужных людей снова.<br>
+ <br>
+Но мы слабо верим в полное отсутствие задач на сайте. Это как частный дом: всегда есть, чем заняться. Благодаря фиксированному бюджету и гибкой разработке мы можем:</p>
+
+<ul><li>останавливать задачи, если на них уходит слишком много времени или пока появилось что-то важнее;</li>
+	<li>перенаправлять ресурсы на то, что нужно бизнесу именно сейчас;</li>
+	<li>исправлять критические ошибки, которые были найдены в процессе работы не дожидаясь доп.согласований.</li>
+</ul><p>Разработчики <strong>всегда будут знать, чем заняться на вашем сайте</strong>. Не нужно отдельных планёрок, нудных переговоров, какую кнопку передвинуть в это месяце и когда мы наконец развернём курс на расширение каталога — задачи ставятся через трекер, сайт улучшается, бизнес работает и растёт.</p>
+
+<p><img alt="Initlab Drupal" data-entity-type="file" data-entity-uuid="637b2b73-0de6-4349-b9e0-9b798750e0b3" src="..\sites\default\files\inline-images\shutterstock_1160577928.jpg" width="600" height="360" loading="lazy"></p>
+
+<h2>Ригидная разработка: фиксирование часов на задачу и штрафы за несоблюдение сроков</h2>
+
+<p>Некоторых заказчиков всё равно пугает неопределённость. Им кажется, что выделенный бюджет расходуется неправильно и хочется конкретики: скажите точно, сколько уйдёт на эту задачу.<br>
+ <br>
+Выше мы писали, что не даём чётких оценок, но допустим клиент очень просит и мы сдаёмся: по нашим оценкам — 5 часов. И клиент, дабы сохранить бюджет в очерченных рамках, добавляет: а давайте если вы превысите эти часы, вы оплатите штраф или сделаете за свой счёт?<br>
+ <br>
+Звучит справедливо: оценили — делайте за столько, на сколько оценили. Но давайте попробуем переложить такой подход на другую работу.<br>
+ <br>
+Допустим, вы говорите электрику, что у вас сломалась розетка. Он называет цену за эту работу и начинает работать. В процессе осмотра выясняется, что проблема в проводке. Справедливо ли требовать от электрика, чтобы он менял проводку за то же время, что и розетку и за ту сумму, что он назвал изначально?<br>
+ <br>
+Или обратная ситуация: вы решили, что у вас бесповоротно сломался счётчик и готовитесь выложить круглую сумму. Но оказывается, что просто отстал провод и всё не так страшно. Электрик либо возьмёт с вас меньшую сумму, либо на оставшиеся деньги проверит/починит розетки/выключатели/свет во всех комнатах.<br>
+ <br>
+Когда заказчик просит конкретную стоимость этапа или задачи, а за превышение хочет штрафовать, из этого вытекает ряд проблем:</p>
+
+<p><strong>1. Мы можем брать в работу только полное ТЗ. </strong>Опишите до молекул, что конкретно и где нужно починить. Со стороны заказчика нужен либо грамотный специалист, который в состоянии дать подробное техзадание, либо нужно оплатить время нашего менеджера, который будет уточнять/дополнять/выяснять, что вам нужно. А если окажется, что заказчик не то хотел или хотел не так, то взятки гладки: ТЗ согласовано, мы работали строго по нему. Плюс не получится никаких правок по пути. Простая просьба заодно перекрасить/передвинуть кнопку потребует новых согласований и нового ТЗ.</p>
+
+<p><strong>2. Мы вынуждены закладывать риски. </strong>Если кто-то согласен работать с вами в таком формате, значит он уже умножил оценку в 2-3 раза. Никто не будет работать себе в убыток. Мы считаем, что это не очень честно, но в таком случае необходимо покрывать издержки: менеджера, оценщиков, возможные штрафы. Вместо примерной, но более честной оценки мы страхуемся, умножаем часы на задачи и ваши расходы. Нам такой подход не близок. Условное спокойствие только умножает затраты на проект.</p>
+
+<p><strong>3. Мы не заинтересованы в доработке задач.</strong> Поймите правильно: если разработчик делает задачу и по пути находит проблему, он не станет её решать в ущерб времени, которое отведено на основную часть работы. Даже если «побочный квест» быстро решается. Теперь он просто скажет, что такая проблема есть и будет ждать согласованного с заказчиком ТЗ.<br>
+В итоге мы согласовываем, формализуем, уточняем, оформляем, считаем и прикидываем. А могли бы работать. Куда лучше начать, получить 80% результата, уточнить и доделать.<br>
+ <br>
+Гибкая разработка подразумевает:</p>
+
+<ul><li>больше доверия со стороны заказчика;</li>
+	<li>приоритет быстрого внедрения изменений над чтением и подписанием бумажек.</li>
+</ul><p>Общение с менеджером и руководителями проекта не превращается в череду согласований — это совместная работа людей, заинтересованных в улучшении и развитии сайта.<br>
+ <br>
+Резюмируем: в таком формате работать можно, но для этого нужно:<br>
+ </p>
+
+<ul><li>обложить команду менеджерами;</li>
+	<li>оценивать любую фигню;</li>
+	<li>не ждать от нашей команды полной отдачи;</li>
+	<li>принимать факт закладывания рисков.</li>
+</ul><p> <br>
+Гибкая разработка + отлаженные годами процессы работы = решение масштабных задач наших клиентов:<br>
+ </p>
+
+<ul><li>выходить на новые рынки и развивать языковые версии сайта;</li>
+	<li>запускать онлайн-продажи;</li>
+	<li>ускорять работу сайта;</li>
+	<li>обновлять дизайн и добавлять новые и нужные фишки;</li>
+	<li>исправлять любые баги, из-за которых компания несёт убытки</li>
+</ul><p>и при этом оставаться в рамках понятного бюджета.</p>
+
+<h2>Вывод</h2>
+
+<p>Завершим мыслью, с которой начали: <strong>сайт — это процесс</strong>. Процесс, который должен работать как часы или быть как непрерывный танец, если хотите. Будущее за слаженным союзом бизнеса и команд разработчиков, нацеленных на помощь этому самому бизнесу. Мы в Initlab в этом уверены и всю нашу работу строим на этой основе.<br>
+ </p>
+</div>
+      
+  <div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above">
+    <div class="field--label">Еще по теме</div>
+          <div class="field--items">
+              <div class="field--item"><a href="luchshe-4-chasa-potratit-i-za-5-minut-doletet-zachem-nuzhen-obyazatelnyy-onbording-na-sayte.html" hreflang="ru">Лучше 4 часа потратить и за 5 минут долететь: зачем нужен обязательный онбординг на сайте клиента</a></div>
+              </div>
+      </div>
+
+
+      <div class="field-yashare">
+        <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+        <script src="//yastatic.net/share2/share.js"></script>
+        <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+                <div class="ya-share2" id="block-ya-share2" data-services="vkontakte,facebook,odnoklassniki,gplus,twitter"></div>
+        <a href="..\rss.rss" target="_blank"><span class="iconify" id="block-iconify" data-icon="ion:logo-rss" style="color: #da8c2c;" data-width="29" data-height="29"></span></a>
+              </div>
+  </div>
+
+  <section>
+  
+  
+ 
+      <div class="comment-form-wrapper">
+      <h2 class="block-form-title">Добавить комментарий</h2>
+      <form class="comment-comment-form comment-form antibot" data-drupal-selector="comment-form" data-action="https://drupal-coder.ru/comment/reply/node/347/comment" action="/antibot" method="post" id="comment-form" accept-charset="UTF-8">
+  <noscript>
+  <div class="antibot-no-js antibot-message antibot-message-warning">Вы должны включить JavaScript чтобы использовать эту форму.</div>
+</noscript>
+<div class="form-item js-form-item form-type-textfield js-form-type-textfield form-item-name js-form-item-name form-group">
+      <label for="edit-name" class="control-label">Ваше имя</label>
+  
+  
+  <input placeholder="Ваше имя" data-drupal-selector="edit-name" class="form-text form-control" type="text" id="edit-name" name="name" value="" size="30" maxlength="60">
+
+  
+  
+  </div>
+<input autocomplete="off" data-drupal-selector="form-70pjkvwxd-kf4pcewk-uomv3uw-jkqftyaevm8ghw-c" type="hidden" name="form_build_id" value="form-70pJkVWXD_Kf4pcEwK_uomV3Uw-jKqFtyaEvM8Ghw-c"><input data-drupal-selector="edit-comment-comment-form" type="hidden" name="form_id" value="comment_comment_form"><input data-drupal-selector="edit-antibot-key" type="hidden" name="antibot_key" value=""><div class="field--type-text-long field--name-comment-body field--widget-text-textarea form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-wrapper" id="edit-comment-body-wrapper">      <div class="js-text-format-wrapper text-format-wrapper js-form-item form-item">
+  <div class="form-item js-form-item form-type-textarea js-form-type-textarea form-item-comment-body-0-value js-form-item-comment-body-0-value">
+      <label for="edit-comment-body-0-value" class="control-label js-form-required form-required">Комментарий</label>
+  
+  
+  <div class="form-textarea-wrapper">
+  <textarea class="js-text-full text-full form-textarea required form-control resize-vertical" data-media-embed-host-entity-langcode="ru" data-drupal-selector="edit-comment-body-0-value" id="edit-comment-body-0-value" name="comment_body[0][value]" rows="5" cols="60" placeholder="" required="required" aria-required="true"></textarea>
+</div>
+
+
+  
+  
+  </div>
+<div class="js-filter-wrapper filter-wrapper form-inline form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format" id="edit-comment-body-0-format"><div class="filter-help form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format-help" id="edit-comment-body-0-format-help"><a href="..\filter\tips.html" target="_blank" title="Opens in new window" data-toggle="tooltip" data-drupal-selector="edit-comment-body-0-format-help-about" class="icon-before" id="edit-comment-body-0-format-help-about"><span class="icon glyphicon glyphicon-question-sign" aria-hidden="true"></span>О текстовых форматах</a></div>
+</div>
+
+  </div>
+
+  </div>
+<div data-drupal-selector="edit-actions" class="form-actions form-group js-form-wrapper form-wrapper" id="edit-actions"><button data-drupal-selector="edit-submit" class="button button--primary js-form-submit form-submit btn-primary btn" type="submit" id="edit-submit" name="op" value="Отправить">Отправить</button></div>
+
+</form>
+
+    </div> 
+  
+</section>
+
+
+</article>
+
+
+  </div>
+
+              </section>
+
+                </div>
+  </div>
+
+
+      <footer class="footer" role="contentinfo">
+      <div class=" container">  
+          <div class="region region-footer">
+    <section id="block-footerphone" class="block block-block-content block-block-content07b69e1d-d1db-4e8b-bb14-dc4563ef50bc clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="block-form-contacts">
+  <ul>
+    <li class="block-form-phone"><a href="tel:88002222673">8 800 222-26-73</a></li>
+  </ul>
+</div></div>
+      
+  </section>
+
+<section id="block-copyright" class="block block-block-content block-block-content263c1cb2-b142-4488-af8e-99f92fcb7640 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="social-links">
+  <ul class="social-links-wrapper">
+    <li class="social-links-item"><a target="_blank" href="https://vk.com/initlab"><i class="fab fa-vk"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://teleg.one/initlabbot" title="Свяжитесь с нами"><i class="fab fa-telegram-plane"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.youtube.com/channel/UCyFEbngMB-bK2ulNtd_W43A"><i class="fab fa-youtube"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://zen.yandex.ru/id/6037ce072f500a068c630fec"><img style="width: 16px; margin-bottom: 5px;" src="..\sites\default\files\icons\zen-icon.svg"></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.facebook.com/initlabkr/"><img style="width: 25px; margin-bottom: 5px;" src="..\sites\default\files\icons\icon-facebook-ru-dc.svg"></a></li>
+  </ul>  
+</div>
+
+<p>ООО «Инитлаб», Краснодар, Россия.
+<a class="goal__tel" href="tel:+78002222673">8 800 222-26-73</a><br>
+Drupal является зарегистрированной торговой маркой Dries Buytaert.</p>
+</div>
+      
+  </section>
+
+
+  </div>
+
+      </div>
+    </footer>
+  </div>
+
+  </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"node\/347","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"ru"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"ajaxPageState":{"libraries":"antibot\/antibot.form,bootstrap\/popover,bootstrap\/theme,bootstrap\/tooltip,bootstrap_dc\/bootstrap-scripts,bootstrap_dc\/dc,bootstrap_dc\/global-styling,bootstrap_dc\/seo,colorbox\/default,colorbox_inline\/colorbox_inline,colorbox_load\/colorbox_load,filter\/drupal.filter,google_analytics\/google_analytics,ng_lightbox\/ng_lightbox,system\/base,views\/views.module","theme":"bootstrap_dc","theme_token":null},"ajaxTrustedUrl":{"https:\/\/drupal-coder.ru\/comment\/reply\/node\/347\/comment":true},"colorbox":{"opacity":"0.85","current":"{current} \u0438\u0437 {total}","previous":"\u00ab \u041f\u0440\u0435\u0434\u044b\u0434\u0443\u0449\u0438\u0439","next":"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0439 \u00bb","close":"Close","maxWidth":"98%","maxHeight":"98%","fixed":true,"mobiledetect":true,"mobiledevicewidth":"480px"},"google_analytics":{"account":"UA-87805467-1","trackOutbound":true,"trackMailto":true,"trackTel":true,"trackDownload":true,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip","trackColorbox":true},"bootstrap":{"forms_has_error_value_toggle":1,"modal_animation":1,"modal_backdrop":"true","modal_focus_input":1,"modal_keyboard":1,"modal_select_text":1,"modal_show":1,"modal_size":"","popover_enabled":1,"popover_animation":1,"popover_auto_close":1,"popover_container":"body","popover_content":"","popover_delay":"0","popover_html":0,"popover_placement":"right","popover_selector":"","popover_title":"","popover_trigger":"click","tooltip_enabled":1,"tooltip_animation":1,"tooltip_container":"body","tooltip_delay":"0","tooltip_html":0,"tooltip_placement":"auto left","tooltip_selector":"","tooltip_trigger":"hover"},"antibot":{"forms":{"comment-form":{"id":"comment-form","key":"5D-i6uDYb-gr3-4qQZFOE5ec3-2jdoq6QSz9J26Pt50"}}},"user":{"uid":0,"permissionsHash":"66bb25c0b665c533dd9436d0cd4e99532a723088208bff0a05f2bf113d3703ac"}}</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="..\sites\default\files\js\js_kFVTvKCxW3cWmdAcJABrE5Fa90cD_Go5IxgQw9oFgJ0.js"></script>
+<script src="..\sites\default\files\js\js_d5BC-2wlh3XH4S29GgaPGie7NxyWY0K1EhPg30LGzwA.js"></script>
+<script src="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+<script src="..\sites\default\files\js\js_CNCJCgJnATwdWHfgCEncmZchd6pVQciEiBxkoYS9btY.js"></script>
+<script src="..\sites\default\files\js\js_PZPdVr1rIFXjUagjykPULRTCC8T4ZfIghTqFAwKg6ZI.js"></script>
+
+  </body>
+</html>

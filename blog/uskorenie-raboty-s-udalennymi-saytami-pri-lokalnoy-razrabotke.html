@@ -1,0 +1,550 @@
+﻿<!DOCTYPE html>
+<html lang="ru" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
+  <head>
+    <meta charset="utf-8">
+<noscript><style>form.antibot * :not(.antibot-message) { display: none !important; }</style>
+</noscript><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-87805467-1"></script>
+<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag("js", new Date());gtag("set", "developer_id.dMDhkMT", true);gtag("config", "UA-87805467-1", {"groups":"default","anonymize_ip":true,"page_placeholder":"PLACEHOLDER_page_path","allow_ad_personalization_signals":false});</script>
+<meta http-equiv="content-language" content="ru">
+<meta name="description" content="В работе программиста много времени отнимают процессы, к программированию относящиеся лишь косвенно. Лично у меня каждый новый, либо надолго забытый проект начинается с продолжительного разворачивания локального окружения, которое состоит не только в клонировании гит-репозитория на локальный компьютер, но также копировании не содержащихся в гите статичных файлов и базы данных. Со временем актуальность локального окружения падает, и часть процесса приходится повторять заново.">
+<meta name="keywords" content="создание сайтов на drupal, разработка Drupal-сайтов">
+<meta property="og:type" content="blog">
+<meta property="og:url" content="https://drupal-coder.ru/blog/uskorenie-raboty-s-udalennymi-saytami-pri-lokalnoy-razrabotke">
+<meta property="og:title" content="Ускорение работы с удаленными сайтами при локальной разработке">
+<meta property="og:description" content="В работе программиста много времени отнимают процессы, к программированию относящиеся лишь косвенно. Лично у меня каждый новый, либо надолго забытый проект начинается с продолжительного разворачивания локального окружения, которое состоит не только в клонировании гит-репозитория на локальный компьютер, но также копировании не содержащихся в гите статичных файлов и базы данных. Со временем актуальность локального окружения падает, и часть процесса приходится повторять заново.">
+<meta name="Generator" content="Drupal 9 (https://www.drupal.org)">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="..\sites\default\files\android-chrome-256x256.png" type="image/png">
+<link rel="alternate" hreflang="ru" href="uskorenie-raboty-s-udalennymi-saytami-pri-lokalnoy-razrabotke.html">
+<link rel="canonical" href="uskorenie-raboty-s-udalennymi-saytami-pri-lokalnoy-razrabotke.html">
+<link rel="shortlink" href="uskorenie-raboty-s-udalennymi-saytami-pri-lokalnoy-razrabotke.html">
+
+    <title>Ускорение работы с удаленными сайтами при локальной разработке | drupal-coder.ru</title>
+    <link rel="stylesheet" media="all" href="..\sites\default\files\css\css_y8CdfJDNR-tG0CPnRDokR6Eh9OUJplbHLVQ9A8myecQ.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_tFXlTqkfn6J-Qtpt9xbB8JudSaJfOGxRSmpeidDAzPE.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_l8G4voaHcf64TEU2r2Yyz9f53nJ0vU-50MrP1M5xhmk.css">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/@unicorn-fail/drupal-bootstrap-styles@0.0.2/dist/3.4.0/8.x-3.x/drupal-bootstrap.min.css" integrity="sha512-tGFFYdzcicBwsd5EPO92iUIytu9UkQR3tLMbORL9sfi/WswiHkA1O3ri9yHW+5dXk18Rd+pluMeDBrPKSwNCvw==" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_ULmc1mwKFKQRQmxYsjphW6dsh2g6jX4LXXBAtdO0vIE.css">
+
+    
+    <meta name="cmsmagazine" content="3d47b05beba40f3816d9741ee18c01a5">
+
+    
+    
+           <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P4SXQSG');</script>
+<!-- End Google Tag Manager -->
+    
+    
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Bold.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Medium.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Regular.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/fontawesome/webfonts/fa-brands-400.woff2" crossorigin="anonymous">
+    <link rel='manifest' href='..\manifest.json'>
+    <meta name="format-detection" content="telephone=no">
+
+          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MXPCP8Q"></script>
+      </head>
+  <body class="page-node-290 path-node page-node-type-blog has-glyphicons">
+
+                  <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4SXQSG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+      
+          
+
+    <a href="#main-content" class="visually-hidden focusable skip-link">
+      Перейти к основному содержанию
+    </a>
+    
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
+    
+      
+          <header class="navbar navbar-default" id="navbar" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+            <div class="region region-navigation">
+    <section id="block-pikselvkskript" class="block block-block-content block-block-contentbf8d9e8f-617c-4e8f-8501-7586be8255e0 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script>(window.Image ? (new Image()) : document.createElement('img')).src = 'https://vk.com/rtrg?p=VK-RTRG-238064-1VWIQ';</script></div>
+      
+  </section>
+
+<section id="block-globalsitetagadwords" class="block block-block-content block-block-content27617f8e-58d1-4a2a-9f23-31eab95a43c8 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><!-- Global site tag (gtag.js) - AdWords: 948581894 -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=AW-948581894"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-948581894');
+</script></div>
+      
+  </section>
+
+            <a class="logo navbar-btn pull-left" href="..\index.htm" title="Главная" rel="home">
+            <img src="..\themes\custom\bootstrap_dc\images\logo-initlab.svg" alt="Главная" width="156" height="31">
+        </a>
+            
+  </div>
+
+        </div>
+                          <div class="navbar-collapse-wrapper">
+
+            <div class="navbar-collapse collapse">
+                <div class="region region-navigation-collapsible">
+    <nav role="navigation" aria-labelledby="block-bootstrap-dc-main-menu-menu" id="block-bootstrap-dc-main-menu">
+            
+  <h2 class="visually-hidden" id="block-bootstrap-dc-main-menu-menu">Основная навигация</h2>
+  
+
+        
+              <ul class="menu nav navbar-nav">
+                      <li><a href="..\support.html" data-drupal-link-system-path="node/1">Поддержка Drupal</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-admin.html" class="dropdown-toggle" data-toggle="dropdown">DevOps <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\import-migrate-upgrade.html" data-drupal-link-system-path="node/4">Миграция</a>
+                  </li>
+                  <li><a href="..\backup.html" data-drupal-link-system-path="node/3">Бэкапы</a>
+                  </li>
+                  <li><a href="..\drupal-security-audit.html" data-drupal-link-system-path="node/9">Аудит безопасности</a>
+                  </li>
+                  <li><a href="..\boost-drupal.html" data-drupal-link-system-path="node/5">Оптимизация скорости</a>
+                  </li>
+                  <li><a href="..\ssl.html" data-drupal-link-system-path="node/99">Переезд на https</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\blog.html" data-drupal-link-system-path="blog">Блог</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-seo.html" class="dropdown-toggle" data-toggle="dropdown">Продвижение <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\drupal-seo\context.html" data-drupal-link-system-path="node/111">Реклама</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li class="expanded dropdown"><a href="..\team.html" class="dropdown-toggle" data-toggle="dropdown">О нас <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\team.html#team" data-drupal-link-system-path="team">Команда</a>
+                  </li>
+                  <li><a href="..\drupalgive.html" data-drupal-link-system-path="node/135">Drupalgive</a>
+                  </li>
+                  <li><a href="..\drupal-courses.html" data-drupal-link-system-path="node/10">Курсы Drupal</a>
+                  </li>
+                  <li><a href="..\vacancies.html" data-drupal-link-system-path="vacancies">Вакансии</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\happy-customers.html" data-drupal-link-system-path="happy-customers">Проекты</a>
+                  </li>
+                  <li><a href="..\contacts.html" data-drupal-link-system-path="node/86">Контакты</a>
+                  </li>
+              </ul>
+      
+
+
+  </nav>
+
+  </div>
+
+            </div>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+              </div>
+    </header>
+  
+
+      <div class="page-header-big" role="heading">
+        <div class="container">
+            <div class="region region-header">
+        <h1 class="page-header">
+<span>Ускорение работы с удаленными сайтами при локальной разработке</span>
+</h1>
+
+<section class="views-element-container block block-views block-views-blockuser-block-1 clearfix" id="block-views-block-user-block-1">
+  
+    
+
+      <div class="form-group"><div class="view view-user view-id-user view-display-id-block_1 js-view-dom-id-6199f1a87e34ddfb83d02a00850e56e91f80d8b76601d36ff3eb504c39455cec">
+  
+    
+      
+      <div class="view-content">
+          <div class="views-row"><div class="views-field views-field-user-picture"><div class="field-content">  <img loading="lazy" src="..\sites\default\files\styles\avatar_mini\public\pictures\2019-12\IMG_2497_0.jpg?itok=8NXHrHsQ" width="45" height="45" alt="" typeof="foaf:Image" class="img-responsive">
+
+
+</div></div><div class="views-field views-field-field-name"><div class="field-content">Зубенко Алексей</div></div></div>
+
+    </div>
+  
+          </div>
+</div>
+
+  </section>
+
+<section id="block-yashare" class="block-yashare block block-block-content block-block-contentee72d8fb-02e9-4ef6-8e71-0df16bee86a9 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+<script src="//yastatic.net/share2/share.js"></script>
+<div class="ya-share2" data-services="vkontakte,odnoklassniki,gplus,twitter"></div></div>
+      
+  </section>
+
+
+  </div>
+
+        </div>
+      
+    </div>
+  
+
+<div class="main-wrapper">
+  <div role="main" class="main-container container js-quickedit-main-content">
+    <div class="row">
+
+
+
+            
+                  <section class="col-sm-12">
+
+                
+                
+                
+                                      
+                  
+                          <a id="main-content"></a>
+            <div class="region region-content">
+        <ol class="breadcrumb">
+          <li>
+                  <a href="..\blog.html">Блог</a>
+              </li>
+          <li class="active">
+                  Ускорение работы с удаленными сайтами при локальной разработке
+              </li>
+      </ol>
+
+<div data-drupal-messages-fallback="" class="hidden"></div>
+  <article data-history-node-id="290" role="article" about="https://drupal-coder.ru/blog/uskorenie-raboty-s-udalennymi-saytami-pri-lokalnoy-razrabotke" class="blog is-promoted full clearfix">
+
+  
+    
+
+  
+
+  <div class="content">
+    
+    <div id="field-language-display"><div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group">
+      <label class="control-label">Language</label>
+  
+  
+  Russian
+
+  
+  
+  </div>
+</div>
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><p>В работе программиста много времени отнимают процессы, к программированию относящиеся лишь косвенно. Лично у меня каждый новый, либо надолго забытый проект начинается с продолжительного разворачивания локального окружения, которое состоит не только в клонировании гит-репозитория на локальный компьютер, но также копировании не содержащихся в гите статичных файлов и базы данных. Со временем актуальность локального окружения падает, и часть процесса приходится повторять заново. Еще несколько лет назад я неизменно заходил на сервер, делал дамп БД и архив файлов, которые выкачивал и разворачивал локально. Сейчас появились некоторые инструменты, которые хоть и требуют определенной начальной настройки, но в дальнейшем сильно упрощают жизнь.</p>
+
+<h3>1. Подключение к удаленному серверу.</h3>
+
+<p>Итак, вы получили доступы к серверу, на котором работает сайт. Первым делом надо озаботиться тем, чтобы раз и навсегда забыть пароль к нему и осуществлять доступ исключительно с помощью SSH-ключа. Поэтому заходим к себе в каталог ~/.ssh и смотрим ранее сгенерированные ключи. Там их, как водится, одна или более пар - закрытый и открытый ключ в каждой. Всего скорее вы найдете что-то вроде <code>id_rsa</code> и <code>id_rsa.pub</code>. Если вы ничего не увидели, то ключ можно сгенерировать командой ssh-keygen. Вам надо будет выбрать название для файла ключа и, если вы поборник безопасности, придумать для него пароль (что я бы не рекомендовал делать в целях упрощения пользования им).</p>
+
+<p>Итак, теперь у нас есть ключ, и нам надо закинуть его публичную часть на сервер, а точнее - дописать содержимое ключа в файл <code>~/.ssh/authorized_keys</code>. Публичную - это ту, что имеет расширение <code>.pub</code>, всё, что без него, - это ваша личная собственность, и за пределы вашего компьютера уходить не должно. Раньше я делал это через файл-менеджер, однако иногда права доступа настроены таким образом, что сделать это проблематично. Безотказный вариант - использовать специальную команду в консоли. Пусть наш логин на сервере будет <code>username</code>, а домен - <code>servername.ru</code>, тогда команда будет выглядеть следующим образом:</p>
+
+<pre>
+<span class="geshifilter"><code class="bash geshifilter-bash">ssh-copy-id <span style="color: #660033;">-i</span> ~<span style="color: #000000; font-weight: bold;">/</span>.ssh<span style="color: #000000; font-weight: bold;">/</span>id_rsa.pub username<span style="color: #000000; font-weight: bold;">@</span>servername.ru</code></span></pre>
+
+<p>Если вы подключаетесь по нестандартному порту, добавьте в конце <code>--p[номер порта]</code> (например, <code>-p22222</code>).</p>
+
+<p>Меняете имя файла ключа на свой, а логин и url сервера на нужные, отправляете и, если все верно, единожды вводите пароль. Все - ключ скопирован, и вы можете проверить, как всё работает, попытавшись подключиться: <code>ssh username@servername.ru<code>.</code></code></p>
+
+<p><code><code>Про пароль теперь можно забыть, что уже хорошо, но запоминать имя пользователя и домен (а то и ip-адрес) тоже не очень бы хотелось, к тому же через пару лет работы таких записей соберется не один десяток и хранить это в голове или где бы то ни было станет невыносимо.</code></code></p>
+
+<p><code><code>Значительно проще было бы запоминать короткий алиас подключения, а про остальное забыть, как про страшный сон. Например, <em>username@servername.ru</em> обозвать <em>srv</em>. И это возможно - заходим в файл <code>~/.ssh/config</code> (если нет, то создаем его) и добавляем в него следующие строчки:</code></code></p>
+
+<pre>
+<code><code>
+<code language="bash">
+host srv
+hostname servername.ru  
+user username
+port 22222 # это только если порт нестандартный
+</code></code></code></pre>
+
+<p><code><code>Сохраняем, выполняем в консоли <code>ssh srv</code> и - профит! Есть и иные параметры подключения, но они далеко за пределами обычной работы и всего скорее после краткого гугления вы найдете свой особенный вариант настройки, если стандартный не подойдет.</code></code></p>
+
+<p><code><code>Главное здесь - называть подключения так, чтобы они были максимально коротки, но при этом чётко ассоциировались с проектом. Наверняка у вас будут подключения к рабочему сайту и его варианту для разработки. Какой бы домен/поддомен не имел последний, наиболее логичным будет назвать его, добавив к алиасу основного подключения суффикс <code>_dev</code>. Так, если у нас <code>srv</code> - это алиас для прода, то к деву будет логично подключаться через <code>srv_dev</code>. Адреса девов меняются, а краткое слово "дев" всегда будет однозначно характеризовать нам то, что... что оно <a href="..\sites\default\files\images\klichko.jpg">должно характеризовать</a>).</code></code></p>
+
+<h3><code><code>2. Настройка удаленных алиасов для консольной утилиты drush</code></code></h3>
+
+<p><code><code>Drupal поддерживает мультисайтинг. То есть на одной кодовой базе может работать более одного сайта. Для обеспечения возможности работы с несколькими сайтами на уровне утилиты drush были внедрены алиасы сайтов. В режиме мультисайтинга они позволяют из одного рабочего каталога выполнять команды для разных сайтов, в этом каталоге работающих. Но помимо этого, мы можем также указывать среди алиасов удаленные сайты, что открывает нам дополнительные возможности.</code></code></p>
+
+<p><code><code>В версиях Drupal 7 и Drupal 8/9 настройка осуществляется немного по-разному, что приводит в особенностям при разворачивании локального окружения.</code></code></p>
+
+<h4><code><code>Настройка алиасов drush Для Drupal 7</code></code></h4>
+
+<p><code><code>Алиасы сайтов для Drupal 7 настраиваются глобально для текущего пользователя ОС и по сути не имеют отношения к конкретному проекту, так как описываются за его пределами.</code></code></p>
+
+<p><code><code>В папке пользователя создаем папку .drush, и в нем - файл aliases.drushrc.php примерно со следующим содержимым:</code></code></p>
+
+<pre>
+<code><code>
+<code language="php">
+&lt;?php
+
+$aliases['prod'] = array(
+  'remote-host' =&gt; 'servername.ru', // адрес для подключения
+  'remote-user' =&gt; 'username', // имя пользователя
+  'root' =&gt; '/home/username/web/servername.ru/html', // каталог установки сайта
+  'uri' =&gt; 'https://servername.ru', // URL сайта
+  'ssh-options' =&gt; '-p 22222' // дополнительные опции для подключения, например, порт
+);
+</code>
+</code></code></pre>
+
+<p><code><code>Это вариант для идеальных условий, который, тем не менее, срабатывает для большинства случаев. Иногда требуются дополнительные параметры, как, например, пути к каталогу установки drush, к статичным файлам и т.п. Пример файла настроек алиасов со всеми возможными значениями можно посмотреть <a href="https://github.com/drush-ops/drush/blob/8.x/examples/example.aliases.drushrc.php">здесь</a>.</code></code></p>
+
+<p><code><code>Казалось бы, всё легко, но если локально вы работаете с docker-окружением (а это наверняка так), то вам надо пробросить этот файл в контейнер. Я пользуюсь <a href="https://lando.dev/">Lando</a> и для проброса использую следующую <a href="https://docs.lando.dev/config/drupal7.html#aliases">инструкцию</a>. Аналогично можно сделать для <a href="https://docs.docksal.io/tools/drush/#site-aliases">docksal</a>. Адепты docker4drupal, думаю, разберутся и без дополнительных пояснений - им в конфигах копаться не впервой.</code></code></p>
+
+<h4><code><code>Настройка алиасов drush Для Drupal 8</code></code></h4>
+
+<p><code><code>Здесь всё стало логичнее: конфигурация алиасов - это уже часть проекта. В каталоге проекта создается папка drush/sites, и в ней - файл self.sites.yml с соответствующим содержимым:</code></code></p>
+
+<pre>
+<code><code>
+<code language="yaml">
+prod:
+  host: servername.ru
+  user: username
+  root: /home/username/web/servername.ru/html
+  uri: https://servername.ru
+</code></code></code></pre>
+
+<p><code><code>Полный пример файла, как всегда - в <a href="https://github.com/drush-ops/drush/blob/master/examples/example.site.yml">репозитории</a> проекта. </code></code></p>
+
+<h3><br><code><code>3. Использование алиасов drush</code></code></h3>
+
+<p><code><code>Итак, мы сконфигурировали алиасы сайтов для drush и теперь можем попробовать их в деле. Сбрасываем кэш drush, выполнив <code>drush cc drush</code> (если вы используете docker, предварительно зайдите в контейнер), и пытаемся получить информацию от удаленного сайта <code>drush @prod st</code>. В ответ мы должны увидеть то, что обычно видим при выполнении привычного <span class="geshifilter"><code class="bash geshifilter-bash">drush st</code></span>, но уже в контексте удаленного сайта. Также пробуем получить ссылку для авторизации (вы ведь уже забыли пароль?) - <code>drush @prod uli</code>. Работает? Переходим к самому интересному.</code></code></p>
+
+<p><code><code>Пока вы были в отпуске, сайт ушёл далеко вперёд? Пора актуализировать БД. Сделаем это по-модному. Для начала раз и навсегда запоминаем, что в стандартной односайтовой установке текущий сайт обозначается алиасом <code>@self</code>. Теперь выполняем</code></code></p>
+
+<pre>
+<code><code><code>drush sql-sync @prod @self</code></code></code></pre>
+
+<p><code><code>Если нам повезёт, то мы увидим процесс авторизации, создания дампа на удаленном сайте, скачивания его и разворачивания на локальной установке. Если этого не произошло - что-то в вашей конфигурации алиаса не так и всего скорее придётся немного погуглить. Часто проблема возникает, если в настройках не указаны пути к папке и к исполняемому файлу drush.</code></code></p>
+
+<p><code><code>Мы актуализировали БД и обнаружили, что все последние новости с пустыми картинками - нет новых файлов. Не беда, выполняем</code></code></p>
+
+<pre>
+<code><code><code>drush rsync @prod:%files @self:%files</code></code></code></pre>
+
+<p><code><code>Как вы поняли, <code>%files</code> - это переменная, в которой хранится путь к каталогу <code>public://</code> удаленного сайта (который обычно <code>/sites/default/files/</code>). Порой эту переменную надо особо определить, о чём выше, но обычно всё происходит без лишних сложностей. Впрочем, вместо <code>%files</code> может быть любой каталог сайта.</code></code></p>
+
+<p><code><code>Теперь о страшном. С самого начала я думал, что произойдёт, если случайно перепутать алиасы местами и запустить <code>drush sql-sync @self @prod</code>. И вот как-то я попробовал это сделать. Ничего не вышло, Drush отказал мне. Не знаю, сделано ли это ограничение для алиаса @prod, или вообще нельзя выкатить свой дамп на удаленную БД, но по крайней мере в этой фобии можно себя успокоить.</code></code></p>
+
+<h3><code><code>4. Хитрости при дампе БД</code></code></h3>
+
+<p><code><code>Порой нам встречаются сайты, база данных которых разрослась до многих гигабайт, и скачивание и разворачивание такого гиганта занимает много ценного рабочего (или не очень) времени. Причём значительную часть этого объема занимают таблицы, где хранится кэш.</code></code></p>
+
+<p><code><code>Решаем вопрос следующим образом (рецепт для Drupal 7). В папке <code>.drush</code> на сайте создаем файл <code>.drushrc.php</code> (если его там еще нет), где прописываем список таблиц, которые надо пропускать при создании дампа. Например:</code></code></p>
+
+<pre>
+<code><code>
+<code language="php">
+&lt;?php
+
+$options['structure-tables']['common'] = array('cache', 'cache_admin_menu', 'cache_block', 'cache_bootstrap', 'cache_commerce_shipping_rates', 'cache_entity_comment', 'cache_entity_commerce_customer_profile', 'cache_entity_commerce_line_item', 'cache_entity_commerce_order', 'cache_entity_commerce_product', 'cache_entity_field_collection_item', 'cache_entity_file', 'cache_entity_node', 'cache_entity_taxonomy_term', 'cache_entity_taxonomy_vocabulary', 'cache_entity_user', 'cache_features', 'cache_feeds_http', 'cache_field', 'cache_filter', 'cache_form', 'cache_hacked', 'cache_image', 'cache_libraries', 'cache_menu', 'cache_metatag', 'cache_page', 'cache_path', 'cache_rules', 'cache_session_cache', 'cache_token', 'cache_ultimate_cron', 'cache_update', 'cache_variable', 'cache_views', 'cache_views_data');
+</code>
+</code></code></pre>
+
+<p><code><code>Впрочем, всего скорее, сейчас уже должна быть доступна запись с wildcard:</code></code></p>
+
+<pre>
+<code><code>
+<code language="php">
+$options['structure-tables']['common'] = array('cache', 'cache_*');</code></code></code></pre>
+
+<p><code><code>Теперь при синхронизации (да и просто при создании дампа) добавляем ссылку на этот список: <code>--structure-tables-key=common</code>, например:</code></code></p>
+
+<pre>
+<code><code><code>
+drush sql-sync @prod_ru @ru --structure-tables-key=common</code></code></code></pre>
+
+<h3><code><code>Заключение</code></code></h3>
+
+<p><code><code>Это лишь небольшая часть ухищрений, к которым можно прибегнуть для автоматизации ежедневной рутины. Порой может показаться, что для малых и нерегулярных проектов игра не стоит свеч и потерянного на настройку времени, но если проект большой, и вы часто к нему обращаетесь, в будущем это сэкономит вам много нервов и к тому же подарит новые навыки, которые в нашем деле никогда не бывают лишними.</code></code></p></div>
+      
+      <div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items">
+              <div class="field--item category-tag"><a href="programmirovanie.html" hreflang="ru">Программирование</a></div>
+              <div class="field--item category-tag"><a href="performance.html" hreflang="ru">performance</a></div>
+              <div class="field--item category-tag"><a href="drupal.html" hreflang="ru">Drupal</a></div>
+              <div class="field--item category-tag"><a href="drupal-7.html" hreflang="ru">Drupal 7</a></div>
+          </div>
+  
+  <div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above">
+    <div class="field--label">Еще по теме</div>
+          <div class="field--items">
+              <div class="field--item"><a href="drupal-7-uskorenie-vremeni-generacii-stranic-internet-magazina-na-32.html" hreflang="ru">Drupal 7: ускорение времени генерации страниц интернет-магазина на 32%</a></div>
+          <div class="field--item"><a href="nastroyka-keshirovaniya-dannykh-apgreyd-servera-uskorenie-raboty-sayta-v-30-raz.html" hreflang="ru">Настройка кэширования данных. Апгрейд сервера. Ускорение работы сайта в 30 раз! </a></div>
+              </div>
+      </div>
+
+
+      <div class="field-yashare">
+        <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+        <script src="//yastatic.net/share2/share.js"></script>
+        <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+                <div class="ya-share2" id="block-ya-share2" data-services="vkontakte,facebook,odnoklassniki,gplus,twitter"></div>
+        <a href="..\rss.rss" target="_blank"><span class="iconify" id="block-iconify" data-icon="ion:logo-rss" style="color: #da8c2c;" data-width="29" data-height="29"></span></a>
+              </div>
+  </div>
+
+  <section>
+  
+  
+ 
+      <div class="comment-form-wrapper">
+      <h2 class="block-form-title">Добавить комментарий</h2>
+      <form class="comment-comment-form comment-form antibot" data-drupal-selector="comment-form" data-action="https://drupal-coder.ru/comment/reply/node/290/comment" action="/antibot" method="post" id="comment-form" accept-charset="UTF-8">
+  <noscript>
+  <div class="antibot-no-js antibot-message antibot-message-warning">Вы должны включить JavaScript чтобы использовать эту форму.</div>
+</noscript>
+<div class="form-item js-form-item form-type-textfield js-form-type-textfield form-item-name js-form-item-name form-group">
+      <label for="edit-name" class="control-label">Ваше имя</label>
+  
+  
+  <input placeholder="Ваше имя" data-drupal-selector="edit-name" class="form-text form-control" type="text" id="edit-name" name="name" value="" size="30" maxlength="60">
+
+  
+  
+  </div>
+<input autocomplete="off" data-drupal-selector="form-wt0mlai6ijhghsvwkvrcpe5zcroianjemt2sekz24fe" type="hidden" name="form_build_id" value="form-wt0MLai6iJHgHsvwkvRcPe5zCROiaNJeMT2SEkZ24FE"><input data-drupal-selector="edit-comment-comment-form" type="hidden" name="form_id" value="comment_comment_form"><input data-drupal-selector="edit-antibot-key" type="hidden" name="antibot_key" value=""><div class="field--type-text-long field--name-comment-body field--widget-text-textarea form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-wrapper" id="edit-comment-body-wrapper">      <div class="js-text-format-wrapper text-format-wrapper js-form-item form-item">
+  <div class="form-item js-form-item form-type-textarea js-form-type-textarea form-item-comment-body-0-value js-form-item-comment-body-0-value">
+      <label for="edit-comment-body-0-value" class="control-label js-form-required form-required">Комментарий</label>
+  
+  
+  <div class="form-textarea-wrapper">
+  <textarea class="js-text-full text-full form-textarea required form-control resize-vertical" data-media-embed-host-entity-langcode="ru" data-drupal-selector="edit-comment-body-0-value" id="edit-comment-body-0-value" name="comment_body[0][value]" rows="5" cols="60" placeholder="" required="required" aria-required="true"></textarea>
+</div>
+
+
+  
+  
+  </div>
+<div class="js-filter-wrapper filter-wrapper form-inline form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format" id="edit-comment-body-0-format"><div class="filter-help form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format-help" id="edit-comment-body-0-format-help"><a href="..\filter\tips.html" target="_blank" title="Opens in new window" data-toggle="tooltip" data-drupal-selector="edit-comment-body-0-format-help-about" class="icon-before" id="edit-comment-body-0-format-help-about"><span class="icon glyphicon glyphicon-question-sign" aria-hidden="true"></span>О текстовых форматах</a></div>
+</div>
+
+  </div>
+
+  </div>
+<div data-drupal-selector="edit-actions" class="form-actions form-group js-form-wrapper form-wrapper" id="edit-actions"><button data-drupal-selector="edit-submit" class="button button--primary js-form-submit form-submit btn-primary btn" type="submit" id="edit-submit" name="op" value="Отправить">Отправить</button></div>
+
+</form>
+
+    </div> 
+  
+</section>
+
+
+</article>
+
+
+  </div>
+
+              </section>
+
+                </div>
+  </div>
+
+
+      <footer class="footer" role="contentinfo">
+      <div class=" container">  
+          <div class="region region-footer">
+    <section id="block-footerphone" class="block block-block-content block-block-content07b69e1d-d1db-4e8b-bb14-dc4563ef50bc clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="block-form-contacts">
+  <ul>
+    <li class="block-form-phone"><a href="tel:88002222673">8 800 222-26-73</a></li>
+  </ul>
+</div></div>
+      
+  </section>
+
+<section id="block-copyright" class="block block-block-content block-block-content263c1cb2-b142-4488-af8e-99f92fcb7640 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="social-links">
+  <ul class="social-links-wrapper">
+    <li class="social-links-item"><a target="_blank" href="https://vk.com/initlab"><i class="fab fa-vk"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://teleg.one/initlabbot" title="Свяжитесь с нами"><i class="fab fa-telegram-plane"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.youtube.com/channel/UCyFEbngMB-bK2ulNtd_W43A"><i class="fab fa-youtube"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://zen.yandex.ru/id/6037ce072f500a068c630fec"><img style="width: 16px; margin-bottom: 5px;" src="..\sites\default\files\icons\zen-icon.svg"></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.facebook.com/initlabkr/"><img style="width: 25px; margin-bottom: 5px;" src="..\sites\default\files\icons\icon-facebook-ru-dc.svg"></a></li>
+  </ul>  
+</div>
+
+<p>ООО «Инитлаб», Краснодар, Россия.
+<a class="goal__tel" href="tel:+78002222673">8 800 222-26-73</a><br>
+Drupal является зарегистрированной торговой маркой Dries Buytaert.</p>
+</div>
+      
+  </section>
+
+
+  </div>
+
+      </div>
+    </footer>
+  </div>
+
+  </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"node\/290","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"ru"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"ajaxPageState":{"libraries":"antibot\/antibot.form,bootstrap\/popover,bootstrap\/theme,bootstrap\/tooltip,bootstrap_dc\/bootstrap-scripts,bootstrap_dc\/dc,bootstrap_dc\/global-styling,bootstrap_dc\/seo,colorbox\/default,colorbox_inline\/colorbox_inline,colorbox_load\/colorbox_load,filter\/drupal.filter,geshifilter\/geshifilter,google_analytics\/google_analytics,ng_lightbox\/ng_lightbox,system\/base,views\/views.module","theme":"bootstrap_dc","theme_token":null},"ajaxTrustedUrl":{"https:\/\/drupal-coder.ru\/comment\/reply\/node\/290\/comment":true},"colorbox":{"opacity":"0.85","current":"{current} \u0438\u0437 {total}","previous":"\u00ab \u041f\u0440\u0435\u0434\u044b\u0434\u0443\u0449\u0438\u0439","next":"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0439 \u00bb","close":"Close","maxWidth":"98%","maxHeight":"98%","fixed":true,"mobiledetect":true,"mobiledevicewidth":"480px"},"google_analytics":{"account":"UA-87805467-1","trackOutbound":true,"trackMailto":true,"trackTel":true,"trackDownload":true,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip","trackColorbox":true},"bootstrap":{"forms_has_error_value_toggle":1,"modal_animation":1,"modal_backdrop":"true","modal_focus_input":1,"modal_keyboard":1,"modal_select_text":1,"modal_show":1,"modal_size":"","popover_enabled":1,"popover_animation":1,"popover_auto_close":1,"popover_container":"body","popover_content":"","popover_delay":"0","popover_html":0,"popover_placement":"right","popover_selector":"","popover_title":"","popover_trigger":"click","tooltip_enabled":1,"tooltip_animation":1,"tooltip_container":"body","tooltip_delay":"0","tooltip_html":0,"tooltip_placement":"auto left","tooltip_selector":"","tooltip_trigger":"hover"},"antibot":{"forms":{"comment-form":{"id":"comment-form","key":"5D-i6uDYb-gr3-4qQZFOE5ec3-2jdoq6QSz9J26Pt50"}}},"user":{"uid":0,"permissionsHash":"66bb25c0b665c533dd9436d0cd4e99532a723088208bff0a05f2bf113d3703ac"}}</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="..\sites\default\files\js\js_kFVTvKCxW3cWmdAcJABrE5Fa90cD_Go5IxgQw9oFgJ0.js"></script>
+<script src="..\sites\default\files\js\js_d5BC-2wlh3XH4S29GgaPGie7NxyWY0K1EhPg30LGzwA.js"></script>
+<script src="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+<script src="..\sites\default\files\js\js_CNCJCgJnATwdWHfgCEncmZchd6pVQciEiBxkoYS9btY.js"></script>
+<script src="..\sites\default\files\js\js_PZPdVr1rIFXjUagjykPULRTCC8T4ZfIghTqFAwKg6ZI.js"></script>
+
+  </body>
+</html>

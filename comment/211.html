@@ -1,0 +1,739 @@
+﻿<!DOCTYPE html>
+<html lang="ru" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
+  <head>
+    <meta charset="utf-8">
+<noscript><style>form.antibot * :not(.antibot-message) { display: none !important; }</style>
+</noscript><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-87805467-1"></script>
+<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag("js", new Date());gtag("set", "developer_id.dMDhkMT", true);gtag("config", "UA-87805467-1", {"groups":"default","anonymize_ip":true,"page_placeholder":"PLACEHOLDER_page_path","allow_ad_personalization_signals":false});</script>
+<meta http-equiv="content-language" content="ru">
+<meta name="description" content="Обзор основных отличий маршрутизации в Drupal 8 от маршрутизации в Drupal 7.">
+<meta name="keywords" content="создание сайтов на drupal, разработка Drupal-сайтов">
+<meta property="og:type" content="blog">
+<meta property="og:url" content="https://drupal-coder.ru/blog/routing-drupal-8-prosai-hookmenu">
+<meta property="og:title" content="Роутинг Drupal 8. Прощай hook_menu.">
+<meta property="og:description" content="Обзор основных отличий маршрутизации в Drupal 8 от маршрутизации в Drupal 7.">
+<meta name="Generator" content="Drupal 9 (https://www.drupal.org)">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="..\sites\default\files\android-chrome-256x256.png" type="image/png">
+<link rel="alternate" hreflang="ru" href="..\blog\routing-drupal-8-prosai-hookmenu.html">
+<link rel="canonical" href="..\blog\routing-drupal-8-prosai-hookmenu.html">
+<link rel="shortlink" href="..\blog\routing-drupal-8-prosai-hookmenu.html">
+
+    <title>Роутинг Drupal 8. Прощай hook_menu. | drupal-coder.ru</title>
+    <link rel="stylesheet" media="all" href="..\sites\default\files\css\css_y8CdfJDNR-tG0CPnRDokR6Eh9OUJplbHLVQ9A8myecQ.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_tFXlTqkfn6J-Qtpt9xbB8JudSaJfOGxRSmpeidDAzPE.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_l8G4voaHcf64TEU2r2Yyz9f53nJ0vU-50MrP1M5xhmk.css">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/@unicorn-fail/drupal-bootstrap-styles@0.0.2/dist/3.4.0/8.x-3.x/drupal-bootstrap.min.css" integrity="sha512-tGFFYdzcicBwsd5EPO92iUIytu9UkQR3tLMbORL9sfi/WswiHkA1O3ri9yHW+5dXk18Rd+pluMeDBrPKSwNCvw==" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_ULmc1mwKFKQRQmxYsjphW6dsh2g6jX4LXXBAtdO0vIE.css">
+
+    
+    <meta name="cmsmagazine" content="3d47b05beba40f3816d9741ee18c01a5">
+
+    
+    
+           <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P4SXQSG');</script>
+<!-- End Google Tag Manager -->
+    
+    
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Bold.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Medium.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Regular.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/fontawesome/webfonts/fa-brands-400.woff2" crossorigin="anonymous">
+    <link rel='manifest' href='..\manifest.json'>
+    <meta name="format-detection" content="telephone=no">
+
+          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MXPCP8Q"></script>
+      </head>
+  <body class="page-node-106 path-node page-node-type-blog has-glyphicons">
+
+                  <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4SXQSG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+      
+          
+
+    <a href="#main-content" class="visually-hidden focusable skip-link">
+      Перейти к основному содержанию
+    </a>
+    
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
+    
+      
+          <header class="navbar navbar-default" id="navbar" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+            <div class="region region-navigation">
+    <section id="block-pikselvkskript" class="block block-block-content block-block-contentbf8d9e8f-617c-4e8f-8501-7586be8255e0 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script>(window.Image ? (new Image()) : document.createElement('img')).src = 'https://vk.com/rtrg?p=VK-RTRG-238064-1VWIQ';</script></div>
+      
+  </section>
+
+<section id="block-globalsitetagadwords" class="block block-block-content block-block-content27617f8e-58d1-4a2a-9f23-31eab95a43c8 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><!-- Global site tag (gtag.js) - AdWords: 948581894 -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=AW-948581894"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-948581894');
+</script></div>
+      
+  </section>
+
+            <a class="logo navbar-btn pull-left" href="..\index.htm" title="Главная" rel="home">
+            <img src="..\themes\custom\bootstrap_dc\images\logo-initlab.svg" alt="Главная" width="156" height="31">
+        </a>
+            
+  </div>
+
+        </div>
+                          <div class="navbar-collapse-wrapper">
+
+            <div class="navbar-collapse collapse">
+                <div class="region region-navigation-collapsible">
+    <nav role="navigation" aria-labelledby="block-bootstrap-dc-main-menu-menu" id="block-bootstrap-dc-main-menu">
+            
+  <h2 class="visually-hidden" id="block-bootstrap-dc-main-menu-menu">Основная навигация</h2>
+  
+
+        
+              <ul class="menu nav navbar-nav">
+                      <li><a href="..\support.html" data-drupal-link-system-path="node/1">Поддержка Drupal</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-admin.html" class="dropdown-toggle" data-toggle="dropdown">DevOps <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\import-migrate-upgrade.html" data-drupal-link-system-path="node/4">Миграция</a>
+                  </li>
+                  <li><a href="..\backup.html" data-drupal-link-system-path="node/3">Бэкапы</a>
+                  </li>
+                  <li><a href="..\drupal-security-audit.html" data-drupal-link-system-path="node/9">Аудит безопасности</a>
+                  </li>
+                  <li><a href="..\boost-drupal.html" data-drupal-link-system-path="node/5">Оптимизация скорости</a>
+                  </li>
+                  <li><a href="..\ssl.html" data-drupal-link-system-path="node/99">Переезд на https</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\blog.html" data-drupal-link-system-path="blog">Блог</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-seo.html" class="dropdown-toggle" data-toggle="dropdown">Продвижение <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\drupal-seo\context.html" data-drupal-link-system-path="node/111">Реклама</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li class="expanded dropdown"><a href="..\team.html" class="dropdown-toggle" data-toggle="dropdown">О нас <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\team.html#team" data-drupal-link-system-path="team">Команда</a>
+                  </li>
+                  <li><a href="..\drupalgive.html" data-drupal-link-system-path="node/135">Drupalgive</a>
+                  </li>
+                  <li><a href="..\drupal-courses.html" data-drupal-link-system-path="node/10">Курсы Drupal</a>
+                  </li>
+                  <li><a href="..\vacancies.html" data-drupal-link-system-path="vacancies">Вакансии</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\happy-customers.html" data-drupal-link-system-path="happy-customers">Проекты</a>
+                  </li>
+                  <li><a href="..\contacts.html" data-drupal-link-system-path="node/86">Контакты</a>
+                  </li>
+              </ul>
+      
+
+
+  </nav>
+
+  </div>
+
+            </div>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+              </div>
+    </header>
+  
+
+      <div class="page-header-big" role="heading">
+        <div class="container">
+            <div class="region region-header">
+        <h1 class="page-header">
+<span>Роутинг Drupal 8. Прощай hook_menu.</span>
+</h1>
+
+<section class="views-element-container block block-views block-views-blockuser-block-1 clearfix" id="block-views-block-user-block-1">
+  
+    
+
+      <div class="form-group"><div class="view view-user view-id-user view-display-id-block_1 js-view-dom-id-db1c5e9121d9fe7dc9f5b257028b343e2bf103f991c68a0af4bd9f9dd3fba199">
+  
+    
+      
+      <div class="view-content">
+          <div class="views-row"><div class="views-field views-field-user-picture"><div class="field-content">  <img loading="lazy" src="..\sites\default\files\styles\avatar_mini\public\pictures\2019-12\avatar.jpg?itok=fGoezcsO" width="45" height="45" alt="" typeof="foaf:Image" class="img-responsive">
+
+
+</div></div><div class="views-field views-field-field-name"><div class="field-content">Тымчук Андрей</div></div></div>
+
+    </div>
+  
+          </div>
+</div>
+
+  </section>
+
+<section id="block-yashare" class="block-yashare block block-block-content block-block-contentee72d8fb-02e9-4ef6-8e71-0df16bee86a9 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+<script src="//yastatic.net/share2/share.js"></script>
+<div class="ya-share2" data-services="vkontakte,odnoklassniki,gplus,twitter"></div></div>
+      
+  </section>
+
+
+  </div>
+
+        </div>
+      
+    </div>
+  
+
+<div class="main-wrapper">
+  <div role="main" class="main-container container js-quickedit-main-content">
+    <div class="row">
+
+
+
+            
+                  <section class="col-sm-12">
+
+                
+                
+                
+                                      
+                  
+                          <a id="main-content"></a>
+            <div class="region region-content">
+        <ol class="breadcrumb">
+          <li>
+                  <a href="..\blog.html">Блог</a>
+              </li>
+          <li class="active">
+                  Роутинг Drupal 8. Прощай hook_menu.
+              </li>
+      </ol>
+
+<div data-drupal-messages-fallback="" class="hidden"></div>
+  <article data-history-node-id="106" role="article" about="https://drupal-coder.ru/blog/routing-drupal-8-prosai-hookmenu" class="blog is-promoted full clearfix">
+
+  
+    
+
+  
+
+  <div class="content">
+    
+    <ul class="links inline list-inline"><li class="comment-add"><a href="..\blog\routing-drupal-8-prosai-hookmenu.html#comment-form" title="Поделитесь своими мыслями и мнениями." hreflang="ru">Добавить комментарий</a></li></ul><div id="field-language-display"><div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group">
+      <label class="control-label">Language</label>
+  
+  
+  Russian
+
+  
+  
+  </div>
+</div>
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><p lang="zxx" xml:lang="zxx" xml:lang="zxx">Один из самых используемых хуков Drupal 7 – это, конечно же, hook_menu. Его реализация имеется в любом мало-мальски серьёзном модуле. Функционал, которым управлял данный хук, был поистине огромен. С его помощью можно было объявлять страницы, вкладки, контекстные ссылки, устанавливать обработчики, управлять доступом и многое другое. С приходом Drupal 8 данный хук более не нужен и система роутинга теперь базируется на компонентах Symfony (перед изучением роутинга Drupal 8 я бы рекомендовал ознакомиться с <a href="http://symfony.com/doc/current/routing.html">документацией роутинга в Symfony</a>). При первом знакомстве данная система может вызывать отторжение и ощущение запутанности у прожжённого фаната Drupal 7. Однако, при более подробном рассмотрении приходит понимание того, что новая система гораздо удобнее, и возвращаться к hook_menu больше не хочется.</p>
+
+<p lang="zxx" xml:lang="zxx" xml:lang="zxx"> </p>
+
+<h3>Статичные маршруты</h3>
+
+<p lang="zxx" xml:lang="zxx" xml:lang="zxx">Начнём с простого – определение статичного маршрута. Для этого в Drupal 7 нужно было написать следующий код внутри своего модуля:</p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">function</span> example_menu<span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span>
+  <span style="color: #000088;">$items</span> <span style="color: #339933;">=</span> <span style="color: #990000;">array</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+  <span style="color: #000088;">$items</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'example_page'</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #990000;">array</span><span style="color: #009900;">(</span>
+    <span style="color: #0000ff;">'title'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'Example Page'</span><span style="color: #339933;">,</span>
+    <span style="color: #0000ff;">'page callback'</span> <span style="color: #339933;">=&gt;</span> example_page<span style="color: #339933;">,</span>
+    <span style="color: #0000ff;">'access arguments'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #990000;">array</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'access content'</span><span style="color: #009900;">)</span><span style="color: #339933;">,</span>
+  <span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+  <span style="color: #b1b100;">return</span> <span style="color: #000088;">$items</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">}</span></pre></div></pre>
+
+<p>В Drupal 8 для описания роутов используется формат YAML. Информация о роутах модуля, в том числе статических, содержится в файле MODULE_NAME.routing.yml. Важно (!) отметить, что в YAML файлах рекомендуется использовать одинарные кавычки. Использование двойных кавычек может привести к непредсказуемым последствиям. Каждый маршрут описывается отдельно и обязательно должен иметь следующие параметры:</p>
+
+<ul><li lang="zxx" xml:lang="zxx" xml:lang="zxx">Название - служит уникальным идентификатором роута;</li>
+	<li lang="zxx" xml:lang="zxx" xml:lang="zxx">Путь - в отличие от hook_menu путь обязательно должен начинаться со слеша;</li>
+	<li lang="zxx" xml:lang="zxx" xml:lang="zxx">Обработчик роута;</li>
+	<li lang="zxx" xml:lang="zxx" xml:lang="zxx">Условия для управления доступом к роуту.</li>
+</ul><p lang="zxx" xml:lang="zxx" xml:lang="zxx">Данные параметры являются необходимым минимумом для определения маршрута. Подробнее почитать про структуру описания роутов в Drupal 8 можно на <a href="https://www.drupal.org/docs/8/api/routing-system/structure-of-routes">странице официальной документации</a>.</p>
+
+<p lang="zxx" xml:lang="zxx" xml:lang="zxx">Вернёмся к рассмотренному ранее примеру. В Drupal 8 код будет следующим:</p>
+
+<pre>
+<div class="geshifilter"><pre class="yaml geshifilter-yaml" style="font-family:monospace;"><span style="color: #007F45;">example.page</span>:<span style="color: green;">
+  path</span><span style="font-weight: bold; color: brown;">: </span>'/example_page'<span style="color: #007F45;">
+  defaults</span>:<span style="color: green;">
+    _controller</span><span style="font-weight: bold; color: brown;">: </span>'\Drupal\example\Controller\PageController::page'<span style="color: green;">
+    _title</span><span style="font-weight: bold; color: brown;">: </span>'Example Page'<span style="color: #007F45;">
+  requirements</span>:<span style="color: green;">
+    _permission</span><span style="font-weight: bold; color: brown;">: </span>'access content'</pre></div>
+</pre>
+
+<p lang="zxx" xml:lang="zxx" xml:lang="zxx">Нетрудно заметить, что подобное представление в разы читабельнее массивов из hook_menu. Скажем несколько слов о параметрах вышеуказанного маршрута.</p>
+
+<p lang="zxx" xml:lang="zxx" xml:lang="zxx">Во избежание конфликтов, имя роута должно быть построено по следующей схеме module_name.route_name. Параметр _controller отвечает за обработчик роута. Обработчиком может являться любой публичный метод класса, являющегося наследником класса базового контроллера (ControllerBase). Согласно стандартам Drupal 8, класс обработчик должен быть реализован в файле с названием соответствующим имени класса и располагаться этот файл должен в папке MODULE_NAME/src/Controller/. Для приведённого выше примера класс должен располагаться в файле example/src/Controller/PageController.php. Один контроллер может управлять любым количеством роутов и в отличие от Drupal 7 контроллер всегда должен возвращать массив.</p>
+
+<p lang="zxx" xml:lang="zxx" xml:lang="zxx">Рассмотрим пример минимального контроллера:</p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #009933; font-style: italic;">/**
+ * @file
+ * Contains \Drupal\example\Controller\PageController.
+ */</span>
+ 
+<span style="color: #000000; font-weight: bold;">namespace</span> Drupal\example\Controller<span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">use</span> Drupal\Core\Controller\ControllerBase<span style="color: #339933;">;</span>
+ 
+<span style="color: #000000; font-weight: bold;">class</span> PageController <span style="color: #000000; font-weight: bold;">extends</span> ControllerBase <span style="color: #009900;">{</span>
+ 
+  <span style="color: #009933; font-style: italic;">/**
+   * Page callback example.
+   */</span>
+  <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> page<span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span>
+    <span style="color: #b1b100;">return</span> <span style="color: #009900;">[</span>
+      <span style="color: #0000ff;">'#markup'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #000088;">$this</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">t</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'Example page, Wow!'</span><span style="color: #009900;">)</span><span style="color: #339933;">,</span>
+    <span style="color: #009900;">]</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">}</span>
+ 
+<span style="color: #009900;">}</span></pre></div></pre>
+
+<p lang="zxx" xml:lang="zxx" xml:lang="zxx">Для работы с формами в роутах предусмотрен специальный параметр _form, который следует использовать вместо параметра _controller. Однако этот функционал заслуживает отдельной статьи и в рамках данной статьи рассматриваться не будет.</p>
+
+<p lang="zxx" xml:lang="zxx" xml:lang="zxx">Для управления доступом к роуту по наличию разрешения используется параметр _permission. Подробнее о других вариантах управления доступом будет сказано далее.</p>
+
+<p lang="zxx" xml:lang="zxx" xml:lang="zxx"> </p>
+
+<h3>Статичные маршруты с аргументами</h3>
+
+<p lang="zxx" xml:lang="zxx" xml:lang="zxx">По большей части, маршруты со статичными путями никому не нужны, поэтому необходимо использование аргументов. В Drupal 7 мы делали так:</p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">function</span> example_menu<span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span>
+  <span style="color: #000088;">$items</span> <span style="color: #339933;">=</span> <span style="color: #990000;">array</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+  <span style="color: #000088;">$items</span><span style="color: #009900;">[</span>‘example_page<span style="color: #339933;">/%</span>’<span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #990000;">array</span><span style="color: #009900;">(</span>
+    <span style="color: #0000ff;">'title'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'Example Page'</span><span style="color: #339933;">,</span>
+    <span style="color: #0000ff;">'page callback'</span> <span style="color: #339933;">=&gt;</span> example_page<span style="color: #339933;">,</span>
+    <span style="color: #0000ff;">'page arguments'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #990000;">array</span><span style="color: #009900;">(</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">)</span><span style="color: #339933;">,</span>
+    <span style="color: #0000ff;">'access arguments'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #990000;">array</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'access content'</span><span style="color: #009900;">)</span><span style="color: #339933;">,</span>
+  <span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+  <span style="color: #b1b100;">return</span> <span style="color: #000088;">$items</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">}</span></pre></div></pre>
+
+<p>Если же мы хотели, чтобы при передаче параметра в callback Drupal автоматически подгружал связанную с ним сущность, то мы применяли механизм Wildcard. К примеру для загрузки ноды использовали аргумент %node, для пользователя %user и т.д. В Drupal 8 использование аргументов в маршрутах выглядит так:</p>
+
+<pre>
+<div class="geshifilter"><pre class="yaml geshifilter-yaml" style="font-family:monospace;"><span style="color: #007F45;">example.page</span>:<span style="color: green;">
+  path</span><span style="font-weight: bold; color: brown;">: </span>'/example_page/<span class="br0">{</span>argument<span class="br0">}</span>'<span style="color: #007F45;">
+  defaults</span>:<span style="color: green;">
+    _controller</span><span style="font-weight: bold; color: brown;">: </span>'\Drupal\example\Controller\PageController::page'<span style="color: green;">
+    _title</span><span style="font-weight: bold; color: brown;">: </span>'Example Page'<span style="color: #007F45;">
+  requirements</span>:<span style="color: green;">
+    _permission</span><span style="font-weight: bold; color: brown;">: </span>'access content'</pre></div></pre>
+
+<p>Соответственно в методе контроллера роута нужно будет описать аргумент <em>$argument</em>. В секции <em>defaults</em> можно определять статичные аргументы для контроллера либо объявлять значения по умолчанию для аргументов, описанных в пути маршрута (при их отсутствии в URL). Любые значения в секции <em>defaults</em>, у которых ключ не начинается с подчёркивания считаются аргументами и будут переданы в контроллер. Например, при определении нижеуказанного роута, первый аргумент (animal)<em> </em>является динамическим и обязателен для данного маршрута, второй аргумент (fruit) – динамический, но необязательный и имеет значение по умолчанию, третий аргумент (count) – статический, он присутствует в метода контроллера, но отсутствует в URL.</p>
+
+<pre>
+<div class="geshifilter"><pre class="yaml geshifilter-yaml" style="font-family:monospace;"><span style="color: #007F45;">example.page</span>:<span style="color: green;">
+  path</span><span style="font-weight: bold; color: brown;">: </span>'/example_page/<span class="br0">{</span>animal<span class="br0">}</span>/<span class="br0">{</span>fruit<span class="br0">}</span>'<span style="color: #007F45;">
+  defaults</span>:<span style="color: green;">
+    _controller</span><span style="font-weight: bold; color: brown;">: </span>'\Drupal\example\Controller\PageController::page'<span style="color: green;">
+    _title</span><span style="font-weight: bold; color: brown;">: </span>'Example Page'<span style="color: green;">
+    fruit</span><span style="font-weight: bold; color: brown;">: </span>'banana'<span style="color: green;">
+    count</span><span style="font-weight: bold; color: brown;">: </span>7<span style="color: #007F45;">
+  requirements</span>:<span style="color: green;">
+    _permission</span><span style="font-weight: bold; color: brown;">: </span>'access content'</pre></div></pre>
+
+<p>Помимо всего прочего в маршрутах Drupal 8 можно устанавливать ограничения на аргументы. Ограничения представляют собой регулярное выражение с ключом, равным имени аргумента. В примере ниже параметр <em>fruit</em> должен обязательно иметь значение banana или mango, а аргумент count должен быть целым числом.</p>
+
+<pre>
+<div class="geshifilter"><pre class="yaml geshifilter-yaml" style="font-family:monospace;"><span style="color: #007F45;">example.page</span>:<span style="color: green;">
+  path</span><span style="font-weight: bold; color: brown;">: </span>'/example_page/<span class="br0">{</span>fruit<span class="br0">}</span>/<span class="br0">{</span>count<span class="br0">}</span>'<span style="color: #007F45;">
+  defaults</span>:<span style="color: green;">
+    _controller</span><span style="font-weight: bold; color: brown;">: </span>'\Drupal\example\Controller\PageController::page'<span style="color: green;">
+    _title</span><span style="font-weight: bold; color: brown;">: </span>'Example Page'<span style="color: #007F45;">
+  requirements</span>:<span style="color: green;">
+    _permission</span><span style="font-weight: bold; color: brown;">: </span>'access content'<span style="color: green;">
+    fruit</span><span style="font-weight: bold; color: brown;">: </span>banana|mango<span style="color: green;">
+    count</span><span style="font-weight: bold; color: brown;">: </span>\d+</pre></div></pre>
+
+<p>Как и в Drupal 7, в 8-ой версии также имеется механизм передачи сущности в контроллер на основе значения аргумента (по-умному это называется Upcasting). Для этого аргумент нужно назвать именем сущности, которую надо передать в контроллер. Хотим передать ноду? Что же, нет ничего проще - называем аргумент <em>node</em>. Нужно загрузить пользователя – называем <em>user</em> и т.д для любой другой сущности. Рано или поздно у Вас возникнет вопрос - "Как же быть, если мне нужно передать в контроллер две ноды? Я ведь не могу определить два аргумента с одинаковым именем.". Да, определять аргументы с одинаковыми именами действительно нельзя. Здесь на помощь приходит секция <em>options</em>. Говоря словами официальной документации, этот раздел представляют собой дополнительные параметры для интерпретации и работы маршрута. Изменим наш роут, сообщив ему о том, что хотим иметь дело с двумя нодами в контроллере:</p>
+
+<pre>
+<div class="geshifilter"><pre class="yaml geshifilter-yaml" style="font-family:monospace;"><span style="color: #007F45;">example.page</span>:<span style="color: green;">
+  path</span><span style="font-weight: bold; color: brown;">: </span>'/example_page/<span class="br0">{</span>node1<span class="br0">}</span>/<span class="br0">{</span>node2<span class="br0">}</span>'<span style="color: #007F45;">
+  defaults</span>:<span style="color: green;">
+    _controller</span><span style="font-weight: bold; color: brown;">: </span>'\Drupal\example\Controller\PageController::page'<span style="color: green;">
+    _title</span><span style="font-weight: bold; color: brown;">: </span>'Example Page'<span style="color: #007F45;">
+  requirements</span>:<span style="color: green;">
+    _permission</span><span style="font-weight: bold; color: brown;">: </span>'access content'<span style="color: #007F45;">
+  options</span>:<span style="color: #007F45;">
+    parameters</span>:<span style="color: #007F45;">
+      node1</span>:<span style="color: green;">
+        type</span><span style="font-weight: bold; color: brown;">: </span>entity:node<span style="color: #007F45;">
+      node2</span>:<span style="color: green;">
+        type</span><span style="font-weight: bold; color: brown;">: </span>entity:node</pre></div></pre>
+
+<p>Остаётся отметить, что Upcasting работает только при наличии в методе контроллера аргумента с типом загружаемой сущности.</p>
+
+<p> </p>
+
+<h3>Управление доступом</h3>
+
+<p lang="zxx" xml:lang="zxx" xml:lang="zxx">Один из важнейших аспектов роутинга – управление доступом. Мы совершенно не хотим, чтобы закрытую информацию мог посмотреть любой желающий. Для общего понимания слудет знать, что в Drupal 8 имеется возможность управлять доступом по следующим значениям:</p>
+
+<ul><li lang="zxx" xml:lang="zxx" xml:lang="zxx">Роль пользователя (_role) – можно указывать, как одну роль, так и комбинации AND/OR посредством символов ","/"+" соответственно;</li>
+	<li lang="zxx" xml:lang="zxx" xml:lang="zxx">Наличие разрешения (_permission) – аналогично роли можно указывать одиночное разрешение или комбинацию;</li>
+	<li lang="zxx" xml:lang="zxx" xml:lang="zxx">Наличие разрешения выполнения операции для сущности (_entity_access) – например, node.view выполняет проверку на наличие прав на просмотр ноды;</li>
+	<li lang="zxx" xml:lang="zxx" xml:lang="zxx">Кастомный callback управления доступом роута (_custom_access) – подробно можно прочитать в <a href="https://www.drupal.org/node/2122195">официальной документации</a>;</li>
+	<li lang="zxx" xml:lang="zxx" xml:lang="zxx">На основе типа HTTP-запроса (_method) – множество типов указывается с помощью соответствующего символа - "|".</li>
+</ul><p lang="zxx" xml:lang="zxx" xml:lang="zxx">Кроме этого имеется возможность управления доступом в зависимости от включённых модулей и формата контента в запросе. Параметры управления доступом располагаются в секции <em>requirements</em>.</p>
+
+<p lang="zxx" xml:lang="zxx" xml:lang="zxx"> </p>
+
+<h3>Динамические маршруты</h3>
+
+<p lang="zxx" xml:lang="zxx" xml:lang="zxx">Статичные маршруты – это, конечно, хорошо, но когда возникает необходимость определить множество похожих роутов на основе определённого правила, не будем же мы их все писать в MODULE.routing.yml. К тому же мы не можем точно быть уверены в том, сколько именно роутов нам нужно. В Drupal 7 логику построения множества маршрутов нужно было добавлять в код реализации hook_menu() в вашем модуле. На основе этой логики (например, с помощью цикла) в результирующий массив добавлялись требуемые маршруты. Но можем ли мы что-то похожее реализовать в Drupal 8? Идём читать официальную документацию. Действительно, присутствует специальный механизм для динамического роутинга. В MODULE.routing.yml объявляем элемент <em>route_callbacks</em>. Стоит отметить, что он является элементом верхнего уровня – говоря простым языком, располагается в файле максимально близко к левому краю без отступов. Для примера, можно рассмотреть часть содержимого файла роутинга модуля Views:</p>
+
+<pre>
+<div class="geshifilter"><pre class="yaml geshifilter-yaml" style="font-family:monospace;"><span style="color: #007F45;">views.ajax</span>:<span style="color: green;">
+  path</span><span style="font-weight: bold; color: brown;">: </span>'/views/ajax'<span style="color: #007F45;">
+  defaults</span>:<span style="color: green;">
+    _controller</span><span style="font-weight: bold; color: brown;">: </span>'\Drupal\views\Controller\ViewAjaxController::ajaxView'<span style="color: #007F45;">
+  options</span>:<span style="color: green;">
+    _theme</span><span style="font-weight: bold; color: brown;">: </span>ajax_base_page<span style="color: #007F45;">
+  requirements</span>:<span style="color: green;">
+    _access</span><span style="font-weight: bold; color: brown;">: </span>'TRUE'
+<span style="color: #007F45;">
+route_callbacks</span><span style="font-weight: bold; color: brown;">:
+</span>  - 'views.route_subscriber:routes'</pre></div></pre>
+
+<p lang="zxx" xml:lang="zxx" xml:lang="zxx">В элементе <em>route_callbacks</em> определяется callback для генерации маршрутов. Им может быть как метод класса (\Drupal\example\Routing\ExampleRoutes::routes), так и метод сервиса (example.service:routes).</p>
+
+<p lang="zxx" xml:lang="zxx" xml:lang="zxx">Определим динамические маршруты в нашем модуле с помощью кастомного класса <em>ExampleRoutes</em>. В MODULE.routing.yml добавим:</p>
+
+<pre>
+<div class="geshifilter"><pre class="yaml geshifilter-yaml" style="font-family:monospace;"><span style="color: #007F45;">route_callbacks</span><span style="font-weight: bold; color: brown;">:
+</span>  - '\Drupal\example\Routing\ExampleRoutes::routes'</pre></div></pre>
+
+<p>Теперь опишем класс <em>ExampleRoutes</em> в файле src/Routing/ExampleRoutes.php относительно папки нашего модуля.</p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">namespace</span> Drupal\example\Routing<span style="color: #339933;">;</span>
+ 
+<span style="color: #000000; font-weight: bold;">use</span> Symfony\Component\Routing\Route<span style="color: #339933;">;</span>
+ 
+<span style="color: #009933; font-style: italic;">/**
+ * Defines dynamic routes.
+ */</span>
+<span style="color: #000000; font-weight: bold;">class</span> ExampleRoutes <span style="color: #009900;">{</span>
+ 
+  <span style="color: #009933; font-style: italic;">/**
+   * {@inheritdoc}
+   */</span>
+  <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> routes<span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span>
+    <span style="color: #000088;">$routes</span> <span style="color: #339933;">=</span> <span style="color: #990000;">array</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+    <span style="color: #666666; font-style: italic;">// Declares a single route under the name 'example.content'.</span>
+    <span style="color: #666666; font-style: italic;">// Returns an array of Route objects. </span>
+    <span style="color: #000088;">$routes</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'example.content'</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> Route<span style="color: #009900;">(</span>
+      <span style="color: #666666; font-style: italic;">// Path to attach this route to:</span>
+      <span style="color: #0000ff;">'/example'</span><span style="color: #339933;">,</span>
+      <span style="color: #666666; font-style: italic;">// Route defaults:</span>
+      <span style="color: #990000;">array</span><span style="color: #009900;">(</span>
+        <span style="color: #0000ff;">'_controller'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'\Drupal\example\Controller\ExampleController::content'</span><span style="color: #339933;">,</span>
+        <span style="color: #0000ff;">'_title'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'Hello'</span>
+      <span style="color: #009900;">)</span><span style="color: #339933;">,</span>
+      <span style="color: #666666; font-style: italic;">// Route requirements:</span>
+      <span style="color: #990000;">array</span><span style="color: #009900;">(</span>
+        <span style="color: #0000ff;">'_permission'</span>  <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'access content'</span><span style="color: #339933;">,</span>
+      <span style="color: #009900;">)</span>
+    <span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+    <span style="color: #b1b100;">return</span> <span style="color: #000088;">$routes</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">}</span>
+ 
+<span style="color: #009900;">}</span></pre></div></pre>
+
+<p>Метод генерации роутов должен возвращать массив объектов класса \Symfony\Component\Routing\Route либо объект класса \Symfony\Component\Routing\RouteCollection.</p>
+
+<p> </p>
+
+<h3>Переопределение существующих маршрутов</h3>
+
+<p lang="zxx" xml:lang="zxx" xml:lang="zxx">Что же, мы уже много узнали о маршрутизации в Drupal 8. Мы умеем создавать статичные маршруты, умеем снабжать их аргументами, умеем управлять доступом к роутам и даже можем создавать маршруты динамически...однако, тут мы вспоминаем, что в Drupal 7 ещё был такой полезный хук, как hook_menu_alter(). Да, в 8-ой версии его также убрали. Настало время поговорить о таком важном функционале, как переопределение роутов.</p>
+
+<p lang="zxx" xml:lang="zxx" xml:lang="zxx">Файл MODULE.routing.yml оставляем в покое – более он нам не понадобится. В подпапке src/Routing нашего модуля создаём файл RouteSubscriber.php. В этом файле описываем класс <em>RouteSubsriber</em>, являющийся наследником <em>RouteSubscriberBase</em>. В классе реализуем метод <em>alterRoutes()</em>. Ознакомимся с тем, что у нас получилось.</p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">namespace</span> Drupal\example\Routing<span style="color: #339933;">;</span>
+ 
+<span style="color: #000000; font-weight: bold;">use</span> Drupal\Core\Routing\RouteSubscriberBase<span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">use</span> Symfony\Component\Routing\RouteCollection<span style="color: #339933;">;</span>
+ 
+<span style="color: #009933; font-style: italic;">/**
+ * Listens to the dynamic route events.
+ */</span>
+<span style="color: #000000; font-weight: bold;">class</span> RouteSubscriber <span style="color: #000000; font-weight: bold;">extends</span> RouteSubscriberBase <span style="color: #009900;">{</span>
+ 
+  <span style="color: #009933; font-style: italic;">/**
+   * {@inheritdoc}
+   */</span>
+  <span style="color: #000000; font-weight: bold;">protected</span> <span style="color: #000000; font-weight: bold;">function</span> alterRoutes<span style="color: #009900;">(</span>RouteCollection <span style="color: #000088;">$collection</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span>
+    <span style="color: #666666; font-style: italic;">// Your operations with existing routes here.</span>
+  <span style="color: #009900;">}</span>
+ 
+<span style="color: #009900;">}</span></pre></div></pre>
+
+<p>Изменять созданные роуты можно путём манипуляций с объектом <em>RouteCollection</em>. После создания класса зарегистрируем его в соответствующем сервисе нашего модуля. Сервисы модуля описываются в файле MODULE.services.ym (файл должен располагаться в корневой папке модуля).</p>
+
+<pre>
+<div class="geshifilter"><pre class="yaml geshifilter-yaml" style="font-family:monospace;"><span style="color: #007F45;">services</span>:<span style="color: #007F45;">
+  example.route_subscriber</span>:<span style="color: green;">
+    class</span><span style="font-weight: bold; color: brown;">: </span>Drupal\example\Routing\RouteSubscriber<span style="color: #007F45;">
+    tags</span>:<span style="color: green;">
+      - { name</span><span style="font-weight: bold; color: brown;">: </span>event_subscriber <span class="br0">}</span></pre></div></pre>
+
+<p>Вот такой вот простой механизм предлагает нам Drupal 8 вместо hook_menu_alter(). Осталось отметить, что в <em>alterRoutes()</em> можно не только изменять существующие, но и добавлять новые маршруты аналогично <em>route_callbacks</em>.</p>
+
+<p> </p>
+
+<h3>В виде заключения</h3>
+
+<p lang="zxx" xml:lang="zxx" xml:lang="zxx">С уверенностью сказать, что маршрутизация в Drupal 8 стала проще для понимания и программирования, чем в Drupal 7 нельзя – нужно по крайней мере быть знакомым с принципами ООП, плюсом также было бы знание основ Symfony и YAML. Однако точно можно утверждать, что механизм роутинга стал более функциональным, более гибким и более читаемым. Как и говорилось в начале статьи – возвращаться к старине hook_menu() совсем не хочется.</p>
+
+<h3>Материалы для изучения</h3>
+
+<ol><li lang="zxx" xml:lang="zxx" xml:lang="zxx"><a href="https://www.drupal.org/docs/8/api/routing-system/structure-of-routes">Структура маршрутов</a></li>
+	<li lang="zxx" xml:lang="zxx" xml:lang="zxx"><a href="https://www.drupal.org/docs/8/api/routing-system/using-parameters-in-routes">Использование параметров в роутах</a></li>
+	<li lang="zxx" xml:lang="zxx" xml:lang="zxx"><a href="https://www.drupal.org/docs/8/api/routing-system/parameter-upcasting-in-routes">Старина Upcasting</a></li>
+	<li lang="zxx" xml:lang="zxx" xml:lang="zxx"><a href="https://www.drupal.org/docs/8/api/routing-system/providing-dynamic-routes">Динамические маршруты</a></li>
+	<li lang="zxx" xml:lang="zxx" xml:lang="zxx"><a href="https://www.drupal.org/node/2187643">Переопределение существующих роутов</a></li>
+</ol></div>
+      
+      <div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items">
+              <div class="field--item category-tag"><a href="..\blog\drupal-8.html" hreflang="ru">Drupal 8</a></div>
+              <div class="field--item category-tag"><a href="..\blog\drupal.html" hreflang="ru">Drupal</a></div>
+          </div>
+  
+
+      <div class="field-yashare">
+        <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+        <script src="//yastatic.net/share2/share.js"></script>
+        <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+                <div class="ya-share2" id="block-ya-share2" data-services="vkontakte,facebook,odnoklassniki,gplus,twitter"></div>
+        <a href="..\rss.rss" target="_blank"><span class="iconify" id="block-iconify" data-icon="ion:logo-rss" style="color: #da8c2c;" data-width="29" data-height="29"></span></a>
+              </div>
+  </div>
+
+  <section>
+      
+    <h2 class="block-form-title">Комментарии</h2>
+    
+  
+  <div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Владимир
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">суббота, октября 14, 2017 - 12:06</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>&gt; ознакомиться с документацией роутинга в Symfony</p>
+<p>перевод - <a href="https://symfony.com.ua/doc/current/routing.html">https://symfony.com.ua/doc/current/routing.html</a></p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\106\comment\1.html">Ответить</a></li></ul>
+
+</div>
+
+<div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Василий
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">вторник, ноября 6, 2018 - 03:58</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>Отличные статьи, вот только надо бы синтаксис массивов на короткий [] поправить</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\106\comment\86.html">Ответить</a></li></ul>
+
+</div>
+
+<div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Даниил
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">вторник, июля 9, 2019 - 13:05</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>А как мне определить, есть ли путь в системе? И путь и алиас... В семёрке понятно, здесь не понимаю пока. Помогите. У меня задача дать пользователям возможность назначать путь к своей странице на сайте. Для этого требуется валидация, проверить не конфликтует ли путь с уже имеющимися.</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\106\comment\211.html">Ответить</a></li></ul>
+
+</div>
+
+
+ 
+      <div class="comment-form-wrapper">
+      <h2 class="block-form-title">Добавить комментарий</h2>
+      <form class="comment-comment-form comment-form antibot" data-drupal-selector="comment-form" data-action="https://drupal-coder.ru/comment/reply/node/106/comment" action="/antibot" method="post" id="comment-form" accept-charset="UTF-8">
+  <noscript>
+  <div class="antibot-no-js antibot-message antibot-message-warning">Вы должны включить JavaScript чтобы использовать эту форму.</div>
+</noscript>
+<div class="form-item js-form-item form-type-textfield js-form-type-textfield form-item-name js-form-item-name form-group">
+      <label for="edit-name" class="control-label">Ваше имя</label>
+  
+  
+  <input placeholder="Ваше имя" data-drupal-selector="edit-name" class="form-text form-control" type="text" id="edit-name" name="name" value="" size="30" maxlength="60">
+
+  
+  
+  </div>
+<input autocomplete="off" data-drupal-selector="form-3mfuelpu-my5voy3v1oqlnouzkxcztoapiln6zsn2ci" type="hidden" name="form_build_id" value="form-3mFuelpU_MY5VOy3v1oqlnouZkxCzTOApIln6zSN2cI"><input data-drupal-selector="edit-comment-comment-form" type="hidden" name="form_id" value="comment_comment_form"><input data-drupal-selector="edit-antibot-key" type="hidden" name="antibot_key" value=""><div class="field--type-text-long field--name-comment-body field--widget-text-textarea form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-wrapper" id="edit-comment-body-wrapper">      <div class="js-text-format-wrapper text-format-wrapper js-form-item form-item">
+  <div class="form-item js-form-item form-type-textarea js-form-type-textarea form-item-comment-body-0-value js-form-item-comment-body-0-value">
+      <label for="edit-comment-body-0-value" class="control-label js-form-required form-required">Комментарий</label>
+  
+  
+  <div class="form-textarea-wrapper">
+  <textarea class="js-text-full text-full form-textarea required form-control resize-vertical" data-media-embed-host-entity-langcode="ru" data-drupal-selector="edit-comment-body-0-value" id="edit-comment-body-0-value" name="comment_body[0][value]" rows="5" cols="60" placeholder="" required="required" aria-required="true"></textarea>
+</div>
+
+
+  
+  
+  </div>
+<div class="js-filter-wrapper filter-wrapper form-inline form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format" id="edit-comment-body-0-format"><div class="filter-help form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format-help" id="edit-comment-body-0-format-help"><a href="..\filter\tips.html" target="_blank" title="Opens in new window" data-toggle="tooltip" data-drupal-selector="edit-comment-body-0-format-help-about" class="icon-before" id="edit-comment-body-0-format-help-about"><span class="icon glyphicon glyphicon-question-sign" aria-hidden="true"></span>О текстовых форматах</a></div>
+</div>
+
+  </div>
+
+  </div>
+<div data-drupal-selector="edit-actions" class="form-actions form-group js-form-wrapper form-wrapper" id="edit-actions"><button data-drupal-selector="edit-submit" class="button button--primary js-form-submit form-submit btn-primary btn" type="submit" id="edit-submit" name="op" value="Отправить">Отправить</button></div>
+
+</form>
+
+    </div> 
+  
+</section>
+
+
+</article>
+
+
+  </div>
+
+              </section>
+
+                </div>
+  </div>
+
+
+      <footer class="footer" role="contentinfo">
+      <div class=" container">  
+          <div class="region region-footer">
+    <section id="block-footerphone" class="block block-block-content block-block-content07b69e1d-d1db-4e8b-bb14-dc4563ef50bc clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="block-form-contacts">
+  <ul>
+    <li class="block-form-phone"><a href="tel:88002222673">8 800 222-26-73</a></li>
+  </ul>
+</div></div>
+      
+  </section>
+
+<section id="block-copyright" class="block block-block-content block-block-content263c1cb2-b142-4488-af8e-99f92fcb7640 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="social-links">
+  <ul class="social-links-wrapper">
+    <li class="social-links-item"><a target="_blank" href="https://vk.com/initlab"><i class="fab fa-vk"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://teleg.one/initlabbot" title="Свяжитесь с нами"><i class="fab fa-telegram-plane"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.youtube.com/channel/UCyFEbngMB-bK2ulNtd_W43A"><i class="fab fa-youtube"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://zen.yandex.ru/id/6037ce072f500a068c630fec"><img style="width: 16px; margin-bottom: 5px;" src="..\sites\default\files\icons\zen-icon.svg"></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.facebook.com/initlabkr/"><img style="width: 25px; margin-bottom: 5px;" src="..\sites\default\files\icons\icon-facebook-ru-dc.svg"></a></li>
+  </ul>  
+</div>
+
+<p>ООО «Инитлаб», Краснодар, Россия.
+<a class="goal__tel" href="tel:+78002222673">8 800 222-26-73</a><br>
+Drupal является зарегистрированной торговой маркой Dries Buytaert.</p>
+</div>
+      
+  </section>
+
+
+  </div>
+
+      </div>
+    </footer>
+  </div>
+
+  </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"comment\/211","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"ru","currentQuery":{"page":0}},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"ajaxPageState":{"libraries":"antibot\/antibot.form,bootstrap\/popover,bootstrap\/theme,bootstrap\/tooltip,bootstrap_dc\/bootstrap-scripts,bootstrap_dc\/dc,bootstrap_dc\/global-styling,bootstrap_dc\/seo,colorbox\/default,colorbox_inline\/colorbox_inline,colorbox_load\/colorbox_load,comment\/drupal.comment-by-viewer,filter\/drupal.filter,geshifilter\/geshifilter,google_analytics\/google_analytics,ng_lightbox\/ng_lightbox,system\/base,views\/views.module","theme":"bootstrap_dc","theme_token":null},"ajaxTrustedUrl":{"https:\/\/drupal-coder.ru\/comment\/reply\/node\/106\/comment":true},"colorbox":{"opacity":"0.85","current":"{current} \u0438\u0437 {total}","previous":"\u00ab \u041f\u0440\u0435\u0434\u044b\u0434\u0443\u0449\u0438\u0439","next":"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0439 \u00bb","close":"Close","maxWidth":"98%","maxHeight":"98%","fixed":true,"mobiledetect":true,"mobiledevicewidth":"480px"},"google_analytics":{"account":"UA-87805467-1","trackOutbound":true,"trackMailto":true,"trackTel":true,"trackDownload":true,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip","trackColorbox":true},"bootstrap":{"forms_has_error_value_toggle":1,"modal_animation":1,"modal_backdrop":"true","modal_focus_input":1,"modal_keyboard":1,"modal_select_text":1,"modal_show":1,"modal_size":"","popover_enabled":1,"popover_animation":1,"popover_auto_close":1,"popover_container":"body","popover_content":"","popover_delay":"0","popover_html":0,"popover_placement":"right","popover_selector":"","popover_title":"","popover_trigger":"click","tooltip_enabled":1,"tooltip_animation":1,"tooltip_container":"body","tooltip_delay":"0","tooltip_html":0,"tooltip_placement":"auto left","tooltip_selector":"","tooltip_trigger":"hover"},"antibot":{"forms":{"comment-form":{"id":"comment-form","key":"5D-i6uDYb-gr3-4qQZFOE5ec3-2jdoq6QSz9J26Pt50"}}},"user":{"uid":0,"permissionsHash":"66bb25c0b665c533dd9436d0cd4e99532a723088208bff0a05f2bf113d3703ac"}}</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="..\sites\default\files\js\js_2omCfdjRPteGoPcs4txReDz1ziq8dw_NERpcaIRsDPk.js"></script>
+<script src="..\sites\default\files\js\js_U0-ei-DZ6u8k-JNjuYyeU7SkryXEZZ54qVWXctdF9xs.js"></script>
+<script src="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+<script src="..\sites\default\files\js\js_0JpfcTomuXtSWa_m9aC3Cl6jt3QOGmlwYugQhh4TJxo.js"></script>
+<script src="..\sites\default\files\js\js_s-3xOYzWEgR_FYD47Em71gucXCZV2wtpxM9O-gGfPco.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:og="http://ogp.me/ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:schema="http://schema.org/" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" version="2.0" xml:base="https://drupal-coder.ru/">
+  <channel>
+    <title>сео семинар google</title>
+    <link>https://drupal-coder.ru/</link>
+    <description/>
+    <language>ru</language>
+    
+    <item>
+  <title>Изменения алгоритмов поиска Google: к чему готовиться владельцам сайтов на Drupal</title>
+  <link>https://drupal-coder.ru/blog/izmeneniya-algoritmov-poiska-google-k-chemu-gotovitsya-vladelcam-saytov-na-drupal</link>
+  <description>
+&lt;span&gt;Изменения алгоритмов поиска Google: к чему готовиться владельцам сайтов на Drupal&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/43" lang="" about="https://drupal-coder.ru/user/43" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Дарья Бочкарёва&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;пт, 05/21/2021 - 07:49&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2021-05/google-485613_1920_0.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Со дня на день вступят в силу масштабные изменения в алгоритме поиска, которые Google анонсировал еще в ноябре 2020 года. Если коротко, эти изменения в основном будут связаны с ранжированием страниц с учётом их удобства. Удивляться не стоит, Google не один десяток лет говорит, что если делать сайты полезными и удобными, то эти сайты поисковик с радостью сам отправит в ТОП. Грядущие изменения будут касаться как раз удобства, а не полезности. То есть это, скорее, вопрос техники и технологий, а не контента, текстов и смыслов.&lt;/p&gt;
+
+&lt;p&gt;Изменения, о которых мы хотим вам рассказать, называются &lt;strong&gt;Core Web Vitals&lt;/strong&gt;. Если быть до конца точными, то &lt;strong&gt;Core Web Vitals&lt;/strong&gt; — это часть &lt;strong&gt;Web Vitals&lt;/strong&gt; — инициативы Google по созданию единой системы сигналов качества, которые показывают уровень комфорта взаимодействия пользователя с web-ресурсом.&lt;/p&gt;
+
+&lt;p&gt;Проще говоря, &lt;strong&gt;Web Vitals&lt;/strong&gt; — это набор понятных и измеримых показателей, который говорит, плох сайт или хорош с технической точки зрения, а &lt;strong&gt;Core Web Vitals&lt;/strong&gt; — это три ключевых показателя из &lt;strong&gt;Web Vitals&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;Отрисовка самого крупного контента (&lt;strong&gt;LCP&lt;/strong&gt; — &lt;em&gt;Largest Contentful Paint&lt;/em&gt;);&lt;/li&gt;
+	&lt;li&gt;Задержка после первого ввода (&lt;strong&gt;FID&lt;/strong&gt; — &lt;em&gt;First Input Delay&lt;/em&gt;);&lt;/li&gt;
+	&lt;li&gt;Совокупное смещение макета (&lt;strong&gt;CLS&lt;/strong&gt; — &lt;em&gt;Cumulative Layout Shift&lt;/em&gt;).&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;img alt="Core Web Vitals" class="img-responsive" data-entity-type="file" data-entity-uuid="83f0f18e-d1f7-42ef-bf14-006f3d98ad28" src="https://drupal-coder.ru/sites/default/files/inline-images/image2.png" width="600" height="338" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Расскажем про каждый из показателей поподробнее.&lt;/p&gt;
+
+&lt;h2&gt;1. Largest contentful paint (LCP)&lt;/h2&gt;
+
+&lt;p&gt;Это время отрисовки самого крупного элемента страницы. Этот показатель говорит поисковику, насколько быстро загружается страница. То есть будет учитываться скорость загрузки самого крупного элемента в области просмотра: изображения, видео или текста с компьютера и с мобильного телефона. На это может влиять время отклика вашего сервера, &lt;em&gt;CSS&lt;/em&gt;, &lt;em&gt;JavaScript&lt;/em&gt;, визуализация на стороне клиента и т.д. Границы значений этого показателя:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li class="text-success"&gt;до 2,5 сек — хорошо;&lt;/li&gt;
+	&lt;li class="text-warning"&gt;от 2,5 сек до 4.0 — требуются улучшения;&lt;/li&gt;
+	&lt;li class="text-danger"&gt;от 4.0 сек — плохо.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;img alt="Largest contentful paint (LCP)" class="img-responsive" data-entity-type="file" data-entity-uuid="4ae1f460-8ece-4b60-a327-952c3955d9af" src="https://drupal-coder.ru/sites/default/files/inline-images/image4.png" width="600" height="164" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;h2&gt; &lt;/h2&gt;
+
+&lt;h2&gt;2. Cumulative layout shift (CLS)&lt;/h2&gt;
+
+&lt;p&gt;&lt;em&gt;Cumulative layout shift &lt;/em&gt;(&lt;strong&gt;CLS&lt;/strong&gt;) или совокупный сдвиг макета. Это то, как быстро страница становится стабильной.&lt;/p&gt;
+
+&lt;p&gt;Представьте, что, сайт загружается на вашем мобильном устройстве, вы нажимаете кнопку, а она тут же «уезжает» и вы попадаете пальцем не туда, куда хотели, например, в рекламный баннер. Промежуток времени, когда возможен подобный неприятный опыт, Google измеряет как совокупный сдвиг макета: скорость стабилизации страницы. Основная причина такой нестабильности — неопределённость размеров изображений. Поэтому все изображения известной ширины и высоты нужно определить в &lt;em&gt;HTML&lt;/em&gt;. Могут быть ещё причины: анимация, контент со сторонних ресурсов и т.п. Границы значений этого показателя:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li class="text-success"&gt;до 0.1 — хорошо;&lt;/li&gt;
+	&lt;li class="text-warning"&gt;от 0.1 до 0.25 — требуются улучшения;&lt;/li&gt;
+	&lt;li class="text-danger"&gt;от 0.25 — плохо.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;img alt="Cumulative layout shift (CLS)" class="img-responsive" data-entity-type="file" data-entity-uuid="34f6319b-f58f-4770-bc61-7d1699d2956b" src="https://drupal-coder.ru/sites/default/files/inline-images/image3_0.png" width="600" height="166" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;h2&gt; &lt;/h2&gt;
+
+&lt;h2&gt;3. First input delay (FID)&lt;/h2&gt;
+
+&lt;p&gt;Последняя метрика — &lt;em&gt;first input delay&lt;/em&gt; (&lt;strong&gt;FID&lt;/strong&gt;), она же задержка первого ввода. В этом случае важна скорость, с которой страница реагирует на действия пользователя. Если пользователь нажал кнопку или выбрал строку для ввода, насколько быстро браузер сможет начать обработку и даст ответ?&lt;/p&gt;
+
+&lt;p&gt;Если в ответ на действия сайт не реагирует, либо реагирует медленно — это показатель плохого &lt;em&gt;UX&lt;/em&gt;. Границы значений этого показателя:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li class="text-success"&gt;до 100 мс — хорошо;&lt;/li&gt;
+	&lt;li class="text-warning"&gt;от 100 до 300 мс — требуются улучшения;&lt;/li&gt;
+	&lt;li class="text-danger"&gt;от 300 мс — плохо.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;img alt="First input delay (FID)" class="img-responsive" data-entity-type="file" data-entity-uuid="5e12d39f-f2bb-4d46-b1b6-2adbfd683ed0" src="https://drupal-coder.ru/sites/default/files/inline-images/image5.png" width="600" height="166" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;h2&gt; &lt;/h2&gt;
+
+&lt;h2&gt;Зачем вот это вот всё?&lt;/h2&gt;
+
+&lt;p&gt;Задача, которую Google хочет решить при помощи &lt;strong&gt;Core Web Vitals&lt;/strong&gt; — уменьшить в выдаче количество сайтов, где пользователи получат негативный опыт и увеличить количество тех, которые соответствуют ожиданиям пользователей и дадут опыт качественного взаимодействия. И если ваш сайт плох с точки зрения &lt;strong&gt;Core Web Vitals&lt;/strong&gt;, то он начнет неумолимое путешествие на дно поисковой выдачи. Соответственно, хорошему сайту прямая дорожка в ТОП.&lt;/p&gt;
+
+&lt;h2&gt;Когда изменения алгоритма вступят в силу?&lt;/h2&gt;
+
+&lt;p&gt;Реализация первого этапа произойдёт в середине июня 2021 г. и завершится в августе 2021 г.&lt;/p&gt;
+
+&lt;h2&gt;Что делать, если у вас сайт на Drupal?&lt;/h2&gt;
+
+&lt;p&gt;Во-первых, порадоваться правильному выбору, потому что &lt;strong&gt;Drupal&lt;/strong&gt; как фреймворк полностью готов к изменениям поискового алгоритма.&lt;/p&gt;
+
+&lt;p&gt;Во-вторых, нужно обязательно провести аудит. Благо, Google предоставляет множество инструментов для этого. Google рекомендует начать с проверки всех страниц сайта, чтобы определить, какие из них можно улучшить. В &lt;a href="https://search.google.com/search-console"&gt;&lt;em&gt;Search Console&lt;/em&gt;&lt;/a&gt; есть отчет об основных интернет-показателях, который содержит общие сведения о состоянии сайта и обнаруженных на нем проблемах. Определить, что именно можно улучшить, можно воспользовавшись инструментами &lt;a href="https://developers.google.com/speed/pagespeed/insights/"&gt;&lt;em&gt;PageSpeed Insights&lt;/em&gt;&lt;/a&gt; и &lt;em&gt;Lighthouse&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Если по каким-то причинам показатели &lt;strong&gt;Core Web Vitals&lt;/strong&gt; далеки от идеальных, это можно решить при помощи стандартных инструментов &lt;strong&gt;Drupal&lt;/strong&gt;, например:&lt;/p&gt;
+
+&lt;p&gt;встроенное кеширование &lt;strong&gt;Drupal: Internal Dynamic Page Cache&lt;/strong&gt;, &lt;strong&gt;Internal Page Cache&lt;/strong&gt;. Для большинства небольших проектов будет достаточно включить модуль Internal Page Cache, чтобы back-end отдавал данные с более чем достаточной скоростью. Значения &lt;strong&gt;Core Web Vitals&lt;/strong&gt; будут в порядке, если на фронтэнде нет серьезных проблем. Но о фронтэнде отдельно поговорим в конце этого блока.&lt;/p&gt;
+
+&lt;p&gt;Если данные динамичны и их нельзя кешировать, например, данные корзины пользователя в интернет-магазине — поможет “ленивая загрузка”. Мы говорим о подходе &lt;em&gt;lazy load&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Если инвалидация кеша происходит часто или в больших объёмах, используйте инструменты «разогрева» кеша. Например, модуль &lt;strong&gt;Warmer&lt;/strong&gt; позволяет производить разогрев с использованием очередей.&lt;/p&gt;
+
+&lt;p&gt;Ну и отдельно стоит упомянуть модуль &lt;strong&gt;BigPipe&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Модуль &lt;strong&gt;BigPipe&lt;/strong&gt; ускоряет время доставки страницы, отправляя неизменяемые части страницы в браузер немедленно, одновременно визуализируя и транслируя другие, динамические части по мере их подготовки. Данная технология была впервые применена &lt;em&gt;Facebook&lt;/em&gt;, а разработчики &lt;strong&gt;Drupal&lt;/strong&gt; доработали применили её для нашей системы. &lt;strong&gt;BigPipe&lt;/strong&gt; автоматически определяет и отделяет статические (и обычно кэшированные) части страницы - например, основной контент и изображения - от динамических, не кэшируемых, персонализированных элементов, например, рекомендаций, личных сообщений или, например, содержимого корзины покупок.&lt;/p&gt;
+
+&lt;p&gt;Можете посмотреть, как это работает:&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Пример" class="img-responsive" src="https://drupal-coder.ru/sites/default/files/inline-images/bigpipe_page_loading.gif" /&gt;&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;И невооруженным глазом увидеть результат&lt;/p&gt;
+
+&lt;p&gt;&lt;iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/JwzX0Qv6u3A" title="YouTube video player" width="100%"&gt;&lt;/iframe&gt;&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Вот что про это говорит один из разработчиков модуля &lt;em&gt;Фабиан Франц&lt;/em&gt; (&lt;em&gt;Fabian Franz&lt;/em&gt;):&lt;/p&gt;
+
+&lt;blockquote class="blockquote-dc"&gt;
+&lt;p&gt;&lt;q&gt;«Мы сделали так, что просто установив наш модуль &lt;strong&gt;BigPipe&lt;/strong&gt;, каждый может воспользоваться преимуществами этой технологии, которая ранее была доступна только глобальным игрокам, таким как &lt;em&gt;LinkedIn&lt;/em&gt; и &lt;em&gt;Facebook&lt;/em&gt;». &lt;/q&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Технология &lt;strong&gt;BigPipe&lt;/strong&gt; доступна в &lt;strong&gt;Drupal&lt;/strong&gt; начиная с восьмой версии. Причем в ядре и абсолютно бесплатно. Это мы и называем «&lt;em&gt;магией open-source&lt;/em&gt;». Насколько нам известно, ничего подобного у платформ-конкурентов до сих пор нет. Поправьте нас, если мы ошибаемся.&lt;/p&gt;
+
+&lt;p&gt;Кстати, если вы уже приступили к rocket science типа BigPipe, мы настоятельно рекомендуем не забывать о базовых вещах, особенно на фронтэнде (обещали же вернуться к этой теме - возвращаемся):&lt;/p&gt;
+
+&lt;p&gt;загружайте только необходимый &lt;em&gt;CSS / JavaScript&lt;/em&gt;, оптимизируйте изображения и внешние скрипты. В Drupal для этого есть все необходимые инструменты, например, модуль &lt;strong&gt;ImageAPI Optimize&lt;/strong&gt; для изображений, &lt;strong&gt;Advanced CSS/JS Aggregation&lt;/strong&gt; для &lt;em&gt;CSS&lt;/em&gt; и скриптов. Вообще в &lt;strong&gt;Drupal&lt;/strong&gt; есть инструменты для решения любой прикладной задачи, мы уж точно знаем :)&lt;/p&gt;
+
+&lt;h2&gt;Чего ни в коем случае не стоит делать?&lt;/h2&gt;
+
+&lt;p&gt;Самое главное, как говорится, не пытаться обмануть судьбу. Если вы владелец сайта на &lt;strong&gt;Drupal&lt;/strong&gt;, но сами специалистом не являетесь, ни в коем случае не ведитесь на предложения переиграть Google. Как обычно набежали шаманы с гениальными идеями «против системы». Только вместо плясок у костра вам предложат обмануть пейджспид при помощи банальной подмены результата по юзерагенту или отключения всего &lt;em&gt;JS/CSS &lt;/em&gt;для Google, или же загрузки части сайта через 5 секунд после &lt;em&gt;TTFB&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Нужно учитывать тот факт, что как только изменения поискового алгоритма вступят в силу, любые попытки обмануть систему попадут под определение клоакинга (от англ. cloak — мантия, маска, прикрытие) — вид поискового спама, заключающийся в том, что информация, выдаваемая пользователю и поисковым роботам на одной и той же странице, различается. А там и бан не за горами.&lt;/p&gt;
+
+&lt;p&gt;Так что не стоит пытаться скрыть проблемы — их нужно решать. Тем более &lt;strong&gt;Drupal&lt;/strong&gt; даёт все возможности для хорошего результата по всем показателям &lt;strong&gt;Core Web Vitals&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Итог: Что делать прямо сейчас?&lt;/h2&gt;
+
+&lt;h3&gt;Получить инструкцию по ускорению сайтов на Drupal&lt;/h3&gt;
+
+&lt;p&gt;Мы разработали внутреннюю инструкцию по ускорению Drupal-сайтов, которой мы пользуемся в ежедневной работе. Заполните форму и мы вышлем ее Вам на email бесплатно.&lt;/p&gt;
+
+&lt;p&gt;Если у вас сайт на &lt;strong&gt;Drupal&lt;/strong&gt; и вы хотите быть точно уверенными в том, что он готов к изменениям поискового алгоритма, можете воспользоваться бесплатными инструментами, о которых мы уже упоминали (&lt;em&gt;Search Console&lt;/em&gt; и &lt;a href="https://developers.google.com/speed/pagespeed/insights/"&gt;&lt;em&gt;PageSpeed Insights&lt;/em&gt;&lt;/a&gt;), и посмотреть вашу текущую оценку от Google.&lt;/p&gt;
+
+&lt;p&gt;В случае, если значения вас не устраивают, вы можете самостоятельно исправить ошибки и слабые стороны. В этом может помочь наша &lt;strong&gt;&lt;a href="https://drupal-coder.ru/blog/izmeneniya-algoritmov-poiska-google-k-chemu-gotovitsya-vladelcam-saytov-na-drupal/#contact-message-drupal-turbo-instraction-form"&gt;бесплатная пошаговая инструкция по ускорению сайтов на Drupal&lt;/a&gt;. &lt;/strong&gt;Оставьте заявку и мы вышлем вам её.&lt;/p&gt;
+
+&lt;p&gt;А если у вас нет времени или вы не хотите заниматься этим самостоятельно, обращайтесь к нам за аудитом вашего сайта. Мы проанализируем показатели по &lt;strong&gt;Core Web Vitals&lt;/strong&gt; вашего сайта&lt;strong&gt;,&lt;/strong&gt; дадим практические рекомендации по улучшению этих показателей и поможем их внедрить.&lt;/p&gt;
+
+&lt;p&gt;Наш опыт в &lt;strong&gt;SEO&lt;/strong&gt; и разработке &lt;strong&gt;Drupal &lt;/strong&gt;— более 10 лет. У нас отличная команда специалистов, которые очень внимательно подойдут к решению вашей задачи.&lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/seo-seminar-google" hreflang="ru"&gt;сео семинар google&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/seo" hreflang="ru"&gt;SEO&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/prodvizenie-saitov" hreflang="ru"&gt;Продвижение сайтов&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;h2 class="block-form-title"&gt;Комментарии&lt;/h2&gt;
+    
+  
+  &lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Владимир
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;четверг, июля 8, 2021 - 04:54&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Здравствуйте. Мой сайт panstakan.com.ua&lt;br /&gt;
+Очень интересная статья. Спасибо вам за нее.&lt;br /&gt;
+Буду рад сотрудничеству на постоянной основе по доработкам сайта и оптимизации&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1720&amp;1=default&amp;2=ru&amp;3=" token="oPgFzPj2aJHRAhjqLV2EicBo-mrHd6IqhMCAPYCzdI4"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+&lt;div class="indented"&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;пятница, июля 9, 2021 - 07:13&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Владимир, добрый день!&lt;br /&gt;
+Спасибо за ваш комментарий. Очень рады, что статья оказалась вам полезной.&lt;br /&gt;
+Пришлите, пожалуйста, ваши контакты (почту и телефон) на наш почтовый адрес: &lt;a data-sk="tooltip_parent" data-stringify-link="mailto:sales@initlab.ru" delay="150" href="mailto:sales@initlab.ru" rel="noopener noreferrer" target="_blank" viewcontext="threads-flexpane"&gt;sales@initlab.ru&lt;/a&gt;&lt;br /&gt;
+Наши менеджеры с вами свяжутся для обсуждения условий сотрудничества.&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1721&amp;1=default&amp;2=ru&amp;3=" token="P_OC9i5IgeZ6jqlgrKFLBFsgvrUE-zmONtgY8r38ryw"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+ 
+      &lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=282&amp;2=comment&amp;3=comment" token="3YIlnFuEj6zlTk3_VM1f87nKGzX-yxqXSHLqkOxmnGc"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/my-na-seminare-ot-google-reklama-v-google-adwords" hreflang="ru"&gt;Мы на семинаре от Google "Реклама в Google AdWords"&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/podnimaem-ctr-c-089-do-292-v-yandeksdirekt-i-s-118-do-52-v-googleads" hreflang="ru"&gt;Поднимаем CTR c 0,89% до 2,92% в Яндекс.Директ и с 1,18% до 5,2% в Google.Ads&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/tekhnologiya-google-amp-dlya-saytov-na-drupal-bystraya-zagruzka-stranic-sayta-s-mobilnogo" hreflang="ru"&gt;Технология Google AMP для сайтов на Drupal: быстрая загрузка страниц сайта с мобильного телефона&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/nastroyka-amp-dlya-drupal-8-i-9" hreflang="ru"&gt;Настройка AMP для Drupal 8 и 9&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Fri, 21 May 2021 07:49:33 +0000</pubDate>
+    <dc:creator>Дарья Бочкарёва</dc:creator>
+    <guid isPermaLink="false">282 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/izmeneniya-algoritmov-poiska-google-k-chemu-gotovitsya-vladelcam-saytov-na-drupal#comments</comments>
+    </item>
+
+  </channel>
+</rss>

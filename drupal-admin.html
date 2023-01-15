@@ -1,0 +1,600 @@
+﻿<!DOCTYPE html>
+<html lang="ru" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
+  <head>
+    <meta charset="utf-8">
+<noscript><style>form.antibot * :not(.antibot-message) { display: none !important; }</style>
+</noscript><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-87805467-1"></script>
+<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag("js", new Date());gtag("set", "developer_id.dMDhkMT", true);gtag("config", "UA-87805467-1", {"groups":"default","anonymize_ip":true,"page_placeholder":"PLACEHOLDER_page_path","allow_ad_personalization_signals":false});</script>
+<meta http-equiv="content-language" content="ru">
+<meta name="description" content="Техническая поддержка серверов и администрирование Drupal сайтов. Миграция, обновление, бекапы, оптимизация скорости работы.">
+<meta name="keywords" content="Администрирование веб-серверов для Drupal сайтов, DevOps">
+<meta name="Generator" content="Drupal 9 (https://www.drupal.org)">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="sites\default\files\android-chrome-256x256.png" type="image/png">
+<link rel="alternate" hreflang="ru" href="drupal-admin.html">
+<link rel="alternate" hreflang="en" href="https://drupal-coding.com/drupal-admin">
+<link rel="canonical" href="drupal-admin.html">
+<link rel="shortlink" href="drupal-admin.html">
+
+    <title>Администрирование серверов для Drupal сайтов</title>
+    <link rel="stylesheet" media="all" href="sites\default\files\css\css_P81baECj6UKZEcVd0B0yFbM356D69EqYMRe9o9IsC0s.css">
+<link rel="stylesheet" media="all" href="sites\default\files\css\css_ZC3re7v7ac_pIY3KXCSEen7eEJbGjAKWjDLmK3aJn3M.css">
+<link rel="stylesheet" media="all" href="sites\default\files\css\css_XG_fc4RZc_3Fhagw7BqLHhJnSeHT8sUW7zOk2zFhhzs.css">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/@unicorn-fail/drupal-bootstrap-styles@0.0.2/dist/3.4.0/8.x-3.x/drupal-bootstrap.min.css" integrity="sha512-tGFFYdzcicBwsd5EPO92iUIytu9UkQR3tLMbORL9sfi/WswiHkA1O3ri9yHW+5dXk18Rd+pluMeDBrPKSwNCvw==" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="sites\default\files\css\css_ULmc1mwKFKQRQmxYsjphW6dsh2g6jX4LXXBAtdO0vIE.css">
+
+    
+    <meta name="cmsmagazine" content="3d47b05beba40f3816d9741ee18c01a5">
+
+    
+    
+           <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P4SXQSG');</script>
+<!-- End Google Tag Manager -->
+    
+    
+    <link rel="preload" as="font" href="themes\custom\bootstrap_dc\fonts\Montserrat\Montserrat-Bold.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes\custom\bootstrap_dc\fonts\Montserrat\Montserrat-Medium.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes\custom\bootstrap_dc\fonts\Montserrat\Montserrat-Regular.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes\custom\bootstrap_dc\fonts\fontawesome\webfonts\fa-brands-400.woff2" crossorigin="anonymous">
+    <link rel='manifest' href='manifest.json'>
+    <meta name="format-detection" content="telephone=no">
+
+          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MXPCP8Q"></script>
+      </head>
+  <body class="page-node-2 path-node page-node-type-page has-glyphicons">
+
+                  <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4SXQSG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+      
+          
+
+    <a href="#main-content" class="visually-hidden focusable skip-link">
+      Перейти к основному содержанию
+    </a>
+    
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
+    
+      
+          <header class="navbar navbar-default" id="navbar" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+            <div class="region region-navigation">
+    <section id="block-pikselvkskript" class="block block-block-content block-block-contentbf8d9e8f-617c-4e8f-8501-7586be8255e0 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script>(window.Image ? (new Image()) : document.createElement('img')).src = 'https://vk.com/rtrg?p=VK-RTRG-238064-1VWIQ';</script></div>
+      
+  </section>
+
+<section id="block-globalsitetagadwords" class="block block-block-content block-block-content27617f8e-58d1-4a2a-9f23-31eab95a43c8 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><!-- Global site tag (gtag.js) - AdWords: 948581894 -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=AW-948581894"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-948581894');
+</script></div>
+      
+  </section>
+
+            <a class="logo navbar-btn pull-left" href="index.htm" title="Главная" rel="home">
+            <img src="themes\custom\bootstrap_dc\images\logo-initlab.svg" alt="Главная" width="156" height="31">
+        </a>
+            
+  </div>
+
+        </div>
+                          <div class="navbar-collapse-wrapper">
+
+            <div class="navbar-collapse collapse">
+                <div class="region region-navigation-collapsible">
+    <nav role="navigation" aria-labelledby="block-bootstrap-dc-main-menu-menu" id="block-bootstrap-dc-main-menu">
+            
+  <h2 class="visually-hidden" id="block-bootstrap-dc-main-menu-menu">Основная навигация</h2>
+  
+
+        
+              <ul class="menu nav navbar-nav">
+                      <li><a href="support.html" data-drupal-link-system-path="node/1">Поддержка Drupal</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="drupal-admin.html" class="dropdown-toggle" data-toggle="dropdown">DevOps <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="import-migrate-upgrade.html" data-drupal-link-system-path="node/4">Миграция</a>
+                  </li>
+                  <li><a href="backup.html" data-drupal-link-system-path="node/3">Бэкапы</a>
+                  </li>
+                  <li><a href="drupal-security-audit.html" data-drupal-link-system-path="node/9">Аудит безопасности</a>
+                  </li>
+                  <li><a href="boost-drupal.html" data-drupal-link-system-path="node/5">Оптимизация скорости</a>
+                  </li>
+                  <li><a href="ssl.html" data-drupal-link-system-path="node/99">Переезд на https</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="blog.html" data-drupal-link-system-path="blog">Блог</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="drupal-seo.html" class="dropdown-toggle" data-toggle="dropdown">Продвижение <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="drupal-seo\context.html" data-drupal-link-system-path="node/111">Реклама</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li class="expanded dropdown"><a href="team.html" class="dropdown-toggle" data-toggle="dropdown">О нас <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="team.html#team" data-drupal-link-system-path="team">Команда</a>
+                  </li>
+                  <li><a href="drupalgive.html" data-drupal-link-system-path="node/135">Drupalgive</a>
+                  </li>
+                  <li><a href="drupal-courses.html" data-drupal-link-system-path="node/10">Курсы Drupal</a>
+                  </li>
+                  <li><a href="vacancies.html" data-drupal-link-system-path="vacancies">Вакансии</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="happy-customers.html" data-drupal-link-system-path="happy-customers">Проекты</a>
+                  </li>
+                  <li><a href="contacts.html" data-drupal-link-system-path="node/86">Контакты</a>
+                  </li>
+              </ul>
+      
+
+
+  </nav>
+
+  </div>
+
+            </div>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+              </div>
+    </header>
+  
+
+      <div class="page-header-big" role="heading">
+        <div class="container">
+            <div class="region region-header">
+        <h1 class="page-header">
+<span property="schema:name">Администрирование веб-серверов для Drupal сайтов, DevOps</span>
+</h1>
+
+
+  </div>
+
+        </div>
+      
+    </div>
+  
+
+<div class="main-wrapper">
+  <div role="main" class="main-container container js-quickedit-main-content">
+    <div class="row">
+
+
+
+            
+                  <section class="col-sm-12">
+
+                
+                
+                
+                                      
+                  
+                          <a id="main-content"></a>
+            <div class="region region-content">
+      
+<div data-drupal-messages-fallback="" class="hidden"></div>
+  <article data-history-node-id="2" role="article" about="https://drupal-coder.ru/drupal-admin" typeof="schema:WebPage" class="page full clearfix">
+
+  
+      <span property="schema:name" content="Администрирование веб-серверов для Drupal сайтов, DevOps" class="hidden"></span>
+
+
+  
+  <div class="content">
+    
+            <div property="schema:text" class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><h2>Администрирование серверов для Drupal, DevOps</h2>
+<p>В работе любого сайта могут быть проблемы связанные с доступностью сайта, вирусами на сайте, медленной работой сайта, которые в свою очередь несут прямые и репутационные издержки для бизнеса. Поэтому важно обеспечить надежную техническую поддержку для предотвращения простоя сайта.</p>
+
+<div class="usluga-text" id="anchor-support"><span>Оказываем услугу по технической поддержки Drupal-сайтов и серверов по тарифным планам:</span>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover" id="techsupport">
+      <thead>
+        <tr>
+          <td class="F-C"><strong>Услуги \ Тарифный план</strong></td>
+          <td style="width: 15%;"><strong>«Стандарт»</strong></td>
+          <td style="width: 15%;"><strong>«Расширенный»</strong></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td class="F-C">Рекомендован для</td>
+          <td>виртуальный сервер (VDS/VPS)</td>
+          <td>выделенный сервер (dedicated)</td>
+        </tr>
+        <tr class="odd">
+          <td class="F-C">Оперативная установка обновлений безопасности Drupal</td>
+          <td>+</td>
+          <td>+</td>
+        </tr>
+        <tr class="odd">
+          <td class="F-C">Мониторинг доступности Drupal-сайта и устранение сбоев</td>
+          <td>+</td>
+          <td>+</td>
+        </tr>
+        <tr class="odd">
+          <td class="F-C">Мониторинг изменений файлов сайта .htaccess и robots.txt</td>
+          <td>+</td>
+          <td>+</td>
+        </tr>
+        <tr class="even">
+          <td class="F-C">Приём заявок по email</td>
+          <td>+</td>
+          <td>+</td>
+        </tr>
+        <tr class="odd">
+          <td class="F-C">Консультации по технической поддержке &nbsp;Drupal по email</td>
+          <td>+</td>
+          <td>+</td>
+        </tr>
+        <tr class="even">
+          <td class="F-C">Первоначальный аудит сервера</td>
+          <td>+</td>
+          <td>+</td>
+        </tr>
+        <tr class="odd">
+          <td class="F-C">Первоначальная оптимизация сервера и настройка безопасности</td>
+          <td>+</td>
+          <td>+</td>
+        </tr>
+
+        <tr class="even">
+          <td class="F-C">Оперативная установка обновлений безопасности веб-сервера</td>
+          <td>+</td>
+          <td>+</td>
+        </tr>
+        <tr class="even">
+          <td class="F-C">Мониторинг ресурсов сервера (CPU, Memory, HDD)</td>
+          <td>+</td>
+          <td>+</td>
+        </tr>
+        <tr class="odd">
+          <td class="F-C">Мониторинг очереди e-mail и DNS blacklist (черные списки серверов)</td>
+          <td>+</td>
+          <td>+</td>
+        </tr>
+        <tr class="even">
+          <td class="F-C">Антивирусная проверка файлов</td>
+          <td>+</td>
+          <td>+</td>
+        </tr>
+        <tr class="even">
+          <td class="F-C">Резервное копирование системных файлов, ежедневные срезы</td>
+          <td>+</td>
+          <td>+</td>
+        </tr>
+        <tr class="odd">
+          <td class="F-C">Мониторинг S.M.A.R.T. жестких дисков на сервере</td>
+          <td>-</td>
+          <td>+</td>
+        </tr>
+        <tr class="even">
+          <td class="F-C">Консультации по технической поддержке &nbsp;Drupal по Skype и телефону в рабочее время (MSK, GMT+3)</td>
+          <td>-</td>
+          <td>+</td>
+        </tr>
+        <tr class="odd">
+          <td class="F-C">Максимально время реакции на заявки по изменению конфигурации сервера</td>
+          <td>2&nbsp;дня</td>
+          <td>8&nbsp;часов</td>
+        </tr>
+        <tr class="even">
+          <td class="F-C">Максимальное время реакции на сбои в рабочее время</td>
+          <td>2 час</td>
+          <td>30 минут</td>
+        </tr>
+        <tr class="odd">
+          <td class="F-C">Работа специалистов
+            <!--a href="#f1" class="foottip">*</a-->, часов в&nbsp;месяц</td>
+          <td>до 2</td>
+          <td>до 5</td>
+        </tr>
+        <tr class="even">
+          <td class="F-C">Оплата работы специалистов сверх предоплаченных часов, руб. в час</td>
+          <td>3000</td>
+          <td>3000</td>
+        </tr>
+<!--        <tr class="odd">
+          <td class="F-C">Соглашение об уровне услуг</td>
+          <td>лучший из возможного</td>
+          <td>лучший из возможного</td>
+        </tr> -->
+        <tr class="even">
+          <td class="F-C">Предоплата в&nbsp;месяц при оплате за&nbsp;1&nbsp;месяц (руб.)</td>
+          <td><strong>-</strong></td>
+          <td><strong>7000</strong></td>
+        </tr>
+        <tr class="even">
+          <td class="F-C">Первоначальный платеж (руб.)</td>
+          <td><strong>-</strong></td>
+          <td><strong>-</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<h2>Настройка веб-серверов для Drupal-сайтов</h2>
+<p>Настраиваем веб-серверы, оптимизированные для работы CMS Drupal. Имеем опыт работы с большинством зарекомендовавших себя решений для быстрой работы Drupal-сайтов, таких как:</p>
+
+<ul>
+	<li>Веб-серверы Apache, Nginx.</li>
+	<li>Кэширующие реверс-прокси серверы Varnish, Nginx.</li>
+	<li>Кэширование данных в оперативной памяти Memcached, APC/Opcache.</li>
+</ul>
+
+<p>При заказе настройки веб-сервера мы проводим следующие работы:</p>
+
+<ul>
+	<li>Анализ сайтов, которые требуется разместить на сервере, на предмет требовательности к аппаратному обеспечению.</li>
+	<li>Подготовка требований и подбор оптимального по цене хостинга. Мы работаем как с российскими, так и с зарубежными хостинговыми компаниями.</li>
+	<li>Инсталляция и настройка операционной системы Debian.</li>
+	<li>Подбор и настройка оптимальной конфигурации веб-сервера для быстрой работы Drupal-сайтов, с учетом специфики этих сайтов.</li>
+	<li>Установка и тонкая настройка MySQL.</li>
+	<li>Возможность установки панели управления сервером.</li>
+	<li>Перенос одного сайта&nbsp;<a href="support.html">при заказе дальнейшей поддержки</a>.</li>
+</ul>
+
+<p><strong>Стоимость настройки 1-го веб-сервера составляет от 24000 р.</strong></p>
+
+<p>Мы можем настроить следующие типовые конфигурации веб-серверов для Drupal-сайтов:</p>
+<div class="table-responsive">
+<table class="table table-striped table-hover" id="admin">
+	<thead>
+		<tr>
+			<td><strong>Функционал \ Конфигурация</strong></td>
+			<td><strong>Apache + APC + Memcached</strong></td>
+			<td><strong>Nginx + Apache + APC + Memcached</strong></td>
+			<td><strong>Nginx + Varnish + Apache + APC + Memcached</strong></td>
+			<td><strong>Nginx + Varnish + Php-fpm + APC + Memcached</strong></td>
+			<td><strong>Nginx + Php-fpm + APC + Memcached</strong></td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Кэширование в памяти</td>
+			<td>+</td>
+			<td>+</td>
+			<td>+</td>
+			<td>+</td>
+			<td>+</td>
+		</tr>
+		<tr>
+			<td>Быстрая раздача статики</td>
+			<td>-</td>
+			<td>+</td>
+			<td>+</td>
+			<td>+</td>
+			<td>+</td>
+		</tr>
+		<tr>
+			<td>Кэширование страниц для анонимов</td>
+			<td>-</td>
+			<td>-</td>
+			<td>+</td>
+			<td>+</td>
+			<td>+</td>
+		</tr>
+		<tr>
+			<td>Выполнение PHP без Apache</td>
+			<td>-</td>
+			<td>-</td>
+			<td>-</td>
+			<td>+</td>
+			<td>+</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<p>Возможна настройка по индивидуальным требованиям под ваш проект.</p>
+<!--
+<script id="bx24_form_button" data-skip-moving="true">
+        (function(w,d,u,b){w['Bitrix24FormObject']=b;w[b] = w[b] || function(){arguments[0].ref=u;
+                (w[b].forms=w[b].forms||[]).push(arguments[0])};
+                if(w[b]['forms']) return;
+                var s=d.createElement('script');s.async=1;s.src=u+'?'+(1*new Date());
+                var h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);
+        })(window,document,'https://initlab.bitrix24.ru/bitrix/js/crm/form_loader.js','b24form');
+
+        b24form({"id":"12","lang":"ru","sec":"85zlrh","type":"button","click":""});
+</script><button class="b24-web-form-popup-btn b24-web-form-popup-btn-12">Заказать администрирование веб-сервера</button> -->
+</div>
+      
+  </div>
+
+</article>
+
+
+  </div>
+
+              </section>
+
+                </div>
+  </div>
+
+
+      <footer class="footer" role="contentinfo">
+      <div class=" container">  
+          <div class="region region-footer">
+    <section id="block-zakazatadministrirovanievebservera" class="block block-block-content block-block-content8dcfaeb0-03e2-4ca9-94e3-bd714cd143e2 clearfix">
+  
+    
+
+      
+<div class="row">
+      
+<div class="col-md-6 col-xs-12 col-sm-6">
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="block-form-wrapper">
+<div class="block-form-title">Заказать администрирование веб-сервера</div>
+
+<div class="block-form-description">Оказываем услугу по технической поддержки Drupal-сайтов и серверов</div>
+
+<div class="block-form-contacts">
+  <ul>
+    <li class="block-form-phone"><a href="tel:88002222673">8 800 222-26-73</a></li>
+    <li class="block-form-email">info@drupal-coder.ru</li>
+  </ul>
+</div>
+</div>
+</div>
+      
+  </div>
+
+<div class="col-md-6 col-xs-12 col-sm-6">
+      
+            <div class="field field--name-field-block-with-form-value field--type-entity-reference field--label-hidden field--item"><form class="contact-message-order-drupal-admin-form contact-message-form contact-form antibot" data-user-info-from-browser="" data-drupal-selector="contact-message-order-drupal-admin-form" data-action="/drupal-admin" action="/antibot" method="post" id="contact-message-order-drupal-admin-form" accept-charset="UTF-8">
+  <noscript>
+  <div class="antibot-no-js antibot-message antibot-message-warning">Вы должны включить JavaScript чтобы использовать эту форму.</div>
+</noscript>
+<div class="field--type-string field--name-field-vashe-imya field--widget-string-textfield form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-field-vashe-imya-wrapper" id="edit-field-vashe-imya-wrapper">      <div class="form-item js-form-item form-type-textfield js-form-type-textfield form-item-field-vashe-imya-0-value js-form-item-field-vashe-imya-0-value form-group">
+      <label for="edit-field-vashe-imya-0-value" class="control-label">Ваше имя</label>
+  
+  
+  <input class="js-text-full text-full form-text form-control" data-drupal-selector="edit-field-vashe-imya-0-value" type="text" id="edit-field-vashe-imya-0-value" name="field_vashe_imya[0][value]" value="" size="60" maxlength="255" placeholder="Ваше имя">
+
+  
+  
+  </div>
+
+  </div>
+<input autocomplete="off" data-drupal-selector="form-el8rlaipz4zeukpfucxsbu6f-pwzfpggcpkhneplf1s" type="hidden" name="form_build_id" value="form-el8rLAIpz4ZEUkpFUcxsbu6f-PWZFpGGCpkHnePLf1s"><input data-drupal-selector="edit-contact-message-order-drupal-admin-form" type="hidden" name="form_id" value="contact_message_order_drupal_admin_form"><input data-drupal-selector="edit-antibot-key" type="hidden" name="antibot_key" value=""><div class="field--type-email field--name-field-e-mail field--widget-email-default form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-field-e-mail-wrapper" id="edit-field-e-mail-wrapper">      <div class="form-item js-form-item form-type-email js-form-type-email form-item-field-e-mail-0-value js-form-item-field-e-mail-0-value form-group">
+      <label for="edit-field-e-mail-0-value" class="control-label">E-mail</label>
+  
+  
+  <input data-drupal-selector="edit-field-e-mail-0-value" class="form-email form-control" type="email" id="edit-field-e-mail-0-value" name="field_e_mail[0][value]" value="" size="60" maxlength="254" placeholder="Ваш E-mail">
+
+  
+  
+  </div>
+
+  </div>
+<div class="field--type-string field--name-field-telefon field--widget-string-textfield form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-field-telefon-wrapper" id="edit-field-telefon-wrapper">      <div class="form-item js-form-item form-type-textfield js-form-type-textfield form-item-field-telefon-0-value js-form-item-field-telefon-0-value form-group">
+      <label for="edit-field-telefon-0-value" class="control-label">Телефон</label>
+  
+  
+  <input class="js-text-full text-full form-text form-control" data-drupal-selector="edit-field-telefon-0-value" type="text" id="edit-field-telefon-0-value" name="field_telefon[0][value]" value="" size="60" maxlength="255" placeholder="Телефон">
+
+  
+  
+  </div>
+
+  </div>
+<div class="field--type-string-long field--name-field-vash- field--widget-string-textarea form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-field-vash-wrapper" id="edit-field-vash-wrapper">      <div class="form-item js-form-item form-type-textarea js-form-type-textarea form-item-field-vash--0-value js-form-item-field-vash--0-value form-group">
+      <label for="edit-field-vash-0-value" class="control-label">Ваш комментарий</label>
+  
+  
+  <div class="form-textarea-wrapper">
+  <textarea class="js-text-full text-full form-textarea form-control resize-vertical" data-drupal-selector="edit-field-vash-0-value" id="edit-field-vash-0-value" name="field_vash_[0][value]" rows="5" cols="60" placeholder="Ваш комментарий"></textarea>
+</div>
+
+
+  
+  
+  </div>
+
+  </div>
+<div class="form-item js-form-item form-type-checkbox js-form-type-checkbox form-item-fz152-agreement js-form-item-fz152-agreement checkbox">
+  
+  
+  
+
+      <label for="edit-fz152-agreement" class="control-label option js-form-required form-required"><input required="required" data-drupal-selector="edit-fz152-agreement" class="form-checkbox required" type="checkbox" id="edit-fz152-agreement" name="fz152_agreement" value="1" aria-required="true"><span class="custom-checkbox"></span>Отправляя заявку, я даю согласие на <a href="privacy-policy.html" target="_blank" rel="nofollow">обработку своих персональных данных</a>.</label>
+  
+  
+  </div>
+<div data-drupal-selector="edit-actions" class="form-actions form-group js-form-wrapper form-wrapper" id="edit-actions"><button data-drupal-selector="edit-submit" class="button button--primary js-form-submit form-submit btn-primary btn" type="submit" id="edit-submit" name="op" value="Заказать услугу">Заказать услугу</button></div>
+
+</form>
+</div>
+      
+  </div>
+
+  </div>
+
+  </section>
+
+<section id="block-copyright" class="block block-block-content block-block-content263c1cb2-b142-4488-af8e-99f92fcb7640 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="social-links">
+  <ul class="social-links-wrapper">
+    <li class="social-links-item"><a target="_blank" href="https://vk.com/initlab"><i class="fab fa-vk"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://teleg.one/initlabbot" title="Свяжитесь с нами"><i class="fab fa-telegram-plane"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.youtube.com/channel/UCyFEbngMB-bK2ulNtd_W43A"><i class="fab fa-youtube"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://zen.yandex.ru/id/6037ce072f500a068c630fec"><img style="width: 16px; margin-bottom: 5px;" src="sites\default\files\icons\zen-icon.svg"></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.facebook.com/initlabkr/"><img style="width: 25px; margin-bottom: 5px;" src="sites\default\files\icons\icon-facebook-ru-dc.svg"></a></li>
+  </ul>  
+</div>
+
+<p>ООО «Инитлаб», Краснодар, Россия.
+<a class="goal__tel" href="tel:+78002222673">8 800 222-26-73</a><br>
+Drupal является зарегистрированной торговой маркой Dries Buytaert.</p>
+</div>
+      
+  </section>
+
+
+  </div>
+
+      </div>
+    </footer>
+  </div>
+
+  </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"node\/2","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"ru"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"ajaxPageState":{"libraries":"antibot\/antibot.form,bootstrap\/popover,bootstrap\/theme,bootstrap\/tooltip,bootstrap_dc\/bootstrap-scripts,bootstrap_dc\/dc,bootstrap_dc\/global-styling,bootstrap_dc\/seo,colorbox\/default,colorbox_inline\/colorbox_inline,colorbox_load\/colorbox_load,core\/drupal.form,google_analytics\/google_analytics,ng_lightbox\/ng_lightbox,system\/base","theme":"bootstrap_dc","theme_token":null},"ajaxTrustedUrl":{"form_action_p_pvdeGsVG5zNF_XLGPTvYSKCf43t8qZYSwcfZl2uzM":true},"colorbox":{"opacity":"0.85","current":"{current} \u0438\u0437 {total}","previous":"\u00ab \u041f\u0440\u0435\u0434\u044b\u0434\u0443\u0449\u0438\u0439","next":"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0439 \u00bb","close":"Close","maxWidth":"98%","maxHeight":"98%","fixed":true,"mobiledetect":true,"mobiledevicewidth":"480px"},"google_analytics":{"account":"UA-87805467-1","trackOutbound":true,"trackMailto":true,"trackTel":true,"trackDownload":true,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip","trackColorbox":true},"bootstrap":{"forms_has_error_value_toggle":1,"modal_animation":1,"modal_backdrop":"true","modal_focus_input":1,"modal_keyboard":1,"modal_select_text":1,"modal_show":1,"modal_size":"","popover_enabled":1,"popover_animation":1,"popover_auto_close":1,"popover_container":"body","popover_content":"","popover_delay":"0","popover_html":0,"popover_placement":"right","popover_selector":"","popover_title":"","popover_trigger":"click","tooltip_enabled":1,"tooltip_animation":1,"tooltip_container":"body","tooltip_delay":"0","tooltip_html":0,"tooltip_placement":"auto left","tooltip_selector":"","tooltip_trigger":"hover"},"field_group":{"html_element":{"mode":"default","context":"view","settings":{"classes":"col-md-6 col-xs-12 col-sm-6","id":"","element":"div","show_label":false,"label_element":"h3","attributes":"","effect":"none","speed":"fast"}}},"antibot":{"forms":{"contact-message-order-drupal-admin-form":{"id":"contact-message-order-drupal-admin-form","key":"KlzzgDNZZotmezdLurox-uaGrJ3JP9d9Jd6CaHJ8RIs"}}},"user":{"uid":0,"permissionsHash":"66bb25c0b665c533dd9436d0cd4e99532a723088208bff0a05f2bf113d3703ac"}}</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="sites\default\files\js\js_l7kj413ts0sy1f7dK4QZ7-EXIJ99g8tR1YUHtt5nj_A.js"></script>
+<script src="sites\default\files\js\js_d5BC-2wlh3XH4S29GgaPGie7NxyWY0K1EhPg30LGzwA.js"></script>
+<script src="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+<script src="sites\default\files\js\js_0JpfcTomuXtSWa_m9aC3Cl6jt3QOGmlwYugQhh4TJxo.js"></script>
+<script src="sites\default\files\js\js_mbcGbcodpeZ1m4jteybh9rD6NIaxpB29Ujc2LQxAnBI.js"></script>
+
+  </body>
+</html>

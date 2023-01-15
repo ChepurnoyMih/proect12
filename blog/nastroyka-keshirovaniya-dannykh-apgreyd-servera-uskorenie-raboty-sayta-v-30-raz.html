@@ -1,0 +1,966 @@
+﻿<!DOCTYPE html>
+<html lang="ru" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
+  <head>
+    <meta charset="utf-8">
+<noscript><style>form.antibot * :not(.antibot-message) { display: none !important; }</style>
+</noscript><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-87805467-1"></script>
+<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag("js", new Date());gtag("set", "developer_id.dMDhkMT", true);gtag("config", "UA-87805467-1", {"groups":"default","anonymize_ip":true,"page_placeholder":"PLACEHOLDER_page_path","allow_ad_personalization_signals":false});</script>
+<meta http-equiv="content-language" content="ru">
+<meta name="description" content="Влияние скорости загрузки страниц сайта на отказы и конверсии. Кейс ускорения сайта в 30 раз.">
+<meta name="keywords" content="создание сайтов на drupal, разработка Drupal-сайтов">
+<meta property="og:type" content="blog">
+<meta property="og:url" content="https://drupal-coder.ru/blog/nastroyka-keshirovaniya-dannykh-apgreyd-servera-uskorenie-raboty-sayta-v-30-raz">
+<meta property="og:title" content="Настройка кэширования данных. Апгрейд сервера. Ускорение работы сайта в 30 раз!">
+<meta property="og:description" content="Влияние скорости загрузки страниц сайта на отказы и конверсии. Кейс ускорения сайта в 30 раз.">
+<meta name="Generator" content="Drupal 9 (https://www.drupal.org)">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="..\sites\default\files\android-chrome-256x256.png" type="image/png">
+<link rel="alternate" hreflang="ru" href="nastroyka-keshirovaniya-dannykh-apgreyd-servera-uskorenie-raboty-sayta-v-30-raz.html">
+<link rel="alternate" hreflang="en" href="https://drupal-coding.com/blog/setup-data-caching-server-upgrade-30-fold-site-performance-boost">
+<link rel="canonical" href="nastroyka-keshirovaniya-dannykh-apgreyd-servera-uskorenie-raboty-sayta-v-30-raz.html">
+<link rel="shortlink" href="nastroyka-keshirovaniya-dannykh-apgreyd-servera-uskorenie-raboty-sayta-v-30-raz.html">
+
+    <title>Настройка кэширования данных. Апгрейд сервера. Ускорение работы сайта в 30 раз! | drupal-coder.ru</title>
+    <link rel="stylesheet" media="all" href="..\sites\default\files\css\css_y8CdfJDNR-tG0CPnRDokR6Eh9OUJplbHLVQ9A8myecQ.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_tFXlTqkfn6J-Qtpt9xbB8JudSaJfOGxRSmpeidDAzPE.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_c0CK9J5WwpjjjzUIU22NJ_K_N6o0HFHz68-eM_V9Q7Q.css">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/@unicorn-fail/drupal-bootstrap-styles@0.0.2/dist/3.4.0/8.x-3.x/drupal-bootstrap.min.css" integrity="sha512-tGFFYdzcicBwsd5EPO92iUIytu9UkQR3tLMbORL9sfi/WswiHkA1O3ri9yHW+5dXk18Rd+pluMeDBrPKSwNCvw==" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_ULmc1mwKFKQRQmxYsjphW6dsh2g6jX4LXXBAtdO0vIE.css">
+
+    
+    <meta name="cmsmagazine" content="3d47b05beba40f3816d9741ee18c01a5">
+
+    
+    
+           <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P4SXQSG');</script>
+<!-- End Google Tag Manager -->
+    
+    
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Bold.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Medium.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Regular.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/fontawesome/webfonts/fa-brands-400.woff2" crossorigin="anonymous">
+    <link rel='manifest' href='..\manifest.json'>
+    <meta name="format-detection" content="telephone=no">
+
+          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MXPCP8Q"></script>
+      </head>
+  <body class="page-node-253 path-node page-node-type-blog has-glyphicons">
+
+                  <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4SXQSG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+      
+          
+
+    <a href="#main-content" class="visually-hidden focusable skip-link">
+      Перейти к основному содержанию
+    </a>
+    
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
+    
+      
+          <header class="navbar navbar-default" id="navbar" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+            <div class="region region-navigation">
+    <section id="block-pikselvkskript" class="block block-block-content block-block-contentbf8d9e8f-617c-4e8f-8501-7586be8255e0 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script>(window.Image ? (new Image()) : document.createElement('img')).src = 'https://vk.com/rtrg?p=VK-RTRG-238064-1VWIQ';</script></div>
+      
+  </section>
+
+<section id="block-globalsitetagadwords" class="block block-block-content block-block-content27617f8e-58d1-4a2a-9f23-31eab95a43c8 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><!-- Global site tag (gtag.js) - AdWords: 948581894 -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=AW-948581894"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-948581894');
+</script></div>
+      
+  </section>
+
+            <a class="logo navbar-btn pull-left" href="..\index.htm" title="Главная" rel="home">
+            <img src="..\themes\custom\bootstrap_dc\images\logo-initlab.svg" alt="Главная" width="156" height="31">
+        </a>
+            
+  </div>
+
+        </div>
+                          <div class="navbar-collapse-wrapper">
+
+            <div class="navbar-collapse collapse">
+                <div class="region region-navigation-collapsible">
+    <nav role="navigation" aria-labelledby="block-bootstrap-dc-main-menu-menu" id="block-bootstrap-dc-main-menu">
+            
+  <h2 class="visually-hidden" id="block-bootstrap-dc-main-menu-menu">Основная навигация</h2>
+  
+
+        
+              <ul class="menu nav navbar-nav">
+                      <li><a href="..\support.html" data-drupal-link-system-path="node/1">Поддержка Drupal</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-admin.html" class="dropdown-toggle" data-toggle="dropdown">DevOps <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\import-migrate-upgrade.html" data-drupal-link-system-path="node/4">Миграция</a>
+                  </li>
+                  <li><a href="..\backup.html" data-drupal-link-system-path="node/3">Бэкапы</a>
+                  </li>
+                  <li><a href="..\drupal-security-audit.html" data-drupal-link-system-path="node/9">Аудит безопасности</a>
+                  </li>
+                  <li><a href="..\boost-drupal.html" data-drupal-link-system-path="node/5">Оптимизация скорости</a>
+                  </li>
+                  <li><a href="..\ssl.html" data-drupal-link-system-path="node/99">Переезд на https</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\blog.html" data-drupal-link-system-path="blog">Блог</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-seo.html" class="dropdown-toggle" data-toggle="dropdown">Продвижение <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\drupal-seo\context.html" data-drupal-link-system-path="node/111">Реклама</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li class="expanded dropdown"><a href="..\team.html" class="dropdown-toggle" data-toggle="dropdown">О нас <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\team.html#team" data-drupal-link-system-path="team">Команда</a>
+                  </li>
+                  <li><a href="..\drupalgive.html" data-drupal-link-system-path="node/135">Drupalgive</a>
+                  </li>
+                  <li><a href="..\drupal-courses.html" data-drupal-link-system-path="node/10">Курсы Drupal</a>
+                  </li>
+                  <li><a href="..\vacancies.html" data-drupal-link-system-path="vacancies">Вакансии</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\happy-customers.html" data-drupal-link-system-path="happy-customers">Проекты</a>
+                  </li>
+                  <li><a href="..\contacts.html" data-drupal-link-system-path="node/86">Контакты</a>
+                  </li>
+              </ul>
+      
+
+
+  </nav>
+
+  </div>
+
+            </div>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+              </div>
+    </header>
+  
+
+      <div class="page-header-big" role="heading">
+        <div class="container">
+            <div class="region region-header">
+        <h1 class="page-header">
+<span>Настройка кэширования данных. Апгрейд сервера. Ускорение работы сайта в 30 раз! </span>
+</h1>
+
+<section class="views-element-container block block-views block-views-blockuser-block-1 clearfix" id="block-views-block-user-block-1">
+  
+    
+
+      <div class="form-group"><div class="view view-user view-id-user view-display-id-block_1 js-view-dom-id-24dfae93e8e2aa5b1d2fe155bec84956d3866bb5924622cf4312b49383deeaae">
+  
+    
+      
+      <div class="view-content">
+          <div class="views-row"><div class="views-field views-field-user-picture"><div class="field-content">  <img loading="lazy" src="..\sites\default\files\styles\avatar_mini\public\pictures\2019-12\IMG_2472_0.jpg?itok=HBh09VCv" width="45" height="45" alt="" typeof="foaf:Image" class="img-responsive">
+
+
+</div></div><div class="views-field views-field-field-name"><div class="field-content">Синица Сергей</div></div></div>
+
+    </div>
+  
+          </div>
+</div>
+
+  </section>
+
+<section id="block-yashare" class="block-yashare block block-block-content block-block-contentee72d8fb-02e9-4ef6-8e71-0df16bee86a9 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+<script src="//yastatic.net/share2/share.js"></script>
+<div class="ya-share2" data-services="vkontakte,odnoklassniki,gplus,twitter"></div></div>
+      
+  </section>
+
+
+  </div>
+
+        </div>
+      
+    </div>
+  
+
+<div class="main-wrapper">
+  <div role="main" class="main-container container js-quickedit-main-content">
+    <div class="row">
+
+
+
+            
+                  <section class="col-sm-12">
+
+                
+                
+                
+                                      
+                  
+                          <a id="main-content"></a>
+            <div class="region region-content">
+        <ol class="breadcrumb">
+          <li>
+                  <a href="..\blog.html">Блог</a>
+              </li>
+          <li class="active">
+                  Настройка кэширования данных. Апгрейд сервера. Ускорение работы сайта в 30 раз! 
+              </li>
+      </ol>
+
+<div data-drupal-messages-fallback="" class="hidden"></div>
+  <article data-history-node-id="253" role="article" about="https://drupal-coder.ru/blog/nastroyka-keshirovaniya-dannykh-apgreyd-servera-uskorenie-raboty-sayta-v-30-raz" class="blog is-promoted full clearfix">
+
+  
+    
+
+  
+
+  <div class="content">
+    
+    
+            <div class="field field--name-field-blog-img field--type-image field--label-hidden field--item">/sites/default/files/2020-05/office-2717014_1920.jpg</div>
+      <div id="field-language-display"><div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group">
+      <label class="control-label">Language</label>
+  
+  
+  Russian
+
+  
+  
+  </div>
+</div>
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><h2>Влияние скорости загрузки страниц сайта на отказы и конверсии</h2>
+
+<p>На какие только уловки не идут владельцы лендингов, интернет-каталогов, веб-порталов и интернет-магазинов для привлечения посетителей к своим сайтам. Заказывают оригинальный и красивый дизайн, стараются наполнить интересным и содержательным контентом, придумывают разнообразные способы взаимодействия с посетителями, проводят дорогие рекламные кампании. Делают всё возможное для достижения одной цели — привлечения как можно большего количества посетителей, рассчитывая увеличить таким образом количество сделок, покупок и прочих доходных транзакций.</p>
+
+<p>В статьях, посвящённых проблеме повышения коммерческой эффективности веб-проектов, основными факторами, влияющими на достижение поставленной цели, указываются дизайн, качество контента, удобство пользования («юзабилити»), регулярное обновление и качество кода. Всё это, конечно же, справедливо.</p>
+
+<p>Однако нередко происходит так, что очередной шедевр сайтостроения, в который было вложено совершенно немыслимое количество денег, сил и нервов, оформленный самыми лучшими дизайнерами и наполненный тщательно продуманным и оптимизированным для поиска контентом, почему-то не пользуется высокой популярностью, на которую был рассчитан и не производит того эффекта, ради получения которого был задуман.</p>
+
+<p>Проблема в том, что при создании и дальнейшем функционировании сайта мало кто заботится о скорости, с которой открываются страницы сайта в браузерах посетителей. Но как показывают, проведённые на эту тему, исследования и доказывает практика, этому вопросу стоит уделить особое внимание.</p>
+
+<p>Например, согласно <a href="https://blog.kissmetrics.com/loading-time/">результатам исследования компании Akamai</a>, оказывающей услуги по ускорению работы сайтов, было установлено следующее:</p>
+
+<ul><li>47% пользователей ожидают, что веб-страница загрузится в течение 2 секунд;</li>
+	<li>40% посетителей могут уйти с сайта, который грузится более 3 секунд;</li>
+	<li>52% утверждают, что скорость загрузки влияет на лояльность посетителей;</li>
+	<li>3 секунды ожидания уменьшают лояльность клиентов примерно на 16%.</li>
+</ul><p>То же самое утверждает и <a href="https://www.thinkwithgoogle.com/consumer-insights/consumer-mobile-brand-content-interaction/">Google</a>: «Если сайт загружается дольше трех секунд, 53% пользователей покинут его».</p>
+
+<p>Очень интересны результаты <a href="https://www.youtube.com/watch?v=TOsqP16jnDs">исследования</a>, проведенные Пэтом Минаном (Pat Meenan) из Google и Тамми Эвертсом (Tammy Everts) из SOASTA, представленные на конференции <a href="http://conferences.oreilly.com/velocity/devops-web-performance-ca">Velocity 2016</a>.</p>
+
+<blockquote>«...В этом исследовании использовался специальный счетчик (системы mPulse) для сбора данных на множестве живых сайтов в области электронной коммерции. Среди данных были следующие: операционная система, браузер, география, длительность сессии, заголовки запросов, времена загрузки страниц, скорость подключения, состав страниц (количество элементов, картинок и т.д.). Использовалось более 1100000 загрузок страниц...»</blockquote>
+
+<p>В результате исследования были выявлены главные шесть детерминантов, влияющих на конверсии и процент отказов:</p>
+
+<ol><li>Количество элементов на странице.</li>
+	<li>Количество изображений на странице.</li>
+	<li>Количество скриптов (JavaScript).</li>
+	<li>Время загрузки страницы (после получения документа).</li>
+	<li>Полное время загрузки.</li>
+	<li>Время генерации HTML-документа сервером.</li>
+</ol><p>Первые три пункта относятся к составу страницы, три следующих — к скорости загрузки страницы. Вывод очевиден: скорость, с которой грузятся страницы сайта, влияет на количество отказов со стороны посетителей и на процент конверсии.</p>
+
+<p>Исходя из полученных результатов исследования, для всех владельцев сайтов, желающих повысить конверсию или вовлечённость посетителей, рекомендуется провести аудит скорости сайта и инвестировать в его ускорение.</p>
+
+<p>С точки зрения пользователя все ещё проще: никто не любит долгой загрузки страниц сайта, всем нравится быстродействие и скорость. Чем быстрее грузятся страницы, тем комфортнее чувствует себя посетитель сайта, тем благоприятнее у него впечатление о компании — владельце сайта.</p>
+
+<p>Ну, или наоборот: чем медленнее грузятся страницы сайта, тем хуже отношение посетителя к его владельцу, а значит — тем меньше вероятности конверсии визита в сделку.</p>
+
+<p>Проверять скорость загрузки страниц вашего сайта просто загружая их на свой компьютер недостаточно — это не покажет вам реального положения дел. Для получения реальной картины необходимо использовать сторонние сервисы, специально предназначенные для тестирования скорости работы сайта. Например, <a href="https://developers.google.com/speed/pagespeed/insights/?hl=RU">PageSpeed Insights — Google Developers</a> покажет не только скорость загрузки страниц, как для стационарных компьютеров, так и для мобильных устройств, но и выдаст список предполагаемых проблем.</p>
+
+<p> </p>
+
+<figure><img alt="Результат тестирования скорости работы сайта" src="..\sites\default\files\blog\image12.png"><figcaption><em>Рис. 1. Результат тестирования скорости работы сайта</em></figcaption></figure><p> </p>
+
+<p>Причины медленной загрузки страниц, возникшие из-за содержимого самого сайта, найти и устранить относительно просто — для этого надо оптимизировать графический контент по количеству и объёму картинок, сократить и оптимизировать таблицы стилей, java-скрипты, HTML-код. Сайты, созданные профессионалами, как правило, множеством ошибок в коде или графическом контенте не страдают, но избежать их совсем, к сожалению, не получается. Впрочем, они легко устраняются в процессе «обкатки» сайта при последующей его оптимизации.</p>
+
+<p>Медленная загрузка страниц сайта может происходить также по причине низкой скорости сетевых интерфейсов аппаратного уровня и низкой пропускной способности физических каналов связи, через который веб-сервер подключается к Сети. Выбирайте оборудование и подключение, которое способно обеспечить необходимую пропускную способность.</p>
+
+<p>Если ваш сайт является высоконагруженным интернет-каталогом или интернет-магазином, содержащим объёмную базу данных и требующим обработки большого количества транзакций, то замедление загрузки страниц также может происходить по причине высокой загруженности самого веб-сервера, не успевающего обработать все запросы своевременно. Такое происходит, как правило, когда обмен данными большого объёма происходит через жёсткие диски, скорость работы интерфейсов которых недостаточно высока для обработки больших объёмов информации.</p>
+
+<h3>Постановка задачи</h3>
+
+<p>В данной статье описывается реальная работа по оптимизации скорости обработки запросов веб-сервером, на котором работает сайт интернет-магазина одного из наших клиентов. Коммерчески проект оказался весьма успешным и стал довольно популярным. Со временем сервер перестал справляться с возросшей нагрузкой и в «часы пик» стал заметно тормозить, в результате чего ощутимо снизилась скорость его работы.</p>
+
+<p>Проведённые тесты показали, что среднее время загрузки страниц составило более 350 мс, а иногда посетителям сайта даже не в «пиковое» время приходилось ждать полной загрузки страницы более одной секунды. Дальнейшее игнорирование проблемы становилось невозможным, так как рост посещаемости продолжался, из-за чего время загрузки «медленных» страниц превысило критические 3 секунды, о чём сообщалось в панели Яндекс.Вебмастер в списке критичных ошибок сайта.</p>
+
+<p> </p>
+
+<figure><img alt="Сообщение Яндекс.Вебмастер: «При обращении к страницам сайта среднее время ответа сайта превышает 3 секунды...»" src="..\sites\default\files\blog\image13.png"><figcaption><em>Рис. 2. Сообщение Яндекс.Вебмастер: «При обращении к страницам сайта среднее время ответа сайта превышает 3 секунды...»</em></figcaption></figure><p> </p>
+
+<p>Поэтому было принято решение оптимизировать работу сервера так, чтобы уменьшить время обработки входящих запросов и ускорить выдачу данных.</p>
+
+<p>Для повышения скорости обработки и обмена информацией используют кэширование данных: наиболее часто используемые данные перемещают в оперативную память компьютера. Для проектов на Drupal чаще всего используется утилита Memcached, реализующая сервис кэширования данных в оперативной памяти на основе хеш-таблицы. Описанию процесса оптимизации работы веб-сервера и ускорению работы сайта с помощью настройки кэширования данных посвящена данная статья.</p>
+
+<h2>Оптимизация работы форм интернет-магазина и кеширование страниц с формами</h2>
+
+<p>Одной из ключевых метрик скорости загрузки страниц сайта является время генерации страницы веб-сервером. В работе по оптимизации сайта и сервера для уменьшения времени генерации страниц участвуют наши системные администраторы и специалисты DevOps, разработчики, специалисты со стороны заказчика и хостинг-провайдера. Мы используем профилировку XDebug медленных страниц и анализ времени выполнения отдельных функций PHP для поиска и устранения узких мест в коде сайта.</p>
+
+<p>Для сбора агрегированной статистики времени обработки запроса на загрузку страниц сервером, а также скорости выполнения запросов к MySQL и Solr, с целью последующего анализа, использовался сервис мониторинга NewRelic.</p>
+
+<p>В публикуемой статье описана проблема, довольно распространённая для сайтов на Drupal, и показано решение, позволяющее на 32% уменьшить время обработки запросов на загрузку страниц интернет-магазина.</p>
+
+<h3>Проблема</h3>
+
+<p>Есть в Drupal 7 давняя особенность — форма автоматически кэшируется при использовании <a href="https://api.drupal.org/api/drupal/includes%21ajax.inc/group/ajax/7.x">AJAX фреймворка</a>. При каждом выводе такой формы в таблице <em>cache_form</em> создаётся две записи — одна для структуры формы и одна для её состояния. Кэширование необходимо для корректной работы AJAX обработчика, которому нужно знать структуру и последнее состояние формы.</p>
+
+<p>В случае, когда таких форм на странице много, возникает проблема быстрого роста количества записей в таблице <em>cache_form</em>. Например, «Добавить в корзину» в Commerce: запрос на вывод 50 товаров приведёт к созданию 100 записей в таблице <em>cache_form</em> при каждом просмотре страницы каталога. На сайте с высокой нагрузкой это приводит к тому, что таблица <em>cache_form</em> может иметь размер в несколько десятков гигабайт.</p>
+
+<p>Учитывая тот факт, что кэш форм в Drupal 7 тесно связан с кэшированием страниц с минимальным временем жизни памяти (задаётся на странице <em>«Производительность»</em>), если удалить кэш формы раньше, чем память страницы, возникнет ошибка «Некорректные POST-данные формы» при взаимодействии с формой. Если задать минимальное время жизни памяти, устаревший кэш форм не будет очищаться в течение установленного времени.</p>
+
+<p>Для исправления этой проблемы уже существует несколько решений:</p>
+
+<ul><li>
+	<p>Переменная <em>form_cache_expiration</em>. Данная переменная была <a href="https://www.drupal.org/node/2857751">добавлена</a> в версии 7.61 и позволяет управлять временем хранения кэша форм, которое по умолчанию равно 6 часам. Основной недостаток заключается в сильной зависимости от механизма очистки устаревшей памяти, без своевременного вмешательства которого, размер <em>cache_form</em> будет продолжать расти.</p>
+	</li>
+	<li>
+	<p>Модуль <a href="https://www.drupal.org/project/optimizedb">OptimizeDB</a>. Позволяет гибко настроить очистку таблицы <em>cache_form</em> по cron. Можно задать полную очистку таблицы или очистку только устаревших записей. Но тогда высока вероятность возникновения ошибки «Некорректные POST-данные формы», при этом размер таблицы <em>cache_form</em> всё равно останется слишком большим.</p>
+	</li>
+	<li>
+	<p>Модуль <a href="https://www.drupal.org/project/safe_cache_form_clear">Safe cache_form Clear</a> предоставляет Drush команду для очистки устаревших записей в таблице <em>cache_form</em>. Недостатки аналогичны недостаткам модуля <a href="https://www.drupal.org/project/optimizedb">OptimizeDB</a>.</p>
+	</li>
+	<li>
+	<p>Модуль <a href="http://xandeadx.ru/blog/drupal/751">Commerce Fast Ajax Add to Cart</a>. Решение от <a href="https://www.drupal.org/u/xandeadx">xandeadx</a>, направленное на корень проблемы — кэширование стандартной формы Drupal Commerce добавления товара в корзину. Минус решения, как ни странно, в том, что AJAX фреймворк не используется, а для нашего проекта разработчиками уже был написан нестандартный диалог добавления в корзину с использованием AJAX-команд Drupal. Кроме того, это решение не универсально и работает только для формы добавления товара в корзину;</p>
+	</li>
+	<li>
+	<p>Патч <a href="https://www.drupal.org/files/issues/2019-03-19/2819375-94.patch">#94</a> из этого <a href="https://www.drupal.org/project/drupal/issues/2819375">issue</a>. Кроме применения патча потребуется дописать обработчик для нужной формы. Это решение может работать нестабильно для страниц со множественным выводом форм. Не работает для страниц со случайным списком товаров. Ну и уже большой минус в том, что надо патчить ядро.</p>
+	</li>
+</ul><h3>Решение</h3>
+
+<p>Для примера возьмём чистую установку Drupal 7.67 с модулем Commerce 1.15. Реализуем страницы каталога с помощью Views. На каждой странице выведем по 50 товаров, в каждом тизере товара выведем кнопку добавления в корзину. Для удобства генерируем товары с помощью модуля <a href="https://www.drupal.org/project/commerce_devel">Commerce Devel</a>. Для AJAX-ификации кнопки добавления товара в корзину используем модуль <a href="https://www.drupal.org/project/dc_ajax_add_cart">Commerce Ajax Add to Cart</a>. Открываем страницу каталога и проверяем — в таблице <em>cache_form</em> появилось 100 новых записей, проблема воспроизведена.</p>
+
+<p>Решение, предлагаемое в данной статье, частично основано на данном <a href="https://www.drupal.org/project/drupal/issues/2819375#comment-12637823">комментарии</a>. Для его реализации потребуется создать небольшой кастомный модуль или добавить код в уже имеющийся. В нашем примере это будет модуль <em>custom</em>.</p>
+
+<p>Первым делом определим путь для нового AJAX-обработчика формы. По своей структуре он похож на определение пути <em>«system/ajax»</em> в модуле <em>system</em>.</p>
+
+<p> </p>
+
+<pre>
+  <code language="php">
+/**
+ * Implements hook_menu().
+ */
+function custom_menu() {
+  $items['custom/form/ajax'] = array(
+    'title' =&gt; 'AJAX callback',
+    'page callback' =&gt; 'custom_form_ajax_callback',
+    'delivery callback' =&gt; 'ajax_deliver',
+    'access arguments' =&gt; array('access content'),
+    'theme callback' =&gt; 'ajax_base_page_theme',
+    'type' =&gt; MENU_CALLBACK,
+  );
+  return $items;
+}
+
+  </code>
+</pre>
+
+<p> </p>
+
+<p>Изменим путь AJAX-обработчика у кнопки добавления товара в корзину (свойство <em>path</em>). Здесь важно не путать свойства <em>path</em> и <em>callback</em> — первое определяет адрес, на который будет отправлен AJAX-запрос, а второе указывает функцию, которая при этом запросе будет вызвана для формирования ответа. Как правило, <em>path</em> не указывают и берётся значение по умолчанию <em>«system/ajax»</em>, его и требуется поменять. Также принудительно отключим кэширование, интересующей нас, формы.</p>
+
+<p> </p>
+
+<pre>
+  <code language="php">
+/**
+ * Implements hook_form_alter().
+ */
+function custom_form_alter(&amp;$form, &amp;$form_state, $form_id) {
+  if (strpos($form_id, 'commerce_cart_add_to_cart_form') !== FALSE) {
+    // Указываем, что хотим самостоятельно обработать AJAX-запрос к форме.
+    $form['submit']['#ajax']['path'] = 'custom/form/ajax';
+ 
+    // Отключаем кэширование формы.
+    $form_state['no_cache'] = TRUE;
+  }
+}
+
+  </code>
+</pre>
+
+<p> </p>
+
+<p>Наконец, реализуем функцию <code>custom_form_ajax_callback()</code>, которую ранее указали в определении пути <em>«custom/form/ajax»</em>. Код функции частично повторяет код функций <code>ajax_get_form()</code> и <code>ajax_form_callback()</code>. Основная идея заключается в том, что нужно получить правильное состояние формы без использования кэша, так как мы его уже отключили. Важно отметить, что приведённый далее код универсален и может быть применен для отключения кэширования других AJAX-форм, за исключением блока, в котором выполняется формирование товарной позиции. Именно в данном блоке происходит построение состояния формы, необходимой для корректной валидации и сабмита. Для поддержки атрибутов товаров потребуется доработка этого кода. Для других форм потребуется написать аналогичный код.</p>
+
+<p> </p>
+
+<pre>
+  <code language="php">
+/**
+ * Menu callback; handles Ajax requests for forms without caching.
+ *
+ * @return array|null
+ *   Array of ajax commands or NULL on failure.
+ */
+function custom_form_ajax_callback() {
+  // Проверяем, что обрабатываем AJAX-запрос к форме.
+  if (isset($_POST['form_id']) &amp;&amp; isset($_POST['form_build_id'])) {
+    $form_build_id = $_POST['form_build_id'];
+    $form_id = $_POST['form_id'];
+    $commands = array();
+ 
+    // Инициализируем состояние формы.
+    $form_state = form_state_defaults();
+    $form_state['build_info']['args'] = array();
+ 
+    // Заполняем состояние формы. Данный код уникален в рамках обрабатываемой формы.
+    // Проверяем, что форма является формой добавления товара в корзину.
+    if (strpos($form_id, 'commerce_cart_add_to_cart_form_') === 0) {
+      $product = commerce_product_load($_POST['product_id']);
+ 
+      if (!empty($product)) {
+        // Формируем сущность товарной позиции на основе данных отправленной формы.
+        $line_item = commerce_product_line_item_new($product, $_POST['quantity'] ?? 1);
+        $line_item-&gt;data['context']['product_ids'] = array($product-&gt;product_id);
+        $line_item-&gt;data['context']['add_to_cart_combine'] = TRUE;
+ 
+        // Добавляем товарную позицию в состояние формы.
+        $form_state['build_info']['args'] = array($line_item);
+      }
+    }
+ 
+    // Строим форму, будут вызваны билдеры и соответствующие хуки.
+    $form = drupal_retrieve_form($form_id, $form_state);
+    drupal_prepare_form($form_id, $form, $form_state);
+    $form['#build_id_old'] = $form_build_id;
+ 
+    // Обрабатываем форму аналогично тому, как это сделано в ajax_get_form().
+    if ($form['#build_id_old'] != $form['#build_id']) {
+      $commands[] = ajax_command_update_build_id($form);
+    }
+    $form_state['no_redirect'] = TRUE;
+    $form_state['rebuild_info']['copy']['#build_id'] = TRUE;
+    $form_state['rebuild_info']['copy']['#action'] = TRUE;
+    $form_state['input'] = $_POST;
+ 
+    // Обрабатываем форму аналогично тому, как это сделано в ajax_form_callback().
+    drupal_process_form($form['#form_id'], $form, $form_state);
+    if (!empty($form_state['triggering_element'])) {
+      $callback = $form_state['triggering_element']['#ajax']['callback'];
+    }
+    if (!empty($callback) &amp;&amp; is_callable($callback)) {
+      $result = $callback($form, $form_state);
+      if (!(is_array($result) &amp;&amp; isset($result['#type']) &amp;&amp; $result['#type'] == 'ajax')) {
+        $result = array(
+          '#type' =&gt; 'ajax',
+          '#commands' =&gt; ajax_prepare_response($result),
+        );
+      }
+      $result['#commands'] = array_merge($commands, $result['#commands']);
+      return $result;
+    }
+  }
+  return NULL;
+}
+
+  </code>
+</pre>
+
+<h3>Результаты</h3>
+
+<p>В нашем примере добавление вышеуказанного кода приводит к сохранению AJAX-функционала кнопки добавления товара в корзину при отключённом кэшировании формы. Обновление страницы каталога теперь не приводит к созданию 100 записей в таблице cache_form. Результат обработки AJAX-запроса аналогичен результату обработки при использовании кэша. Изменения формы, добавленные в рамках Drupal API (например, атрибуты товаров) либо потребуют небольших изменений в коде (построения состояния формы), либо не потребуют их вообще.</p>
+
+<p>Кроме того, интересен результат применения решения на реальном проекте, для которого оно и было реализовано:</p>
+
+<ul><li>Количество SELECT запросов к таблице <em>cache_form</em> уменьшилось в 10 раз;</li>
+	<li>Количество INSERT запросов к таблице <em>cache_form</em> уменьшилось в 10 раз;</li>
+	<li>Среднее время обработки запроса сервером уменьшилось на 32% (с 352 до 241 миллисекунд).</li>
+</ul><p>Более подробно статистика отображена на скриншотах.</p>
+
+<p> </p>
+
+<figure><img alt="Количество SELECT и INSERT запросов в минуту к таблице cache_form" src="..\sites\default\files\blog\image9.png"><figcaption><em>Рис. 3. Количество SELECT и INSERT запросов в минуту к таблице cache_form</em></figcaption></figure><figure><p> </p>
+
+<p><img alt="Трудоёмкость INSERT запросов к таблице cache_form." src="..\sites\default\files\blog\image10.png"></p>
+
+<figcaption><em>Рис. 4. Трудоёмкость INSERT запросов к таблице cache_form</em></figcaption></figure><figure><p> </p>
+
+<p><img alt="Количество INSERT запросов в минуту" src="..\sites\default\files\blog\image8.png"></p>
+
+<figcaption><em>Рис. 5. Количество INSERT запросов в минуту</em></figcaption></figure><figure><p> </p>
+
+<p><img alt="Количество SELECT и INSERT запросов в минуту к таблице cache_form" src="..\sites\default\files\blog\image5.png"></p>
+
+<figcaption><em>Рис. 6. Количество SELECT и INSERT запросов в минуту к таблице cache_form</em></figcaption></figure><figure><p> </p>
+
+<p><img alt="Время обработки запроса сервером до изменений" src="..\sites\default\files\blog\image1.png"></p>
+
+<figcaption><em>Рис. 7. Время обработки запроса сервером до изменений</em></figcaption></figure><figure><p> </p>
+
+<p><img alt="Время обработки запроса сервером после изменений." src="..\sites\default\files\blog\image4.png"></p>
+
+<figcaption><em>Рис. 8. Время обработки запроса сервером после изменений</em></figcaption></figure><p> </p>
+
+<p>Среднее время от запроса до ответа сервера APP SERVER уменьшилось с 352 до 241 миллисекунд. Размер таблицы <em>cache_form</em> уменьшился с ~10Гб до 200Мб.</p>
+
+<p>Таким образом получилось сократить время транзакции на 32%. Дальнейшие доработки других форм сайта аналогичным образом позволят улучшить эти показатели.</p>
+
+<h2>Тонкая настройка кэширования страниц в Memcached и мониторинг кеша страниц</h2>
+
+<p>Одним из самых важных факторов, влияющих на отказы и конверсии интернет-магазина, да и любого сайта, является скорость загрузки страниц.</p>
+
+<p>Слишком медленная работа сайта способна свести на нет любые старания владельца по повышению конверсии веб-проекта. Причина слишком медленной загрузки веб-страниц очень часто содержится в медленной обработке запросов и низкой скорости процессов обмена данными на самом веб-сервере.</p>
+
+<p>Как известно, самыми медленными в компьютере являются операции ввода и вывода данных, хранящихся на жёстком диске. Даже самые быстрые современные устройства хранения зачастую не могут обеспечить требуемую скорость чтения и записи данных через интерфейс жёсткого диска. Чтобы ускорить процессы обмена и обработки информации применяется кэширование — т.е. хранение часто используемых данных в оперативной памяти, для чего в проектах на Drupal чаще всего используется утилита Memcached, настройке которой и посвящен данный раздел статьи.</p>
+
+<h3>Проблема</h3>
+
+<p>Работая над задачей по увеличению скорости загрузки страниц сайта интернет-магазина, мы обнаружили неожиданное поведение сервиса кэширования. Несмотря на то, что утилита кэширования данных Memcached была настроена и запущена, страницы отдавались по запросу не из памяти, как ожидалось, а генерировались всякий раз заново, загружая данные с жёсткого диска даже при повторном запросе от пользователя.</p>
+
+<p>Погрузившись в проблему, мы поняли, что невозможно определить объем памяти, используемый именно под хранение страниц в кэше, ведь кэш Drupal хранит не только их. Было принято решение тщательно исследовать работу Memcached и перенастроить его так, чтобы страницы выдавались из памяти сайта.</p>
+
+<h3>Анализ</h3>
+
+<p>Для того, чтобы понять масштаб проблемы и оценить потенциальную эффективность ее решения мы использовали следующие инструменты:</p>
+
+<ul><li>memcached-tool — perl-скрипт, входящий в стандартную поставку Memcached. Позволяет просматривать статистику запущенного процесса Memcached. Его удобно использовать в bash скриптах для организации автоматического мониторинга.</li>
+	<li>PHPMemcachedAdmin — панель управления для отображения статистики и работы Memcached, с помощью которой удобно осуществлять мониторинг работы Memcached.</li>
+	<li>логи WEB сервера. Мы включили в действующий формат логов nginx логирование заголовков кэша Drupal. Для этого в директиве <em>log_format</em> добавили еще одну переменную <code>$sent_http_x_drupal_cache</code>.</li>
+	<li>Zabbix-сервер — центральный узел мониторинга.</li>
+</ul><p>Далее рассмотрим подробнее, как работает Memcached и как мы использовали, перечисленные выше, инструменты.</p>
+
+<p>Администраторы сайтов и веб-серверов зачастую просто устанавливают Memcached, выделяя ему, например, 1-2 Гб оперативной памяти, и благополучно забывают про него, не заморачиваясь долгой и трудоёмкой настройкой, полагая, что он прекрасно работает и без этого. Но так ли это на самом деле? С помощью панели PHPMemcachedAdmin можно детально изучить работу службы. Вот пример главного экрана мониторинга:</p>
+
+<figure><p> </p>
+
+<p><img alt="Главный экран мониторинга PHPMemcachedAdmin" src="..\sites\default\files\blog\image6.png"></p>
+
+<figcaption><em>Рис. 9. Главный экран мониторинга PHPMemcachedAdmin</em></figcaption></figure><p> </p>
+
+<p>Первое, что обращает на себя внимание — используемая память. Если вы используете 100% выделенной памяти, значит новые запросы не будут кэшироваться, так как под них не остаётся ресурсов.</p>
+
+<p>Второй важный параметр — wasted. Если процент wasted высокий, значит используемая память расходуется не рационально. Чтобы понять, что такое wasted, нужно разобраться, как Memcached использует выделенную ему память.</p>
+
+<p>Вся выделяемая память в Memcached делится на слабы (Slab). Слаб, в свою очередь, содержит чанки (chank), а в чанках уже хранятся непосредственно данные. Каждый слаб хранит в себе чанки одинакового размера. Такой подход к хранению данных позволяет Memcached легко и быстро находить область в памяти для записи новых данных.</p>
+
+<p>Когда в Memcached приходят данные для записи, он находит слаб, который содержит чанки размером, максимально приближенном к размеру поступивших данных, и записывает эти данные в него, при условии, что он свободен. Более в этот чанк ничего записать нельзя. Если размер чанка превышает размер записанных в него данных, в чанке остается немного свободной памяти, которую уже нельзя использовать. Суммарный объем этой неиспользуемой памяти и составляет wasted.</p>
+
+<p>Таким образом, только посмотрев на главный экран панели PHPMemcachedAdmin, можно сразу определить, насколько рационально используется память в Memcached и нужно ли вообще что-то менять. Но если используемая память расходуется на 100%, а процент Wasted относительно невысок, то достаточно увеличить выделяемую для Memcached память. Если же процент Wasted высокий необходимо оптимизировать работу Memcached. Хорошим показателем работы является 15-25% Wasted и 20-25% свободной памяти. Это означает, что ваш экземпляр Memcached рационально использует выделенную ему память и у него есть небольшой запас для записи новых запросов.</p>
+
+<h3>Решение</h3>
+
+<p>В зависимости от того, что хранится в кэше, а точнее — от объема данных, Memcached по-разному настраивается. Поэтому первое, что мы сделали — отделили кэш страниц от всего остального, т.к. размер страницы сильно отличается от остального кэша, который хранится в памяти.</p>
+
+<p>Для этого на сервере клиента мы развернули второй инстанис Memcached. Сделать это было не сложно — мы скопировали существующий юнит systemd и вписали в него новый путь к конфигурационному файлу.</p>
+
+<p> </p>
+
+<pre style="background: #333333; color: #fff;">
+  <code>
+cat /etc/systemd/system/memcached1.service 
+[Unit]
+Description=memcached daemon
+After=network.target
+Documentation=man:memcached(1)
+
+[Service]
+ExecStart=/usr/share/memcached/scripts/systemd-memcached-wrapper /etc/memcached1.conf
+
+[Install]
+WantedBy=multi-user.target
+  </code>
+</pre>
+
+<p> </p>
+
+<p>Затем скопировали файл <code>/etc/memcached.conf</code> в <code>/etc/memcached1.conf</code> и указали в нем новый файл сокета.</p>
+
+<p> </p>
+
+<pre style="background: #333333; color: #fff;">
+  <code>
+systemctl daemon-reload
+systemctl start memcached1 &amp;&amp; systemctl enable memcached1
+  </code>
+</pre>
+
+<p> </p>
+
+<p>Готово. Теперь у нас есть два экземпляра Memcached (memcached и memcached1), с которыми «научим» работать Drupal. Мы используем модуль <a href="https://www.drupal.org/project/memcache_storage">Memcached Storage</a>. Для его настройки изменим блок описания кэша в файле <code>settings.php</code>:</p>
+
+<p> </p>
+
+<pre>
+  <code language="php">
+$conf['cache_backends'][] = 'sites/all/modules/memcache_storage/memcache_storage.inc';
+$conf['cache_default_class'] = 'MemcacheStorage';
+$conf['cache_class_cache_update'] = 'DrupalDatabaseCache';
+$conf['cache_class_cache_form'] = 'DrupalDatabaseCache';
+# Configure Memcache Storage module.
+$conf['memcache_storage_wildcard_invalidate'] = 60 * 60 * 24;
+# Set current extension.
+$conf['memcache_extension'] = 'Memcached';
+# Configure memcached extenstion.
+$conf['memcache_options'] = array(
+  Memcached::OPT_TCP_NODELAY =&gt; TRUE,
+  Memcached::OPT_BUFFER_WRITES =&gt; TRUE,
+  Memcached::OPT_NO_BLOCK =&gt; TRUE
+);
+$conf['memcache_servers'] = array(
+  'unix:///tmp/memcached.sock' =&gt; 'default',
+  'unix:///tmp/memcached1.sock' =&gt; 'page',
+);
+$conf['memcache_bins'] = array(
+  'cache'           =&gt; 'default',
+  'cache_page'      =&gt; 'page',
+);
+# Set custom expiration for cached pages.
+$conf['memcache_storage_page_cache_custom_expiration'] = TRUE;
+$conf['memcache_storage_page_cache_expire'] = 60 * 60 * 24;
+$conf['memcache_storage_key_prefix'] = 'XXXXXXXXXXXX';
+$conf['page_compression'] = 1;
+$conf['page_cache_maximum_age'] = 60 * 60 * 24;
+  </code>
+</pre>
+
+<p> </p>
+
+<p>Отлично! Теперь страницы попадают в кэш, созданный memcached1, а все остальное — в сформированный memcached. Теперь осталось оптимизировать работу обоих экземпляров memcached. При этом следует помнить, что у каждого — свой конфигурационный файл.</p>
+
+<p>Наверняка вы столкнетесь с высоким процентом Wasted. Рассмотрим методику его уменьшения.</p>
+
+<p>У нас есть возможность регулировать размеры чанка. В параметрах Memcached мы выставляем размер начального чанка, т.е. размер чанка, который создается в первом слабе. И выставляем так называемый фактор роста — это соотношение размера большего чанка к меньшему. Т.е. если размер начального чанка составляет 1 кб, а фактор роста — 1.15, то его размер во втором слабе составит 1 кб х 1.15 = 1.15 кб, размер чанка в следующем слабе 1.15 кб х 1.15 = 1,3225 кб и так далее.</p>
+
+<p>Подбор подходящих значений начального чанка и фактора роста является занятием довольно кропотливым. Выставляя сначала одни значения, которые кажутся вам подходящими, через какое-то время следует проверять полученный результат и при необходимости корректировать параметры, выставляя новые значения. У нас ушло около недели, чтобы выбрать оптимальные параметры для интернет-магазина нашего клиента.</p>
+
+<p>Для этого можно воспользоваться тем же PHPMemcachedAdmin. Перейдя по ссылке See this Server Slabs Stats в панели управления, вы увидите текущие состояния слабов, процент Wasted в каждом слабе, количество и размеры используемых чанков, которые хранятся в каждом слабе.</p>
+
+<p> </p>
+
+<figure><img alt="Экран Server Slabs Stats утилиты PHPMemcachedAdmin" src="..\sites\default\files\blog\image14.png"><figcaption><em>Рис. 10. Экран Server Slabs Stats утилиты PHPMemcachedAdmin</em></figcaption></figure><p> </p>
+
+<p>Учтите, что максимальное количество слабов — 63. Поэтому не стоит выставлять слишком маленький фактор роста, это может привести к тому, что у вас будет много слабов с маленьким размером чанков, а под данные большего размера у вас не останется слабов. Для настройки параметров Memcached используются следующие ключи: <em>-m </em>— задает количество оперативной памяти для Memcached, <em>-n </em>— определяет размер начального чанка в байтах, <em>-f </em>— назначает фактор роста. Вот небольшой пример настройки Memcached:</p>
+
+<p> </p>
+
+<pre style="background: #333333; color: #fff;">
+  <code>
+cat memcached1.conf
+
+-m 1536M
+-u www-data
+-s /tmp/memcached1.sock
+-a 0777
+-n 40960
+-f 1.015
+  </code>
+</pre>
+
+<p> </p>
+
+<p>После оптимизации настроек Memcached не стоит думать, что об этом можно забыть. Приложение развивается, объем данных, поступающих на хранение в Memcached может измениться. Мы рекомендуем время от времени проверять состояние Memcached и при необходимости корректировать параметры.</p>
+
+<p>Мы оптимизировали работу Memcached и надеемся, что страницы будут всегда отдаваться из кэша. Чтобы убедиться, что все работает так как должно быть, можно воспользоваться тем же PHPMemcachedAdmin. На главной панели есть секция Hit &amp; Miss Rate с гистограммой, отображающей количество попаданий в кэш. Удобная визуализация, но гораздо полезнее эти данные хранить в системе мониторинга, чтобы отслеживать работу кэша во времени и среагировать в случае изменения работы приложения. Чтобы получить те же данные, можно воспользоваться консольной утилитой netcat (nc), например, так:</p>
+
+<p> </p>
+
+<pre style="background: #333333; color: #fff;">
+  <code>
+echo "stats" | nc -U /tmp/memcached.sock -w 1 | grep get_hit | awk '{print $3}'
+4330
+echo "stats" | nc -U /tmp/memcached.sock -w 1 | grep get_miss | awk '{print $3}'
+41
+  </code>
+</pre>
+
+<p> </p>
+
+<p>Такие несложные ванлайнеры можно запускать с помощью zabbix-агента и хранить результаты на zabbix-сервере.</p>
+
+<h2>Тюнинг производительности базы данных MySQL</h2>
+
+<p>На производительность сайта существенно влияет скорость работы СУБД MySQL. Для оптимизации работы MySQL мы используем разработанный нами сервис MySQLConfigurer: <a href="https://habr.com/ru/post/499410/">https://habr.com/ru/post/499410/</a></p>
+
+<p>Он позволяет ускорить работу MySQL на 30% по сравнению с параметрами MySQL по умолчанию: <a href="https://docs.google.com/spreadsheets/d/1J9FDgBGbvNA356d74WKYBaEzSwK7H-wgjHEQgYh8CMI/edit?usp=sharing">https://docs.google.com/spreadsheets/d/1J9FDgBGbvNA356d74WKYBaEzSwK7H-wgjHEQgYh8CMI/edit?usp=sharing</a></p>
+
+<p>При заходе на закэшированную страницу Drupal делает не более двух запросов к БД. Однако при заходе на незакэшированную страницу или при заходе на сайт авторизованным пользователем количество запросов может быть велико. Нами была проведена оптимизация кэширования на уровне блоков и оптимизация кэша сущностей Drupal в memcached таким образом, чтобы при загрузке страницы карточки товара интернет-магазина не из кэша делалось не более 300 запросов к БД.</p>
+
+<h2>Прогрев и мониторинг кэша страниц</h2>
+
+<p>Картина, полученная в мониторинге, может вам не понравиться, т.к. количество не попаданий в кэш (miss) может быть довольно велико. Причина в методе работы Memcached. Чтобы страница попала в кэш, ее должен кто-то запросить. Очевидно, что главная страница сайта или страницы с популярными товарами быстро попадут в кэш. Но представьте себе, что посетитель интернет-магазина ищет товар не из самой популярной категории. Он будет переходить от страницы к странице, которые генерируются не из кэша, скорость работы сайта конкретно для этого человека окажется слишком низкой, что может оттолкнуть потенциального покупателя. Чтобы максимально увеличить количество попаданий страниц в кэш наша команда реализовала так называемый «прогрев кэша». Он представляет собой текстовый файл со списком url-адресов страниц, которые нужно добавить в кэш, и bash-скрипт, который с помощью утилиты curl обращается к каждой строке, содержащей url-ссылку из этого файла.</p>
+
+<p>Чтобы реализовать этот инструмент, был написан следующий bash-сценарий:</p>
+
+<p> </p>
+
+<pre style="background: #333333; color: #fff;">
+  <code>
+#!/bin/bash
+# файл со списком url
+$SOURCEFILE="urls.txt"
+# функция, которая запрашивает страницу
+function cached_url() {
+time=$(date +"%T")
+curl -LI -w "$time;%{time_total};$1\n" -o /dev/null -s $1
+}
+# запускаем перебор файла и вызываем функцию cached_url для каждого url
+flag=0
+cat $SOURCEFILE | while read url; do
+cached_url $url &amp;
+let "flag = flag + 1"
+if [[ $flag == "4" ]];
+then
+    # мы делаем периодические паузы, чтобы сильно не нагружать сервер
+    wait
+    sleep 1
+    flag=0
+fi
+done  
+  </code>
+</pre>
+
+<p> </p>
+
+<p>Нужно поместить этот скрипт в крон, который нужно запускать каждую ночь после импорта и обновления данных сайта, чтобы обеспечить попадание страниц сайта в кэш еще до того как к ним обратится первый реальный посетитель. При этом необходимо учитывать, что выполняться такой скрипт может достаточно долго, генерируя довольно чувствительную нагрузку на сервер. Поэтому необходимо продумать время его запуска и количество загружаемых url-адресов. В нашем случае мы добавляли только те страницы, которые были либо слишком объёмными, либо слишком редкими для загрузки пользователями.</p>
+
+<p>Еще одним инструментом мониторинга правильной работы кэша являются логи Web-сервера. Дело в том, что Drupal к каждой странице добавляет http заголовок под названием x-drupal-cache, который может иметь только два значения — HIT или MISS. Мы добавили в формат лога nginx переменную <em>$sent_http_x_drupal_cache</em>, чтобы отслеживать эти заголовки и точно понимать, какой запрос был отдан из кэша и была возможность анализировать общую картину.</p>
+
+<p>Мы храним логи nginx в Elasticsearch. Kibana — фронтенд для визуализации логов в Elasticsearch, предоставляет отличные возможности для визуализации, сортировки, выборки и анализа логов. Немного поработав с дашбордами можно получить исчерпывающие графики и гистограммы попадания запросов в кэш.</p>
+
+<figure><p> </p>
+
+<p><img alt="Drupal cache headers proportion" src="..\sites\default\files\blog\image7.png"></p>
+
+<figcaption><em>Рис. 11. Drupal cache headers proportion</em></figcaption></figure><figure><p> </p>
+
+<p><img alt="Drupal cache header graph" src="..\sites\default\files\blog\image11.png"></p>
+
+<figcaption><em>Рис. 12. Drupal cache header graph</em></figcaption></figure><p> </p>
+
+<p>Другой возможностью Kibana является поиск и сортировка логов. Например, вы можете найти все MISS запросы и отсортировать их по количеству вхождений в лог за день или неделю, т.е. составить своеобразный ТОП не кэшируемых запросов — первых претендентов на добавление в прогрев кэша.</p>
+
+<h2>Результаты</h2>
+
+<p>Оптимизация кэширования AJAX-форм позволила нам ускорить обработку запросов на 32%. Благодаря тонкой настройке Memcached и использованию прогрева кэша мы смогли добиться того, что все входные страницы сайта хранятся в оперативной памяти. Проведённые тесты показали среднее время загрузки страниц 48 ms — это пятикратное ускорение! Но для выполнения других операций очень важна общая производительность сервера.</p>
+
+<p>Добившись ускорения работы сайта с помощью оптимизации кода, работы баз данных и прочего сопутствующего ПО, наблюдая за процессом роста числа посетителей и загрузок страниц сайта интернет-магазина, мы подумали, что можем столкнуться с проблемами недостаточной производительности сервера во время пиковых нагрузок. Кроме того, запас производительности сервера будет очень кстати в случае добавления в интернет-магазин новых функций или, например, для добавления новых веб-проектов, расширяющих коммерческие возможности клиента. Поэтому предложили клиенту перевести сайт на более мощное и производительное аппаратное обеспечение.</p>
+
+<p>Перед началом работ наш клиент арендовал виртуальную машину с 4 ядрами cpu 3200 Mhz и 16 Gb оперативной памяти. После анализа работы интернет магазина было принято решение о переносе сайта на выделенный физический сервер со следующей конфигурацией: процессором Intel<sup class="reg">®</sup> Xeon<sup class="reg">®</sup> E-2236 CPU @ 3.40GHz 12 core и 32 Gb оперативной памяти.</p>
+
+<p>Среднее время кэшируемых страниц сайта сократилось до 11.9 ms, а не кэшируемых — снизилось в среднем на 76 %, с 616 мс до 102 мс.</p>
+
+<p>В итоге мы получили следующие результаты мониторинга скорости загрузки страниц сервисом Newrelic:</p>
+
+<p><b>До начала работ</b></p>
+
+<figure><p> </p>
+
+<p><img alt="Время обработки запроса сервером до настройки кэширования" src="..\sites\default\files\blog\image1.png"></p>
+
+<figcaption><em>Рис. 13. Время обработки запроса сервером до настройки кэширования</em></figcaption></figure><p> </p>
+
+<p><b>После окончания работ и перехода на «новый» сервер</b></p>
+
+<figure><p> </p>
+
+<p><img alt="Время обработки запроса сервером после настройки кэширования и переноса сервера на «новое» аппаратное обеспечение уменьшилось с 352 мс до 11.9 мс" src="..\sites\default\files\blog\image2.png"></p>
+
+<figcaption><em>Рис. 14. Время обработки запроса сервером после настройки кэширования и переноса сервера на «новое» аппаратное обеспечение уменьшилось с 352 мс до 11.9 мс</em></figcaption></figure><h2>Заключение</h2>
+
+<p>Разрабатывая веб-проект, необходимо очень внимательно отнестись к качеству кода и стилю программирования. Ошибки, допускаемые при программировании, накапливаются, что весьма негативно сказывается на скорости загрузки страниц у пользователя. А неаккуратный и запутанный стиль программирования не способствует быстрому поиску и устранению этих ошибок.</p>
+
+<p>Кэширование в оперативной памяти сервера страниц сайта, особенно крупного интернет-магазина, заметно повышает скорость обработки запросов и загрузки страниц у пользователя. Но использование программы, обеспечивающей сервис кэширования данных, требует тщательной настройки и хорошего понимания самого процесса. В противном случае это не даст никакого эффекта и окажется совершенно бесполезным, а обработка запросов и выдача результатов пользователю так и будет происходить через жёсткие диски.</p>
+
+<p>Разумеется, требуется тщательный подход к выбору аппаратной конфигурации сервера, на котором базируется веб-хост. Использование более мощного аппаратного обеспечения позволяет быстрее обрабатывать запросы пользователя, имея при этом хороший запас прочности при возникновении пиковых нагрузок, а также резервы для модернизации коммерческого веб-проекта.</p>
+
+<p>Высокая скорость обработки запросов и быстрая загрузка страниц в браузерах пользователя делает пребывание посетителя на сайте наиболее комфортным, увеличивает вероятность совершения сделки, а значит повышает коммерческую эффективность сайта в целом.</p>
+
+<figure><p> </p>
+
+<p><img alt="Результат тестирования сайта клиента инструментом Google PageSpeed Insights после оптимизации. Идеальный результат, полученный специалистами компании ИНИТЛАБ." src="..\sites\default\files\blog\image3.png"></p>
+
+<figcaption><em>Рис. 15. Результат тестирования сайта клиента инструментом Google PageSpeed Insights после оптимизации. Идеальный результат, полученный специалистами компании ИНИТЛАБ.</em></figcaption></figure></div>
+      
+      <div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items">
+              <div class="field--item category-tag"><a href="performance.html" hreflang="ru">performance</a></div>
+              <div class="field--item category-tag"><a href="prodvizenie-saitov.html" hreflang="ru">Продвижение сайтов</a></div>
+              <div class="field--item category-tag"><a href="seo.html" hreflang="ru">SEO</a></div>
+          </div>
+  
+  <div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above">
+    <div class="field--label">Еще по теме</div>
+          <div class="field--items">
+              <div class="field--item"><a href="poiskovaya-optimizaciya-trafik-vyros-v-2-raza.html" hreflang="ru">Поисковая оптимизация. Трафик вырос в 2 раза!</a></div>
+          <div class="field--item"><a href="pravilnye-otvety-servera-dlya-uskoreniya-indeksacii-sayta.html" hreflang="ru">Правильные ответы сервера для ускорения индексации сайта</a></div>
+          <div class="field--item"><a href="uskorenie-raboty-s-udalennymi-saytami-pri-lokalnoy-razrabotke.html" hreflang="ru">Ускорение работы с удаленными сайтами при локальной разработке</a></div>
+              </div>
+      </div>
+
+
+      <div class="field-yashare">
+        <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+        <script src="//yastatic.net/share2/share.js"></script>
+        <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+                <div class="ya-share2" id="block-ya-share2" data-services="vkontakte,facebook,odnoklassniki,gplus,twitter"></div>
+        <a href="..\rss.rss" target="_blank"><span class="iconify" id="block-iconify" data-icon="ion:logo-rss" style="color: #da8c2c;" data-width="29" data-height="29"></span></a>
+              </div>
+  </div>
+
+  <section>
+  
+  
+ 
+      <div class="comment-form-wrapper">
+      <h2 class="block-form-title">Добавить комментарий</h2>
+      <form class="comment-comment-form comment-form antibot" data-drupal-selector="comment-form" data-action="https://drupal-coder.ru/comment/reply/node/253/comment" action="/antibot" method="post" id="comment-form" accept-charset="UTF-8">
+  <noscript>
+  <div class="antibot-no-js antibot-message antibot-message-warning">Вы должны включить JavaScript чтобы использовать эту форму.</div>
+</noscript>
+<div class="form-item js-form-item form-type-textfield js-form-type-textfield form-item-name js-form-item-name form-group">
+      <label for="edit-name" class="control-label">Ваше имя</label>
+  
+  
+  <input placeholder="Ваше имя" data-drupal-selector="edit-name" class="form-text form-control" type="text" id="edit-name" name="name" value="" size="30" maxlength="60">
+
+  
+  
+  </div>
+<input autocomplete="off" data-drupal-selector="form-eydpqnx2gkjvxegtomd88v-nfkeyduclczqigryflbc" type="hidden" name="form_build_id" value="form-EyDpqNX2gKjVxEGtOmd88V_nFkeYduClCZqIGRyfLbc"><input data-drupal-selector="edit-comment-comment-form" type="hidden" name="form_id" value="comment_comment_form"><input data-drupal-selector="edit-antibot-key" type="hidden" name="antibot_key" value=""><div class="field--type-text-long field--name-comment-body field--widget-text-textarea form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-wrapper" id="edit-comment-body-wrapper">      <div class="js-text-format-wrapper text-format-wrapper js-form-item form-item">
+  <div class="form-item js-form-item form-type-textarea js-form-type-textarea form-item-comment-body-0-value js-form-item-comment-body-0-value">
+      <label for="edit-comment-body-0-value" class="control-label js-form-required form-required">Комментарий</label>
+  
+  
+  <div class="form-textarea-wrapper">
+  <textarea class="js-text-full text-full form-textarea required form-control resize-vertical" data-media-embed-host-entity-langcode="ru" data-drupal-selector="edit-comment-body-0-value" id="edit-comment-body-0-value" name="comment_body[0][value]" rows="5" cols="60" placeholder="" required="required" aria-required="true"></textarea>
+</div>
+
+
+  
+  
+  </div>
+<div class="js-filter-wrapper filter-wrapper form-inline form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format" id="edit-comment-body-0-format"><div class="filter-help form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format-help" id="edit-comment-body-0-format-help"><a href="..\filter\tips.html" target="_blank" title="Opens in new window" data-toggle="tooltip" data-drupal-selector="edit-comment-body-0-format-help-about" class="icon-before" id="edit-comment-body-0-format-help-about"><span class="icon glyphicon glyphicon-question-sign" aria-hidden="true"></span>О текстовых форматах</a></div>
+</div>
+
+  </div>
+
+  </div>
+<div data-drupal-selector="edit-actions" class="form-actions form-group js-form-wrapper form-wrapper" id="edit-actions"><button data-drupal-selector="edit-submit" class="button button--primary js-form-submit form-submit btn-primary btn" type="submit" id="edit-submit" name="op" value="Отправить">Отправить</button></div>
+
+</form>
+
+    </div> 
+  
+</section>
+
+
+</article>
+
+
+  </div>
+
+              </section>
+
+                </div>
+  </div>
+
+
+      <footer class="footer" role="contentinfo">
+      <div class=" container">  
+          <div class="region region-footer">
+    <section id="block-footerphone" class="block block-block-content block-block-content07b69e1d-d1db-4e8b-bb14-dc4563ef50bc clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="block-form-contacts">
+  <ul>
+    <li class="block-form-phone"><a href="tel:88002222673">8 800 222-26-73</a></li>
+  </ul>
+</div></div>
+      
+  </section>
+
+<section id="block-copyright" class="block block-block-content block-block-content263c1cb2-b142-4488-af8e-99f92fcb7640 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="social-links">
+  <ul class="social-links-wrapper">
+    <li class="social-links-item"><a target="_blank" href="https://vk.com/initlab"><i class="fab fa-vk"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://teleg.one/initlabbot" title="Свяжитесь с нами"><i class="fab fa-telegram-plane"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.youtube.com/channel/UCyFEbngMB-bK2ulNtd_W43A"><i class="fab fa-youtube"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://zen.yandex.ru/id/6037ce072f500a068c630fec"><img style="width: 16px; margin-bottom: 5px;" src="..\sites\default\files\icons\zen-icon.svg"></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.facebook.com/initlabkr/"><img style="width: 25px; margin-bottom: 5px;" src="..\sites\default\files\icons\icon-facebook-ru-dc.svg"></a></li>
+  </ul>  
+</div>
+
+<p>ООО «Инитлаб», Краснодар, Россия.
+<a class="goal__tel" href="tel:+78002222673">8 800 222-26-73</a><br>
+Drupal является зарегистрированной торговой маркой Dries Buytaert.</p>
+</div>
+      
+  </section>
+
+
+  </div>
+
+      </div>
+    </footer>
+  </div>
+
+  </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"node\/253","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"ru"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"ajaxPageState":{"libraries":"antibot\/antibot.form,bootstrap\/popover,bootstrap\/theme,bootstrap\/tooltip,bootstrap_dc\/bootstrap-scripts,bootstrap_dc\/dc,bootstrap_dc\/global-styling,bootstrap_dc\/seo,colorbox\/default,colorbox_inline\/colorbox_inline,colorbox_load\/colorbox_load,filter\/drupal.filter,google_analytics\/google_analytics,ng_lightbox\/ng_lightbox,system\/base,views\/views.module","theme":"bootstrap_dc","theme_token":null},"ajaxTrustedUrl":{"https:\/\/drupal-coder.ru\/comment\/reply\/node\/253\/comment":true},"colorbox":{"opacity":"0.85","current":"{current} \u0438\u0437 {total}","previous":"\u00ab \u041f\u0440\u0435\u0434\u044b\u0434\u0443\u0449\u0438\u0439","next":"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0439 \u00bb","close":"Close","maxWidth":"98%","maxHeight":"98%","fixed":true,"mobiledetect":true,"mobiledevicewidth":"480px"},"google_analytics":{"account":"UA-87805467-1","trackOutbound":true,"trackMailto":true,"trackTel":true,"trackDownload":true,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip","trackColorbox":true},"bootstrap":{"forms_has_error_value_toggle":1,"modal_animation":1,"modal_backdrop":"true","modal_focus_input":1,"modal_keyboard":1,"modal_select_text":1,"modal_show":1,"modal_size":"","popover_enabled":1,"popover_animation":1,"popover_auto_close":1,"popover_container":"body","popover_content":"","popover_delay":"0","popover_html":0,"popover_placement":"right","popover_selector":"","popover_title":"","popover_trigger":"click","tooltip_enabled":1,"tooltip_animation":1,"tooltip_container":"body","tooltip_delay":"0","tooltip_html":0,"tooltip_placement":"auto left","tooltip_selector":"","tooltip_trigger":"hover"},"antibot":{"forms":{"comment-form":{"id":"comment-form","key":"5D-i6uDYb-gr3-4qQZFOE5ec3-2jdoq6QSz9J26Pt50"}}},"user":{"uid":0,"permissionsHash":"66bb25c0b665c533dd9436d0cd4e99532a723088208bff0a05f2bf113d3703ac"}}</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="..\sites\default\files\js\js_kFVTvKCxW3cWmdAcJABrE5Fa90cD_Go5IxgQw9oFgJ0.js"></script>
+<script src="..\sites\default\files\js\js_d5BC-2wlh3XH4S29GgaPGie7NxyWY0K1EhPg30LGzwA.js"></script>
+<script src="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+<script src="..\sites\default\files\js\js_CNCJCgJnATwdWHfgCEncmZchd6pVQciEiBxkoYS9btY.js"></script>
+<script src="..\sites\default\files\js\js_PZPdVr1rIFXjUagjykPULRTCC8T4ZfIghTqFAwKg6ZI.js"></script>
+
+  </body>
+</html>

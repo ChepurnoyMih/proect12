@@ -1,0 +1,626 @@
+﻿<!DOCTYPE html>
+<html lang="ru" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
+  <head>
+    <meta charset="utf-8">
+<noscript><style>form.antibot * :not(.antibot-message) { display: none !important; }</style>
+</noscript><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-87805467-1"></script>
+<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag("js", new Date());gtag("set", "developer_id.dMDhkMT", true);gtag("config", "UA-87805467-1", {"groups":"default","anonymize_ip":true,"page_placeholder":"PLACEHOLDER_page_path","allow_ad_personalization_signals":false});</script>
+<meta http-equiv="content-language" content="ru">
+<meta name="description" content="В начале сентября ветки 8.x-2.x и 7.x-2.x, разрабатываемого мною модуля CDEK API, добрались до полноценных релизов - все задуманные фичи реализованы и протестированы. В данной статье кратко расскажу о том, какие у модуля возможности и как их использовать.">
+<meta name="keywords" content="создание сайтов на drupal, разработка Drupal-сайтов">
+<meta property="og:type" content="blog">
+<meta property="og:url" content="https://drupal-coder.ru/blog/drupal-modul-cdek-api">
+<meta property="og:title" content="Drupal: Модуль CDEK API">
+<meta property="og:description" content="В начале сентября ветки 8.x-2.x и 7.x-2.x, разрабатываемого мною модуля CDEK API, добрались до полноценных релизов - все задуманные фичи реализованы и протестированы. В данной статье кратко расскажу о том, какие у модуля возможности и как их использовать.">
+<meta name="Generator" content="Drupal 9 (https://www.drupal.org)">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="..\sites\default\files\android-chrome-256x256.png" type="image/png">
+<link rel="alternate" hreflang="ru" href="drupal-modul-cdek-api.html">
+<link rel="canonical" href="drupal-modul-cdek-api.html">
+<link rel="shortlink" href="drupal-modul-cdek-api.html">
+
+    <title>Drupal: Модуль CDEK API | drupal-coder.ru</title>
+    <link rel="stylesheet" media="all" href="..\sites\default\files\css\css_y8CdfJDNR-tG0CPnRDokR6Eh9OUJplbHLVQ9A8myecQ.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_tFXlTqkfn6J-Qtpt9xbB8JudSaJfOGxRSmpeidDAzPE.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_l8G4voaHcf64TEU2r2Yyz9f53nJ0vU-50MrP1M5xhmk.css">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/@unicorn-fail/drupal-bootstrap-styles@0.0.2/dist/3.4.0/8.x-3.x/drupal-bootstrap.min.css" integrity="sha512-tGFFYdzcicBwsd5EPO92iUIytu9UkQR3tLMbORL9sfi/WswiHkA1O3ri9yHW+5dXk18Rd+pluMeDBrPKSwNCvw==" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_ULmc1mwKFKQRQmxYsjphW6dsh2g6jX4LXXBAtdO0vIE.css">
+
+    
+    <meta name="cmsmagazine" content="3d47b05beba40f3816d9741ee18c01a5">
+
+    
+    
+           <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P4SXQSG');</script>
+<!-- End Google Tag Manager -->
+    
+    
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Bold.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Medium.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Regular.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/fontawesome/webfonts/fa-brands-400.woff2" crossorigin="anonymous">
+    <link rel='manifest' href='..\manifest.json'>
+    <meta name="format-detection" content="telephone=no">
+
+          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MXPCP8Q"></script>
+      </head>
+  <body class="page-node-265 path-node page-node-type-blog has-glyphicons">
+
+                  <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4SXQSG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+      
+          
+
+    <a href="#main-content" class="visually-hidden focusable skip-link">
+      Перейти к основному содержанию
+    </a>
+    
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
+    
+      
+          <header class="navbar navbar-default" id="navbar" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+            <div class="region region-navigation">
+    <section id="block-pikselvkskript" class="block block-block-content block-block-contentbf8d9e8f-617c-4e8f-8501-7586be8255e0 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script>(window.Image ? (new Image()) : document.createElement('img')).src = 'https://vk.com/rtrg?p=VK-RTRG-238064-1VWIQ';</script></div>
+      
+  </section>
+
+<section id="block-globalsitetagadwords" class="block block-block-content block-block-content27617f8e-58d1-4a2a-9f23-31eab95a43c8 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><!-- Global site tag (gtag.js) - AdWords: 948581894 -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=AW-948581894"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-948581894');
+</script></div>
+      
+  </section>
+
+            <a class="logo navbar-btn pull-left" href="..\index.htm" title="Главная" rel="home">
+            <img src="..\themes\custom\bootstrap_dc\images\logo-initlab.svg" alt="Главная" width="156" height="31">
+        </a>
+            
+  </div>
+
+        </div>
+                          <div class="navbar-collapse-wrapper">
+
+            <div class="navbar-collapse collapse">
+                <div class="region region-navigation-collapsible">
+    <nav role="navigation" aria-labelledby="block-bootstrap-dc-main-menu-menu" id="block-bootstrap-dc-main-menu">
+            
+  <h2 class="visually-hidden" id="block-bootstrap-dc-main-menu-menu">Основная навигация</h2>
+  
+
+        
+              <ul class="menu nav navbar-nav">
+                      <li><a href="..\support.html" data-drupal-link-system-path="node/1">Поддержка Drupal</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-admin.html" class="dropdown-toggle" data-toggle="dropdown">DevOps <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\import-migrate-upgrade.html" data-drupal-link-system-path="node/4">Миграция</a>
+                  </li>
+                  <li><a href="..\backup.html" data-drupal-link-system-path="node/3">Бэкапы</a>
+                  </li>
+                  <li><a href="..\drupal-security-audit.html" data-drupal-link-system-path="node/9">Аудит безопасности</a>
+                  </li>
+                  <li><a href="..\boost-drupal.html" data-drupal-link-system-path="node/5">Оптимизация скорости</a>
+                  </li>
+                  <li><a href="..\ssl.html" data-drupal-link-system-path="node/99">Переезд на https</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\blog.html" data-drupal-link-system-path="blog">Блог</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-seo.html" class="dropdown-toggle" data-toggle="dropdown">Продвижение <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\drupal-seo\context.html" data-drupal-link-system-path="node/111">Реклама</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li class="expanded dropdown"><a href="..\team.html" class="dropdown-toggle" data-toggle="dropdown">О нас <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\team.html#team" data-drupal-link-system-path="team">Команда</a>
+                  </li>
+                  <li><a href="..\drupalgive.html" data-drupal-link-system-path="node/135">Drupalgive</a>
+                  </li>
+                  <li><a href="..\drupal-courses.html" data-drupal-link-system-path="node/10">Курсы Drupal</a>
+                  </li>
+                  <li><a href="..\vacancies.html" data-drupal-link-system-path="vacancies">Вакансии</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\happy-customers.html" data-drupal-link-system-path="happy-customers">Проекты</a>
+                  </li>
+                  <li><a href="..\contacts.html" data-drupal-link-system-path="node/86">Контакты</a>
+                  </li>
+              </ul>
+      
+
+
+  </nav>
+
+  </div>
+
+            </div>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+              </div>
+    </header>
+  
+
+      <div class="page-header-big" role="heading">
+        <div class="container">
+            <div class="region region-header">
+        <h1 class="page-header">
+<span>Drupal: Модуль CDEK API</span>
+</h1>
+
+<section class="views-element-container block block-views block-views-blockuser-block-1 clearfix" id="block-views-block-user-block-1">
+  
+    
+
+      <div class="form-group"><div class="view view-user view-id-user view-display-id-block_1 js-view-dom-id-1ca6d9c8b8d306c27ef444a07db437faa05eb1e2c3d921cd87b75495a2f4a746">
+  
+    
+      
+      <div class="view-content">
+          <div class="views-row"><div class="views-field views-field-user-picture"><div class="field-content">  <img loading="lazy" src="..\sites\default\files\styles\avatar_mini\public\pictures\2019-12\avatar.jpg?itok=fGoezcsO" width="45" height="45" alt="" typeof="foaf:Image" class="img-responsive">
+
+
+</div></div><div class="views-field views-field-field-name"><div class="field-content">Тымчук Андрей</div></div></div>
+
+    </div>
+  
+          </div>
+</div>
+
+  </section>
+
+<section id="block-yashare" class="block-yashare block block-block-content block-block-contentee72d8fb-02e9-4ef6-8e71-0df16bee86a9 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+<script src="//yastatic.net/share2/share.js"></script>
+<div class="ya-share2" data-services="vkontakte,odnoklassniki,gplus,twitter"></div></div>
+      
+  </section>
+
+
+  </div>
+
+        </div>
+      
+    </div>
+  
+
+<div class="main-wrapper">
+  <div role="main" class="main-container container js-quickedit-main-content">
+    <div class="row">
+
+
+
+            
+                  <section class="col-sm-12">
+
+                
+                
+                
+                                      
+                  
+                          <a id="main-content"></a>
+            <div class="region region-content">
+        <ol class="breadcrumb">
+          <li>
+                  <a href="..\blog.html">Блог</a>
+              </li>
+          <li class="active">
+                  Drupal: Модуль CDEK API
+              </li>
+      </ol>
+
+<div data-drupal-messages-fallback="" class="hidden"></div>
+  <article data-history-node-id="265" role="article" about="https://drupal-coder.ru/blog/drupal-modul-cdek-api" class="blog is-promoted full clearfix">
+
+  
+    
+
+  
+
+  <div class="content">
+    
+    <div id="field-language-display"><div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group">
+      <label class="control-label">Language</label>
+  
+  
+  Russian
+
+  
+  
+  </div>
+</div>
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><p>В начале сентября ветки 8.x-2.x и 7.x-2.x, разрабатываемого мною модуля <a href="https://www.drupal.org/project/cdek_api">CDEK API</a>, добрались до полноценных релизов - все задуманные фичи реализованы и протестированы. В данной статье кратко расскажу о том, какие у модуля возможности и как их использовать.</p>
+
+<p>Напомню, что модуль позволяет взаимодействовать с API сервиса доставки <a href="https://cdek.ru">СДЭК</a> и будет полезен исключительно для разработчиков, так как сам по себе он ничего не делает, не дополняет, не расширяет.</p>
+
+<p>Главное отличие от веток 8.x-1.x и 7.x-1.x — это использование PHP библиотеки <a href="https://github.com/sanmai/cdek-sdk">CDEK SDK</a> для взаимодействия с API. Ставится библиотека с помощью Composer, для версии в Drupal 7 потребуется модуль Composer Manager.</p>
+
+<p>Ветка 8.x-2.x потребует Drupal версии 8.8 или выше (Drupal 9 тоже поддерживается). Для ветки 7.x-2.x потребуется PHP версии 7.0 или выше.</p>
+
+<h2>Настройка</h2>
+
+<p>Страница настроек модуля позволяет:</p>
+
+<ul><li>Задать учётные данные для выполнения авторизованных запросов к API;</li>
+	<li>Включить тестовый режим (все запросы будут отправляться на тестовый сервер);</li>
+	<li>Задать таймаут для запросов к API;</li>
+	<li>Включить кэширование данных (список ПВЗ);</li>
+	<li>Задать время хранения кэша.</li>
+</ul><p><img alt="Настройки" data-entity-type="file" data-entity-uuid="eb0c0f34-ad15-4998-bfb5-48e7d945583a" src="..\sites\default\files\inline-images\settings2.png" width="600" height="619" loading="lazy"></p>
+
+<h2>Базовое использование</h2>
+
+<p>Основа модуля — это сервис <code>cdek_api</code>. Рассмотрим ряд примеров:</p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$client</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">service</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'cdek_api'</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getCdekClient</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p>Получаем объект клиента с учётом настроек. Далее с помощью клиента можно выполнить любой запрос, который описан в <a href="https://cdek-sdk.readthedocs.io">документации</a>.</p>
+
+<hr><pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$points</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">service</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'cdek_api'</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getPickupPoints</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p>Получаем список всех ПВЗ (пункт выдачи заказа). Если кэширование включено, то полученные данные будут сохранены в отдельном кэш-бине. Кроме того, независимо от настроек, все данные сохраняются в статическом кэше. Следует отметить, что полный список имеет большой объём. В случае хранения кэша в базе данных и при возникновении ошибки при его записи следует увеличить значение параметра <code>innodb_log_file_size</code>.</p>
+
+<hr><pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$request</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> PvzListRequest<span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$request</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">setCityId</span><span style="color: #009900;">(</span><span style="color: #cc66cc;">435</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$request</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">setCash</span><span style="color: #009900;">(</span><span style="color: #009900; font-weight: bold;">TRUE</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$request</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">setDressingRoom</span><span style="color: #009900;">(</span><span style="color: #009900; font-weight: bold;">TRUE</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+ 
+<span style="color: #000088;">$points</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">service</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'cdek_api'</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getPickupPoints</span><span style="color: #009900;">(</span><span style="color: #000088;">$request</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p>При запросе ПВЗ можно использовать фильтры. Для этого нужно в метод передать объект запроса с нужными параметрами. Списки с использованием фильтров также кэшируются.</p>
+
+<hr><pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$point</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">service</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'cdek_api'</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getPickupPoint</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'KSD11'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p>Получаем конкретный ПВЗ по его коду.</p>
+
+<hr><pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$service</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">service</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'cdek_api'</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+ 
+<span style="color: #000088;">$countries</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$service</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getCountries</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$regions</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$service</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getRegions</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$cities</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$service</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getCities</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p>Получаем список доступных стран, регионов и городов. Данные списки строятся на основе списка ПВЗ, поэтому сами не кэшируются.</p>
+
+<hr><pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$request</span> <span style="color: #339933;">=</span> <span style="color: #000000; font-weight: bold;">new</span> PvzListRequest<span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+<span style="color: #000088;">$request</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">setCountryId</span><span style="color: #009900;">(</span><span style="color: #cc66cc;">1</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+ 
+<span style="color: #000088;">$cities</span> <span style="color: #339933;">=</span> \Drupal<span style="color: #339933;">::</span><span style="color: #004000;">service</span><span style="color: #009900;">(</span><span style="color: #0000ff;">'cdek_api'</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getCities</span><span style="color: #009900;">(</span><span style="color: #000088;">$request</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p>Фильтры также доступны.</p>
+
+<hr><p>Если необходимо внести изменения в список ПВЗ, то нужно создать обработчик события <code>cdek_api.pickup_points</code>. Например, в указанном ниже примере название ПВЗ заменяется на его адрес.</p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+ 
+<span style="color: #000000; font-weight: bold;">namespace</span> Drupal\example\EventSubscriber<span style="color: #339933;">;</span>
+ 
+<span style="color: #000000; font-weight: bold;">use</span> Symfony\Component\EventDispatcher\EventSubscriberInterface<span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">use</span> Drupal\cdek_api\Event\PickupPointsEvent<span style="color: #339933;">;</span>
+<span style="color: #000000; font-weight: bold;">use</span> Drupal\cdek_api\Event\CdekApiEvents<span style="color: #339933;">;</span>
+ 
+<span style="color: #009933; font-style: italic;">/**
+ * An example event subscriber.
+ */</span>
+<span style="color: #000000; font-weight: bold;">class</span> ExampleEventSubscriber <span style="color: #000000; font-weight: bold;">implements</span> EventSubscriberInterface <span style="color: #009900;">{</span>
+ 
+  <span style="color: #009933; font-style: italic;">/**
+   * {@inheritdoc}
+   */</span>
+  <span style="color: #000000; font-weight: bold;">public</span> static <span style="color: #000000; font-weight: bold;">function</span> getSubscribedEvents<span style="color: #009900;">(</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span>
+    <span style="color: #b1b100;">return</span> <span style="color: #009900;">[</span>
+      CdekApiEvents<span style="color: #339933;">::</span><span style="color: #004000;">PICKUP_POINTS</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'alterPickupPoints'</span><span style="color: #339933;">,</span>
+    <span style="color: #009900;">]</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">}</span>
+ 
+  <span style="color: #009933; font-style: italic;">/**
+   * React to a list of pickup points being loaded.
+   *
+   * @param \Drupal\cdek_api\Event\PickupPointsEvent $event
+   *   The pickup points event.
+   */</span>
+  <span style="color: #000000; font-weight: bold;">public</span> <span style="color: #000000; font-weight: bold;">function</span> alterPickupPoints<span style="color: #009900;">(</span>PickupPointsEvent <span style="color: #000088;">$event</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span>
+    <span style="color: #000088;">$points</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$event</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getPoints</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+ 
+    <span style="color: #b1b100;">foreach</span> <span style="color: #009900;">(</span><span style="color: #000088;">$points</span> <span style="color: #b1b100;">as</span> <span style="color: #000088;">$point</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span>
+      <span style="color: #000088;">$point</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">Name</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$point</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">Address</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">}</span>
+    <span style="color: #000088;">$event</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">setPoints</span><span style="color: #009900;">(</span><span style="color: #000088;">$points</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">}</span>
+ 
+<span style="color: #009900;">}</span></pre></div></pre>
+
+<p>В Drupal 7 сервисов и событий нет, поэтому код для 7.x-2.x будет отличаться.</p>
+
+<p>Нужно обращаться напрямую к классу…</p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$client</span> <span style="color: #339933;">=</span> CdekApi<span style="color: #339933;">::</span><span style="color: #004000;">getInstance</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">getCdekClient</span><span style="color: #009900;">(</span><span style="color: #009900;">)</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p>…и вместо обработки события использовать реализацию хука <code>hook_cdek_api_pickup_points_alter()</code>.</p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #009933; font-style: italic;">/**
+ * Implements hook_cdek_api_pickup_points_alter().
+ */</span>
+<span style="color: #000000; font-weight: bold;">function</span> example_cdek_api_pickup_points_alter<span style="color: #009900;">(</span><span style="color: #990000;">array</span> <span style="color: #339933;">&amp;</span><span style="color: #000088;">$points</span><span style="color: #339933;">,</span> <span style="color: #990000;">array</span> <span style="color: #000088;">$params</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span>
+  <span style="color: #b1b100;">foreach</span> <span style="color: #009900;">(</span><span style="color: #000088;">$points</span> <span style="color: #b1b100;">as</span> <span style="color: #000088;">$point</span><span style="color: #009900;">)</span> <span style="color: #009900;">{</span>
+    <span style="color: #000088;">$point</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">Name</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$point</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">Address</span><span style="color: #339933;">;</span>
+  <span style="color: #009900;">}</span>
+<span style="color: #009900;">}</span></pre></div></pre>
+
+<h2>Элемент формы для выбора ПВЗ</h2>
+
+<p>Модуль предоставляет два элемента формы, первый из которых — это элемент для иерархического выбора ПВЗ относительно выбранных значений страны/региона/города.</p>
+
+<p>Чтобы использовать элемент, достаточно внутри формы указать следующий код:</p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$form</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'point'</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #009900;">[</span>
+  <span style="color: #0000ff;">'#type'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'cdek_select'</span><span style="color: #339933;">,</span>
+<span style="color: #009900;">]</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p><img alt="Элемент формы для выбора ПВЗ" data-entity-type="file" data-entity-uuid="c9d6cf76-295d-49c8-9e4a-789859d7081f" src="..\sites\default\files\inline-images\form-element-1.png" width="300" height="229" loading="lazy"></p>
+
+<p>Можно использовать стандартные свойства, применимые к стандартным элементам — <code>#title</code>, <code>#description</code>, <code>#required</code> и другие. Значением элемента при сабмите формы будет код выбранного ПВЗ. Можно также указывать значение по умолчанию с помощью <code>#default_value</code>, которое должно являться кодом существующего ПВЗ.</p>
+
+<p>Кроме того, для изменения поведения и/или отображения элемента можно использовать дополнительное свойство <code>#cdek_request</code>, в котором нужно будет передать объект запроса аналогично тому как это используется в методе <code>getPickupPoints()</code> для фильтрации списка. Таким образом, можно изменять список ПВЗ, который будет доступен для выбора.</p>
+
+<p>При этом, если в запросе указан фильтр по городу, то не будут отображаться элементы для выбора города, региона и страны. Если указан фильтр по региону, то не будут отображаться элементы для выбора региона и страны. Если указан фильтр по стране, то не будет отображаться элемент для выбора страны.</p>
+
+<p>По умолчанию элементы для выбора страны/региона/города/пункта являются выпадающими списками. Их отображение можно кастомизировать с помощью прямого указания их структуры.</p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$form</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'point'</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #009900;">[</span>
+  <span style="color: #0000ff;">'#type'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'cdek_select'</span><span style="color: #339933;">,</span>
+  <span style="color: #0000ff;">'country'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900;">[</span>
+    <span style="color: #0000ff;">'#type'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'radios'</span><span style="color: #339933;">,</span>
+    <span style="color: #0000ff;">'#title'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">NULL</span><span style="color: #339933;">,</span>
+  <span style="color: #009900;">]</span><span style="color: #339933;">,</span>
+  <span style="color: #0000ff;">'region'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900;">[</span>
+    <span style="color: #0000ff;">'#access'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900; font-weight: bold;">FALSE</span><span style="color: #339933;">,</span>
+  <span style="color: #009900;">]</span><span style="color: #339933;">,</span>
+<span style="color: #009900;">]</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<h2>Виджет</h2>
+
+<p>Второй элемент представляет собой интеграцию с виджетом ПВЗ (<a href="https://widget.cdek.ru">https://widget.cdek.ru</a>). На сайте СДЭК указано следующее описание виджета:</p>
+
+<blockquote>
+<p>Виджет предназначен для отображения актуальной информации о пунктах самовывоза СДЭК с привязкой их к карте, возможностью расчета доставки (сроков и стоимости) для указанных габаритов товаров. Виджет может быть отображен как статичный элемент на странице, так и всплывающим окном.</p>
+</blockquote>
+
+<p>Элемент может быть использован как внутри формы, так и внутри обычного рендер массива. Если элемент используется в контексте формы, то он предназначен для выбора ПВЗ и панель с выбором варианта доставки будет скрыта. Выбранный ПВЗ будет отображаться в дочернем элементе над виджетом. Если элемент используется вне формы, то виджет считается информационным и выбор ПВЗ в нём запрещён.</p>
+
+<p>В рамках одной страницы рекомендуется использовать не более одного виджета, в противном случае поведение не известно. Чтобы использовать элемент, достаточно указать следующий код:</p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$form</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'point'</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #009900;">[</span>
+  <span style="color: #0000ff;">'#type'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'cdek_widget'</span><span style="color: #339933;">,</span>
+  <span style="color: #0000ff;">'#cdek_widget_options'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900;">[</span>
+    <span style="color: #0000ff;">'defaultCity'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'Краснодар'</span><span style="color: #339933;">,</span>
+    <span style="color: #0000ff;">'cityFrom'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'Москва'</span><span style="color: #339933;">,</span>
+  <span style="color: #009900;">]</span><span style="color: #339933;">,</span>
+<span style="color: #009900;">]</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p><img alt="Виджет" data-entity-type="file" data-entity-uuid="cbc34fbf-5925-4048-b752-e95605f092e5" src="..\sites\default\files\inline-images\form-element3.png" width="800" height="538" loading="lazy"></p>
+
+<p>В свойстве <code>#cdek_widget_options</code> указывается массив настроек виджета. Подробнее о настройках можно прочитать в документации виджета. Настройки <code>link</code> и <code>servicepath</code> указывать бессмысленно, так как они будут перезаписаны. Если указать настройку <code>popup</code> со значением TRUE, то виджет будет отображён в виде всплывающего окна.</p>
+
+<p>К элементу применимы стандартные свойства элементов формы. Значение по умолчанию должно являться кодом существующего ПВЗ.</p>
+
+<p>С помощью свойства <code>#cdek_widget_popup_title</code> можно задать текст ссылки, нажатие которой приводит к открытию виджета в режиме всплывающего окна.</p>
+
+<p>Свойство <code>#cdek_widget_tariff_list</code> предназначено для указания списка тарифов, который будет использован контроллером виджета при расчёте стоимости для каждого из типов доставки (<strong>courier</strong> или <strong>pickup</strong>). Если список тарифов не указан, то для расчёта будет использован тариф под номером <strong>1</strong>. Для того, чтобы контроллер мог получить доступ к тарифам, список сохраняется в кэше.</p>
+
+<pre>
+<div class="geshifilter"><pre class="php geshifilter-php" style="font-family:monospace;"><span style="color: #000088;">$form</span><span style="color: #009900;">[</span><span style="color: #0000ff;">'point'</span><span style="color: #009900;">]</span> <span style="color: #339933;">=</span> <span style="color: #009900;">[</span>
+  <span style="color: #0000ff;">'#type'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'cdek_widget'</span><span style="color: #339933;">,</span>
+  <span style="color: #0000ff;">'#cdek_widget_options'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900;">[</span>
+    <span style="color: #0000ff;">'defaultCity'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'Краснодар'</span><span style="color: #339933;">,</span>
+    <span style="color: #0000ff;">'cityFrom'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #0000ff;">'Москва'</span><span style="color: #339933;">,</span>
+  <span style="color: #009900;">]</span><span style="color: #339933;">,</span>
+  <span style="color: #0000ff;">'#cdek_widget_tariff_list'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900;">[</span>
+    <span style="color: #0000ff;">'courier'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900;">[</span><span style="color: #cc66cc;">233</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">137</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">139</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">16</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">18</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">11</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">1</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">3</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">61</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">60</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">59</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">58</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">57</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">83</span><span style="color: #009900;">]</span><span style="color: #339933;">,</span>
+    <span style="color: #0000ff;">'pickup'</span> <span style="color: #339933;">=&gt;</span> <span style="color: #009900;">[</span><span style="color: #cc66cc;">234</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">136</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">138</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">15</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">17</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">10</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">12</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">5</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">62</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">63</span><span style="color: #009900;">]</span><span style="color: #339933;">,</span>
+  <span style="color: #009900;">]</span><span style="color: #339933;">,</span>
+<span style="color: #009900;">]</span><span style="color: #339933;">;</span></pre></div></pre>
+
+<p>На данный момент модуль не имеет перевода на русский язык, поэтому все обозначения и описания внутри виджета отображаются на английском языке. Виджет можно локализовать вручную - все строки для перевода находятся в методе <code>WidgetController::doActionLang()</code>. В случае Drupal 7 - это функция <code>cdek_api_widget_action_lang()</code>.</p>
+
+<p>Элемент виджета также предоставляет API со стороны JavaScript. В процессе работы виджета возникают события: <code>cdekApiWidgetReady</code>, <code>cdekApiWidgetDeliveryCalculated</code>, <code>cdekApiWidgetPointSelected</code> и <code>cdekApiWidgetCourierSelected</code>. Они соответствуют событиям <code>onReady</code>, <code>onCalculate</code>, <code>onChoose</code> и <code>onChooseProfile</code>, которые описаны в документации виджета. Отличие заключается в отсутствии привязки к объекту виджета, так как событие вызывается для оболочки элемента. Соответственно, подписаться на событие можно с помощью стандартных средств jQuery.</p></div>
+      
+      <div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items">
+              <div class="field--item category-tag"><a href="drupal.html" hreflang="ru">Drupal</a></div>
+              <div class="field--item category-tag"><a href="drupal-7.html" hreflang="ru">Drupal 7</a></div>
+              <div class="field--item category-tag"><a href="drupal-8.html" hreflang="ru">Drupal 8</a></div>
+          </div>
+  
+  <div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above">
+    <div class="field--label">Еще по теме</div>
+          <div class="field--items">
+              <div class="field--item"><a href="modul-performance-monitor-ocenka-proizvoditelnosti-sistemnogo-okruzheniya.html" hreflang="ru">Модуль Performance Monitor - оценка производительности системного окружения</a></div>
+          <div class="field--item"><a href="moy-dostupnyy-vsem-sekretnyy-drupal-modul-dlya-uluchsheniya-seo-ustanovili-bolee-tysyachi-raz.html" hreflang="ru">Мой доступный всем секретный Drupal-модуль для улучшения SEO установили более тысячи раз</a></div>
+          <div class="field--item"><a href="seo-prodvizhenie-internet-magazinov-na-drupal-sozdali-modul-kotoryy-prevraschaet-svoystva.html" hreflang="ru">SEO-продвижение интернет-магазинов на Drupal: создали модуль, который превращает свойства товаров в осмысленные заголовки</a></div>
+              </div>
+      </div>
+
+
+      <div class="field-yashare">
+        <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+        <script src="//yastatic.net/share2/share.js"></script>
+        <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+                <div class="ya-share2" id="block-ya-share2" data-services="vkontakte,facebook,odnoklassniki,gplus,twitter"></div>
+        <a href="..\rss.rss" target="_blank"><span class="iconify" id="block-iconify" data-icon="ion:logo-rss" style="color: #da8c2c;" data-width="29" data-height="29"></span></a>
+              </div>
+  </div>
+
+  <section>
+  
+  
+ 
+      <div class="comment-form-wrapper">
+      <h2 class="block-form-title">Добавить комментарий</h2>
+      <form class="comment-comment-form comment-form antibot" data-drupal-selector="comment-form" data-action="https://drupal-coder.ru/comment/reply/node/265/comment" action="/antibot" method="post" id="comment-form" accept-charset="UTF-8">
+  <noscript>
+  <div class="antibot-no-js antibot-message antibot-message-warning">Вы должны включить JavaScript чтобы использовать эту форму.</div>
+</noscript>
+<div class="form-item js-form-item form-type-textfield js-form-type-textfield form-item-name js-form-item-name form-group">
+      <label for="edit-name" class="control-label">Ваше имя</label>
+  
+  
+  <input placeholder="Ваше имя" data-drupal-selector="edit-name" class="form-text form-control" type="text" id="edit-name" name="name" value="" size="30" maxlength="60">
+
+  
+  
+  </div>
+<input autocomplete="off" data-drupal-selector="form-tfzeqkeracslu-yuruzkqjhp9lq1ehy9t7esa-axjyg" type="hidden" name="form_build_id" value="form-tfZEQKerACsLU-YuRuZKqjHp9lq1ehY9t7esa-aXjYg"><input data-drupal-selector="edit-comment-comment-form" type="hidden" name="form_id" value="comment_comment_form"><input data-drupal-selector="edit-antibot-key" type="hidden" name="antibot_key" value=""><div class="field--type-text-long field--name-comment-body field--widget-text-textarea form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-wrapper" id="edit-comment-body-wrapper">      <div class="js-text-format-wrapper text-format-wrapper js-form-item form-item">
+  <div class="form-item js-form-item form-type-textarea js-form-type-textarea form-item-comment-body-0-value js-form-item-comment-body-0-value">
+      <label for="edit-comment-body-0-value" class="control-label js-form-required form-required">Комментарий</label>
+  
+  
+  <div class="form-textarea-wrapper">
+  <textarea class="js-text-full text-full form-textarea required form-control resize-vertical" data-media-embed-host-entity-langcode="ru" data-drupal-selector="edit-comment-body-0-value" id="edit-comment-body-0-value" name="comment_body[0][value]" rows="5" cols="60" placeholder="" required="required" aria-required="true"></textarea>
+</div>
+
+
+  
+  
+  </div>
+<div class="js-filter-wrapper filter-wrapper form-inline form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format" id="edit-comment-body-0-format"><div class="filter-help form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format-help" id="edit-comment-body-0-format-help"><a href="..\filter\tips.html" target="_blank" title="Opens in new window" data-toggle="tooltip" data-drupal-selector="edit-comment-body-0-format-help-about" class="icon-before" id="edit-comment-body-0-format-help-about"><span class="icon glyphicon glyphicon-question-sign" aria-hidden="true"></span>О текстовых форматах</a></div>
+</div>
+
+  </div>
+
+  </div>
+<div data-drupal-selector="edit-actions" class="form-actions form-group js-form-wrapper form-wrapper" id="edit-actions"><button data-drupal-selector="edit-submit" class="button button--primary js-form-submit form-submit btn-primary btn" type="submit" id="edit-submit" name="op" value="Отправить">Отправить</button></div>
+
+</form>
+
+    </div> 
+  
+</section>
+
+
+</article>
+
+
+  </div>
+
+              </section>
+
+                </div>
+  </div>
+
+
+      <footer class="footer" role="contentinfo">
+      <div class=" container">  
+          <div class="region region-footer">
+    <section id="block-footerphone" class="block block-block-content block-block-content07b69e1d-d1db-4e8b-bb14-dc4563ef50bc clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="block-form-contacts">
+  <ul>
+    <li class="block-form-phone"><a href="tel:88002222673">8 800 222-26-73</a></li>
+  </ul>
+</div></div>
+      
+  </section>
+
+<section id="block-copyright" class="block block-block-content block-block-content263c1cb2-b142-4488-af8e-99f92fcb7640 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="social-links">
+  <ul class="social-links-wrapper">
+    <li class="social-links-item"><a target="_blank" href="https://vk.com/initlab"><i class="fab fa-vk"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://teleg.one/initlabbot" title="Свяжитесь с нами"><i class="fab fa-telegram-plane"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.youtube.com/channel/UCyFEbngMB-bK2ulNtd_W43A"><i class="fab fa-youtube"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://zen.yandex.ru/id/6037ce072f500a068c630fec"><img style="width: 16px; margin-bottom: 5px;" src="..\sites\default\files\icons\zen-icon.svg"></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.facebook.com/initlabkr/"><img style="width: 25px; margin-bottom: 5px;" src="..\sites\default\files\icons\icon-facebook-ru-dc.svg"></a></li>
+  </ul>  
+</div>
+
+<p>ООО «Инитлаб», Краснодар, Россия.
+<a class="goal__tel" href="tel:+78002222673">8 800 222-26-73</a><br>
+Drupal является зарегистрированной торговой маркой Dries Buytaert.</p>
+</div>
+      
+  </section>
+
+
+  </div>
+
+      </div>
+    </footer>
+  </div>
+
+  </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"node\/265","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"ru"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"ajaxPageState":{"libraries":"antibot\/antibot.form,bootstrap\/popover,bootstrap\/theme,bootstrap\/tooltip,bootstrap_dc\/bootstrap-scripts,bootstrap_dc\/dc,bootstrap_dc\/global-styling,bootstrap_dc\/seo,colorbox\/default,colorbox_inline\/colorbox_inline,colorbox_load\/colorbox_load,filter\/drupal.filter,geshifilter\/geshifilter,google_analytics\/google_analytics,ng_lightbox\/ng_lightbox,system\/base,views\/views.module","theme":"bootstrap_dc","theme_token":null},"ajaxTrustedUrl":{"https:\/\/drupal-coder.ru\/comment\/reply\/node\/265\/comment":true},"colorbox":{"opacity":"0.85","current":"{current} \u0438\u0437 {total}","previous":"\u00ab \u041f\u0440\u0435\u0434\u044b\u0434\u0443\u0449\u0438\u0439","next":"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0439 \u00bb","close":"Close","maxWidth":"98%","maxHeight":"98%","fixed":true,"mobiledetect":true,"mobiledevicewidth":"480px"},"google_analytics":{"account":"UA-87805467-1","trackOutbound":true,"trackMailto":true,"trackTel":true,"trackDownload":true,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip","trackColorbox":true},"bootstrap":{"forms_has_error_value_toggle":1,"modal_animation":1,"modal_backdrop":"true","modal_focus_input":1,"modal_keyboard":1,"modal_select_text":1,"modal_show":1,"modal_size":"","popover_enabled":1,"popover_animation":1,"popover_auto_close":1,"popover_container":"body","popover_content":"","popover_delay":"0","popover_html":0,"popover_placement":"right","popover_selector":"","popover_title":"","popover_trigger":"click","tooltip_enabled":1,"tooltip_animation":1,"tooltip_container":"body","tooltip_delay":"0","tooltip_html":0,"tooltip_placement":"auto left","tooltip_selector":"","tooltip_trigger":"hover"},"antibot":{"forms":{"comment-form":{"id":"comment-form","key":"5D-i6uDYb-gr3-4qQZFOE5ec3-2jdoq6QSz9J26Pt50"}}},"user":{"uid":0,"permissionsHash":"66bb25c0b665c533dd9436d0cd4e99532a723088208bff0a05f2bf113d3703ac"}}</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="..\sites\default\files\js\js_kFVTvKCxW3cWmdAcJABrE5Fa90cD_Go5IxgQw9oFgJ0.js"></script>
+<script src="..\sites\default\files\js\js_d5BC-2wlh3XH4S29GgaPGie7NxyWY0K1EhPg30LGzwA.js"></script>
+<script src="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+<script src="..\sites\default\files\js\js_CNCJCgJnATwdWHfgCEncmZchd6pVQciEiBxkoYS9btY.js"></script>
+<script src="..\sites\default\files\js\js_PZPdVr1rIFXjUagjykPULRTCC8T4ZfIghTqFAwKg6ZI.js"></script>
+
+  </body>
+</html>

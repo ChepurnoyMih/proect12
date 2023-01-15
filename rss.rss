@@ -1,0 +1,1253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:og="http://ogp.me/ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:schema="http://schema.org/" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" version="2.0" xml:base="https://drupal-coder.ru/">
+  <channel>
+    <title>drupal-coder.ru</title>
+    <link>https://drupal-coder.ru/</link>
+    <description/>
+    <language>ru</language>
+    
+    <item>
+  <title>Redesign and upgrade of the Drupal website "Mathematical Bureau"</title>
+  <link>https://drupal-coding.com/blog/redesign-and-upgrade-drupal-website-mathematical-bureau</link>
+  <description>
+&lt;span&gt;Redesign and upgrade of the Drupal website "Mathematical Bureau"&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/35" lang="" about="https://drupal-coder.ru/user/35" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Алексей Синица&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;ср, 01/11/2023 - 12:36&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2023-01/1%20%D0%B5%D0%BD%D0%B3%20%D0%BD%D0%BE%D0%B2%D0%B0%D1%8F%20%20%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F.png&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  English
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;We at Initlab develop, support and improve Drupal websites. Today we'll tell you how we've completely redesigned and re-structured &lt;a href="https://www.mbureau.energy/" target="_blank"&gt;www.mbureau.energy&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;A small remark: the design was developed by our good friends from &lt;i&gt;Planchet&lt;/i&gt; studio based on the results of our SEO-design. We detailed all the necessary recommendations and implemented the finished design on the website.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;The challenge.&lt;/b&gt; We were approached for a standard redesign, to update the background, colours and forms. We carried out a site audit and suggested a more productive approach: together with the design update, carry out SEO work, work on the structure of the sections and pages of the site.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Specifics of the client's business.&lt;/b&gt; The project is dedicated to modelling in the wholesale electricity market. There are no such narrowly themed blogs on the Russian language network.&lt;/p&gt;
+
+&lt;p&gt;We prepared a lengthy SEO design document in which we detailed our vision, suggestions and wishes for the project. After agreement with the client, we proceeded with the redesign. In this case study we will omit most of the technical details and show the main visual and structural solutions.&lt;/p&gt;
+
+&lt;h2&gt;Positioning&lt;/h2&gt;
+
+&lt;p&gt;First of all, we suggested strengthening the positioning. In the past, the main page would tell the user about the maths bureau, i.e. in the majority's view of some kind of organisation. The headline stated that it was a project of Irina Chuchueva. The information was presented through an abundance of text and did not make it clear what was more important: the identity of the creator or the activities of the organisation.&lt;/p&gt;
+
+&lt;p&gt;We solved this problem this way:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;now the first thing the user sees is the founder's picture. So we have shifted the focus to the fact that for the most part this is her blog, her project and most of the articles are written by her;&lt;/li&gt;
+	&lt;li&gt;The creator's competencies are expressed through portfolios and academic articles, so we have displayed them more prominently on the main screen;&lt;/li&gt;
+	&lt;li&gt;In this way we have harmonised through the visual the personality of the creator and her brainchild.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;b&gt;картинка 2 енг старая главная&lt;/b&gt; &lt;em&gt;&lt;i&gt;It was&lt;/i&gt;&lt;/em&gt; &lt;b&gt;картинка 1 енг новая главная&lt;/b&gt; &lt;b&gt;картинка 2 енг визуал новый &lt;/b&gt; &lt;em&gt;&lt;i&gt;Became&lt;/i&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2&gt;Technical and visual solutions&lt;/h2&gt;
+
+&lt;p&gt;&lt;b&gt;We kept the light tones, the minimalism.&lt;/b&gt;The previous site had a really smart colour scheme for the specific content. We left the design minimalistic and light, perfect for the perception of charts, tables and formulas.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;We've separated important elements with blocks and brought their design to life a little.&lt;/b&gt;For example, article teasers used to be solid text with a hyperlink in the title. Now they are more bulky interface elements with "Read more" buttons.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;картинка 1 енг тизеры старые&lt;/b&gt; &lt;em&gt;&lt;i&gt;It was&lt;/i&gt;&lt;/em&gt; &lt;b&gt;картинка 1 енг тизеры новые&lt;/b&gt; &lt;em&gt;&lt;i&gt;Became&lt;/i&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;The menu has been shortened.&lt;/b&gt;In the old version "Articles" and "Blog" were separate menu items. It wasn't entirely clear to the reader what the difference was. One might have assumed that the blog contained the creator's articles and the articles contained more suggested material, but both contained mixed entries from different authors. We suggested merging this section into "Blog" and putting it in the bottom menu, on the home screen and as article teasers on the home page + putting the "Collaboration" block separately in the menu. Previously, it was part of the welcome text.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;картинка 1 енг меню старое&lt;/b&gt; &lt;em&gt;&lt;i&gt;It was&lt;/i&gt;&lt;/em&gt; &lt;b&gt; картинка 1 енг меню новое&lt;/b&gt; &lt;em&gt;&lt;i&gt;Became&lt;/i&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Expanded the homepage.&lt;/b&gt;Previously, the homepage relied on a narrow grid, giving the impression of an outdated website. The page itself was almost a single scroll away. We supplemented it with information and made it more adaptive for modern screens.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;картинка 1 енг сетка старая&lt;/b&gt; &lt;em&gt;&lt;i&gt;It was&lt;/i&gt;&lt;/em&gt; &lt;b&gt;картинка 1 енг сетка новая&lt;/b&gt; &lt;em&gt;&lt;i&gt;Became&lt;/i&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;We have added thematic navigation.&lt;/b&gt;Thematic navigation is important so that a visitor at any time, even when first accessing an article, can see which topics are reflected in the blog and quickly navigate to the desired entries. And having end-to-end links to sections increases the weight of those sections and promotes them in searches.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;картинка 2 енг тематическая навигация старая&lt;/b&gt; &lt;em&gt;&lt;i&gt;It was&lt;/i&gt;&lt;/em&gt; &lt;b&gt;картинка 1 енг тематическая навигация новая&lt;/b&gt; &lt;em&gt;&lt;i&gt;Became&lt;/i&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Adapted for mobile devices.&lt;/b&gt;Analytics have shown that more than 70% of visitors are desktop. However:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;according to Google Search Console, the site is now indexed and rated by the mobile version;&lt;/li&gt;
+	&lt;li&gt;traffic has gone rapidly to mobile devices in recent years, it should not be neglected.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;It is therefore important that the website is user-friendly and fast from both the desktop and mobile versions.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;картинка 2 енг адаптивка&lt;/b&gt; &lt;em&gt;&lt;i&gt;It was&lt;/i&gt;&lt;/em&gt; &lt;b&gt;1 енг адаптивка старая&lt;/b&gt; &lt;em&gt;&lt;i&gt;Became&lt;/i&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;SEO: We set up similar publications, linking and tagging.&lt;/b&gt;site, but sometimes there were small errors like broken links or broken logic. We also updated the display of tags and similar publications.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;картинка 1 енг теги старый&lt;/b&gt; &lt;em&gt;&lt;i&gt;It was&lt;/i&gt;&lt;/em&gt; &lt;b&gt;картинка 1 енг теги новый&lt;/b&gt; &lt;em&gt;&lt;i&gt;Became&lt;/i&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Introduced the client to the basics of the E-A-T principle.&lt;/b&gt; Search engines have long been evaluating more than just text and technical factors when ranking websites. Criteria such as the quality of content and information, usefulness and the author's level of expertise are increasingly coming to the fore. E-A-T factors (an abbreviation for expertise, authoritativeness, trustworthiness) in SEO are criteria that Google's search algorithm considers when evaluating the quality of content and a resource as a whole. These indicators show that the page contains content that can be trusted, and thus the page is worthy of a higher ranking. The client now considers these factors when uploading content to the site.&lt;/p&gt;
+
+&lt;h2&gt;Reputation, positioning&lt;/h2&gt;
+
+&lt;p&gt;&lt;b&gt;Newsletter subscription.&lt;/b&gt; We have added a newsletter subscription to the site. It is not too intrusive (once every six months), tells about new articles and helps the creator to find like-minded people.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Multilingualism&lt;/b&gt;The English version of the website was underdeveloped. After talking to the founder, we found out that she wanted to put more emphasis on a foreign audience, to demonstrate a foreign experience. We took the foreign specifics into account in working with multilingualism, the site looks equally good in both languages.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Feedback form.&lt;/b&gt;Previously it was only in the Contact Us section, although it was sorely missed on the Collaboration page, where we added it too.&lt;/p&gt;
+
+&lt;p&gt;In the end, we did what we thought was a decent job of adding missing features, removing redundancies and freshening up the design.&lt;/p&gt;
+
+&lt;p&gt;At Initlab, we believe that along with the look and feel, you should pay attention to the usability, load speed and other indicators of the website. With a redesign, you can solve a lot of problems that you never get around to: improve the code, &lt;a href="https://drupal-coder.ru/import-migrate-upgrade" target="_blank"&gt;migrate to a newer version of Drupal&lt;/a&gt;, add new features, etc.&lt;/p&gt;
+&lt;/div&gt;
+      &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=355&amp;2=comment&amp;3=comment" token="yILwM73sJssd2PYr1QiLqc-6_51ruJdtyvHoejf4i-4"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;</description>
+  <pubDate>Wed, 11 Jan 2023 12:36:24 +0000</pubDate>
+    <dc:creator>Алексей Синица</dc:creator>
+    <guid isPermaLink="false">355 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coding.com/blog/redesign-and-upgrade-drupal-website-mathematical-bureau#comments</comments>
+    </item>
+<item>
+  <title>Drupal 10 is out: what's new and why it's best to start migrating now</title>
+  <link>https://drupal-coding.com/blog/drupal-10-out-whats-new-and-why-its-best-start-migrating-now</link>
+  <description>
+&lt;span&gt;Drupal 10 is out: what's new and why it's best to start migrating now&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/51" lang="" about="https://drupal-coder.ru/user/51" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Сергей Синица&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;ср, 01/11/2023 - 09:18&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  English
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;In time for the New Year, the Drupal team has put version 10 under the tree with new technologies and nice changes in speed and security. In this short article we'll take a look at the list of innovations and see what they'll bring us and why it's a good idea to upgrade to the latest version now&lt;/p&gt;
+
+&lt;h2&gt;What has changed in the new version of Drupal&lt;/h2&gt;
+
+&lt;p&gt;December 14, 2022 saw the release of Drupal 10, the latest version of the currently open-source CMF (or CMS, many still argue), the fruit of the efforts of thousands of developers.&lt;/p&gt;
+
+&lt;p&gt;List of updates in Drupal 10&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;The Olivero interface.&lt;/b&gt; Olivero will replace the Bartik design theme, which was installed by default on versions 7, 8 and 9. The outdated interface gave a false impression of Drupal's capabilities.&lt;/p&gt;
+
+&lt;p&gt;A smoother, sleeker and more modern interface. Its main advantage is compliance with WCAG, the web content accessibility guidelines for people with disabilities. Creating new projects on Drupal is now even easier.&lt;/p&gt;
+&lt;img alt="Drupal 10 main manu" data-entity-type="file" data-entity-uuid="69227c90-799d-4bdd-847e-4c74395a0506" src="https://drupal-coder.ru/sites/default/files/inline-images/1_10.png" class="align-center" width="512" height="502" loading="lazy" /&gt;&lt;p&gt;&lt;b&gt;Backend by Claro.&lt;/b&gt; Also replaces the outdated Seven theme. Improved usability for content handling: admin tabs moved based on user experience studies for better accessibility, improved editing from mobile devices. Any such improvements potentially speed up the site experience for moderators and content managers.&lt;/p&gt;
+&lt;img alt="Drupal 10 edit UI" data-entity-type="file" data-entity-uuid="e1912ebb-2c6f-4bcd-b7a7-73d97b53032a" src="https://drupal-coder.ru/sites/default/files/inline-images/2_10.png" class="align-center" width="512" height="453" loading="lazy" /&gt;&lt;p&gt;&lt;b&gt;CKEditor 5.&lt;/b&gt; The service of CKEditor 4 expires in 2023. This word processing module served for more than 10 years and will now be replaced by a more modern successor. Moreover, the fifth version is now included in the core of Drupal 10 and does not require a separate installation.&lt;/p&gt;
+
+&lt;p&gt;Content managers will be pleased with the updates: links and images can be edited without additional windows, and CKEditor 5 will remove markup from Google Docs and Word when inserting texts from those programs.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Modern JavaScript components to replace some applications of jQuery.&lt;/b&gt; Drupal used to have a large jQuery library built in, which dealt with the implementation of functions not supported in browsers. Thanks to advances in JavaScript technology, the capabilities of browsers are growing - they can do some of what used to lie in jQuery. Now part of this library can be dispensed with, which will speed up the loading of the site and its operation.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;The Starterkit theme generator.&lt;/b&gt; Creating new websites is now even easier. Now you can build a theme based on the base version without fear of problems with updates. After creating a theme with Starterkit, you can monitor changes in the theme to incorporate improvements and bug fixes. this will help the site remain more stable.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Symfony 6 replaces Symfony 4 and PHP 8.1.&lt;/b&gt; Symfony 6 has improved performance and security - bug fixes and vulnerability fixes. The new PHP 8.1 version is faster and will remain secure for longer.&lt;/p&gt;
+
+&lt;p&gt;All of these updates will help simplify support, increase site performance, and improve interaction with the platform for developers and non-technical users alike.&lt;/p&gt;
+
+&lt;h2&gt;Important box for those with a Drupal 7 website&lt;/h2&gt;
+
+&lt;p&gt;It would seem that why would an iPhone 5 owner need the latest model? This one works, makes calls and goes online. Without getting into design details and unnecessary features, we're stumped for better performance, better iron and other nice features.&lt;/p&gt;
+
+&lt;p&gt;The same can be said for Drupal 7, the most popular version with code from ten years ago. In 2023 support for this version of Drupal will cease, you need to get out of it as soon as possible. To return to the iPhone analogy just imagine you can no longer update apps on it or your data is much easier to steal from it than from a new model that is being maintained and improved.&lt;/p&gt;
+
+&lt;p&gt;If you don't think much has changed, it's important to realise that the comparison is with versions 8 and 9, which are slightly easier to upgrade from, and the changes are not as dramatic. But there's a real chasm between Drupal 7 and Drupal 10 in 10 years. Here's a small list of what else you can get if you make the "jump" from 7 to 10:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;speed of opening pages will increase due to dynamic caching (only the cache of modified blocks and pages is reset, not the whole site;&lt;/li&gt;
+	&lt;li&gt;less developer time (money) will be spent on transferring dev/pro configurations. Configuration support will allow all changes to site settings to be tracked in the GIT version control system;&lt;/li&gt;
+	&lt;li&gt;FaceBook Big Pipe technology will become available, allowing visitors to see content faster: you can set up delayed block loads (such as ads) in a single request to the web server;&lt;/li&gt;
+	&lt;li&gt;The possibility of realising multilingualism and accessibility of content for people with disabilities will be facilitated;&lt;/li&gt;
+	&lt;li&gt;support for the new webp image format will become available to speed up image uploading and promotion in search engines;&lt;/li&gt;
+	&lt;li&gt;Integration with other content import/export systems will be enhanced through built-in migrations and web services. For example, partners can be given access to automatically update content on the site, or articles can be imported in bulk, site content can be fed into a mobile app or onto partner sites;&lt;/li&gt;
+	&lt;li&gt;an off-the-shelf module for creating a PWA mobile application will be added;&lt;/li&gt;
+	&lt;li&gt;there will be more ready-made integration modules, e.g. Unisender mailing list, Bitrix 24 CRM, Google AMP (Yandex.Turbo analogue);&lt;/li&gt;
+	&lt;li&gt;Modern semantic layout, Schema.org, Microformats.org, Open Graph, JSON-LD markup will be supported to deliver information to search engines and increase conversions from search engines;&lt;/li&gt;
+	&lt;li&gt;support for embedded videos and integration with YouTube, Vimeo will be added;&lt;/li&gt;
+	&lt;li&gt;it will be possible to implement full-text search with Russian morphology support through Apache Solr integration.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Quite an impressive list, wouldn't you agree? And all this isn't even buying a newer iPhone. It's like trading a car for a rocket.&lt;/p&gt;
+
+&lt;h2&gt;What will happen to older versions of Drupal?&lt;/h2&gt;
+
+&lt;p&gt;We'll still support earlier versions of Drupal. But you should be aware that most new features, updates and improvements will not be available on versions that are no longer supported.&lt;/p&gt;
+
+&lt;p&gt;If you care about the security and stability of your website, it is best to think about relocating it now.&lt;/p&gt;
+
+&lt;h2&gt;Why migrate to a new version of Drupal?&lt;/h2&gt;
+
+&lt;p&gt;Migration can always be done in a good way. When a project develops for a long time, it accumulates technical debt, dead code and bugs, which you can get rid of by migrating to a new version. This load affects the quality of the site and makes maintenance more expensive - you have to do the same thing, fix it in one place while it breaks in another.&lt;/p&gt;
+
+&lt;p&gt;You can get rid of something that has accumulated over dozens of years of development and several generations of developers at different levels in one go. In addition to an upgrade, a redesign can also be carried out, which will be much easier and cheaper to implement when moving to an updated version of Drupal.&lt;/p&gt;
+
+&lt;p&gt;In the new year, give your project a new life: till January 31st, 2023, to celebrate migration to Drupal 10, &lt;b&gt;Initlab offers a 50% discount on&lt;/b&gt; &lt;a href="https://drupal-coder.ru/import-migrate-upgrade" target="_blank"&gt;a migration audit&lt;/a&gt;. And if you decide to migrate your site to a new Drupal version by the end of January 2023, we'll also give you &lt;a href="https://drupal-coder.ru/import-migrate-upgrade" target="_blank"&gt;a discount on the migration work based on the results of your site audit.&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=354&amp;2=comment&amp;3=comment" token="vBaaCoLtqIKq4WcGgrxMlI2pycmErLGbfx4_eHAjA_Y"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;</description>
+  <pubDate>Wed, 11 Jan 2023 09:18:59 +0000</pubDate>
+    <dc:creator>Сергей Синица</dc:creator>
+    <guid isPermaLink="false">354 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>Initlab занял призовое место в Tagline Awards 2022</title>
+  <link>https://drupal-coder.ru/blog/initlab-zanyal-prizovoe-mesto-v-tagline-awards-2022</link>
+  <description>
+&lt;span&gt;Initlab занял призовое место в Tagline Awards 2022&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/51" lang="" about="https://drupal-coder.ru/user/51" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Сергей Синица&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;чт, 12/29/2022 - 10:41&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2022-12/tagline-awards-2022-ceremony_01.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Впервые приняли участие в этой премии и взяли бронзу в категории «Лучшее IT-решение, разработка или интеграция».&lt;/p&gt;
+
+&lt;p&gt;В проекте миграции сайта крупного европейского СМИ на Arc XP наши разработчики в сжатый срок разобрались в работе этой проприетарной CMS от Washington Post, разработали фронтенд на React и выполнили техническое SEO.&lt;/p&gt;
+
+&lt;p&gt;Разработчики Initlab Александр Долженков и Андраник Менешян в составе международной команды проделали огромную работу над этим большим проектом. Очень гордимся ребятами!&lt;/p&gt;
+
+&lt;p&gt;Хотим сказать спасибо командам компаний И20 и code.store за то, что выбрали нас и участвовали в работе над проектом. А также поблагодарить Алексея Раменского, главреда Tagline, за приглашение поучаствовать в конкурсе.&lt;/p&gt;
+
+&lt;p&gt;Кладём приз в копилочку, в следующем году соберём больше кейсов и будем метить уже в золото!&lt;/p&gt;
+&lt;/div&gt;
+      &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=353&amp;2=comment&amp;3=comment" token="cycvbfH5DB6Bt4GkEUc-Vl0zC4AgXdoXu2vancOSmVw"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/nebolshoy-urozhay-s-reytinga-runeta-2021" hreflang="ru"&gt;Небольшой урожай с Рейтинга Рунета 2021 🎉&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/initlab-top-1-komanda-po-drupal-v-rossii" hreflang="ru"&gt;Initlab — ТОП-1 команда по Drupal в России!&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/initlab-top-1-po-podderzhke-i-razvitiyu-saytov-na-drupal-2022" hreflang="ru"&gt;Initlab — ТОП-1 по поддержке и развитию сайтов на Drupal 2022!&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Thu, 29 Dec 2022 10:41:44 +0000</pubDate>
+    <dc:creator>Сергей Синица</dc:creator>
+    <guid isPermaLink="false">353 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>Редизайн и апгрейд Drupal-сайта «Математическое бюро» </title>
+  <link>https://drupal-coder.ru/blog/redizayn-i-apgreyd-drupal-sayta-matematicheskoe-byuro</link>
+  <description>
+&lt;span&gt;Редизайн и апгрейд Drupal-сайта «Математическое бюро» &lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/35" lang="" about="https://drupal-coder.ru/user/35" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Алексей Синица&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;чт, 12/29/2022 - 09:28&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2023-01/1%20%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F%20%D0%BD%D0%BE%D0%B2%D0%B0%D1%8F%20SMALL%201.png&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Мы в Initlab занимаемся разработкой, поддержкой и усовершенствованием сайтов на Drupal. Сегодня расскажем вам о том, как мы полностью обновили дизайн и переработали структуру сайта &lt;a href="https://www.mbureau.ru/"&gt;www.mbureau.ru&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Небольшая ремарка: дизайн разрабатывали наши хорошие друзья из студии &lt;a href="https://platzkart.ru/"&gt;PLATZKART&lt;/a&gt; по результатам нашего SEO-проектирования. Мы подробно описали все необходимые рекомендации и внедрили готовый дизайн на сайт.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Задача.&lt;/strong&gt; К нам обратились за стандартным редизайном, обновить фон, цвета и формы. Мы провели аудит сайта и предложили более продуктивный подход: вместе с обновлением дизайна провести работу по SEO, проработать структуру разделов и страниц сайта.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Специфика бизнеса клиента.&lt;/strong&gt; Проект посвящён моделированию на оптовом рынке электроэнергии. В русскоязычной сети подобных узкотематических блогов нет.&lt;/p&gt;
+
+&lt;p&gt;Мы подготовили объёмный документ по SEO-проектированию, в котором детально изложили наше видение, предложения и пожелания к проекту. После согласования с заказчицей мы приступили к редизайну. В этом кейсе мы опустим большую часть технических подробностей и покажем основные визуальные и структурные решения. &lt;/p&gt;
+
+&lt;h3&gt;Позиционирование&lt;/h3&gt;
+
+&lt;p&gt;В первую очередь мы предложили усилить позиционирование.&lt;br /&gt;
+Раньше на главной странице пользователя встречала информация о математическом бюро, т.е. в представлении большинства некой организации. При этом в заголовке было указано, что это проект Ирины Чучуевой. Информация подавалась через обилие текста и не давала понять, что важнее: личность создательницы или деятельность организации.&lt;/p&gt;
+
+&lt;p&gt;Мы решили эту задачу так:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;теперь в первую очередь пользователь видит фотографию основательницы. Так мы сместили фокус на то, что по большей части это её блог, её проект и большая часть статей написана ею;&lt;/li&gt;
+	&lt;li&gt;компетенции создательницы выражаются через портфолио и научные статьи, поэтому мы вывели их более наглядно на главный экран;&lt;/li&gt;
+	&lt;li&gt;таким образом мы гармонизировали через визуал личность создательницы и её детище.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;br /&gt;&lt;span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#000000"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;&lt;span style="border:none"&gt;&lt;span style="display:inline-block"&gt;&lt;span style="overflow:hidden"&gt;&lt;span style="width:505px"&gt;&lt;span style="height:308px"&gt;&lt;img height="308" src="https://lh5.googleusercontent.com/nieF1YzJdixz_ojLFUNuTtTIJftX5bvHkA536zv8mEwotkIepZf6EwnT-j5Y21HgvlYXBlVgIjtSKtTLNlog8S6wiUuFZBjFtDroRYA-_Ob1nEQLIrsvqjgHGUMhDx3EwbRDuBcPGN_pDBhBDYfYEt66NkiqJEkMk_ObY4Ty0kIwTM9cQ7STR0kUT5Ya0A" width="505" /&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;                    Было&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#000000"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;&lt;span style="border:none"&gt;&lt;span style="display:inline-block"&gt;&lt;span style="overflow:hidden"&gt;&lt;span style="width:502px"&gt;&lt;span style="height:247px"&gt;&lt;img height="247" src="https://lh3.googleusercontent.com/RGe5EtkW3meZ2z4Q-LsFIo12Ihs_IchHL5ru8C3anxBAKSD78bqweE1BTFH4Ds4pSty3-9HO9zk6AJB-wEjHpt6tloQSxeZVfTdxXOHmOjnzMBa8Ajjc7ZvIl_sgFbyLIXO2mLeFIhLv7qAbuKrdWwN-WAVyQNc0Hf7zNTNMex2lqrSS3QubXEmUOtqsfg" width="502" /&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;                    Стало&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3&gt;Технические и визуальные решения&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Оставили светлые тона, минимализм. &lt;/strong&gt;У прошлого сайта было действительно грамотное цветовое решение для специфики контента. Мы оставили дизайн минималистичным и светлым, идеально подходящим для восприятия графиков, таблиц и формул.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Отделили важные элементы блоками, немного оживили их оформление.&lt;/strong&gt; Например, раньше тизеры статей были сплошным текстом с гиперссылкой в заголовке. Теперь это более объёмные элементы интерфейса с кнопками «Подробнее».&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#000000"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;&lt;span style="border:none"&gt;&lt;span style="display:inline-block"&gt;&lt;span style="overflow:hidden"&gt;&lt;span style="width:499px"&gt;&lt;span style="height:329px"&gt;&lt;img height="329" src="https://lh6.googleusercontent.com/tHoZHwAL96GsMIezr98REIslep6l1OPfEZ0i_QElu1Xp_Xjf3i1W1VDVQ4VHjSAzLlpJZUMqkZypFNCSxX1-CGnUp3zpcCEtKOFf69rREs55M8B9WbhK-VeXW6qAPNvG6Ie5vwi1I0mZ38c6kvwiwyzPLVXpsVt0HEmHLikJF2OuTP2478bWeEftlJHSuA" width="499" /&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;                    Было&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#000000"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;&lt;span style="border:none"&gt;&lt;span style="display:inline-block"&gt;&lt;span style="overflow:hidden"&gt;&lt;span style="width:473px"&gt;&lt;span style="height:355px"&gt;&lt;img height="355" src="https://lh3.googleusercontent.com/rD9OnZSgJvU--uxWoUvdq4nRa-i3KjGvjgrvMsO08PXaw3enN7ia_NnZByCb1dAtIlDqzH2xnBQ2Wj2Wn1HgZOcnIH0PxoUL8ZJk3ESoW5eaAOx682KHyXHY_15a-un76ld2rWPVXAVw3K9VuZRlXebGGE8YAuzEIVjsqhwQPGs3oL7ZW2tO5qLQcrTo_g" width="473" /&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;                    Стало&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Сократили меню.&lt;/strong&gt; В старой версии «Статьи» и «Блог» были отдельными пунктами меню. Читателю было не совсем понятно в чём отличие. Можно было предположить, что в блоге содержатся статьи создательницы, а в статьях больше предложенных материалов, однако и там, и там содержались смешанные записи от разных авторов. Мы предложили объединить этот раздел в «Блог» и вынести его в нижнее меню, на главный экран и в виде тизеров статей на главной странице + вынесли блок «Сотрудничество» отдельно в меню. Раньше оно входило в приветственный текст.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#000000"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;&lt;span style="border:none"&gt;&lt;span style="display:inline-block"&gt;&lt;span style="overflow:hidden"&gt;&lt;span style="width:602px"&gt;&lt;span style="height:103px"&gt;&lt;img height="103" src="https://lh4.googleusercontent.com/RH-6d2PCiBlI-B4zp35FD-GuJvvHRyZ3tGcmsgJwgwT_tTL9R35WwYqstbrDGdiWjHwjw2CoeYtb1vTURQByW3Xgd2pFkvOLpvQDQ_OanDricDMrdXxbFU3nFENSqinBKAExlfnZo8jjPGgaPAswkkk4fGwVxUGrE6JouC5ZfRWzX7zbIyJFb4o7NovIDQ" width="602" /&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;                    Было&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#000000"&gt;&lt;span style="font-weight:700"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;&lt;span style="border:none"&gt;&lt;span style="display:inline-block"&gt;&lt;span style="overflow:hidden"&gt;&lt;span style="width:602px"&gt;&lt;span style="height:112px"&gt;&lt;img height="112" src="https://lh4.googleusercontent.com/cZ2f1kGEsG2_Ikb12H_ds9FcUDs29ViFwz66nOTahGM0kpBXMwcJx38qZBvBxZ1fFecVaGOiy-N5QoIl950cUQ_ZxXJLs19suiSYCdp_uKa9p9heSKuuP8qqVqu2d_oDgsmp3vTfyOhak4Wp2lH_4CzlW9qZzfwz-jMapsXUoSME7O3IcL2MdE6tVvUtZw" width="602" /&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;                  Стало&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Расширили главную.&lt;/strong&gt; Раньше главная страница опиралась на узкую сетку, что создавало впечатление устаревшего сайта. Сама страница укладывалась практически в один скролл. Мы дополнили её информацией и сделали более адаптивной для современных экранов.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#000000"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;&lt;span style="border:none"&gt;&lt;span style="display:inline-block"&gt;&lt;span style="overflow:hidden"&gt;&lt;span style="width:551px"&gt;&lt;span style="height:358px"&gt;&lt;img height="358" src="https://lh5.googleusercontent.com/zULSfY5hr1HbpNrMialiY79nz8yiCszT7P7R7-Uso4Spe5OnC1WvoZB3zrM5Ya5BjyKRaMPYEedWyfbZjZQApVwAQNLb8AMT-aqluFfkyiM0ochbLi3SHVpSpGC27STR7sDbYdmFq3HJ5Fp58jpj7xhWnLGIO-HDbs_lcWsc52GRyO36wiKirJ91YgP6jA" width="551" /&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;                    Было&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#000000"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;&lt;span style="border:none"&gt;&lt;span style="display:inline-block"&gt;&lt;span style="overflow:hidden"&gt;&lt;span style="width:615px"&gt;&lt;span style="height:311px"&gt;&lt;img height="311" src="https://lh6.googleusercontent.com/OYkIuoAUVtdWCchp6xrBcQlpoLV0xtLn6RrYlhn0DRiZoXcXV9jDDJbJADzjTHl_QuI50wIGEClA9RnfHLRsrKCIE-7QO1JtmJpPjNMC1fLZZ9OhJ_TAqLr09q7RiAzG-LBkq3VbtrNqIvLohbAqxXzRM6HJ3gd-UjUTu2wodC6hUPV-VWKXmd8HbNYyoQ" width="615" /&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;                  Стало&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Добавили тематическую навигацию. &lt;/strong&gt;Тематическая навигация важна, чтобы посетитель в любой момент, даже попав первый раз на статью, мог увидеть, какие темы отражены в блоге, и быстро перейти к нужным записям. А также наличие сквозных ссылок на разделы увеличивает вес этих разделов и продвигает их в поиске.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#000000"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;&lt;span style="border:none"&gt;&lt;span style="display:inline-block"&gt;&lt;span style="overflow:hidden"&gt;&lt;span style="width:547px"&gt;&lt;span style="height:264px"&gt;&lt;img height="264" src="https://lh4.googleusercontent.com/wLW8KwM8HaXwAaRN7Pfp1KNrJd8_GIEads97yeqQyLSGs6hkvfiAvLZpPsayH7sfBvwztK7I0zYGioRG24heHjPp6iX1p2Mxzv78Den2dFdgr1iQdcdofyuSPmZobyI2sDqK2kgZK2oMjyozwlicedyp8Av-8g3xQx-SlEyoXOf3i0nuJ-J78tlKGCfhYw" width="547" /&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;                    Было&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#000000"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;&lt;span style="border:none"&gt;&lt;span style="display:inline-block"&gt;&lt;span style="overflow:hidden"&gt;&lt;span style="width:602px"&gt;&lt;span style="height:325px"&gt;&lt;img height="325" src="https://lh4.googleusercontent.com/QHEMOyPFmp0QgX1G-I-iQvYJOdOPaI5wzvdwqgkx1OXHbLLPc03g-HK9uVehn9Mvt8kUMEXYjc1GayrsQzTrSzxBC_WuIdeQMDQwdt3MI4g2-PMJUDJVuLtiXjdqshVP3SuwMeOuv240SCmyMSlVS3jokzAcdstzGbQ0aj2a4671CHH9grZXhYVnEAOQ5A" width="602" /&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;                  Стало&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Адаптировали под мобильные устройства.&lt;/strong&gt; Аналитика показала, что более 70% посетителей десктопные. Однако:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;по данным Google Search Console, индексация и оценка сайта сейчас происходит по мобильной версии;&lt;/li&gt;
+	&lt;li&gt;трафик в последние годы стремительно уходит на мобильные устройства, не стоит им пренебрегать.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Поэтому важно, чтобы сайт был удобным и быстрым как с десктопной, так и с мобильной версии. &lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#000000"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;&lt;span style="border:none"&gt;&lt;span style="display:inline-block"&gt;&lt;span style="overflow:hidden"&gt;&lt;span style="width:306px"&gt;&lt;span style="height:815px"&gt;&lt;img height="815" src="https://lh6.googleusercontent.com/sLygXzKtbiCg_ADz63aOwS0BSdtVAMHXVXklZZVgM14uULRTq269xvbmunmHv3kMAME23uB9L39A0rP8f5hmh_M-GQhXE7IfU3X__-5eTWgSJKbOWpfdrupLbpcYlzfd9ORNKaz_UsM9Uu_fD4coMexTi_qYWVKZ79dwf9LGkG84qHqDgFvqBIn_IqmH6g" width="306" /&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;                    Было&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#000000"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;&lt;span style="border:none"&gt;&lt;span style="display:inline-block"&gt;&lt;span style="overflow:hidden"&gt;&lt;span style="width:440px"&gt;&lt;span style="height:512px"&gt;&lt;img height="512" src="https://lh4.googleusercontent.com/jVY9fuc7d-7N-Ik91IWQSx6fYlOkpCZuNBfHHWxl2fGoChpSi6aFYJZUaIM8RptZTBWZ8FJtmIRF9mk1TwxAvovkk4eHEW6GVN0hmeJM131p8KYIkhVmKGhRQ5XU41PvtEZE0ENgrWA_BUWwt9y7Tqae3Voqch-J5m5WacrDn-hHsnbgWh_Hyt1aDGLRTA" width="440" /&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;                  Стало&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;SEO: Настроили похожие публикации, перелинковку и теги. &lt;/strong&gt;Всё это было на старом сайте, но иногда встречались мелкие ошибки вроде битых ссылок или нарушенной логики. Также мы обновили отображение тегов и похожих публикаций.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#000000"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;&lt;span style="border:none"&gt;&lt;span style="display:inline-block"&gt;&lt;span style="overflow:hidden"&gt;&lt;span style="width:433px"&gt;&lt;span style="height:222px"&gt;&lt;img height="222" src="https://lh3.googleusercontent.com/SGh0sOJYeaXuPO-WsGniROG_GmlZzM5nlvzmpTiFEq1gBYVTFKqfTqekVbZSDXyyGxZ2Rl4IUWt2_Zkt9Y547ZPO4f-VSVUWvcUJcko2CxYRlXzNFMP3XaP_R2VQ3s12sBkCGva4kDOc3XlGAzBWJDIwbVc5NNkGgiAiC83WtmF-i08woiMLtbBXwDfRWQ" width="433" /&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;                    Было&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;span style="font-size:13pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#000000"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;&lt;span style="border:none"&gt;&lt;span style="display:inline-block"&gt;&lt;span style="overflow:hidden"&gt;&lt;span style="width:576px"&gt;&lt;span style="height:330px"&gt;&lt;img height="330" src="https://lh5.googleusercontent.com/lP-g2-oCicWxn7I6w0NBV_C_Q1e5esjJsik5wFutfug3UpY1CHV5J1kj8Gi_7UsZrmhCdmLC_gpgSQ0ZdC8z4npdQegqnHRA0cK_f3mU9u83mc63-l7My1RwiOcf-PCCdxazQMwYjGV-49lnHoOvH_OPo7tHHYe1xcI_0TL3Dxb8Gd73p5Q9BQfxAVeVZQ" width="576" /&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;                  Стало&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Посвятили клиента в основы принципа E-A-T. &lt;/strong&gt;Поисковые системы при ранжировании сайтов уже давно оценивают не только текстовые и технические факторы. На первый план все больше выходят такие критерии, как качество контента и информации, полезность и уровень экспертности автора. E-A-T факторы (аббревиатура от слов expertise (экспертность), authoritativeness (авторитетность), trustworthiness (достоверность)) в SEO – это критерии, которые поисковый алгоритм Google учитывает при определении качества контента и ресурса в целом. Такие показатели свидетельствуют о том, что страница содержит контент, которому можно доверять, а значит страница достойна более высокого места в выдаче. Теперь клиент учитывает эти факторы при загрузке контента на сайт.&lt;/p&gt;
+
+&lt;h3&gt;Репутация, позиционирование&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Подписка на рассылку.&lt;/strong&gt; Мы добавили на сайт подписку на новостную рассылку. Она не сильно навязчивая (раз в полгода), рассказывает о новых статьях и помогает создательнице искать единомышленников. &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Мультиязычность.&lt;/strong&gt; На сайте была слабо развита английская версия. После общения с основательницей мы выяснили, что она хотела бы делать больший упор на зарубежную аудиторию, демонстрировать иностранный опыт. Мы учли зарубежную специфику в работе с мультиязычностью, сайт смотрится одинаково хорошо на обоих языках.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Форма обратной связи.&lt;/strong&gt; Раньше находилась только в разделе «Контакты», хотя её очень не хватало на странице «Сотрудничество», куда мы её тоже добавили.&lt;/p&gt;
+
+&lt;p&gt;В итоге мы проделали достойную, на наш взгляд, работу: добавили недостающие функции, убрали лишнее и освежили дизайн.&lt;/p&gt;
+
+&lt;p&gt;Мы в Initlab уверены, что вместе с внешним видом нужно обращать внимание на юзабилити, скорость загрузки и другие показатели сайта. Вместе с редизайном можно решить множество проблем, до которых всё никак не доходят руки: улучшить код, &lt;a href="https://drupal-coder.ru/import-migrate-upgrade"&gt;мигрировать на более новую версию Drupal&lt;/a&gt;, добавить новые функции и т.д.&lt;br /&gt;
+ &lt;/p&gt;
+&lt;/div&gt;
+      &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=352&amp;2=comment&amp;3=comment" token="StziL-ugXZ6gdYTeA_5J8WuVZDKM3k8UNqyCDO41UsY"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;</description>
+  <pubDate>Thu, 29 Dec 2022 09:28:20 +0000</pubDate>
+    <dc:creator>Алексей Синица</dc:creator>
+    <guid isPermaLink="false">352 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>Вышел Drupal 10: что нового и почему лучше начать миграцию на новую версию уже сейчас</title>
+  <link>https://drupal-coder.ru/blog/vyshel-drupal-10-chto-novogo-i-pochemu-luchshe-nachat-migraciyu-na-novuyu-versiyu-uzhe-seychas</link>
+  <description>
+&lt;span&gt;Вышел Drupal 10: что нового и почему лучше начать миграцию на новую версию уже сейчас&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/51" lang="" about="https://drupal-coder.ru/user/51" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Сергей Синица&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;пн, 12/19/2022 - 08:42&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;К новому году команда Drupal положила нам под ёлочку десятую версию с новыми технологиями и приятными переменами в скорости работы и безопасности. В этой небольшой статье мы заглянем в список инноваций и узнаем, чем они нас порадуют, а также расскажем, почему лучше задуматься о переезде на последнюю версию уже сейчас.&lt;/p&gt;
+
+&lt;h3&gt;Что изменилось в новой версии Drupal&lt;/h3&gt;
+
+&lt;p&gt;14 декабря 2022 года вышел Drupal 10 — последняя на текущий момент версия CMF (или CMS, многие до сих пор спорят) с открытым кодом, плод усилий тысяч разработчиков.&lt;/p&gt;
+
+&lt;h3&gt;Список обновлений в Drupal 10&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Интерфейс Olivero. &lt;/strong&gt;Olivero станет заменой теме оформления Bartik, которая была установлена по умолчанию на версиях 7, 8 и 9. Устаревший интерфейс создавал ложное впечатление о возможностях Drupal.&lt;/p&gt;
+
+&lt;p&gt;Более плавный, элегантный и современный интерфейс. Его основное преимущество — соответствие WCAG, руководству по доступности веб-контента для людей с ограниченными возможностями. Теперь создавать новые проекты на Drupal стало ещё удобнее.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Drupal 10" data-entity-type="file" data-entity-uuid="f04cf681-ddb2-47fa-9a06-b2690f14be7a" src="https://drupal-coder.ru/sites/default/files/inline-images/1_1.png" width="512" height="502" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Бэкенд от Claro. &lt;/strong&gt;Также заменит устаревшую тему Seven. Улучшенное юзабилити для работы с контентом: вкладки администратора перемещены по результатам исследований пользовательского опыта для лучшей доступности, улучшено редактирование с мобильных устройств. Любые подобные улучшение потенциально ускоряет работу с сайтом для модераторов и контент-менеджеров.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Drupal 10" data-entity-type="file" data-entity-uuid="0904d0de-e1a2-41ac-8560-ffc29a62fa70" src="https://drupal-coder.ru/sites/default/files/inline-images/2_2.png" width="512" height="453" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;CKEditor 5. &lt;/strong&gt;Обслуживание CKEditor 4 истекает в 2023 году. Этот модуль для работы с текстами служил более 10 лет, теперь его заменит более современный приемник. Причём, пятая версия теперь входит в ядро Drupal 10 и не требует отдельной установки.&lt;br /&gt;
+Обновления на радость контент-менеджерам: можно редактировать ссылки и изображения без дополнительных окон, прямо на месте, а при вставке текстов из Google Docs и Word CKEditor 5 удалит разметку из этих программ.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Современные компоненты JavaScript для замены некоторых применений jQuery. &lt;/strong&gt;Раньше в Drupal была встроена большая библиотека jQuery, которая занималась реализацией функций, не поддерживаемых в браузерах. Благодаря развитию технологии JavaScript растут возможности браузеров — они могут выполнять часть того, что раньше лежало на jQuery. Теперь от части этой библиотеки можно отказаться, что ускорит загрузку сайта и его работу.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Генератор тем Starterkit. &lt;/strong&gt;Создание новых сайтов стало ещё удобнее. Теперь при сборке темы на основе базовой версии можно не бояться проблем с обновлениями. После создания темы с помощью Starterkit можно отслеживать изменения в теме, чтобы включить в неё улучшения и исправления ошибок. это поможет сайту оставаться более стабильным.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Symfony 6 на замену Symfony 4 и PHP 8.1.&lt;/strong&gt; В Symfony 6 улучшены производительность и безопасность — устранены баги и исправлены уязвимости. Новая версия PHP 8.1 работает быстрее и долго будет оставаться безопасной.&lt;/p&gt;
+
+&lt;p&gt;Все эти обновления помогут упростить поддержку, повысить производительность сайта,  улучшить взаимодействие с платформой как для разработчиков, так и для нетехнических пользователей.&lt;/p&gt;
+
+&lt;h3&gt;Важный блок для тех, у кого сайт на Drupal 7&lt;/h3&gt;
+
+&lt;p&gt;Казалось бы, зачем владельцу iPhone 5 самая новая модель? Эта работает, звонит и выходит в интернет. Если не вдаваться в детали дизайна и ненужных функций, мы упрёмся в повышение производительности, лучшее железо и другие приятные возможности.&lt;/p&gt;
+
+&lt;p&gt;То же самое можно сказать о Drupal 7 — самая популярная версия с кодом десятилетней давности. В 2023 году прекращается поддержка этой версии Drupal, с неё нужно уходить как можно скорее. Если вернуться к аналогии с iPhone, просто представьте, что больше нельзя обновлять приложения на нём или ваши данные намного легче украсть отсюда, чем с новой модели, которую во всю обслуживают и улучшают.&lt;br /&gt;
+Если вам кажется, что изменилось не так много, нужно понимать, что сравнение идёт с  8 и 9 версиями, переходить с которых будет немного проще, а перемены не такими значительными. Но вот между 7 и 10 Drupal за 10 лет образовалась настоящая пропасть. Вот небольшой список того, что ещё можно получить, если совершить «прыжок» с 7 на 10: &lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;увеличится скорость открытия страниц за счет динамического кэширования (сбрасывается только кэш изменённых блоков и страниц, а не всего сайта;&lt;/li&gt;
+	&lt;li&gt;будет тратиться меньше времени разработчиков (денег) на перенос настроек dev/pro. Поддержка конфигураций позволит отслеживать все изменения настроек сайта в системе контроля версий GIT;&lt;/li&gt;
+	&lt;li&gt;станет доступна технология FaceBook Big Pipe, благодаря которой посетителям быстрее отображается контент: можно настроить отложенную загрузку блоков (например, рекламу) за один запрос к веб-серверу;&lt;/li&gt;
+	&lt;li&gt;упростится возможность реализации многоязычности и доступности контента для людей с ограниченными возможностями;&lt;/li&gt;
+	&lt;li&gt;станет доступна поддержка нового формата изображений webp для ускорения загрузки изображений и продвижения в поисковиках;&lt;/li&gt;
+	&lt;li&gt;расширятся возможности интеграции с другими системами импорта\экспорта контента за счет встроенных миграций и веб-сервисов. Например, можно предоставить партнерам  доступ для автоматического обновления контента на сайте, либо массово импортировать статьи, отдавать контент сайта в мобильное приложение или на партнерские сайты.&lt;/li&gt;
+	&lt;li&gt;добавится готовый модуль для создания мобильного приложения по технологии PWA &lt;/li&gt;
+	&lt;li&gt;будет больше готовых модулей интеграции, например рассылки Unisender, CRM Битрикс 24, Google AMP (аналог Яндекс.Турбо);&lt;/li&gt;
+	&lt;li&gt;будет поддерживаться современная семантическая верстка, разметка Schema.org, Microformats.org, Open Graph, JSON-LD для передачи информации поисковикам и увеличения переходов из поисковых систем;&lt;/li&gt;
+	&lt;li&gt;будет добавлена поддержка встроенных видео и интеграция с YouTube, Vimeo;&lt;/li&gt;
+	&lt;li&gt;появится возможность реализовать полнотекстовой поиск с поддержкой русской морфологии через интеграцию Apache Solr.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Довольно внушительный список, согласитесь. И всё это даже не покупка iPhone поновее. Это как поменять машину на ракету.&lt;/p&gt;
+
+&lt;h3&gt;Что будет со старыми версиями Drupal?&lt;/h3&gt;
+
+&lt;p&gt;Мы всё равно будем поддерживать более ранние версии Drupal. Но нужно понимать, что большинство новых фишек, обновлений и улучшений будут недоступны на тех версиях, поддержка который прекращена.&lt;/p&gt;
+
+&lt;p&gt;Если вам дорога безопасность вашего сайта и его стабильность, лучше задуматься о переезде уже сейчас.&lt;/p&gt;
+
+&lt;h3&gt;Зачем мигрировать на новую версию Drupal?&lt;/h3&gt;
+
+&lt;p&gt;Миграцию всегда можно провести с пользой. Когда проект развивается долго, на нём копится технический долг, мёртвый код и баги, от которых можно избавиться переходом на новую версию. Этот груз сказывается на качестве сайта и удорожает поддержку — приходится делать одно и то же, чинить в одном месте, пока ломается в другом. За один раз можно избавиться от того, что копилось десятки лет разработки и несколько поколений разработчиков разного уровня. &lt;/p&gt;
+
+&lt;p&gt;Помимо апгрейда, можно также провести, редизайн, который будет намного проще и дешевле внедрить при переезде на обновлённую версию Drupal.&lt;/p&gt;
+
+&lt;p&gt;В новом году подарите вашему проекту новую жизнь: до 31 января 2023 года, в честь перехода на Drupal 10, &lt;strong&gt;Initlab предлагает скидку 50% на &lt;a href="https://drupal-coder.ru/import-migrate-upgrade"&gt;аудит миграции&lt;/a&gt;&lt;/strong&gt;. А если вы до конца января 2023 года решите перевести сайт на новую версию Drupal, мы также сделаем &lt;a href="https://drupal-coder.ru/import-migrate-upgrade"&gt;&lt;strong&gt;скидку на работы по миграции по итогам аудита вашего сайта&lt;/strong&gt;&lt;/a&gt;.&lt;br /&gt;
+ &lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=351&amp;2=comment&amp;3=comment" token="pQxN14c32Pdp4lI1ELRLbG9_YTnZAjoC6qfy2YZcyV4"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;</description>
+  <pubDate>Mon, 19 Dec 2022 08:42:07 +0000</pubDate>
+    <dc:creator>Сергей Синица</dc:creator>
+    <guid isPermaLink="false">351 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>MailChimp ушёл из России: рассказываем, на какой почтовый сервис перешли наши клиенты</title>
+  <link>https://drupal-coder.ru/blog/mailchimp-ushyol-iz-rossii-rasskazyvaem-na-kakoy-pochtovyy-servis-pereshli-nashi-klienty</link>
+  <description>
+&lt;span&gt;MailChimp ушёл из России: рассказываем, на какой почтовый сервис перешли наши клиенты&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/93" lang="" about="https://drupal-coder.ru/user/93" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Геворг Мкртчян&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;пн, 10/17/2022 - 11:43&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2022-11/pigeon_3_3200_1350.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;После известных событий, некоторые компании и сервисы перестали работать на территории России. Например, платформа e-mail рассылок MailChimp сообщила о своём уходе с нашего рынка. У многих компаний она отвечала за отправку писем с сайта, из-за чего в срочном порядке пришлось искать альтернативу.&lt;/p&gt;
+
+&lt;p&gt;В этой статье мы кратко расскажем о платформе Unisender, на которую перешли несколько наших клиентов, что на текущий момент у Drupal готово для интеграции с Unisender и какие преимущества этого почтового сервиса для владельцев бизнеса и разработчиков мы отметили.&lt;/p&gt;
+
+&lt;h2&gt;Почтовый сервис на сайте: основные функции&lt;/h2&gt;
+
+&lt;p&gt;Почтовые сервисы нужны, чтобы настроить массовые e-mail рассылки. Они помогают обойти спам-фильтры, собрать базу почтовых адресов и автоматизировать отправку писем.&lt;/p&gt;
+
+&lt;p&gt;У всех почтовых сервисов +- одинаковый функционал: настройка рассылок, шаблоны для красивых писем, сбор статистики и т.д.&lt;/p&gt;
+
+&lt;p&gt;Большинству сайтов в обязательном порядке нужны два вида рассылок:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;&lt;strong&gt;системные:&lt;/strong&gt; регистрация, вход, восстановление пароля, данные о покупке и т.д.;&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;информационные: &lt;/strong&gt;акции, скидки, новости.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Мы не будем погружать вас в особенности e-mail-маркетинга, скорее всего, вы сами представляете всю значимость подобных писем с сайта. Это касания с клиентом, которые помогают выстраивать доверительные отношения, улучшать продажи и т.д.&lt;/p&gt;
+
+&lt;p&gt;MailChimp — один из лидеров международного уровня среди почтовых платформ. Их санкции коснулись всех российских пользователей, в том числе нескольких наших клиентов. Владельцы сайтов в один момент остались без важного бизнес-инструмента  и в срочном порядке начали искать замену. Хорошо, что российскому рынку есть что предложить в качестве альтернативы.&lt;/p&gt;
+
+&lt;h2&gt;Unisender: преимущества для владельцев сайтов&lt;/h2&gt;
+
+&lt;p&gt;Unisender не единственная отечественная платформа, достойная внимания. По запросу клиента, мы можем подключить к сайту на Drupal любой другой сервис рассылки. На этом конкретном мы остановились по двум причинам: &lt;/p&gt;
+
+&lt;ol&gt;&lt;li&gt;Именно Unisender попросили подключить клиенты, которых коснулся уход MailChimp.&lt;/li&gt;
+	&lt;li&gt;Unisender уже был подключён у нескольких наших клиентов и они довольны работой с ним.&lt;/li&gt;
+&lt;/ol&gt;&lt;p&gt;В Unisender есть всё, что нужно для комфортной работы с письмами:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;загрузка и сбор базы почтовых адресов;&lt;/li&gt;
+	&lt;li&gt;конструктор писем;&lt;/li&gt;
+	&lt;li&gt;просмотр подробной статистики;&lt;/li&gt;
+	&lt;li&gt;A/B тестирование и т.д.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Есть возможность сегментирования по аудиториям и персонализации. Можно подключить дополнительные каналы связи — SMS и Viber, собирать подписчиков в соцсетях, настроить ретаргетинг по e-mail и многое другое. &lt;/p&gt;
+
+&lt;p&gt;Перечисленные функции мы указываем в качестве примера, так как сервис всё время развивается + какие-то функции зависят от выбранного тарифа.&lt;/p&gt;
+
+&lt;p&gt;Бесплатный тариф включает до 1500 писем — это отличный вариант для маленьких компаний или для знакомства с сервисом. При этом нужна только регистрация — никаких карт привязывать не нужно.&lt;/p&gt;
+
+&lt;p&gt;В общем, у Unisender есть всё необходимое для комфортной работы.&lt;br /&gt;
+У того же MailChimp до момента ухода была только английская версия. Это не сильно мешало работать, но разобраться в сложных или спорных моментах без русскоязычной поддержки непросто. При этом английский саппорт работал по времени другого полушария. У Unisender есть всё для удобной коммуникации: чат поддержки и горячая линия.&lt;/p&gt;
+
+&lt;h2&gt;Unisender: техническая часть&lt;/h2&gt;
+
+&lt;p&gt;Пока что у Unisender и Drupal не самая крепкая дружба: нет готовой интеграции, т.к. нет готовых и оттестированных модулей. Есть «сырой» модуль для Drupal 7 и &lt;a href="https://www.drupal.org/project/unisender_news"&gt;наши наработки модуля для Drupal 8&lt;/a&gt;. Наш вариант открыт для предложений и усовершенствований. Любой желающий Drupal-разработчик может перейти по ссылке и внести свою лепту в более гармоничную работу Unisender и Drupal.&lt;/p&gt;
+
+&lt;p&gt;И несмотря на то, что оба модуля совсем базовые, это не означает, что готовое решение не появится в ближайшем будущем.&lt;/p&gt;
+
+&lt;p&gt;У нас пока не получилось «упаковать» интеграцию с Unisender. Дело в том, что все клиенты обратились с нестандартными решениями под конкретные задачи. &lt;/p&gt;
+
+&lt;p&gt;В одном случае мы настраивали рассылку через панель администратора Drupal. Клиенту не нужен весь широкий функционал Unisender, только самое необходимое:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;сбор почтовых адресов пользователей, которые регистрируются на сайте;&lt;/li&gt;
+	&lt;li&gt;отправка писем по этим адресам;&lt;/li&gt;
+	&lt;li&gt;сбор статистики.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Для всего этого не обязательно заходить в аккаунт Unisender — мы настраиваем панель администратора Drupal таким образом, чтобы «подтянуть» туда все нужные функции. &lt;/p&gt;
+
+&lt;p&gt;Другому клиенту — &lt;a href="http://realchinatea.ru/"&gt;realchinatea.ru&lt;/a&gt; — нужны были те же базовые функции панели администратора для массовых рассылок + настроить отправку автоматических писем (регистрация, статус заказа, смена пароля и т.д.). Шаблоны для таких штучных писем нам нужно брать из Тильды. Например, чтобы отправить письмо при регистрации, в панели Drupal задаётся следующее правило:&lt;/p&gt;
+
+&lt;p&gt;Когда пользователь регистрируется на сайте, Drupal берёт конкретный шаблон из Тильды, подставляет туда логин-пароль-ссылку для входа и отправляет на почту, добавленную пользователем при регистрации.&lt;/p&gt;
+
+&lt;p&gt;Шаблон из Тильды — это часть устоявшихся процессов клиента, которую мы автоматизировали. Административная панель выглядит как одна строка, не нужно переходить в почтовый сервис: просто выбирается ID нужного шаблона из Тильды и действие, на которое надо реагировать.&lt;/p&gt;
+
+&lt;p&gt;Как видите, решения наших клиентов нельзя назвать типичными, из-за чего «упаковать» услугу довольно сложно — всё индивидуально.&lt;/p&gt;
+
+&lt;p&gt;При этом мы не можем назвать подключение сайта к Unisender сложной задачей. Хотим похвалить Unisender за гибкое и стабильное API и грамотную документацию с подробными описаниями — никаких подводных камней.&lt;/p&gt;
+
+&lt;p&gt;Простыми словами API — это способы и правила общения между двумя программами. Например, Drupal просит Unisender отправить письмо вашему клиенту, а Unisender эту команду выполняет. Но чтобы это произошло, на вашем сайте должен быть API, то есть некий командный пункт, из которого Drupal сможет посылать свои запросы, а Unisender их получать и наоборот. И вот в этой части Unisender большие молодцы — тесты не показали никаких проблем.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;В процессе работы мы поправили только один недочёт, который не зависит от Unisender — сервера Microsoft иногда блокируют их письма. У этого нет понятного объяснения, поэтому со своей стороны мы оформили дополнительную проверку: если сайт отправляет письмо и статус «не доставлено» длится дольше 5 минут, сайт повторно отправляет письмо уже через свои стандартные средства. Такой защитный механизм даёт 100% гарантию доставки.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2&gt;Панель администратора Drupal: бесшовный переход между почтовыми сервисами&lt;/h2&gt;
+
+&lt;p&gt;Мы несколько раз коснулись отправки писем через административную панель Drupal и не просто так. Для многих клиентов это удобный способ организации рассылок, и сейчас мы объясним почему.&lt;/p&gt;
+
+&lt;p&gt;Любые действия на сайте должны строиться от задач клиента, что мы и показали в прошлом разделе на наших примерах. Грубо говоря, зачем человеку панель от самолёта, если ему нужен только штурвал?  &lt;/p&gt;
+
+&lt;p&gt;Мы можем добавить в админку Drupal любой функционал Unisender:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;статистику;&lt;/li&gt;
+	&lt;li&gt;создание списков пользователей&lt;/li&gt;
+	&lt;li&gt;автоматическое добавление в эти списки при определённом действии, например, при регистрации клиент отметил, что он оптовый покупатель&lt;/li&gt;
+	&lt;li&gt;отправку штучных писем и массовых рассылок;&lt;/li&gt;
+	&lt;li&gt;информацию о доставке.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Новым клиентам мы всегда стараемся настроить отправку писем именно через административную панель — это даёт возможность использовать разные сервисы доставки писем, не меняя функционал работы самих рассылок.&lt;/p&gt;
+
+&lt;p&gt;Например, тот же MailChimp и Unisender внутри отличаются, клиенту нужно перестраиваться: там листы — тут списки, здесь один механизм набора письма — тут другой. И это не вопрос удобства — в любом новом месте всё непривычно и всё не так. Административная панель Drupal куда стабильнее. Если вам не нужны постоянные смены шаблонов или другой сложный функционал, есть кнопка «создать рассылку», где нужно просто заполнить поля и нажать кнопку «Отправить». Какой сервис будет доставлять письма уже не столь важно. Меняется только начинка, а интерфейс остаётся.&lt;/p&gt;
+
+&lt;p&gt;Один клиент в итоге не заметил никакой разницы: мы импортировали контакты из старого почтового сервиса и перенесли в новый. Отправка писем через панель Drupal для него не изменилась.&lt;/p&gt;
+
+&lt;p&gt;При этом в панель администратора можно внедрить и тонкие настройки. Например, клиент при регистрации указывает, что он оптовый покупатель и попадает в отдельный список. Теперь при отправке писем можно поставить галочку «оптовикам» и письма уйдут только им.&lt;/p&gt;
+
+&lt;h2&gt;Резюмируем&lt;/h2&gt;
+
+&lt;p&gt;Статья вышла обо всём и понемногу, давайте соберём основные тезисы:&lt;/p&gt;
+
+&lt;ol&gt;&lt;li&gt;Уход Mailchimp не так страшен, клиенты спокойно перешли на отечественный аналог Unisender.&lt;/li&gt;
+	&lt;li&gt;Unisender хорош и с точки зрения работы с письмами, и с точки зрения удобства интеграции с Drupal и другими CMS.&lt;/li&gt;
+	&lt;li&gt;Письма можно отправлять при помощи панели администратора Drupal, куда можно перенести все необходимые инструменты из Unisender: списки пользователей, статистику, информацию о доставке и т.д.&lt;/li&gt;
+&lt;/ol&gt;&lt;p&gt;Если вам нужно подключить к вашему сайту на Drupal почтовый сервис или перенастроить его под панель администратора, как мы описали выше, &lt;a href="https://drupal-coder.ru/support"&gt;обращайтесь к нам.&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+      &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=350&amp;2=comment&amp;3=comment" token="kJWZySdQnjC7ECrc-xZSXBTjfJvsoCNCvKrstDqcmOI"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/integraciya-sendpulse-s-saytom-na-drupal" hreflang="ru"&gt;Интеграция Sendpulse с сайтом на Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Mon, 17 Oct 2022 11:43:19 +0000</pubDate>
+    <dc:creator>Геворг Мкртчян</dc:creator>
+    <guid isPermaLink="false">350 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>Better to spend 4 hours and get there in 5 minutes: why do we need mandatory onboarding on a client's website?</title>
+  <link>https://drupal-coding.com/blog/better-spend-4-hours-and-get-there-5-minutes-why-do-we-need-mandatory-onboarding-clients</link>
+  <description>
+&lt;span&gt;Better to spend 4 hours and get there in 5 minutes: why do we need mandatory onboarding on a client's website?&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/51" lang="" about="https://drupal-coder.ru/user/51" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Сергей Синица&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;пн, 09/26/2022 - 08:16&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2022-09/shutterstock_1902706888.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  English
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Some companies, when they take sites for maintenance, require them to move to their servers and their infrastructure. More often they charge money for this work. At Initlab, we support Drupal websites on our clients' servers, we don't require them to move, and therefore we don't charge money for this move. Instead, we have mandatory onboarding. In this article we'll explain what it's for and what the benefits are.&lt;/p&gt;
+
+&lt;p&gt;Many customers are frightened when we have barely started working together and the tasks already have 4 hours of work. The word "onboarding" is also not quite clear, what is it and what is it for? When you have a website, you'll start counting hours!&lt;/p&gt;
+
+&lt;p&gt;It's all very easy to explain with a simple analogy. The client is the owner of the ship on which he hires an Initlab team. And a good team makes sure to check the ship before it sails. You have to fix bugs, tidy up, bring your own equipment, etc. You can scoop water out of the hold with a mug in the middle of the voyage, but wouldn't it be easier to patch the hole and sail on in peace?&lt;/p&gt;
+
+&lt;p&gt;This is what mandatory onboarding is all about - checking, debugging all systems, making future work easier. Four hours spent now will save a lot of working hours, and therefore the client's money.&lt;/p&gt;
+
+&lt;p&gt;We will describe all the steps our managers, system administrators and developers take before the site is fully operational.&lt;/p&gt;
+
+&lt;h2&gt;Managers' tasks&lt;/h2&gt;
+
+&lt;p&gt;Our managers are not only responsible for future communication with the client, but they also have to oversee the overall order of the project and control all processes. Their tasks during onboarding:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;Obtain SSH access from the client and into the site's admin area, add logins and passwords to PassPack. Our employees need secure access to the server/hosting - SSH - to work in peace of mind. We try to work through SSH and through the console for security reasons and to save time. Managers then check that passwords are correct and enter them into PassPack. This is an encrypted vault of passwords - we never send such data via email or correspondence. Only PassPack. It guarantees complete security and confidentiality of access to the site.&lt;/li&gt;
+	&lt;li&gt;Design a project in RedMine. RedMine is a project management system, where all the website tasks are located. An account is created for the client. He or she can keep track of the time spent, send in tasks, view their priorities and the staff working on them.&lt;/li&gt;
+	&lt;li&gt;Set a task and monitor its completion. Our managers train clients on how to use RedMine and check that everything is working correctly - notifications are received, tasks are set, the developers receive them and complete them. Further coordinated work with the client is our priority.&lt;/li&gt;
+	&lt;li&gt;Offer additional services: backups, administration, SEO audits. No, we don't mean to impose services. Our managers will find out what your site needs and whether you need it. They will first consult with those who will work with your site, find out the additional needs of the site and suggest only what you need.&lt;/li&gt;
+&lt;/ul&gt;&lt;h2&gt;Tasks of DevOps, system administrators&lt;/h2&gt;
+
+&lt;p&gt;These guys will set up and maintain your web server, keep your site running, and help developers do their work quickly and efficiently. All onboarding tasks usually take them up to two hours - time well worth it.&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;Install Drush on a prod. Drush is a command that can be used to quickly perform actions on the site: reset the cache, connect to the database, enable/disable modules. You don't have to go into the admin panel every time you use it. This will simplify basic tasks and save hours and therefore money for the client.&lt;/li&gt;
+	&lt;li&gt;Set up a demo copy, save access to PassPack. We always make a working copy of the site, usually on our own servers. This is necessary to demonstrate the intermediate results of the work - to hand over a complex task in parts, to coordinate changes so as not to break the main site. We lock the copy with a separate password in PassPack to protect against leaks and to ensure that the developers have access at all times.&lt;/li&gt;
+	&lt;li&gt;Set up Git. Git is a system for controlling and storing file versions. It's a must-have service for all developers. All changes from the site are recorded here - who, when, and what was changed. So that if anything happens, you can roll back to an old version or find the time when changes were made.&lt;/li&gt;
+	&lt;li&gt;Set up CI. CI helps you quickly transfer changes from copies of the website to the working version. Manual migration takes much more time and labour. We are used to keeping things simple and fast, making it easier for everyone, including the client. In addition, CI setup allows to implement automatic code review for Drupal standards and automate testing of the site when changes are transferred, as well as to update the copy of the site at the click of a button. Code validation and automatic testing are necessary on complex projects in large development teams and aren't mandatory for everyone. But on large-scale projects, we highly recommend them - so there will be fewer bugs and glitches. They are implemented in consultation with the client.&lt;/li&gt;
+	&lt;li&gt;Archiving a copy of the website database before work commences. The site consists of files and a database - the files contain images and code for the site, scripts, and the database contains content, users and shop orders. Before starting the work we back up the database copy and place it on the archive server so that in case of force majeure we can restore everything or compare it with the initial version. Any errors detected on the copy of the site DevOps indicates in a ticket for further analysis by the developers. Our developers get involved and help deploy a fully working copy of the site for development.&lt;/li&gt;
+	&lt;li&gt;Putting the website up for monitoring. This service is agreed upon with the client. We monitor the availability of the site and the availability of security updates. This is necessary so that we can fix problems on the site more quickly.&lt;/li&gt;
+&lt;/ul&gt;&lt;h2&gt;Developers' tasks&lt;/h2&gt;
+
+&lt;p&gt;These guys will design your website. Their job is to make sure that the site was originally designed to the highest Drupal standards. If this is not the case, the developers will make recommendations on how to improve the site in the future, and determine which tools can be used at the moment. Developers are responsible for one of the most critical parts of the job, which means their 2 hours of preparation and testing now will save dozens of hours in the future.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;1. general assessment of site quality to facilitate further evaluation (custom + Hacked + Schema + Watchdog).&lt;/b&gt; This is something akin to a doctor's check-up. Developers look at the "history" of your site - what happened to it before, how it was created and maintained before. At this stage there are 4 mandatory points of check:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;Has anyone made custom modules? Drupal is a system where you can use pre-made modules or you can write your own. As a rule, 99% of functionality can be implemented on off-the-shelf solutions. But many developers don't know about it, so they "reinvent the wheel". We check the site for 'self-written' parts, so that we can take control of them and, if possible, fix them in the future.&lt;/li&gt;
+	&lt;li&gt;Have developers changed the Drupal core before us? Sometimes developers for various reasons (don't know how, don't want to, believe it's faster) make changes to the Drupal core at once. It's like breaking your arm and instead of putting a cast on it you just cut it off. That's why our developers check the core for such unauthorized changes in Drupal core. It's all the same site operability and time saved in the future.&lt;/li&gt;
+	&lt;li&gt;Whether the database structure has been changed. In this case, Drupal updates may not apply. We, therefore, adjust the database structure description so that there are no problems with security updates. Or document the changes found so that they can be taken into account in the future.&lt;/li&gt;
+	&lt;li&gt;We review Watchdog. This is a built-in Drupal module that logs errors. If there are a lot of them, the site will work slowly and further maintenance will be complicated - you'll have to spend time figuring out the causes later. We check the pages of the site for errors in Watchdog. If everything is done by Drupal standards, there won't be anything unnecessary there. But if a non-professional or inexperienced developer was working on the site then the Watchdog will contain some entries for errors. Sometimes there are too many of them, which is why they need to be dealt with immediately.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;b&gt;2. explore the state of Composer and configurations for Drupal 8+ sites and Features for Drupal 7:&lt;/b&gt;&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;not conflict with the way the site has worked before us, otherwise, there is a risk of breaking a lot of things;&lt;/li&gt;
+	&lt;li&gt;quickly update or install the required module on the website;&lt;/li&gt;
+	&lt;li&gt;record the history of changes to the website settings;&lt;/li&gt;
+	&lt;li&gt;quickly transfer changes from copies of the site to the main site;&lt;/li&gt;
+	&lt;li&gt;reduce errors (a robot does this, not a human, which is not perfect).&lt;/li&gt;
+	&lt;li&gt;If the condition is far from satisfactory, in consultation with the client, we will tidy up the necessary parts of the site.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;b&gt;3. Find out if there is nothing wrong with the site's display.&lt;/b&gt; In addition to its internal processes, the site also has an appearance - how it is displayed to your customers. The design theme is responsible for the appearance of the site. Typically, its development utilizes preprocessor - a special programming language and tools. And if at the beginning of the creation there was used the preprocessor, and then they worked without it, in the code of the site will be difficult to navigate. There is a risk of losing all the changes made, if they were introduced in the wrong place or the preprocessor is not running correctly. There are many preprocessors, so we find out which one was used and how to continue working with it.&lt;/p&gt;
+
+&lt;p&gt;We hope we have managed to explain clearly why onboarding is so important. In essence, it's the same as a changeover, just like in any production facility. We value comfort and speed, because both we and the customer need it. Four hours of time to work in the "field" in peace of mind. Believe us, it's worth it.&lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coding.com/blog/support" hreflang="en"&gt;Support&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=349&amp;2=comment&amp;3=comment" token="eXni2uy0tNUS7Ct7QRnNbYPk9sxS0TE6ivKiuXZ3nYY"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;</description>
+  <pubDate>Mon, 26 Sep 2022 08:16:29 +0000</pubDate>
+    <dc:creator>Сергей Синица</dc:creator>
+    <guid isPermaLink="false">349 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>How a flexible development and a planned budget help us maintain and develop clients' sites. The experience of an IT company.</title>
+  <link>https://drupal-coding.com/blog/how-flexible-development-and-planned-budget-help-us-maintain-and-develop-clients-sites</link>
+  <description>
+&lt;span&gt;How a flexible development and a planned budget help us maintain and develop clients' sites. The experience of an IT company.&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/51" lang="" about="https://drupal-coder.ru/user/51" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Сергей Синица&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;ср, 09/21/2022 - 13:23&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2022-09/shutterstock_2150398279_0.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  English
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;To be at the forefront of their industry, businesses need to constantly evolve. It is no longer enough just to build a website and wait for customers. &lt;/p&gt;
+
+&lt;p&gt;What makes a true leader different is that they aim to upgrade their online presence on a regular basis: they try new things, test hypotheses and want to bring ideas to life in as little time as possible.&lt;/p&gt;
+
+&lt;p&gt;If you are aiming at scale, it is not enough to give a freelancer the task of "changing the picture on the home page". You need to entrust the development of your web-project to those who will maintain it in working order and at the same time improve it.&lt;/p&gt;
+
+&lt;p&gt;At Initlab, we believe that &lt;b&gt;a website is a process&lt;/b&gt;, not a ready-made solution. Constant planning, the balance between solving current problems and introducing new features: done, analysed, outlined improvements - this song has no end, start again.&lt;/p&gt;
+
+&lt;p&gt;Our job isn't just to fix minor flaws - we're interested in the long-term development of the client's site. We've been in IT for so many years for this reason.&lt;/p&gt;
+
+&lt;p&gt;In this article, we'll tell you how agile development is organised at Initlab and how it helps us maintain and improve our clients' websites in parallel.&lt;/p&gt;
+&lt;img alt="flexible-1" data-entity-type="file" data-entity-uuid="bee07834-3b5b-487e-b421-947af1888a81" src="https://drupal-coder.ru/sites/default/files/inline-images/shutterstock_2043234731_1.jpg" class="align-center" width="600" height="375" loading="lazy" /&gt;&lt;h2&gt;A little about ourselves&lt;/h2&gt;
+
+&lt;p&gt;We are Initlab. A cool team of specialists with twenty years of experience in web development and 15 years in Drupal. We're called when the simple is done and the complicated is left. When everyone has given up or broken everything, when there are large-scale projects that the client wants to develop. &lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+&lt;img alt="flexible-3" data-entity-type="file" data-entity-uuid="bbe7e2fe-ea00-4cb8-b5b1-66c69bb983de" src="https://drupal-coder.ru/sites/default/files/inline-images/shutterstock_2096393167_0.jpg" class="align-center" width="600" height="470" loading="lazy" /&gt;&lt;h2&gt;How agile development is built&lt;/h2&gt;
+
+&lt;p&gt;We won't say anything new to those who have heard of Agile or Kanban. But if you want to learn about the obvious benefits of this approach, stay tuned. In classic website support, the scenario is: the client is told the price per hour of work→ a contract is signed→ tasks are given to performers→ they are completed. In the case of agile development, after the client asks, the following happens:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1. Calculate the approximate time it will take to do all the planned work.&lt;/strong&gt; The keyword is approximate. We do not give an exact estimate on the revision of the site in cases where: 1) if the site was not made by us and we do not know how it is written; 2) if we have to do something new and we still do not know what and how much it will take. We give a rough estimate at the client's request, based on our experience.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2. We agree on the optimum budget per month.&lt;/strong&gt; In a classic situation, the client is invoiced at the end of the month/quarter based on the work done. For flexible development it is necessary for the client to determine the amount of money he is ready to invest in the support and development of the site per month, and we calculate whether it is enough to employ the necessary team and planned tasks. We'll tell you what it's for below. When the budget is agreed upon, we sign a contract.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3. Prioritise the tasks.&lt;/strong&gt; What needs to be done urgently, what can be tolerated for now, and what can be done on the remaining budget? In most cases, it is the client who prioritises tasks, especially if the project is large and there is a lot to do. For our part, we give a list of tasks that the client may not think about from his point of view: testing the site, eliminating technical debt, etc.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;4. Allocate the budget to all the tasks you are planning.&lt;/strong&gt; The most important item has its own section.&lt;/p&gt;
+
+&lt;h2&gt;Spreading the budget&lt;/h2&gt;
+
+&lt;p&gt;Every project is different and there is no single recipe, so as an example, we will describe a generic version of where the money goes. Thus:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1. Monitoring the state of the site with manual and automatic tests.&lt;/strong&gt; Is the shopping cart working? What are the results of searching the site? Is the layout upside down? All this should be checked after each change/update. Small projects have enough human power, larger ones need automation. It takes approximately 20% of the budget for continuous testing.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2. Problems, bugs, operational tasks&lt;/strong&gt; - from the "drop everything and run to fix the basket" category. We allocate about 30% of the budget to this.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3. technical debt - fixing accumulated bugs and defects.&lt;/strong&gt; Past developers do not always leave the site in perfect condition. Small defects can slow down the site and complicate development. Technical debt takes about 10% of the budget to fix.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;4. upgrading to the latest versions of the site software.&lt;/strong&gt; For example, upgrade Drupal from version 7 to 9. On this we put about 10%.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;5. New business functions.&lt;/strong&gt; We make a road-map with a customer: what will be the site in a year or two and what functions he wants to see there. For big business, this is probably the most essential part of the job, so we spend about 30% of the budget on it. If we "make sense", all the above helps us to keep the balance on the project: to solve urgent tasks and in parallel to harmoniously develop the project. Roughly speaking, putting out a fire and planting new trees at the same time is agile development.&lt;/p&gt;
+
+&lt;p&gt;The percentage from our 'example in a vacuum' can be allocated as desired according to current goals and objectives. We save 30% until the end of the month for urgent tasks, but doesn't anything happen? The allotted hours can be spent on security upgrades. Closed the technical debt that was preventing normal work faster than planned? Use the remaining budget for something else.&lt;/p&gt;
+
+&lt;p&gt;As the project develops, we are constantly analysing whether it needs new business features, working on speeding up the site, and updating all the available Drupal modules. If the site expands and language versions appear, our job is to create copies of it. On large-scale projects, we need to make sure that changes are made in one place and updated on five sites.&lt;/p&gt;
+
+&lt;p&gt;Maintaining a website is not just about current tasks. It is thinking ahead, maintaining a state of readiness for business growth, expansion and development.&lt;/p&gt;
+
+&lt;h2&gt;Distribution of tasks&lt;/h2&gt;
+
+&lt;p&gt;To the client, all this can sound daunting. How can they know that we have sorted out the main problems and started to improve the project according to our plan. As they say, it sounds nice, but how do you prove it? One of our main principles is openness. And it is easy to do so with our task-setting and task-control service (tracker). We give the client access to the tracker and teach them how to use it. All processes can be monitored here. But first and foremost, together with the customer, we enter the required tasks into the system and prioritise them. You can add, change or refine what you need at any time.&lt;/p&gt;
+
+&lt;p&gt;Tasks are allocated to the assigned project specialists in order of priority according to their specialisation (front, back, administration, etc.) We make changes to the site when ready, rather than waiting until the end of the month, another iteration or payment for the task. For us, as for our client, the result is primary.&lt;/p&gt;
+
+&lt;h2&gt;Customer fears: missing tasks, project pauses and missed deadlines&lt;/h2&gt;
+
+&lt;p&gt;In practice, we have encountered different attitudes to the planned budget, which is important for agile development. Let's list some of them &lt;b&gt;&lt;i&gt;- Let's pay for it when the tasks are done.&lt;/i&gt;&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;The point of budget planning is to reserve the developer's time. If a developer isn't engaged in your project, he is most likely busy with another one, and it's hard to pull him away - he allocates his time where there is a work plan and a clear salary. Once tasks from an unscheduled project fall on him, he is likely to take a very long time to get to it, because the schedule is packed. If the client is prepared to wait for months, this format of work is in principle possible.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;&lt;i&gt;- And if there are no / few tasks / business has difficulties, and the budget has already been paid for?&lt;/i&gt;&lt;/b&gt; It's simple: if there are few tasks, we redistribute time on things that are not directly related to business: refactoring code, setting up testing, etc. That is, on the existing budget we prepare the site for future growth, to accelerate and simplify future processes.&lt;/p&gt;
+
+&lt;p&gt;If there are more tasks than the budget, we agree on increasing the budget (if the business is ready), or we "cool down" and focus only on what is important. If the business is having problems, of course, we can put the process on hold. But here you have to realise that it takes time for developers to shut down services and then they will go off to other projects. When work resumes, follow-up onboarding and some time to get the right people back together will be necessary.&lt;/p&gt;
+
+&lt;p&gt;But we have little faith in the complete absence of tasks on the site. It's like a private home: there is always something to do. With a fixed budget and flexible design, we can:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;stop tasks if they take too much time or while something more important has come up;&lt;/li&gt;
+	&lt;li&gt;redirect resources to what the business needs now;&lt;/li&gt;
+	&lt;li&gt;Correct critical errors that were found in the process without waiting for additional approvals.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Developers &lt;b&gt;will always know what to do on your site.&lt;/b&gt; There are no separate meetings, no tedious negotiations about which button to move this month and when we will finally roll out the catalogue expansion - tasks are set through the tracker, the site improves, business runs and grows.&lt;/p&gt;
+&lt;img alt="flexible-4" data-entity-type="file" data-entity-uuid="3a5c0928-9568-4121-9a68-a7b6116ccc2c" src="https://drupal-coder.ru/sites/default/files/inline-images/shutterstock_1160577928_0.jpg" class="align-center" width="600" height="360" loading="lazy" /&gt;&lt;h2&gt;Rigid development: fixing hours per task and penalties for failing to meet deadlines&lt;/h2&gt;
+
+&lt;p&gt;Some customers are still intimidated by uncertainty. They feel that the allocated budget is not being spent correctly and want to be specific: tell us exactly how much it will take for this task. We have written above that we do not give a clear estimate, but let's say the client asks for it and we give in: our estimate is 5 hours. And the client, in order to keep the budget within the limits, adds: if you exceed these hours, you will pay a fine or do it at your own expense?&lt;/p&gt;
+
+&lt;p&gt;Sounds fair: if you've done the estimate, do it for as much as you've estimated. But let's try to transfer this approach to another job. Let's say you tell an electrician that your socket is broken. He quotes a price for the job and starts working. In the course of the inspection, it turns out that the problem is in the wiring. Is it fair to demand from the electrician to change the wiring in the same amount of time as the socket and for the amount he initially quoted?&lt;/p&gt;
+
+&lt;p&gt;Or the opposite situation: you've decided that your meter is permanently broken and you're getting ready to shell out a hefty sum. But it turns out that it's just a loose wire and it's not that bad. The electrician will either charge you less or use the remaining money to check/repair outlets/switches/lights in all the rooms. When a customer asks for a specific cost for a step or task and wants to fine you for exceeding it, there are a number of problems that arise:&lt;/p&gt;
+
+&lt;p&gt;1. We can only take on a complete ToR. Describe to the molecules what exactly needs to be repaired and where. On the client's side, you either need a competent person who is able to give detailed terms of reference, or you need to pay for the time of our manager, who will clarify/supplement/clear up what you need. And if it turns out that the customer didn't want or didn't want it that way, the bribe is free: the TOR is agreed upon, we worked strictly according to it. Plus, you won't get any edits along the way. A simple request to repaint/move a button at the same time will require new approvals and a new ToR.&lt;/p&gt;
+
+&lt;p&gt;2. We have to lay down risks. If someone agrees to work with you in this format, then they have already multiplied the estimate by a factor of two or three. No one is going to work at a loss. We don't think this is very fair, but in such a case you have to cover the costs: the manager, the appraisers, the possible fines. Instead of an approximate but more honest estimate, we insure, multiply the hours by the tasks and your costs. We are not comfortable with this approach. Conditional peace of mind only multiplies the cost of the project.&lt;/p&gt;
+
+&lt;p&gt;3. we are not interested in finalizing tasks. Get it right: if a developer does a task and finds a problem along the way, they will not solve it to the detriment of the time available for the main part of the work. Even if the 'side quest' is quickly solved. Now he will simply say that there is such a problem and wait for the TOR to be agreed with the client. We end up agreeing, formalising, clarifying, drawing up, counting and estimating. And we could be working. Where better to start, get 80% of the result, refine and finish. Flexible design means:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;more trust on the part of the customer;&lt;/li&gt;
+	&lt;li&gt;prioritising rapid implementation of change over reading and signing paperwork.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Communication with the manager and project managers does not turn into a series of approvals - it is a joint work of people interested in improving and developing the site. In summary: it is possible to work in this format, but it is necessary to do so:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;to tax the team with managers;&lt;/li&gt;
+	&lt;li&gt;to assess any kind of bullshit;&lt;/li&gt;
+	&lt;li&gt;not to expect our team to give their all;&lt;/li&gt;
+	&lt;li&gt;accept the fact that risks have been mortgaged.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Flexible development + years of well-established work processes = solving our customers' large-scale problems:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;enter new markets and develop language versions of the website;&lt;/li&gt;
+	&lt;li&gt;launch online sales;&lt;/li&gt;
+	&lt;li&gt;speed up the operation of the website;&lt;/li&gt;
+	&lt;li&gt;update the design and add new and needed features;&lt;/li&gt;
+	&lt;li&gt;fix any bugs that cause the company to lose money&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;and still stay within an understandable budget.&lt;/p&gt;
+
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Let's conclude with the idea we started with: a website is a process. A process that should run like clockwork, or be like a continuous dance, if you like. The future lies in a coherent alliance of businesses and development teams dedicated to helping those businesses. We at Initlab are sure of this, and we base all our work on this basis.&lt;/p&gt;
+&lt;/div&gt;
+      &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=348&amp;2=comment&amp;3=comment" token="MP03gq1wB0yh2HgIEL-wMx_-xVicrEBBt1Gd2IYSQLQ"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coding.com/blog/better-spend-4-hours-and-get-there-5-minutes-why-do-we-need-mandatory-onboarding-clients" hreflang="en"&gt;Better to spend 4 hours and get there in 5 minutes: why do we need mandatory onboarding on a client's website?&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Wed, 21 Sep 2022 13:23:28 +0000</pubDate>
+    <dc:creator>Сергей Синица</dc:creator>
+    <guid isPermaLink="false">348 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>Как гибкая разработка и планируемый бюджет помогают нам поддерживать и развивать сайты клиентов. Опыт IT-компании.</title>
+  <link>https://drupal-coder.ru/blog/kak-gibkaya-razrabotka-i-planiruemyy-byudzhet-pomogayut-nam-podderzhivat-i-razvivat-sayty</link>
+  <description>
+&lt;span&gt;Как гибкая разработка и планируемый бюджет помогают нам поддерживать и развивать сайты клиентов. Опыт IT-компании.&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/51" lang="" about="https://drupal-coder.ru/user/51" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Сергей Синица&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;пт, 09/16/2022 - 07:58&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2022-09/shutterstock_2150398279.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Чтобы занимать лидирующие позиции в своей отрасли, бизнесу нужно постоянно развиваться. Уже недостаточно просто сделать сайт и ждать клиентов.&lt;br /&gt;
+ &lt;br /&gt;
+Настоящих лидеров отличает то, что они нацелены на регулярный апгрейд своего представительства в сети: пробуют новое, тестируют гипотезы и хотят воплощать идеи в жизнь за минимальное время.&lt;br /&gt;
+ &lt;br /&gt;
+Если вы нацелены на масштаб, мало ставить фрилансеру задачи из разряда «поменять картинку на главной». Нужно доверить развитие своего интернет-проекта тем, кто будет поддерживать его в рабочем состоянии и параллельно улучшать.&lt;br /&gt;
+ &lt;br /&gt;
+Мы в Initlab убеждены, что &lt;strong&gt;сайт — это процесс&lt;/strong&gt;, а не готовое решение. Постоянное планирование, баланс между решением текущих задач и введением новых функций: сделали, проанализировали, наметили улучшения — эта песня без конца, начинай сначала.&lt;br /&gt;
+ &lt;br /&gt;
+Наша задача не просто поправлять мелкие недостатки — мы заинтересованы в долгосрочном развитии сайта клиента. Ради этого мы столько лет в IT.&lt;br /&gt;
+ &lt;br /&gt;
+В этой статье мы расскажем о том, как в Initlab организована гибкая разработка и как она помогает нам параллельно поддерживать и улучшать сайты наших клиентов.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Initlab Drupal" data-entity-type="file" data-entity-uuid="5590be2d-8e15-49ca-9184-8c48f15e7c75" src="https://drupal-coder.ru/sites/default/files/inline-images/shutterstock_2043234731.jpg" width="600" height="375" loading="lazy" /&gt;&lt;br /&gt;
+ &lt;/p&gt;
+
+&lt;h2&gt;Коротко о себе и наших клиентах&lt;/h2&gt;
+
+&lt;p&gt;Мы — Initlab. Крутая команда специалистов с опытом от двадцати лет в web-разработке и от 15 лет в Drupal. Нас зовут, когда сделано простое и осталось сложное. Когда все отказались или всё сломали. Когда масштабные проекты, которые заказчик хочет развивать.&lt;br /&gt;
+ &lt;br /&gt;
+В 2020 году наш клиент &lt;a href="https://www.pnevmoteh.ru/"&gt;PNEVMOTEH&lt;/a&gt; получил премию «E-COMMERCE» как лучший интернет-магазин среди малого бизнеса.  В 2022 компания сменила весовую категорию и стала вторым лучшим интернет-магазином Беларуси, уступив место только МТС. Есть над чем работать и к чему стремиться.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Пневмотех " data-entity-type="file" data-entity-uuid="303ea7a8-35f0-477f-9b51-1c0d34497c68" src="https://drupal-coder.ru/sites/default/files/inline-images/%D0%BF%D0%BD%D0%B5%D0%B2%D0%BC%D0%BE%D1%82%D0%B5%D1%85.jpg" width="318" height="423" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Другой наш клиент — завод &lt;a href="https://alvero-dveri.ru/"&gt;«Альверо»&lt;/a&gt;, из-за специфики бизнеса делал упор на офлайн-продажи. Качество премиум-дверей клиенту лучше оценить лично: потрогать материал, изучить фурнитуру, послушать продавца. С приходом пандемии потребовалось дополнить модель продаж системой онлайн-заказов. При разработке сайтов мы закладываем архитектурные решения, которые предполагают развитие и расширение. Поэтому задача от клиента поступила на подготовленную почву: мы внедрили онлайн-заказ на сайт суммарно за 30 часов. Без грамотной архитектуры на это ушло бы от месяца и больше.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://www.rastl.ru/"&gt;RASTL.RU&lt;/a&gt; — интернет-магазин, который уже более 10 лет на рынке текстильных товаров. Их сайт — один из основных инструментов продаж, над которым мы также постоянно работаем. В 2021 году государство потребовало маркировать текстиль и одежду по системе «Честный ЗНАК», что повлекло за собой ряд проблем с онлайн-торговлей. Благодаря тому, что наш разработчик до этого написал и внедрил на RASTL.RU специальный модуль для отправки чеков по 54-ФЗ, мы смогли без труда доработать его архитектуру так, чтобы нужная информация уходила теперь и в систему ЧЗ. Об этом мы писали &lt;a href="https://drupal-coder.ru/blog/keys-kak-my-nastraivali-markirovku-chekov-po-sisteme-chestnyy-znak-integraciya-onlayn-kass-s"&gt;здесь&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Разумеется, это не все наши клиенты, а лишь мини-кейсы для примера. Но всё, что мы описали, работает слаженно и быстро решается благодаря гибкой разработке.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Initlab Drupal" data-entity-type="file" data-entity-uuid="3d1b1030-f86a-46cd-b592-fe7b903c7f63" src="https://drupal-coder.ru/sites/default/files/inline-images/shutterstock_2096393167.jpg" width="600" height="470" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Как строится гибкая разработка&lt;/h2&gt;
+
+&lt;p&gt;Мы не скажем ничего нового тем, кто слышал про Agile или Канбан. Но если вы хотите узнать про очевидную пользу такого подхода, оставайтесь на линии.&lt;br /&gt;
+ &lt;br /&gt;
+В классической поддержке сайта сценарий такой:&lt;br /&gt;
+ &lt;br /&gt;
+заказчику говорят цену за час работы→ подписывается договор→ задачи дают исполнителям→их выполняют.&lt;br /&gt;
+ &lt;br /&gt;
+В случае с гибкой разработкой, после обращения клиента, происходит следующее:&lt;br /&gt;
+ &lt;br /&gt;&lt;strong&gt;1. Рассчитываем примерное время, которое уйдёт на всё запланированное. &lt;/strong&gt;Ключевое слово — примерное. Мы не даём точную оценку на доработку сайта в случаях: 1) если сайт делали не мы и не знаем, как он написан; 2) если нам предстоит делать нечто новое и мы пока не понимаем, что и сколько займёт. Мы даём ориентировочную оценку по запросу клиента, исходя из нашего опыта.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2. Согласовываем оптимальный бюджет в месяц.&lt;/strong&gt; В классической ситуации клиент получает счёт в конце месяца/квартала по факту выполненных работ. Для гибкой разработки нужно, чтобы клиент определил сумму, которую готов вкладывать в поддержку и развитие сайта в месяц, а мы рассчитали, хватит ли её для занятости нужного состава команды и планируемых задач. Для чего это служит, расскажем ниже. Когда бюджет согласован, мы подписываем договор.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3. Расставляем приоритеты по задачам. &lt;/strong&gt;Что нужно сделать срочно, что пока терпит, а что делаем на оставшийся бюджет? Чаще всего распределяет задачи по важности клиент, особенно если проект большой и дел там невпроворот. Со своей стороны мы даём список задач, о которых клиент с его позиции может не задумываться: тестирование сайта, устранение технического долга и т.п.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;4. Распределяем бюджет между всеми задачами, которые планируем.&lt;/strong&gt; Самому важному пункту — отдельный раздел.&lt;/p&gt;
+
+&lt;h2&gt;Распределяем бюджет&lt;/h2&gt;
+
+&lt;p&gt;Все проекты разные и одного рецепта нет, поэтому в качестве примера мы опишем типовой вариант того, куда уходят средства. Итак,&lt;br /&gt;
+ &lt;br /&gt;&lt;strong&gt;1. Контроль состояния сайта с помощью ручных и автоматических тестов.&lt;/strong&gt; Работает ли корзина? Какой результат даёт поиск по сайту? Не поехала ли вёрстка? Всё это нужно проверять после каждого изменения/обновления. На маленьких проектах хватает человеческих сил, на крупных уже нужна автоматизация.&lt;/p&gt;
+
+&lt;p&gt;На постоянное тестирование уходит примерно 20% бюджета.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2. Проблемы, баги, оперативные задачи&lt;/strong&gt; — из разряда «всё бросить и бежать чинить корзину». На это мы выделяем примерно 30% бюджета.&lt;br /&gt;
+ &lt;br /&gt;&lt;strong&gt;3. Технический долг — устранение накопленных ошибок и недоделок.&lt;/strong&gt; Прошлые разработчики не всегда оставляют сайт в идеальном состоянии. Мелкие недочёты могут замедлять сайт и усложнять разработку. На устранение технического долга уходит около 10% бюджета.&lt;br /&gt;
+ &lt;br /&gt;&lt;strong&gt;4. Обновление до актуальных версий ПО сайта.&lt;/strong&gt; Например, апгрейд Drupal с 7 до 9 версии. На это закладываем около 10%&lt;br /&gt;
+ &lt;br /&gt;&lt;strong&gt;5. Новые бизнес-функции.&lt;/strong&gt; Мы с заказчиком составляем road-map: каким будет сайт через год-два и какие функции он хочет там видеть. Для большого бизнеса это едва ли не самая необходимая часть работы, поэтому на неё уходит порядка 30% бюджета.&lt;br /&gt;
+ &lt;br /&gt;
+Если «дожать» смысл, то всё вышесказанное помогает нам держать на проекте баланс: решать срочные задачи, параллельно гармоничного развивать проект. Грубо говоря, тушить пожар и одновременно сажать новые деревья — это и есть гибкая разработка.&lt;br /&gt;
+ &lt;br /&gt;
+Процентовку из нашего «примера в вакууме» можно распределять как угодно в соответствии с текущими целями и задачами. Мы бережём до конца месяца 30% на срочные задачи, но ничего не случается? Выделенные на это часы можно потратить на обновление безопасности. Закрыли технический долг, который мешал нормальной работе быстрее, чем планировали? Оставшийся бюджет пустим на что-то другое.&lt;/p&gt;
+
+&lt;p&gt;Пока проект развивается, мы всё время анализируем, нужны ли ему новые бизнес-функции, работаем над ускорением сайта, обновляем все доступные модули Drupal. Если сайт развивается вширь — у него появляются языковые версии, то наша задача создавать его копии. На масштабных проектах нужно сделать так, чтобы изменения вносились в одном месте, а обновлялись на пяти сайтах.&lt;br /&gt;
+ &lt;br /&gt;
+Поддержка сайта это не только текущие задачи. Это мысли на перспективу, поддержание состояния готовности к росту бизнеса, его расширению и развитию.&lt;/p&gt;
+
+&lt;h2&gt;Распределение задач&lt;/h2&gt;
+
+&lt;p&gt;Для клиента всё это может звучать пугающе. Откуда ему знать, что мы разобрались с основными проблемами и начали улучшать проект по нашему плану. Как говорится, звучит красиво, но чем докажешь? Один из наших главных принципов — открытость. И его легко соблюдать с помощью сервиса постановки и контроля задач (трекера).&lt;br /&gt;
+ &lt;br /&gt;
+Мы даём клиенту доступ к трекеру и учим им пользоваться. Здесь можно следить за всеми процессами. Но в первую очередь вместе с заказчиком мы заводим нужные задачи в систему и расставляем их приоритеты. В любой момент можно добавить, изменить или уточнить то, что нужно.&lt;/p&gt;
+
+&lt;p&gt;Задачи распределяются между прикрепленными к проекту специалистами в порядке приоритета по их специализации (фронт, бек, администрирование и т.д.)&lt;br /&gt;
+ &lt;br /&gt;
+Мы вносим правки на сайт по готовности, а не дожидаясь конца месяца, очередной итерации или оплаты за задачу. Для нас, как и для нашего клиента, результат первичен.&lt;/p&gt;
+
+&lt;h2&gt;Страхи клиентов: отсутствие задач, пауза на проекте и затягивание сроков&lt;/h2&gt;
+
+&lt;p&gt;На практике мы сталкивались с разным отношением к планируемому бюджету, который важен для гибкой разработки. Перечислим некоторые из них&lt;br /&gt;
+ &lt;br /&gt;&lt;em&gt;&lt;strong&gt;— Давайте когда будут задачи, тогда и оплатим.&lt;br /&gt;
+ &lt;/strong&gt;&lt;/em&gt;&lt;br /&gt;
+Суть планирования бюджета в резервировании времени разработчика. Если специалист не занят вашим проектом, скорее всего он занят другим и выдернуть его оттуда сложно — он своё время распределяет там, где есть план работ и понятный заработок. Как только на него упадут задачи с внепланового проекта, скорее всего он будет очень долго до него добираться, потому что график забит. Если заказчик готов ждать месяцами, то такой формат работы в принципе возможен. &lt;br /&gt;
+ &lt;br /&gt;&lt;strong&gt;&lt;em&gt;— А если задач не будет/их будет мало/у бизнеса будут трудности, а бюджет уже оплачен?&lt;/em&gt;&lt;/strong&gt;&lt;br /&gt;
+ &lt;br /&gt;
+Здесь всё просто: если задач мало — мы перераспределяем время на то, что не связано с бизнесом напрямую: рефакторинг кода, настройка тестирования и т.д. То есть на имеющийся бюджет готовим сайт к будущему росту, чтобы ускорить и упростить будущие процессы.&lt;br /&gt;
+ &lt;br /&gt;
+Если задач больше, чем бюджета — договариваемся на увеличение бюджета (если бизнес готов), либо «охлаждаем пыл» и фокусируемся только на важном. Если у бизнеса проблемы, разумеется, мы можем поставить процесс на паузу. Но здесь нужно понимать, что разработчикам требуется время, чтобы отключить сервисы и потом они разойдутся по другим проектам. Когда работы возобновятся, будет необходим повторный онбординг и некоторое время, чтобы собрать нужных людей снова.&lt;br /&gt;
+ &lt;br /&gt;
+Но мы слабо верим в полное отсутствие задач на сайте. Это как частный дом: всегда есть, чем заняться. Благодаря фиксированному бюджету и гибкой разработке мы можем:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;останавливать задачи, если на них уходит слишком много времени или пока появилось что-то важнее;&lt;/li&gt;
+	&lt;li&gt;перенаправлять ресурсы на то, что нужно бизнесу именно сейчас;&lt;/li&gt;
+	&lt;li&gt;исправлять критические ошибки, которые были найдены в процессе работы не дожидаясь доп.согласований.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Разработчики &lt;strong&gt;всегда будут знать, чем заняться на вашем сайте&lt;/strong&gt;. Не нужно отдельных планёрок, нудных переговоров, какую кнопку передвинуть в это месяце и когда мы наконец развернём курс на расширение каталога — задачи ставятся через трекер, сайт улучшается, бизнес работает и растёт.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Initlab Drupal" data-entity-type="file" data-entity-uuid="637b2b73-0de6-4349-b9e0-9b798750e0b3" src="https://drupal-coder.ru/sites/default/files/inline-images/shutterstock_1160577928.jpg" width="600" height="360" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Ригидная разработка: фиксирование часов на задачу и штрафы за несоблюдение сроков&lt;/h2&gt;
+
+&lt;p&gt;Некоторых заказчиков всё равно пугает неопределённость. Им кажется, что выделенный бюджет расходуется неправильно и хочется конкретики: скажите точно, сколько уйдёт на эту задачу.&lt;br /&gt;
+ &lt;br /&gt;
+Выше мы писали, что не даём чётких оценок, но допустим клиент очень просит и мы сдаёмся: по нашим оценкам — 5 часов. И клиент, дабы сохранить бюджет в очерченных рамках, добавляет: а давайте если вы превысите эти часы, вы оплатите штраф или сделаете за свой счёт?&lt;br /&gt;
+ &lt;br /&gt;
+Звучит справедливо: оценили — делайте за столько, на сколько оценили. Но давайте попробуем переложить такой подход на другую работу.&lt;br /&gt;
+ &lt;br /&gt;
+Допустим, вы говорите электрику, что у вас сломалась розетка. Он называет цену за эту работу и начинает работать. В процессе осмотра выясняется, что проблема в проводке. Справедливо ли требовать от электрика, чтобы он менял проводку за то же время, что и розетку и за ту сумму, что он назвал изначально?&lt;br /&gt;
+ &lt;br /&gt;
+Или обратная ситуация: вы решили, что у вас бесповоротно сломался счётчик и готовитесь выложить круглую сумму. Но оказывается, что просто отстал провод и всё не так страшно. Электрик либо возьмёт с вас меньшую сумму, либо на оставшиеся деньги проверит/починит розетки/выключатели/свет во всех комнатах.&lt;br /&gt;
+ &lt;br /&gt;
+Когда заказчик просит конкретную стоимость этапа или задачи, а за превышение хочет штрафовать, из этого вытекает ряд проблем:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1. Мы можем брать в работу только полное ТЗ. &lt;/strong&gt;Опишите до молекул, что конкретно и где нужно починить. Со стороны заказчика нужен либо грамотный специалист, который в состоянии дать подробное техзадание, либо нужно оплатить время нашего менеджера, который будет уточнять/дополнять/выяснять, что вам нужно. А если окажется, что заказчик не то хотел или хотел не так, то взятки гладки: ТЗ согласовано, мы работали строго по нему. Плюс не получится никаких правок по пути. Простая просьба заодно перекрасить/передвинуть кнопку потребует новых согласований и нового ТЗ.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2. Мы вынуждены закладывать риски. &lt;/strong&gt;Если кто-то согласен работать с вами в таком формате, значит он уже умножил оценку в 2-3 раза. Никто не будет работать себе в убыток. Мы считаем, что это не очень честно, но в таком случае необходимо покрывать издержки: менеджера, оценщиков, возможные штрафы. Вместо примерной, но более честной оценки мы страхуемся, умножаем часы на задачи и ваши расходы. Нам такой подход не близок. Условное спокойствие только умножает затраты на проект.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3. Мы не заинтересованы в доработке задач.&lt;/strong&gt; Поймите правильно: если разработчик делает задачу и по пути находит проблему, он не станет её решать в ущерб времени, которое отведено на основную часть работы. Даже если «побочный квест» быстро решается. Теперь он просто скажет, что такая проблема есть и будет ждать согласованного с заказчиком ТЗ.&lt;br /&gt;
+В итоге мы согласовываем, формализуем, уточняем, оформляем, считаем и прикидываем. А могли бы работать. Куда лучше начать, получить 80% результата, уточнить и доделать.&lt;br /&gt;
+ &lt;br /&gt;
+Гибкая разработка подразумевает:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;больше доверия со стороны заказчика;&lt;/li&gt;
+	&lt;li&gt;приоритет быстрого внедрения изменений над чтением и подписанием бумажек.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Общение с менеджером и руководителями проекта не превращается в череду согласований — это совместная работа людей, заинтересованных в улучшении и развитии сайта.&lt;br /&gt;
+ &lt;br /&gt;
+Резюмируем: в таком формате работать можно, но для этого нужно:&lt;br /&gt;
+ &lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;обложить команду менеджерами;&lt;/li&gt;
+	&lt;li&gt;оценивать любую фигню;&lt;/li&gt;
+	&lt;li&gt;не ждать от нашей команды полной отдачи;&lt;/li&gt;
+	&lt;li&gt;принимать факт закладывания рисков.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt; &lt;br /&gt;
+Гибкая разработка + отлаженные годами процессы работы = решение масштабных задач наших клиентов:&lt;br /&gt;
+ &lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;выходить на новые рынки и развивать языковые версии сайта;&lt;/li&gt;
+	&lt;li&gt;запускать онлайн-продажи;&lt;/li&gt;
+	&lt;li&gt;ускорять работу сайта;&lt;/li&gt;
+	&lt;li&gt;обновлять дизайн и добавлять новые и нужные фишки;&lt;/li&gt;
+	&lt;li&gt;исправлять любые баги, из-за которых компания несёт убытки&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;и при этом оставаться в рамках понятного бюджета.&lt;/p&gt;
+
+&lt;h2&gt;Вывод&lt;/h2&gt;
+
+&lt;p&gt;Завершим мыслью, с которой начали: &lt;strong&gt;сайт — это процесс&lt;/strong&gt;. Процесс, который должен работать как часы или быть как непрерывный танец, если хотите. Будущее за слаженным союзом бизнеса и команд разработчиков, нацеленных на помощь этому самому бизнесу. Мы в Initlab в этом уверены и всю нашу работу строим на этой основе.&lt;br /&gt;
+ &lt;/p&gt;
+&lt;/div&gt;
+      &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=347&amp;2=comment&amp;3=comment" token="Iqh8szo7uXRjU01sLCjmpFQZOghinj04bQ8c-feJsZg"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/luchshe-4-chasa-potratit-i-za-5-minut-doletet-zachem-nuzhen-obyazatelnyy-onbording-na-sayte" hreflang="ru"&gt;Лучше 4 часа потратить и за 5 минут долететь: зачем нужен обязательный онбординг на сайте клиента&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Fri, 16 Sep 2022 07:58:24 +0000</pubDate>
+    <dc:creator>Сергей Синица</dc:creator>
+    <guid isPermaLink="false">347 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>How a search engine promotion strategy helps a website to achieve the right goals and reach the top</title>
+  <link>https://drupal-coding.com/blog/how-search-engine-promotion-strategy-helps-website-achieve-right-goals-and-reach-top</link>
+  <description>
+&lt;span&gt;How a search engine promotion strategy helps a website to achieve the right goals and reach the top&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/43" lang="" about="https://drupal-coder.ru/user/43" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Дарья Бочкарёва&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;чт, 09/08/2022 - 08:24&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2022-09/shutterstock_1825909217_0.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  English
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;In order for a website to be the first in search engine results, generate more revenue and reach the top, even for the rarest of queries, you need to do some search engine optimization of your website. But it's important to start with:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;decide on a goal (to increase attendance/sell a particular service);&lt;/li&gt;
+	&lt;li&gt;understand in what order to proceed and what outcome is important to you.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;In this article we explain how a search engine promotion strategy is formed, what it includes, how it helps to make the website better and why businesses need it.&lt;/p&gt;
+
+&lt;h3&gt;What is a search engine promotion strategy?&lt;/h3&gt;
+
+&lt;p&gt;A search engine promotion strategy (SEO strategy) is a list of actions for a website to achieve specific objectives:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;sell a product/promote a service;&lt;/li&gt;
+	&lt;li&gt;increase website/individual page traffic;&lt;/li&gt;
+	&lt;li&gt;collect subscriptions/applications/calls.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Objectives can be long-term or short-term, and can change depending on what is more important to the business now.&lt;/p&gt;
+
+&lt;p&gt;Most of the time, the client has a specific business objective that they come to the specialists with. It is on this that the future strategy is shaped.&lt;/p&gt;
+
+&lt;p&gt;To make it easier for you to understand the question, in the examples you and I will "sell" tomatoes.&lt;/p&gt;
+
+&lt;h3&gt;Why do you need a SEO strategy?&lt;/h3&gt;
+
+&lt;p&gt;To make a long story short:&lt;/p&gt;
+
+&lt;ol&gt;&lt;li&gt;so as not to act at random;&lt;/li&gt;
+	&lt;li&gt;so as to do what will generate maximum results for the business;&lt;/li&gt;
+	&lt;li&gt;so that the site owner has an idea of the front end of the work.&lt;/li&gt;
+&lt;/ol&gt;&lt;h3&gt;How is the strategy formed?&lt;/h3&gt;
+
+&lt;p&gt;You come to us with a request: to increase tomato sales through your website. Now we need to formulate a to-do list with concrete steps to promote your website and your product.&lt;/p&gt;
+
+&lt;p&gt;Before we describe the list of tasks, we need to clarify many nuances:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;you are a wholesaler or a retailer;&lt;/li&gt;
+	&lt;li&gt;What's your delivery situation;&lt;/li&gt;
+	&lt;li&gt;your client is a professional or an "inbred";&lt;/li&gt;
+	&lt;li&gt;how your competitors sell online;&lt;/li&gt;
+	&lt;li&gt;which traffic is prioritized: mobile or desktop.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;And there are a number of other clarifications on which we will build.&lt;/p&gt;
+
+&lt;p&gt;Writing the final strategy is at the intersection of marketing and search engine promotion. It is even more accurate to say that it is part of the marketing strategy.&lt;/p&gt;
+
+&lt;p&gt;The aims and objectives in a promotion strategy can be divided into three notional categories:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;mandatory. The site must meet the standards of the technical optimization checklist: no hang-ups, fast loading on all devices, etc.;&lt;/li&gt;
+	&lt;li&gt;comparative. They are formed after analyzing the competitors: how the top sites differ from ours and what we can learn from them;&lt;/li&gt;
+	&lt;li&gt;testable. Those that we form through hypothesis testing.&lt;/li&gt;
+&lt;/ul&gt;&lt;h3&gt;Procedure&lt;/h3&gt;
+
+&lt;p&gt;Lest you think that we are being written by an astrologer or that we are copying the same actions from client to client, we will describe the strategy formation scheme. Our example of tomatoes is still valid and illustrative.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;1. Formulate a goal or clarify it with the client.&lt;/b&gt; Where should we be once the strategy is implemented? What exactly are we going to promote? For which queries do we want to be the first?&lt;/p&gt;
+
+&lt;p&gt;To make it easier for the client to find a goal, we conduct a questionnaire. On its basis, we form the goal and build the entire future strategy, and the necessary targets are assigned in writing. &lt;b&gt;For example: to come in&lt;/b&gt; first place for a particular search query, increase sales on the site by X%, collect X number of applications per month, etc.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Let's say our goal is to&lt;/b&gt; start selling tomatoes in bulk to the neighboring region of Wiesbaden, X tonnes per month.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;2. Analyze search results.&lt;/b&gt; How a potential client behaves: what they are looking for and what queries they enter. We select groups of search queries, analyze their popularity and look at what your competitors show for these queries. This is done in order to compare sites and give future visitors the most relevant type of page:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;the product page with a detailed description;&lt;/li&gt;
+	&lt;li&gt;a calculator to calculate the cost of the service;&lt;/li&gt;
+	&lt;li&gt;price list;&lt;/li&gt;
+	&lt;li&gt;information page/article if the phrase is non-commercial (you can lead to a commercial page from here), etc.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;b&gt;At first glance:&lt;/b&gt; the query "tomatoes in bulk Volgograd" is entered 24 times a month. There are a lot of B2B aggregator sites in the search engine. We can promote our site separately, setting ourselves apart from our competitors: promising a discount or favorable terms of cooperation, making a more detailed description of the goods, emphasizing customer reviews, etc. Or we can build ourselves into all the aggregator directories and get traffic from there - the more of us on the internet, the better!&lt;/p&gt;
+
+&lt;p&gt;At the end of the analysis, we will have a specific list of SEO objectives. Of course, there will be more keywords and queries, for the example we used the most appropriate to the outlined objective.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;3. Check to see if we have the right pages on the site.&lt;/b&gt; What types of pages from the second point do we need and how many of them do we already have? If the site has all the landing pages we need, we just start promoting them. If it doesn't, then follow one of the schemes:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;writing the ToR for their formation;&lt;/li&gt;
+	&lt;li&gt;set up automatic generation of unique pages using filters on the website. These can then be optimized in the future. This option is great for working with low-frequency queries.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;b&gt;4. First hypotheses: &lt;/b&gt; supplement the About page with benefits, a detailed price list and delivery details from a neighboring region. In the future, set up automatic page generation for each type of tomato to hit narrow queries "cream tomato wholesale volgograd", "pink tomato wholesale volgograd", etc.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;5. Examine the state of the site. &lt;/b&gt;Due to attempts to cheat the search algorithm, special filters may have been imposed on the site which lower its ranking. We check the site for such sanctions and other problems with indexation, so that we can eliminate them in the future and get everything in order.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;6. Make a list of technical tasks, assess their complexity and urgency&lt;/b&gt; - the site can be so "killed" by SEO that no amount of keywords and useful pages will save it.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;7. Prioritising.&lt;/b&gt; We determine what is most relevant to us at the moment based on&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;efficiency - where the hottest traffic is, where the fastest results are;&lt;/li&gt;
+	&lt;li&gt;The labour intensity of the work - if something can be done quickly, we will do it immediately - this will leave us with fewer tasks and make it easier to allocate time to the rest;&lt;/li&gt;
+	&lt;li&gt;client's request - if you focus on any of the tasks and say that this is the most important thing now, then we get on with it first.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;b&gt;Bottom line:&lt;/b&gt; The most important thing is to remove the search filters and refine the About page, which we will do first.&lt;/p&gt;
+
+&lt;p&gt;We will distribute the rest of the work over time, depending on the client's budget and wishes.&lt;/p&gt;
+
+&lt;h3&gt;Examples from our practice&lt;/h3&gt;
+
+&lt;p&gt;This is a small selection of examples of our strategies. We have chosen three client cases with different objectives to illustrate.&lt;/p&gt;
+
+&lt;h4&gt;Overseas promotion&lt;/h4&gt;
+
+&lt;p&gt;A client's business was doing well in Russia, and he decided to promote his products abroad. For this purpose, we suggested that he register several sites for foreign domains and promote each of them for a particular country. That was the initial strategy we came up with:&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;1. Add each website to the Google Search Console.&lt;/b&gt; This tool collects data about the site's performance in Google Search. It will show us how many pages on the site are indexed, which ones are the most visited, what the search engine thinks of our site, etc.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;2. Set up hreflang, robots.txt, sitemap.xml for each site.&lt;/b&gt; These are necessary technical settings for correct site indexing. They are responsible for not showing the search engine unnecessary and correctly identifying the country the domain belongs to.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;3. Collect search phrases for each country.&lt;/b&gt; For these we will promote in a specific region + we will track them through Topvisor.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;4. Analyse search engine rankings.&lt;/b&gt; We will study the sites that fall out of our search queries to make a list of what we lack to compete with them.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;5. Optimise headlines and meta tags on landing pages for keywords. &lt;/b&gt; This is a prerequisite for proper search engine promotion.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;6. Fill in your profile in Google My Business. &lt;/b&gt; This directory is very important for promotion. We need to fill in the organisation card in detail so that the search engine trusts us more.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;7. Find local business directories/aggregators and register your firm there.&lt;/b&gt; For promotion it is important to have external links linked to the region - that way we show Google that we are "local".&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;8. Place guest articles on local websites.&lt;/b&gt; External links with a website from the desired region increase local rankings. Plus, it's additional PR and a great chance to attract buyers directly from the articles.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;9. Publish texts on the blog for the infos.&lt;/b&gt; For some thematic phrases, articles are ranked in the top, not commercial pages. If we want to get that kind of traffic, we need to write interesting articles on the topic and put them on our website.&lt;/p&gt;
+
+&lt;h3&gt;Promotion of a specific service&lt;/h3&gt;
+
+&lt;p&gt;In this example, we have outlined a promotion strategy for the whole website with a focus on the sandblasting service. Some points are not specific to these words, but are relevant.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;1. Collect a large core of low-frequency queries for all services on the website. &lt;/b&gt; In this core allocate clusters - groups of similar key phrases that can be promoted on the same page, for example, by geo-position: painting wheels in ramenskoye, renting a compressor yuz; by subsections: sandblasting cars, sandblasting bumpers, renting a compressor, etc.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;2. Create separate pages for each cluster. &lt;/b&gt; Each cluster should have its own landing page: sections, subsections, content pages, articles, etc.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;3. optimise meta tags for keywords. &lt;/b&gt; Template meta tags are customized for most pages: we make a rule that forms the title and description tag on all types of pages on the site. In this way, we obtain relatively optimized titles and meta tags. They are different from manually prescribed, more "human" and variable, but still help promotion. As a rule, an ordinary page title is taken, to which conversion words are added, for example: &lt;b&gt;"buy a drill in Moscow at a bargain price"&lt;/b&gt;. For landing pages by priority, it is better to pick up the phrases manually.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;4. Work out the texts and content on the website in detail. &lt;/b&gt; It is important to remember that the website is first and foremost for people. The client should not just get to the right page, but also navigate around it.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;5. Work out the CTA elements on the landing pages. &lt;/b&gt; All call to action elements should be well thought out on the right pages: buttons, application forms, order to call, clickable phone number, messenger click-through, etc.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;6. Set up the linking of all pages &lt;/b&gt; That is, make it easy to link from one page to the next. For example, so that from the article about drills you can get to the section of the catalogue "Drills". This is convenient for visitors and an additional plus for the promoted page in terms of search engine - it is important links from other pages to promote. The more of them, the better.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;7. Connect crowdfunding marketing from QA sites with links to landing pages.&lt;/b&gt; For promotion it is important to have as many external links as possible from different sites. Question-and-answer sites are good for this purpose in the first stages + there is an opportunity to attract real buyers.&lt;/p&gt;
+
+&lt;h3&gt;Promotion of a single product&lt;/h3&gt;
+
+&lt;p&gt;A client has an online clothing and textile shop. Website traffic has dropped, marginal goods are being ordered less frequently. In the process of analysis, it turned out that traffic from Google and branded traffic, which used to bring in a lot of sales, had decreased. As a result, we put together a strategy with a focus on brand outreach.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;1. Pay attention to optimisation for Google. &lt;/b&gt; Check important metrics for Google: site speed, optimisation for mobile devices, etc.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;2. Continue to work with low-frequency queries.&lt;/b&gt; You can see the effect of attracting traffic for narrow queries. You need to work on landing pages for them and continue writing unique texts.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;3. Bring back branded traffic. &lt;/b&gt; This work is about brand reputation and depends on your efforts. You need to increase engagement, resume social media engagement so that people remember your brand or know about it for the first time and start looking for it online.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;4. Check positions for all branded queries &lt;/b&gt; to see if competitors are buying up this traffic through contextual advertising.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;5. Increase the conversion rate on the website. &lt;/b&gt; In addition to the main tasks in this direction, it will be useful to pay attention to less visible but important details:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;add information about the reward programme to the product card and in the catalogue sections that the customer enters from the search;&lt;/li&gt;
+	&lt;li&gt;to refine the mobile version, as the amount of such traffic has equalled that of the desktop version;&lt;/li&gt;
+	&lt;li&gt;work with feedback on different platforms and on the website;&lt;/li&gt;
+	&lt;li&gt;add promotional items to the catalogue sections, clearly communicate the benefits in the sale section.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;In our experience, an increase of between 0.5% and 12% in visitor-to-customer conversions can be achieved.&lt;/p&gt;
+
+&lt;h3&gt;How long the promotion strategy is designed to last&lt;/h3&gt;
+
+&lt;p&gt;As you can see, there are not many points in a promotion strategy. However, it is written for an average of six months or a year.&lt;/p&gt;
+
+&lt;p&gt;Once the first tasks of the strategy have been completed, we provide the client with a report on the growth of traffic, conversions or orders. More often than not, the business owner will see a positive trend without this. The results are usually visible after 3 months or more. In the process, we always refer to the strategy to stay on track and report back to the client on the steps and milestones.&lt;/p&gt;
+
+&lt;h3&gt;How we monitor the effectiveness of the strategy&lt;/h3&gt;
+
+&lt;p&gt;Every month we check the success of the promotion against the following indicators&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;monitor the growth of search engine positions and traffic;&lt;/li&gt;
+	&lt;li&gt;measure the number of requests from the client's CRM and e-commerce data;&lt;/li&gt;
+	&lt;li&gt;We analyse targets in Yandex.Metrika and Google.Analytics.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;We also adjust the strategy and add specific targets for site development in line with these indicators.&lt;/p&gt;
+
+&lt;p&gt;Search positions are an intermediate goal, but the main goal is conversions, i.e. orders, form completions, customer calls, etc. In order to track these parameters, if the client needs it, we implement:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;call-tracking;&lt;/li&gt;
+	&lt;li&gt;cross-cutting analytics;&lt;/li&gt;
+	&lt;li&gt;CRM analytics;&lt;/li&gt;
+	&lt;li&gt;goals and metrics in Yandex.Metric and Google.Analytics;&lt;/li&gt;
+	&lt;li&gt;AB testing.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;They help us to monitor the positive dynamics on a monthly basis and check the validity of our hypotheses.&lt;/p&gt;
+
+&lt;h3&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;As you can see, a promotion strategy is a very versatile job that depends on quality analysis and experience.&lt;/p&gt;
+
+&lt;p&gt;Modern search engine promotion is not just about getting the right positions on search, it is also about controlling commercial factors and usability. In essence, it is a constant process of improving the site, controlling the chosen metrics, refining objectives, generating and analysing new hypotheses or implementing those that have already had a positive effect on the search positions of most of our clients. And in this process, it is important to edit what has not had the desired effect, to shift focus, to delve deeper into what has produced good results, etc.&lt;/p&gt;
+
+&lt;p&gt;When it comes to Drupal, we are confident in our knowledge - the technical part of website promotion is mastered to perfection. Thanks to our experience with a wide variety of projects, we understand how to intelligently bypass competitors and which hypotheses to test. And with that much knowledge, you can promote anything - even tomatoes or high-tech production equipment.&lt;/p&gt;
+
+&lt;p&gt;If your website needs search engine promotion, development and support - &lt;a href="https://drupal-coder.ru/drupal-seo" target="_blank"&gt;write to us&lt;/a&gt;. The managers at Initlab will answer any questions you may have.&lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coding.com/blog/seo" hreflang="en"&gt;SEO&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=346&amp;2=comment&amp;3=comment" token="gIA6h1lA3vQZjUGilQqB7j53pFXKebELhQbwCI3bWPE"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coding.com/blog/seo-promotion-online-stores-drupal-we-have-created-module-turns-properties-products-meaningful" hreflang="en"&gt;SEO promotion of online stores on Drupal: we have created a module that turns the properties of products into meaningful titles&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coding.com/blog/increasing-traffic-not-limit-how-we-improved-clients-website-after-successful-seo-optimisation" hreflang="en"&gt;Increasing traffic is not the limit: how we improved a client's website after successful SEO optimisation&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Thu, 08 Sep 2022 08:24:47 +0000</pubDate>
+    <dc:creator>Дарья Бочкарёва</dc:creator>
+    <guid isPermaLink="false">346 at https://drupal-coder.ru</guid>
+    </item>
+
+  </channel>
+</rss>

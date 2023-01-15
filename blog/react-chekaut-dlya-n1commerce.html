@@ -1,0 +1,488 @@
+﻿<!DOCTYPE html>
+<html lang="ru" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
+  <head>
+    <meta charset="utf-8">
+<noscript><style>form.antibot * :not(.antibot-message) { display: none !important; }</style>
+</noscript><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-87805467-1"></script>
+<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag("js", new Date());gtag("set", "developer_id.dMDhkMT", true);gtag("config", "UA-87805467-1", {"groups":"default","anonymize_ip":true,"page_placeholder":"PLACEHOLDER_page_path","allow_ad_personalization_signals":false});</script>
+<meta http-equiv="content-language" content="ru">
+<meta name="description" content="Современный веб шагнул далеко вперед. Для решения актуальных бизнес задач классический подход к созданию сайтов подвергается значительной трансформации как в идеологическом, так и в техническом планах. Так, например, пересматривается роль браузера в веб-системе.">
+<meta name="keywords" content="создание сайтов на drupal, разработка Drupal-сайтов">
+<meta property="og:type" content="blog">
+<meta property="og:url" content="https://drupal-coder.ru/blog/react-chekaut-dlya-n1commerce">
+<meta property="og:title" content="React чекаут для N1Commerce">
+<meta property="og:description" content="Современный веб шагнул далеко вперед. Для решения актуальных бизнес задач классический подход к созданию сайтов подвергается значительной трансформации как в идеологическом, так и в техническом планах. Так, например, пересматривается роль браузера в веб-системе.">
+<meta name="Generator" content="Drupal 9 (https://www.drupal.org)">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="..\sites\default\files\android-chrome-256x256.png" type="image/png">
+<link rel="alternate" hreflang="ru" href="react-chekaut-dlya-n1commerce.html">
+<link rel="canonical" href="react-chekaut-dlya-n1commerce.html">
+<link rel="shortlink" href="react-chekaut-dlya-n1commerce.html">
+
+    <title>React чекаут для N1Commerce | drupal-coder.ru</title>
+    <link rel="stylesheet" media="all" href="..\sites\default\files\css\css_y8CdfJDNR-tG0CPnRDokR6Eh9OUJplbHLVQ9A8myecQ.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_tFXlTqkfn6J-Qtpt9xbB8JudSaJfOGxRSmpeidDAzPE.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_l8G4voaHcf64TEU2r2Yyz9f53nJ0vU-50MrP1M5xhmk.css">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/@unicorn-fail/drupal-bootstrap-styles@0.0.2/dist/3.4.0/8.x-3.x/drupal-bootstrap.min.css" integrity="sha512-tGFFYdzcicBwsd5EPO92iUIytu9UkQR3tLMbORL9sfi/WswiHkA1O3ri9yHW+5dXk18Rd+pluMeDBrPKSwNCvw==" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_ULmc1mwKFKQRQmxYsjphW6dsh2g6jX4LXXBAtdO0vIE.css">
+
+    
+    <meta name="cmsmagazine" content="3d47b05beba40f3816d9741ee18c01a5">
+
+    
+    
+           <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P4SXQSG');</script>
+<!-- End Google Tag Manager -->
+    
+    
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Bold.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Medium.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Regular.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/fontawesome/webfonts/fa-brands-400.woff2" crossorigin="anonymous">
+    <link rel='manifest' href='..\manifest.json'>
+    <meta name="format-detection" content="telephone=no">
+
+          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MXPCP8Q"></script>
+      </head>
+  <body class="page-node-150 path-node page-node-type-blog has-glyphicons">
+
+                  <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4SXQSG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+      
+          
+
+    <a href="#main-content" class="visually-hidden focusable skip-link">
+      Перейти к основному содержанию
+    </a>
+    
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
+    
+      
+          <header class="navbar navbar-default" id="navbar" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+            <div class="region region-navigation">
+    <section id="block-pikselvkskript" class="block block-block-content block-block-contentbf8d9e8f-617c-4e8f-8501-7586be8255e0 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script>(window.Image ? (new Image()) : document.createElement('img')).src = 'https://vk.com/rtrg?p=VK-RTRG-238064-1VWIQ';</script></div>
+      
+  </section>
+
+<section id="block-globalsitetagadwords" class="block block-block-content block-block-content27617f8e-58d1-4a2a-9f23-31eab95a43c8 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><!-- Global site tag (gtag.js) - AdWords: 948581894 -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=AW-948581894"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-948581894');
+</script></div>
+      
+  </section>
+
+            <a class="logo navbar-btn pull-left" href="..\index.htm" title="Главная" rel="home">
+            <img src="..\themes\custom\bootstrap_dc\images\logo-initlab.svg" alt="Главная" width="156" height="31">
+        </a>
+            
+  </div>
+
+        </div>
+                          <div class="navbar-collapse-wrapper">
+
+            <div class="navbar-collapse collapse">
+                <div class="region region-navigation-collapsible">
+    <nav role="navigation" aria-labelledby="block-bootstrap-dc-main-menu-menu" id="block-bootstrap-dc-main-menu">
+            
+  <h2 class="visually-hidden" id="block-bootstrap-dc-main-menu-menu">Основная навигация</h2>
+  
+
+        
+              <ul class="menu nav navbar-nav">
+                      <li><a href="..\support.html" data-drupal-link-system-path="node/1">Поддержка Drupal</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-admin.html" class="dropdown-toggle" data-toggle="dropdown">DevOps <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\import-migrate-upgrade.html" data-drupal-link-system-path="node/4">Миграция</a>
+                  </li>
+                  <li><a href="..\backup.html" data-drupal-link-system-path="node/3">Бэкапы</a>
+                  </li>
+                  <li><a href="..\drupal-security-audit.html" data-drupal-link-system-path="node/9">Аудит безопасности</a>
+                  </li>
+                  <li><a href="..\boost-drupal.html" data-drupal-link-system-path="node/5">Оптимизация скорости</a>
+                  </li>
+                  <li><a href="..\ssl.html" data-drupal-link-system-path="node/99">Переезд на https</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\blog.html" data-drupal-link-system-path="blog">Блог</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-seo.html" class="dropdown-toggle" data-toggle="dropdown">Продвижение <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\drupal-seo\context.html" data-drupal-link-system-path="node/111">Реклама</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li class="expanded dropdown"><a href="..\team.html" class="dropdown-toggle" data-toggle="dropdown">О нас <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\team.html#team" data-drupal-link-system-path="team">Команда</a>
+                  </li>
+                  <li><a href="..\drupalgive.html" data-drupal-link-system-path="node/135">Drupalgive</a>
+                  </li>
+                  <li><a href="..\drupal-courses.html" data-drupal-link-system-path="node/10">Курсы Drupal</a>
+                  </li>
+                  <li><a href="..\vacancies.html" data-drupal-link-system-path="vacancies">Вакансии</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\happy-customers.html" data-drupal-link-system-path="happy-customers">Проекты</a>
+                  </li>
+                  <li><a href="..\contacts.html" data-drupal-link-system-path="node/86">Контакты</a>
+                  </li>
+              </ul>
+      
+
+
+  </nav>
+
+  </div>
+
+            </div>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+              </div>
+    </header>
+  
+
+      <div class="page-header-big" role="heading">
+        <div class="container">
+            <div class="region region-header">
+        <h1 class="page-header">
+<span>React чекаут для N1Commerce</span>
+</h1>
+
+<section class="views-element-container block block-views block-views-blockuser-block-1 clearfix" id="block-views-block-user-block-1">
+  
+    
+
+      <div class="form-group"><div class="view view-user view-id-user view-display-id-block_1 js-view-dom-id-218dd182c4db8de9e291a8cdfb3bb6aae82504526e4cd21230b967800db1a59e">
+  
+    
+      
+      <div class="view-content">
+          <div class="views-row"><div class="views-field views-field-user-picture"><div class="field-content">  <img loading="lazy" src="..\sites\default\files\styles\avatar_mini\public\pictures\2016-07\avatar_small.jpg?itok=k_oN1VDD" width="45" height="45" alt="" typeof="foaf:Image" class="img-responsive">
+
+
+</div></div><div class="views-field views-field-field-name"><div class="field-content">Демидов Николай</div></div></div>
+
+    </div>
+  
+          </div>
+</div>
+
+  </section>
+
+<section id="block-yashare" class="block-yashare block block-block-content block-block-contentee72d8fb-02e9-4ef6-8e71-0df16bee86a9 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+<script src="//yastatic.net/share2/share.js"></script>
+<div class="ya-share2" data-services="vkontakte,odnoklassniki,gplus,twitter"></div></div>
+      
+  </section>
+
+
+  </div>
+
+        </div>
+      
+    </div>
+  
+
+<div class="main-wrapper">
+  <div role="main" class="main-container container js-quickedit-main-content">
+    <div class="row">
+
+
+
+            
+                  <section class="col-sm-12">
+
+                
+                
+                
+                                      
+                  
+                          <a id="main-content"></a>
+            <div class="region region-content">
+        <ol class="breadcrumb">
+          <li>
+                  <a href="..\blog.html">Блог</a>
+              </li>
+          <li class="active">
+                  React чекаут для N1Commerce
+              </li>
+      </ol>
+
+<div data-drupal-messages-fallback="" class="hidden"></div>
+  <article data-history-node-id="150" role="article" about="https://drupal-coder.ru/blog/react-chekaut-dlya-n1commerce" class="blog is-promoted full clearfix">
+
+  
+    
+
+  
+
+  <div class="content">
+    
+    <div id="field-language-display"><div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group">
+      <label class="control-label">Language</label>
+  
+  
+  Russian
+
+  
+  
+  </div>
+</div>
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><p dir="ltr">Современный веб шагнул далеко вперед. Для решения актуальных бизнес задач классический подход к созданию сайтов подвергается значительной трансформации как в идеологическом, так и в техническом планах. Так, например, пересматривается роль браузера в веб-системе.</p>
+
+<p dir="ltr">Современный браузер - это достаточно производительный инструмент, способный разгрузить сервер от необходимости обрабатывать лишние пользовательские взаимодействия, запросы, рендеринг страниц. Он способен обеспечивать работу полноценных клиентских веб-приложений, функционирующих аналогично десктопным, но не зависящих от операционной системы и не требующих установки.</p>
+
+<p dir="ltr">С точки зрения пользователя - веб-приложения повышают удобство использования, плавность работы системы и интерактивность, избавляют от постоянных перезагрузок страницы. С точки зрения разработчика - позволяют повторно использовать кодовую базу, интегрировать готовые приложения в существующие сайты с минимальными затратами на доработку, пользоваться актуальными технологиями и подходами для создания быстрых, сложных и производительных приложений.</p>
+
+<p dir="ltr">Для внедрения современных подходов в нашу платформу для быстрого создания интернет-магазинов <a href="https://n1commerce.ru/ru">N1Commerce</a> мы разработали систему, реализующую логин и корзину. Составными частями этой системы являются модульное Frontend-приложение и Middle веб-сервис.</p>
+
+<h2 dir="ltr"> </h2>
+
+<h2 dir="ltr"><strong>Frontend</strong></h2>
+
+<p dir="ltr">Frontend представляет собой современный ES6-проект на <a href="https://reactjs.org/">React</a> аналогичный проекту одностраничного приложения. Используется сборка проекта на <a href="https://webpack.js.org/">Webpack</a>, компиляция ES6-кода через <a href="https://babeljs.io/">Babel</a>, линтинг кода через <a href="https://eslint.org/">Eslint</a>. Отличие состоит в том, что приложение разбивается на несколько бандлов, которые встраиваются в регионы классического веб-сайта.</p>
+
+<p dir="ltr"> </p>
+
+<p dir="ltr"><img alt="Экран приложения" data-entity-type="file" data-entity-uuid="67b46c5a-be95-4dec-9ce8-86660696f170" height="483" src="..\sites\default\files\inline-images\1. paukshte_screen.png" width="684" loading="lazy"></p>
+
+<p dir="ltr"> </p>
+
+<p dir="ltr"><img alt="Схема бандлов" data-entity-type="file" data-entity-uuid="bb660570-ea3f-46dc-b954-91250443562a" height="518" src="..\sites\default\files\inline-images\2. Screen Shot 2018-05-16 at 18.33.25.png" width="682" loading="lazy"></p>
+
+<p dir="ltr">Так, кнопка добавления товара в корзину, кнопка логина, кнопка корзины, диалог логина, диалог корзины - все отдельные приложения, слабо связанные друг с другом. Взаимодействие между ними осуществляется через смену url, а также через общее хранилище состояния, для реализации которого использована популярная библиотека <a href="https://redux.js.org/">Redux</a>.</p>
+
+<p dir="ltr">Слабая связь между бандлами позволяет гибко компоновать модули на странице, расставлять в UI, свободно заменять или удалять ненужные.</p>
+
+<p dir="ltr"><img alt="Вариант компоновки бандлов" data-entity-type="file" data-entity-uuid="eccf20f8-37ae-4865-bb25-a401a746ce13" height="382" src="..\sites\default\files\inline-images\3. Screen Shot 2018-05-16 at 18.43.31.png" width="680" loading="lazy"></p>
+
+<p dir="ltr">Для построения пользовательского интерфейса была выбрана библиотека <a href="https://reactjs.org/">React</a>, которая очень хорошо проявляет себя в качестве инструмента для создания UI, обладает обширной экосистемой, развитым международным комьюнити и базируется на ряде удачных технологических принципов, таких как компонентный подход, однонаправленный поток данных, расширяемость, отсутствие архитектурных ограничений и поощрение повторного использования кода.</p>
+
+<p dir="ltr">Интерфейс каждого дочернего приложения конструируется с помощью набора общих и индивидуальных взаимозаменяемых компонентов. Односторонний поток данных от родительского компонента к дочерним позволяет управлять состояниями компонентов, реагировать на изменения данных, обновляя и перестраивая интерфейс.</p>
+
+<p dir="ltr">Клиентское веб-приложение строится на взаимодействии с сервером через асинхронные запросы. Это позволяет избавиться от лишних перезагрузок страницы, повысить отзывчивость и ощущение быстроты работы сайта.</p>
+
+<p dir="ltr">В нашей системе наряду с <a href="https://www.drupal.org/docs/8/api/restful-web-services-api/restful-web-services-api-overview">RESTful веб-сервисом</a> используется <a href="https://www.drupal.org/project/jsonapi">JSON API</a> для получения данных от Drupal-бэкенда. Запрос данных залогиненного юзера, добавление товара в корзину, удаление товара из корзины, логаут - эти операции клиент запрашивает непосредственно у бэкенда.</p>
+
+<h2 dir="ltr"> </h2>
+
+<h2 dir="ltr"><strong>Middle</strong></h2>
+
+<p dir="ltr">Однако не все запросы можно доверить клиенту делать напрямую. Часть запросов требует расширенных прав, например, проверка наличия в системе существующей учетной записи.</p>
+
+<p dir="ltr">С целью защиты системы от раскрытия чувствительных данных была создана прослойка между фронтендом и бэкендом - мидл. Так как мидл является элементом серверной части, он имеет расширенный доступ к запросам и может выполнять защищенные операции по обращению клиента.</p>
+
+<p dir="ltr"><img alt="Схема с middle" data-entity-type="file" data-entity-uuid="695751d0-4f61-44a4-90ee-3764fab98547" height="323" src="..\sites\default\files\inline-images\4. Screen Shot 2018-05-16 at 19.29.57.png" width="680" loading="lazy"></p>
+
+<p dir="ltr">Мидл в нашей системе построен на платформе <a href="https://nodejs.org/">NodeJS</a>. Применение js в серверной разработке позволяет использовать часть общих библиотек на клиенте и на сервере. Кроме того, node-приложения хорошо поддаются горизонтальному масштабированию, поскольку способны исполнять несколько асинхронных запросов на одном потоке.</p>
+
+<p dir="ltr">Другой причиной для введения мидла в систему является унификация api для логина. Мы воспользовались библиотекой <a href="http://www.passportjs.org/">PassportJS</a> для реализации единого с точки зрения клиента api для входа через социальные сети и стандартный email + пароль.</p>
+
+<p dir="ltr">Проблемой социальных логинов является разрозненность их api - каждый провайдер имеет свою собственную клиентскую библиотеку, которую необходимо загружать с сервера, встраивать на веб-страницу, писать специальные обработчики и поддерживать их в дальнейшем, а в случае ввода в систему мобильных приложений и вовсе потребуется встраивание отдельных библиотек для мобильных платформ. Это накладывает очевидные неудобства и заставляет разрастаться и без того обширный клиентский код.</p>
+
+<p dir="ltr">Используя унифицированное api мы делаем процесс логина прозрачным для клиента, повышаем комфорт разработки и обеспечиваем более легкую расширяемость набора клиентских приложений.</p>
+
+<h2 dir="ltr"> </h2>
+
+<h2 dir="ltr"><strong>Proxy</strong></h2>
+
+<p dir="ltr">Поскольку логин в нашем приложении осуществляется не напрямую, а через мидл, требуется настройка proxy, который будет распределять клиентские запросы между мидлом и бэкендом на сервере. Это обусловлено политикой безопасности браузера, который в обычном режиме работы не допускает кросс-доменные запросы, а также необходимостью сохранения идентификаторов сессии в cookies с привязкой к домену.</p>
+
+<p dir="ltr"><img alt="Схема с прокси" data-entity-type="file" data-entity-uuid="c1d0bbe0-3290-4571-b41f-e279d8c6f602" height="343" src="..\sites\default\files\inline-images\5. Screen Shot 2018-05-16 at 19.31.19.png" width="678" loading="lazy"></p>
+
+<p dir="ltr">Использование прокси позволяет соблюсти ограничения браузера, при необходимости выполнять масштабирование сервера, балансировку нагрузки, менять внутренний адрес мидла или выносить его на внешний сервер. Все это дает возможность использовать систему в нагруженных сценариях работы.</p>
+
+<p dir="ltr"> </p>
+
+<p dir="ltr">Интеграция рассмотренной в статье системы в N1Commerce позволяет вывести нашу платформу на новый технологический уровень, формируя эффективное сочетание отлаженных бизнес процессов и современных тенденций в вебе.</p>
+
+<p> </p></div>
+      
+      <div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items">
+              <div class="field--item category-tag"><a href="react.html" hreflang="ru">React</a></div>
+              <div class="field--item category-tag"><a href="e-commerce.html" hreflang="ru">E-Commerce</a></div>
+          </div>
+  
+  <div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above">
+    <div class="field--label">Еще по теме</div>
+          <div class="field--items">
+              <div class="field--item"><a href="ispolzovanie-otchetov-ecommerce-v-yandeksmetrike.html" hreflang="ru">Использование отчетов Ecommerce в Яндекс.Метрике </a></div>
+          <div class="field--item"><a href="drupal-react.html" hreflang="ru">Drupal + React</a></div>
+          <div class="field--item"><a href="ispolzovanie-react-js-komponentov-v-unity.html" hreflang="ru">Использование React JS компонентов в Unity</a></div>
+              </div>
+      </div>
+
+
+      <div class="field-yashare">
+        <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+        <script src="//yastatic.net/share2/share.js"></script>
+        <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+                <div class="ya-share2" id="block-ya-share2" data-services="vkontakte,facebook,odnoklassniki,gplus,twitter"></div>
+        <a href="..\rss.rss" target="_blank"><span class="iconify" id="block-iconify" data-icon="ion:logo-rss" style="color: #da8c2c;" data-width="29" data-height="29"></span></a>
+              </div>
+  </div>
+
+  <section>
+  
+  
+ 
+      <div class="comment-form-wrapper">
+      <h2 class="block-form-title">Добавить комментарий</h2>
+      <form class="comment-comment-form comment-form antibot" data-drupal-selector="comment-form" data-action="https://drupal-coder.ru/comment/reply/node/150/comment" action="/antibot" method="post" id="comment-form" accept-charset="UTF-8">
+  <noscript>
+  <div class="antibot-no-js antibot-message antibot-message-warning">Вы должны включить JavaScript чтобы использовать эту форму.</div>
+</noscript>
+<div class="form-item js-form-item form-type-textfield js-form-type-textfield form-item-name js-form-item-name form-group">
+      <label for="edit-name" class="control-label">Ваше имя</label>
+  
+  
+  <input placeholder="Ваше имя" data-drupal-selector="edit-name" class="form-text form-control" type="text" id="edit-name" name="name" value="" size="30" maxlength="60">
+
+  
+  
+  </div>
+<input autocomplete="off" data-drupal-selector="form-nl27rbnzpualiuxhr82rjplmxvhzelttobw3v8et3tq" type="hidden" name="form_build_id" value="form-nL27rBnzpuALIuxhr82RJpLMXVHzeLTtobw3V8Et3TQ"><input data-drupal-selector="edit-comment-comment-form" type="hidden" name="form_id" value="comment_comment_form"><input data-drupal-selector="edit-antibot-key" type="hidden" name="antibot_key" value=""><div class="field--type-text-long field--name-comment-body field--widget-text-textarea form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-wrapper" id="edit-comment-body-wrapper">      <div class="js-text-format-wrapper text-format-wrapper js-form-item form-item">
+  <div class="form-item js-form-item form-type-textarea js-form-type-textarea form-item-comment-body-0-value js-form-item-comment-body-0-value">
+      <label for="edit-comment-body-0-value" class="control-label js-form-required form-required">Комментарий</label>
+  
+  
+  <div class="form-textarea-wrapper">
+  <textarea class="js-text-full text-full form-textarea required form-control resize-vertical" data-media-embed-host-entity-langcode="ru" data-drupal-selector="edit-comment-body-0-value" id="edit-comment-body-0-value" name="comment_body[0][value]" rows="5" cols="60" placeholder="" required="required" aria-required="true"></textarea>
+</div>
+
+
+  
+  
+  </div>
+<div class="js-filter-wrapper filter-wrapper form-inline form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format" id="edit-comment-body-0-format"><div class="filter-help form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format-help" id="edit-comment-body-0-format-help"><a href="..\filter\tips.html" target="_blank" title="Opens in new window" data-toggle="tooltip" data-drupal-selector="edit-comment-body-0-format-help-about" class="icon-before" id="edit-comment-body-0-format-help-about"><span class="icon glyphicon glyphicon-question-sign" aria-hidden="true"></span>О текстовых форматах</a></div>
+</div>
+
+  </div>
+
+  </div>
+<div data-drupal-selector="edit-actions" class="form-actions form-group js-form-wrapper form-wrapper" id="edit-actions"><button data-drupal-selector="edit-submit" class="button button--primary js-form-submit form-submit btn-primary btn" type="submit" id="edit-submit" name="op" value="Отправить">Отправить</button></div>
+
+</form>
+
+    </div> 
+  
+</section>
+
+
+</article>
+
+
+  </div>
+
+              </section>
+
+                </div>
+  </div>
+
+
+      <footer class="footer" role="contentinfo">
+      <div class=" container">  
+          <div class="region region-footer">
+    <section id="block-footerphone" class="block block-block-content block-block-content07b69e1d-d1db-4e8b-bb14-dc4563ef50bc clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="block-form-contacts">
+  <ul>
+    <li class="block-form-phone"><a href="tel:88002222673">8 800 222-26-73</a></li>
+  </ul>
+</div></div>
+      
+  </section>
+
+<section id="block-copyright" class="block block-block-content block-block-content263c1cb2-b142-4488-af8e-99f92fcb7640 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="social-links">
+  <ul class="social-links-wrapper">
+    <li class="social-links-item"><a target="_blank" href="https://vk.com/initlab"><i class="fab fa-vk"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://teleg.one/initlabbot" title="Свяжитесь с нами"><i class="fab fa-telegram-plane"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.youtube.com/channel/UCyFEbngMB-bK2ulNtd_W43A"><i class="fab fa-youtube"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://zen.yandex.ru/id/6037ce072f500a068c630fec"><img style="width: 16px; margin-bottom: 5px;" src="..\sites\default\files\icons\zen-icon.svg"></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.facebook.com/initlabkr/"><img style="width: 25px; margin-bottom: 5px;" src="..\sites\default\files\icons\icon-facebook-ru-dc.svg"></a></li>
+  </ul>  
+</div>
+
+<p>ООО «Инитлаб», Краснодар, Россия.
+<a class="goal__tel" href="tel:+78002222673">8 800 222-26-73</a><br>
+Drupal является зарегистрированной торговой маркой Dries Buytaert.</p>
+</div>
+      
+  </section>
+
+
+  </div>
+
+      </div>
+    </footer>
+  </div>
+
+  </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"node\/150","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"ru"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"ajaxPageState":{"libraries":"antibot\/antibot.form,bootstrap\/popover,bootstrap\/theme,bootstrap\/tooltip,bootstrap_dc\/bootstrap-scripts,bootstrap_dc\/dc,bootstrap_dc\/global-styling,bootstrap_dc\/seo,colorbox\/default,colorbox_inline\/colorbox_inline,colorbox_load\/colorbox_load,filter\/drupal.filter,geshifilter\/geshifilter,google_analytics\/google_analytics,ng_lightbox\/ng_lightbox,system\/base,views\/views.module","theme":"bootstrap_dc","theme_token":null},"ajaxTrustedUrl":{"https:\/\/drupal-coder.ru\/comment\/reply\/node\/150\/comment":true},"colorbox":{"opacity":"0.85","current":"{current} \u0438\u0437 {total}","previous":"\u00ab \u041f\u0440\u0435\u0434\u044b\u0434\u0443\u0449\u0438\u0439","next":"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0439 \u00bb","close":"Close","maxWidth":"98%","maxHeight":"98%","fixed":true,"mobiledetect":true,"mobiledevicewidth":"480px"},"google_analytics":{"account":"UA-87805467-1","trackOutbound":true,"trackMailto":true,"trackTel":true,"trackDownload":true,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip","trackColorbox":true},"bootstrap":{"forms_has_error_value_toggle":1,"modal_animation":1,"modal_backdrop":"true","modal_focus_input":1,"modal_keyboard":1,"modal_select_text":1,"modal_show":1,"modal_size":"","popover_enabled":1,"popover_animation":1,"popover_auto_close":1,"popover_container":"body","popover_content":"","popover_delay":"0","popover_html":0,"popover_placement":"right","popover_selector":"","popover_title":"","popover_trigger":"click","tooltip_enabled":1,"tooltip_animation":1,"tooltip_container":"body","tooltip_delay":"0","tooltip_html":0,"tooltip_placement":"auto left","tooltip_selector":"","tooltip_trigger":"hover"},"antibot":{"forms":{"comment-form":{"id":"comment-form","key":"5D-i6uDYb-gr3-4qQZFOE5ec3-2jdoq6QSz9J26Pt50"}}},"user":{"uid":0,"permissionsHash":"66bb25c0b665c533dd9436d0cd4e99532a723088208bff0a05f2bf113d3703ac"}}</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="..\sites\default\files\js\js_kFVTvKCxW3cWmdAcJABrE5Fa90cD_Go5IxgQw9oFgJ0.js"></script>
+<script src="..\sites\default\files\js\js_d5BC-2wlh3XH4S29GgaPGie7NxyWY0K1EhPg30LGzwA.js"></script>
+<script src="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+<script src="..\sites\default\files\js\js_CNCJCgJnATwdWHfgCEncmZchd6pVQciEiBxkoYS9btY.js"></script>
+<script src="..\sites\default\files\js\js_PZPdVr1rIFXjUagjykPULRTCC8T4ZfIghTqFAwKg6ZI.js"></script>
+
+  </body>
+</html>

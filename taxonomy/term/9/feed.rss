@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:og="http://ogp.me/ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:schema="http://schema.org/" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" version="2.0" xml:base="https://drupal-coder.ru/">
+  <channel>
+    <title>Программирование</title>
+    <link>https://drupal-coder.ru/</link>
+    <description/>
+    <language>ru</language>
+    
+    <item>
+  <title>Ускорение работы с удаленными сайтами при локальной разработке</title>
+  <link>https://drupal-coder.ru/blog/uskorenie-raboty-s-udalennymi-saytami-pri-lokalnoy-razrabotke</link>
+  <description>
+&lt;span&gt;Ускорение работы с удаленными сайтами при локальной разработке&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/64" lang="" about="https://drupal-coder.ru/user/64" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Алексей Зубенко&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;вт, 08/31/2021 - 13:25&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;В работе программиста много времени отнимают процессы, к программированию относящиеся лишь косвенно. Лично у меня каждый новый, либо надолго забытый проект начинается с продолжительного разворачивания локального окружения, которое состоит не только в клонировании гит-репозитория на локальный компьютер, но также копировании не содержащихся в гите статичных файлов и базы данных. Со временем актуальность локального окружения падает, и часть процесса приходится повторять заново. Еще несколько лет назад я неизменно заходил на сервер, делал дамп БД и архив файлов, которые выкачивал и разворачивал локально. Сейчас появились некоторые инструменты, которые хоть и требуют определенной начальной настройки, но в дальнейшем сильно упрощают жизнь.&lt;/p&gt;
+
+&lt;h3&gt;1. Подключение к удаленному серверу.&lt;/h3&gt;
+
+&lt;p&gt;Итак, вы получили доступы к серверу, на котором работает сайт. Первым делом надо озаботиться тем, чтобы раз и навсегда забыть пароль к нему и осуществлять доступ исключительно с помощью SSH-ключа. Поэтому заходим к себе в каталог ~/.ssh и смотрим ранее сгенерированные ключи. Там их, как водится, одна или более пар - закрытый и открытый ключ в каждой. Всего скорее вы найдете что-то вроде &lt;code&gt;id_rsa&lt;/code&gt; и &lt;code&gt;id_rsa.pub&lt;/code&gt;. Если вы ничего не увидели, то ключ можно сгенерировать командой ssh-keygen. Вам надо будет выбрать название для файла ключа и, если вы поборник безопасности, придумать для него пароль (что я бы не рекомендовал делать в целях упрощения пользования им).&lt;/p&gt;
+
+&lt;p&gt;Итак, теперь у нас есть ключ, и нам надо закинуть его публичную часть на сервер, а точнее - дописать содержимое ключа в файл &lt;code&gt;~/.ssh/authorized_keys&lt;/code&gt;. Публичную - это ту, что имеет расширение &lt;code&gt;.pub&lt;/code&gt;, всё, что без него, - это ваша личная собственность, и за пределы вашего компьютера уходить не должно. Раньше я делал это через файл-менеджер, однако иногда права доступа настроены таким образом, что сделать это проблематично. Безотказный вариант - использовать специальную команду в консоли. Пусть наш логин на сервере будет &lt;code&gt;username&lt;/code&gt;, а домен - &lt;code&gt;servername.ru&lt;/code&gt;, тогда команда будет выглядеть следующим образом:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;span class="geshifilter"&gt;&lt;code class="bash geshifilter-bash"&gt;ssh-copy-id &lt;span style="color: #660033;"&gt;-i&lt;/span&gt; ~&lt;span style="color: #000000; font-weight: bold;"&gt;/&lt;/span&gt;.ssh&lt;span style="color: #000000; font-weight: bold;"&gt;/&lt;/span&gt;id_rsa.pub username&lt;span style="color: #000000; font-weight: bold;"&gt;@&lt;/span&gt;servername.ru&lt;/code&gt;&lt;/span&gt;&lt;/pre&gt;
+
+&lt;p&gt;Если вы подключаетесь по нестандартному порту, добавьте в конце &lt;code&gt;--p[номер порта]&lt;/code&gt; (например, &lt;code&gt;-p22222&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Меняете имя файла ключа на свой, а логин и url сервера на нужные, отправляете и, если все верно, единожды вводите пароль. Все - ключ скопирован, и вы можете проверить, как всё работает, попытавшись подключиться: &lt;code&gt;ssh username@servername.ru&lt;code&gt;.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Про пароль теперь можно забыть, что уже хорошо, но запоминать имя пользователя и домен (а то и ip-адрес) тоже не очень бы хотелось, к тому же через пару лет работы таких записей соберется не один десяток и хранить это в голове или где бы то ни было станет невыносимо.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Значительно проще было бы запоминать короткий алиас подключения, а про остальное забыть, как про страшный сон. Например, &lt;em&gt;username@servername.ru&lt;/em&gt; обозвать &lt;em&gt;srv&lt;/em&gt;. И это возможно - заходим в файл &lt;code&gt;~/.ssh/config&lt;/code&gt; (если нет, то создаем его) и добавляем в него следующие строчки:&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;&lt;code&gt;
+&lt;code language="bash"&gt;
+host srv
+hostname servername.ru  
+user username
+port 22222 # это только если порт нестандартный
+&lt;/code&gt;&lt;/code&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Сохраняем, выполняем в консоли &lt;code&gt;ssh srv&lt;/code&gt; и - профит! Есть и иные параметры подключения, но они далеко за пределами обычной работы и всего скорее после краткого гугления вы найдете свой особенный вариант настройки, если стандартный не подойдет.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Главное здесь - называть подключения так, чтобы они были максимально коротки, но при этом чётко ассоциировались с проектом. Наверняка у вас будут подключения к рабочему сайту и его варианту для разработки. Какой бы домен/поддомен не имел последний, наиболее логичным будет назвать его, добавив к алиасу основного подключения суффикс &lt;code&gt;_dev&lt;/code&gt;. Так, если у нас &lt;code&gt;srv&lt;/code&gt; - это алиас для прода, то к деву будет логично подключаться через &lt;code&gt;srv_dev&lt;/code&gt;. Адреса девов меняются, а краткое слово "дев" всегда будет однозначно характеризовать нам то, что... что оно &lt;a href="https://drupal-coder.ru/sites/default/files/images/klichko.jpg"&gt;должно характеризовать&lt;/a&gt;).&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3&gt;&lt;code&gt;&lt;code&gt;2. Настройка удаленных алиасов для консольной утилиты drush&lt;/code&gt;&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Drupal поддерживает мультисайтинг. То есть на одной кодовой базе может работать более одного сайта. Для обеспечения возможности работы с несколькими сайтами на уровне утилиты drush были внедрены алиасы сайтов. В режиме мультисайтинга они позволяют из одного рабочего каталога выполнять команды для разных сайтов, в этом каталоге работающих. Но помимо этого, мы можем также указывать среди алиасов удаленные сайты, что открывает нам дополнительные возможности.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;В версиях Drupal 7 и Drupal 8/9 настройка осуществляется немного по-разному, что приводит в особенностям при разворачивании локального окружения.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4&gt;&lt;code&gt;&lt;code&gt;Настройка алиасов drush Для Drupal 7&lt;/code&gt;&lt;/code&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Алиасы сайтов для Drupal 7 настраиваются глобально для текущего пользователя ОС и по сути не имеют отношения к конкретному проекту, так как описываются за его пределами.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;В папке пользователя создаем папку .drush, и в нем - файл aliases.drushrc.php примерно со следующим содержимым:&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;&lt;code&gt;
+&lt;code language="php"&gt;
+&lt;?php
+
+$aliases['prod'] = array(
+  'remote-host' =&gt; 'servername.ru', // адрес для подключения
+  'remote-user' =&gt; 'username', // имя пользователя
+  'root' =&gt; '/home/username/web/servername.ru/html', // каталог установки сайта
+  'uri' =&gt; 'https://servername.ru', // URL сайта
+  'ssh-options' =&gt; '-p 22222' // дополнительные опции для подключения, например, порт
+);
+&lt;/code&gt;
+&lt;/code&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Это вариант для идеальных условий, который, тем не менее, срабатывает для большинства случаев. Иногда требуются дополнительные параметры, как, например, пути к каталогу установки drush, к статичным файлам и т.п. Пример файла настроек алиасов со всеми возможными значениями можно посмотреть &lt;a href="https://github.com/drush-ops/drush/blob/8.x/examples/example.aliases.drushrc.php"&gt;здесь&lt;/a&gt;.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Казалось бы, всё легко, но если локально вы работаете с docker-окружением (а это наверняка так), то вам надо пробросить этот файл в контейнер. Я пользуюсь &lt;a href="https://lando.dev/"&gt;Lando&lt;/a&gt; и для проброса использую следующую &lt;a href="https://docs.lando.dev/config/drupal7.html#aliases"&gt;инструкцию&lt;/a&gt;. Аналогично можно сделать для &lt;a href="https://docs.docksal.io/tools/drush/#site-aliases"&gt;docksal&lt;/a&gt;. Адепты docker4drupal, думаю, разберутся и без дополнительных пояснений - им в конфигах копаться не впервой.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4&gt;&lt;code&gt;&lt;code&gt;Настройка алиасов drush Для Drupal 8&lt;/code&gt;&lt;/code&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Здесь всё стало логичнее: конфигурация алиасов - это уже часть проекта. В каталоге проекта создается папка drush/sites, и в ней - файл self.sites.yml с соответствующим содержимым:&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;&lt;code&gt;
+&lt;code language="yaml"&gt;
+prod:
+  host: servername.ru
+  user: username
+  root: /home/username/web/servername.ru/html
+  uri: https://servername.ru
+&lt;/code&gt;&lt;/code&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Полный пример файла, как всегда - в &lt;a href="https://github.com/drush-ops/drush/blob/master/examples/example.site.yml"&gt;репозитории&lt;/a&gt; проекта. &lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3&gt;&lt;br /&gt;&lt;code&gt;&lt;code&gt;3. Использование алиасов drush&lt;/code&gt;&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Итак, мы сконфигурировали алиасы сайтов для drush и теперь можем попробовать их в деле. Сбрасываем кэш drush, выполнив &lt;code&gt;drush cc drush&lt;/code&gt; (если вы используете docker, предварительно зайдите в контейнер), и пытаемся получить информацию от удаленного сайта &lt;code&gt;drush @prod st&lt;/code&gt;. В ответ мы должны увидеть то, что обычно видим при выполнении привычного &lt;span class="geshifilter"&gt;&lt;code class="bash geshifilter-bash"&gt;drush st&lt;/code&gt;&lt;/span&gt;, но уже в контексте удаленного сайта. Также пробуем получить ссылку для авторизации (вы ведь уже забыли пароль?) - &lt;code&gt;drush @prod uli&lt;/code&gt;. Работает? Переходим к самому интересному.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Пока вы были в отпуске, сайт ушёл далеко вперёд? Пора актуализировать БД. Сделаем это по-модному. Для начала раз и навсегда запоминаем, что в стандартной односайтовой установке текущий сайт обозначается алиасом &lt;code&gt;@self&lt;/code&gt;. Теперь выполняем&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;&lt;code&gt;&lt;code&gt;drush sql-sync @prod @self&lt;/code&gt;&lt;/code&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Если нам повезёт, то мы увидим процесс авторизации, создания дампа на удаленном сайте, скачивания его и разворачивания на локальной установке. Если этого не произошло - что-то в вашей конфигурации алиаса не так и всего скорее придётся немного погуглить. Часто проблема возникает, если в настройках не указаны пути к папке и к исполняемому файлу drush.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Мы актуализировали БД и обнаружили, что все последние новости с пустыми картинками - нет новых файлов. Не беда, выполняем&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;&lt;code&gt;&lt;code&gt;drush rsync @prod:%files @self:%files&lt;/code&gt;&lt;/code&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Как вы поняли, &lt;code&gt;%files&lt;/code&gt; - это переменная, в которой хранится путь к каталогу &lt;code&gt;public://&lt;/code&gt; удаленного сайта (который обычно &lt;code&gt;/sites/default/files/&lt;/code&gt;). Порой эту переменную надо особо определить, о чём выше, но обычно всё происходит без лишних сложностей. Впрочем, вместо &lt;code&gt;%files&lt;/code&gt; может быть любой каталог сайта.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Теперь о страшном. С самого начала я думал, что произойдёт, если случайно перепутать алиасы местами и запустить &lt;code&gt;drush sql-sync @self @prod&lt;/code&gt;. И вот как-то я попробовал это сделать. Ничего не вышло, Drush отказал мне. Не знаю, сделано ли это ограничение для алиаса @prod, или вообще нельзя выкатить свой дамп на удаленную БД, но по крайней мере в этой фобии можно себя успокоить.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3&gt;&lt;code&gt;&lt;code&gt;4. Хитрости при дампе БД&lt;/code&gt;&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Порой нам встречаются сайты, база данных которых разрослась до многих гигабайт, и скачивание и разворачивание такого гиганта занимает много ценного рабочего (или не очень) времени. Причём значительную часть этого объема занимают таблицы, где хранится кэш.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Решаем вопрос следующим образом (рецепт для Drupal 7). В папке &lt;code&gt;.drush&lt;/code&gt; на сайте создаем файл &lt;code&gt;.drushrc.php&lt;/code&gt; (если его там еще нет), где прописываем список таблиц, которые надо пропускать при создании дампа. Например:&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;&lt;code&gt;
+&lt;code language="php"&gt;
+&lt;?php
+
+$options['structure-tables']['common'] = array('cache', 'cache_admin_menu', 'cache_block', 'cache_bootstrap', 'cache_commerce_shipping_rates', 'cache_entity_comment', 'cache_entity_commerce_customer_profile', 'cache_entity_commerce_line_item', 'cache_entity_commerce_order', 'cache_entity_commerce_product', 'cache_entity_field_collection_item', 'cache_entity_file', 'cache_entity_node', 'cache_entity_taxonomy_term', 'cache_entity_taxonomy_vocabulary', 'cache_entity_user', 'cache_features', 'cache_feeds_http', 'cache_field', 'cache_filter', 'cache_form', 'cache_hacked', 'cache_image', 'cache_libraries', 'cache_menu', 'cache_metatag', 'cache_page', 'cache_path', 'cache_rules', 'cache_session_cache', 'cache_token', 'cache_ultimate_cron', 'cache_update', 'cache_variable', 'cache_views', 'cache_views_data');
+&lt;/code&gt;
+&lt;/code&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Впрочем, всего скорее, сейчас уже должна быть доступна запись с wildcard:&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;&lt;code&gt;
+&lt;code language="php"&gt;
+$options['structure-tables']['common'] = array('cache', 'cache_*');&lt;/code&gt;&lt;/code&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Теперь при синхронизации (да и просто при создании дампа) добавляем ссылку на этот список: &lt;code&gt;--structure-tables-key=common&lt;/code&gt;, например:&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;&lt;code&gt;&lt;code&gt;
+drush sql-sync @prod_ru @ru --structure-tables-key=common&lt;/code&gt;&lt;/code&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;&lt;code&gt;&lt;code&gt;Заключение&lt;/code&gt;&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;code&gt;Это лишь небольшая часть ухищрений, к которым можно прибегнуть для автоматизации ежедневной рутины. Порой может показаться, что для малых и нерегулярных проектов игра не стоит свеч и потерянного на настройку времени, но если проект большой, и вы часто к нему обращаетесь, в будущем это сэкономит вам много нервов и к тому же подарит новые навыки, которые в нашем деле никогда не бывают лишними.&lt;/code&gt;&lt;/code&gt;&lt;/p&gt;&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/programmirovanie" hreflang="ru"&gt;Программирование&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/performance" hreflang="ru"&gt;performance&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-7" hreflang="ru"&gt;Drupal 7&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=290&amp;2=comment&amp;3=comment" token="s_rgntqZMesJQZpzsucmqiXzu5rAh9JFWG31guqpjAk"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-7-uskorenie-vremeni-generacii-stranic-internet-magazina-na-32" hreflang="ru"&gt;Drupal 7: ускорение времени генерации страниц интернет-магазина на 32%&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/nastroyka-keshirovaniya-dannykh-apgreyd-servera-uskorenie-raboty-sayta-v-30-raz" hreflang="ru"&gt;Настройка кэширования данных. Апгрейд сервера. Ускорение работы сайта в 30 раз! &lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Tue, 31 Aug 2021 13:25:22 +0000</pubDate>
+    <dc:creator>Алексей Зубенко</dc:creator>
+    <guid isPermaLink="false">290 at https://drupal-coder.ru</guid>
+    </item>
+
+  </channel>
+</rss>

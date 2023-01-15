@@ -1,0 +1,858 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:og="http://ogp.me/ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:schema="http://schema.org/" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" version="2.0" xml:base="https://drupal-coder.ru/">
+  <channel>
+    <title>Поддержка</title>
+    <link>https://drupal-coder.ru/</link>
+    <description/>
+    <language>ru</language>
+    
+    <item>
+  <title>PWA: как превратить сайт на Drupal в приложение без особых затрат</title>
+  <link>https://drupal-coder.ru/blog/pwa-kak-prevratit-sayt-na-drupal-v-prilozhenie-bez-osobykh-zatrat</link>
+  <description>
+&lt;span&gt;PWA: как превратить сайт на Drupal в приложение без особых затрат&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/35" lang="" about="https://drupal-coder.ru/user/35" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Алексей Синица&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;чт, 05/05/2022 - 10:40&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2022-05/shutterstock_1818087794.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Хотите запустить своё мобильное приложение, но у вас пока нет огромного бюджета? Если у вас есть сайт на Drupal, мы можем предложить вам недорогую и достойную альтернативу полноценному приложению — PWA. Рассказываем о технологии, принципе её работы и преимуществах.&lt;/p&gt;
+
+&lt;h3&gt;Что такое PWA?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;PWA или прогрессивное мобильное приложение (Progressive Web Applications)&lt;/strong&gt; — технология, которая позволяет превратить сайт в подобие мобильного приложения. &lt;/p&gt;
+
+&lt;p&gt;PWA даёт привычный пользовательский опыт: на рабочем столе появляется иконка как у приложения, внутренний интерфейс похож на полноценное приложение, вкладки быстро открываются и грузятся. PWA может работать в автономном режиме и позволяет присылать push-уведомления.&lt;/p&gt;
+
+&lt;p&gt;PWA идеально подходит для запуска минимально жизнеспособного продукта, проверки спроса или других гипотез, а в разработке и поддержке обходится намного дешевле полноценного приложения.&lt;/p&gt;
+
+&lt;p&gt;PWA можно скачать как напрямую с сайта, так и разместить в Google Play.&lt;/p&gt;
+
+&lt;h3&gt;Какие задачи решает PWA?&lt;/h3&gt;
+
+&lt;p&gt;Многие пользователи уже привыкли к тому, что большую часть привычных действий можно делать в приложениях: читать новости, совершать покупки, заказывать еду и т.д. Сайты в браузере чаще всего в этом плане менее конкуренты. И если раньше основным возражением против такого расклада был большой размер приложений, то нынешние поколения смартфонов имеют достаточный объём памяти. А в случае с PWA этот аргумент тем более не работает, т.к. PWA весит несколько Мб против уже привычных нескольких сотен Мб. &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;PWA поможет:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;протестировать спрос или другую гипотезу;&lt;/li&gt;
+	&lt;li&gt;увеличить время нахождения на сайте;&lt;/li&gt;
+	&lt;li&gt;повысить узнаваемость бренда с помощью иконки сайта на стартовом экране телефона;&lt;/li&gt;
+	&lt;li&gt;увеличить конверсию благодаря push-уведомлениям со скидками/акциями.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;strong&gt;PWA отлично подходит для сайтов, на которые люди часто заходят: &lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;новостные порталы, &lt;/li&gt;
+	&lt;li&gt;блоги, &lt;/li&gt;
+	&lt;li&gt;сайты доставки, &lt;/li&gt;
+	&lt;li&gt;любые сайты с личными кабинетами.&lt;/li&gt;
+&lt;/ul&gt;&lt;h3&gt;Плюсы и минусы PWA&lt;/h3&gt;
+
+&lt;p&gt;Несколько плюсов мы уже перечислили, но на всякий случай повторим их в полном списке:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;позволяет сэкономить на разработке и поддержке;&lt;/li&gt;
+	&lt;li&gt;не требует много места на смартфоне  — всего несколько Мб;&lt;/li&gt;
+	&lt;li&gt;скачивается в один клик с сайта;&lt;/li&gt;
+	&lt;li&gt;может быть размещено в Google Play как настоящее приложение;&lt;/li&gt;
+	&lt;li&gt;не ломает пользовательский опыт: понятный и привычный интерфейс, как у приложения;&lt;/li&gt;
+	&lt;li&gt;загружается быстро, работает в офлайн-режиме благодаря кэшированию;&lt;/li&gt;
+	&lt;li&gt;повышает время нахождения на сайте и вероятность конверсии;&lt;/li&gt;
+	&lt;li&gt;позволяет сэкономить на повторном привлечении клиента без расходов на ретаргетинг и ремаркетинг.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Прямо на сайте можно разместить баннер или всплывающее окно с предложением добавить ваше приложение на главный экран. Так пользователь сможет видеть вас чаще и ему будет проще сделать заказ/совершить покупку/узнать новости и т.д.&lt;/p&gt;
+
+&lt;p&gt;В этом случае главное не спугнуть пользователя. Навязчивое приглашение установить сайт на телефон может оттолкнуть клиента:  он может посчитать это угрозой безопасности.&lt;/p&gt;
+
+&lt;p&gt;Правильнее будет расписать все преимущества от установки PWA и продемонстрировать его выгоду. В этом случае пользователь охотнее согласится скачать незнакомое ПО.&lt;/p&gt;
+
+&lt;p&gt;PWA также может помочь поисковому продвижению. Например, обратная ссылка на сайт в Google Play способна привлечь дополнительных посетителей. Также на ранжирование сайта влияют хорошие поведенческие показатели, которые видят поисковики благодаря PWA. Люди пользуются сайтом и совершают целевые действия? Значит им всё нравится и сайт можно продвигать на поиске. В обычной ситуации посетители могли бы просто уйти из-за низкой скорости, плохой оптимизации или другого фактора, но в PWA всё заточено под комфорт пользователя — как в приложении.&lt;/p&gt;
+
+&lt;p&gt;Минусов у PWA объективно меньше:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;некоторые устройства могут не поддерживать PWA из-за версии ОС;&lt;/li&gt;
+	&lt;li&gt;офлайн-доступ не безграничен — закэшировать вообще весь сайт возможности нет, но можно сделать специальную страницу с просьбой подключиться к интернету.&lt;/li&gt;
+&lt;/ul&gt;&lt;h3&gt;Кейс из нашей практики&lt;/h3&gt;
+
+&lt;p&gt;Несмотря на всю прелесть технологии, про PWA до сих пор знают немногие. И очень жаль, потому что мы можем с лёгкостью превратить любой сайт на Drupal в прогрессивное приложение.&lt;/p&gt;
+
+&lt;p&gt;Например, в качестве эксперимента мы превратили в PWA наш собственный сайт.&lt;/p&gt;
+
+&lt;p&gt;А для нашего клиента, интернет-магазина &lt;a href="https://www.pnevmoteh.ru/"&gt;PNEVMOTEH&lt;/a&gt;, мы сделали целых три приложения — на русском, казахском и белорусском языках. Клиент работает в разных странах и в качестве гипотезы хотел проверить, насколько востребована будет установка приложений в его нише, дабы не тратить огромные деньги на разработку. Взрывных показателей по установкам не ожидалось, т.к. никаких рекламных и других затрат на продвижение в проект не закладывалось.&lt;/p&gt;
+
+&lt;p&gt;В результате за всё время существования PWA PNEVMOTEH установили всего 73 раза. Из них 14 белорусских, 59 российских, а вот установок из Казахстана вообще не случилось.&lt;em&gt;&lt;strong&gt; &lt;/strong&gt;&lt;/em&gt;&lt;br /&gt;&lt;span style="font-size:11.5pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Arial"&gt;&lt;span style="color:#1d1c1d"&gt;&lt;span style="background-color:#ffffff"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;&lt;span style="border:none"&gt;&lt;span style="display:inline-block"&gt;&lt;span style="overflow:hidden"&gt;&lt;span style="width:494px"&gt;&lt;span style="height:360px"&gt;&lt;img height="360" src="https://lh4.googleusercontent.com/98QtzGxioRSbwJsy_qkLhLbIstgkd80x1MJFaOochjuCHY64T6f6wG9SVDizkSskhnR0Tq9VcAN92_VhXxplawMrqQKZPhNCMMLyL9DyOqxytnTonN3c84ngOkzYgN4RAH_baLWaPXPymiRsdg" width="494" /&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Статистика установок PWA приложения PNEVMOTEH в Google Play&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3&gt;Что нужно для того, чтобы заказать разработку PWA?&lt;/h3&gt;
+
+&lt;p&gt;Вам понадобится: сайт вашего бизнеса на Drupal и определённый бюджет. Размер последнего зависит от нескольких факторов:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Будет ли PWA размещаться в магазинах приложений.&lt;/strong&gt; Если в хотите, чтобы PWA можно было установить не только с вашего сайта, но и с Google Play, необходимо будет провести дополнительную работу по написанию определённого кода под Android.&lt;br /&gt;&lt;strong&gt;В каком состоянии мобильная версия сайта.&lt;/strong&gt; Насколько хорошо ваш сайт адаптирован под мобильные устройства? Как быстро он загружается и ничего ли там не едет за пределы экрана? Этот фактор влияет не только на стоимость, но и на скорость работы.&lt;br /&gt;&lt;strong&gt;Какое количество функционала планируется.&lt;/strong&gt; Например, push-уведомления о скидках и акциях нужно будет добавлять в систему. В рамках поддержки на это будет уходить определённое время разработчиков.&lt;/p&gt;
+
+&lt;p&gt;Разумеется, это лишь основные параметры. И даже с учётом любых других обстоятельств, это всё равно выгоднее, чем заказывать полновесную разработку мобильного приложения. Тем более если вы озадачиваетесь этим впервые.&lt;/p&gt;
+
+&lt;h3&gt;Стоимость разработки&lt;/h3&gt;
+
+&lt;p&gt;Мы несколько раз акцентировали внимание на том, что PWA в разработке гораздо дешевле. На прогрессивное приложение для PNEVMOTEH у нас ушло 15 часов. Сюда входила подготовка сайта + написание кода под Android для размещения на Google Play. Важная деталь: это заняло так мало времени, потому что сайт был уже оптимизирован и хорошо адаптирован под мобильные устройства.&lt;/p&gt;
+
+&lt;p&gt;Даже по ставке самого опытного нашего разработчика эти часы не обойдутся вам в миллион и более. А когда речь идёт о написании приложения с нуля, именно о таких суммах обычно идёт речь. &lt;/p&gt;
+
+&lt;p&gt;Если вас заинтересовала технология PWA и вы хотите своё приложение без лишних затрат, &lt;a href="https://drupal-coder.ru/support"&gt;обращайтесь к нам&lt;/a&gt;. Наши менеджеры ответят на любые ваши вопросы. &lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/podderzhka" hreflang="ru"&gt;Поддержка&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/prodvizenie-saitov" hreflang="ru"&gt;Продвижение сайтов&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=333&amp;2=comment&amp;3=comment" token="DSxFnKL4z2y7PlL4r1E6ULhcAZDrbJ1kU8A56cWc1tg"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;</description>
+  <pubDate>Thu, 05 May 2022 10:40:26 +0000</pubDate>
+    <dc:creator>Алексей Синица</dc:creator>
+    <guid isPermaLink="false">333 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>Лучше 4 часа потратить и за 5 минут долететь: зачем нужен обязательный онбординг на сайте клиента</title>
+  <link>https://drupal-coder.ru/blog/luchshe-4-chasa-potratit-i-za-5-minut-doletet-zachem-nuzhen-obyazatelnyy-onbording-na-sayte</link>
+  <description>
+&lt;span&gt;Лучше 4 часа потратить и за 5 минут долететь: зачем нужен обязательный онбординг на сайте клиента&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/51" lang="" about="https://drupal-coder.ru/user/51" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Сергей Синица&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;ср, 05/04/2022 - 08:48&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2022-05/shutterstock_1902706888.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Некоторые компании, когда берут сайты на поддержку, требуют переезда на свои серверы и свою инфраструктуру. Чаще всего они берут за эту работу деньги. Мы в Initlab поддерживаем сайты на Drupal на серверах наших клиентов, не требуем переезда, а значит и денег за этот переезд. Вместо этого у нас обязательный онбординг. В этой статье я объясню, для чего он нужен и какие преимущества даёт.&lt;/p&gt;
+
+&lt;p&gt;Многие заказчики пугаются, когда мы едва начали сотрудничать, а в задачах уже прописано 4 часа работ. Ещё и слово «онбординг» не совсем понятно, что это и зачем оно? Вот будут задачи по сайту, тогда и начнёте часы считать!&lt;/p&gt;
+
+&lt;p&gt;Всё очень легко объяснить на простой аналогии. Клиент — владелец корабля, на который он нанимает команду Initlab. А хорошая команда обязательно проверяет судно перед плаванием. Нужно устранить недочёты, навести порядок, принести своё оборудование и т.д. Вычёрпывать кружкой воду из трюма в середине пути можно, но разве не проще сразу залатать дыру и покойно плыть?&lt;/p&gt;
+
+&lt;p&gt;Именно об этом обязательный онбординг — проверка, отладка всех систем, упрощение будущей работы. Четыре часа, потраченных сейчас, сэкономят уйму рабочих часов, а значит и денег клиента.&lt;/p&gt;
+
+&lt;p&gt;Опишу все этапы работ, которые выполняют наши менеджеры, системные администраторы и разработчики перед полноценной работой с сайтом.&lt;/p&gt;
+
+&lt;h3&gt;Задачи менеджеров&lt;/h3&gt;
+
+&lt;p&gt;На наших менеджерах лежит не только будущая коммуникация с клиентом — им предстоит следить за общим порядком на проекте и контролировать все процессы. Их задачи во время онбординга:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;Получить у клиента доступ SSH и в админку сайта, добавить логины и пароли в PassPack. Для спокойной работы нашим сотрудникам нужен безопасный доступ на сервер/хостинг — SSH. Мы стараемся работать через SSH и через консоль в целях безопасности и экономии времени. Затем менеджеры проверяют корректность паролей и заносят их в PassPack. Это зашифрованное хранилище паролей — такие данные мы никогда не пересылаем через почту или переписки. Только PassPack. Он гарантирует полную сохранность и конфиденциальность доступов к сайту.&lt;br /&gt;
+	 &lt;/li&gt;
+	&lt;li&gt;Оформить проект в RedMine. RedMine — это система управления проектами, где расположены все задачи по сайту. Для клиента заводится аккаунт. Он может отслеживать затраченное рабочее время, присылать задачи, просматривать их приоритеты и сотрудников, которые над ними работают.&lt;br /&gt;
+	 &lt;/li&gt;
+	&lt;li&gt;Завести задачу и проконтролировать её выполнение. Наши менеджеры обучают клиентов пользоваться RedMine и проверяют, всё ли работает корректно — уведомления приходят, задачи ставятся, разработчики их получают и выполняют. Дальнейшая слаженная работа с клиентом — наш приоритет.&lt;br /&gt;
+	 &lt;/li&gt;
+	&lt;li&gt;Предложить дополнительные услуги: бекапы, администрирование, SEO-аудит. Нет, не в смысле навязать услуги. Наши менеджеры выясняют, что нужно вашему сайту и считаете ли это нужным именно вы. Сначала они проконсультируются с теми, кто будет работать с вашим сайтом, узнают дополнительные потребности сайта и предложат только необходимое.&lt;/li&gt;
+&lt;/ul&gt;&lt;h3&gt;Задачи DevOps, системных администраторов&lt;/h3&gt;
+
+&lt;p&gt;Эти ребята будут настраивать и поддерживать ваш веб-сервер, обеспечивать работоспособность сайта, помогать разработчикам делать свою работу быстро и качественно. На все задачи по онбордингу у них обычно уходит до двух часов — время, которое того стоит.&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;Установить Drush на проде. Drush — это команда, с помощью которой быстро выполняются действия на сайте: сбросить кэш, подключиться к базе данных, включить-выключить модули. С помощью неё можно не заходить в админку каждый раз. Это упростит выполнение базовых задач и сэкономит часы, а значит и деньги клиента.&lt;br /&gt;
+	 &lt;/li&gt;
+	&lt;li&gt;Настроить копию для демонстрации, сохранить доступы в PassPack. Мы всегда делаем рабочую копию сайта, обычно на своих серверах. Это необходимо для демонстрации промежуточных результатов работ — сдать сложную задачу по частям, согласовать изменения, чтобы не ломать основной сайт. Копию мы закрываем отдельным паролем заводим в PassPack чтобы обезопасить от утечек и обеспечить разработчикам постоянный доступ.&lt;br /&gt;
+	 &lt;/li&gt;
+	&lt;li&gt;Настроить Git. Git — это система контроля и хранения версий файлов. Обязательный для всех разработчиков сервис. Все изменения с сайта фиксируются здесь — кто, когда, и что поменял. Чтобы в случае чего можно было откатить до старой версии или найти время внесения изменений.&lt;br /&gt;
+	 &lt;/li&gt;
+	&lt;li&gt;Настроить CI. CI помогает быстро переносить изменения с копий сайта на его рабочую версию. Ручной перенос занимает куда больше времени и труда. Мы привыкли всё упрощать и ускорять, так легче для всех, включая клиента. Дополнительно настройка CI даёт возможность внедрить автоматическую проверку кода на соответствие стандартам Drupal и автоматизировать тестирование сайта при переносе изменений, а также актуализировать копию сайта по нажатию одной кнопки. Проверка кода и автоматическое тестирование необходимы на сложных проектах в больших командах разработки и не обязательны для всех. Но на масштабных проектах мы их крайне рекомендуем — так будет меньше багов и глюков. Внедряются они по согласованию с клиентом.&lt;br /&gt;
+	 &lt;/li&gt;
+	&lt;li&gt;Архивация копии базы данных сайта перед началом работ. Сайт состоит из файлов и базы данных — в файлах картинки и код сайта, скрипты, а в базе данных — контент, пользователи, заказы магазинов. Перед началом работы копию базы данных мы архивируем и размещаем на архивном сервере, чтобы в случае форс-мажора можно было всё вернуть или сравнить с исходной версией. Все обнаруженные на копии сайта ошибки DevOps указывают в тикете для дальнейшего анализа разработчиками. Наши разработчики подключаются и помогают развернуть полноценную работоспособную копию сайта для разработки.&lt;br /&gt;
+	 &lt;/li&gt;
+	&lt;li&gt;Постановка сайта на мониторинг. Эта услуга согласовывается с клиентом. Мы мониторим доступность сайта, наличие обновлений безопасности. Это необходимо, чтобы мы могли оперативнее исправлять проблемы на сайте.&lt;/li&gt;
+&lt;/ul&gt;&lt;h3&gt;Задачи разработчиков&lt;/h3&gt;
+
+&lt;p&gt;Эти ребята будут разрабатывать ваш сайт. Их задача — убедиться в том, что изначально сайт был разработан по самым высоким стандартам, принятым в Drupal. И если это не так, разработчики подготовят рекомендации по устранению недочётов сайта в будущем и определятся с тем, какими инструментами в работе можно пользоваться на текущий момент. На разработчиках лежит одна из самых ответственных частей работы, а значит их 2 часа подготовки и проверки сейчас помогут сэкономить десятки часов в будущем.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1. Общая оценка качества сайта для упрощения дальнейшей оценки (кастом + Hacked + Schema + Watchdog).&lt;/strong&gt; Это нечто похожее на диагностический осмотр врача. Разработчики изучают «анамнез» вашего сайта — что с ним было до этого, как он был создан и поддерживался ранее. На этом этапе есть 4 обязательных пункта проверки:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;Делал ли кто-то кастомные модули. Drupal такая система, где можно пользоваться готовыми модулями, а можно писать свои. Как правило, 99% функционала можно реализовать на готовых решениях. Но многие разработчики об этом не знают, поэтому, что называется, изобретают велосипед. Мы проверяем сайт на наличие «самописных» частей, чтобы взять их под контроль, а в будущем, по возможности исправить.&lt;br /&gt;
+	 &lt;/li&gt;
+	&lt;li&gt;Меняли ли разработчики до нас ядро Drupal. Иногда разработчики по разным причинам (не умеют, не хотят, верят, что так быстрее) вносят изменения сразу в ядро Drupal. Это как сломать руку и вместо того, чтобы поставить гипс, просто отрубить её. Поэтому наши разработчики проверяют ядро на наличие таких самовольных изменений в ядре Drupal. Это всё та же работоспособность сайта и сэкономленное в будущем время.&lt;br /&gt;
+	 &lt;/li&gt;
+	&lt;li&gt;Меняли ли структуру базы данных. В этом случае могут не применяться обновления Drupal. Поэтому мы корректируем описание структуры базы данных, чтобы не было проблем с обновлениями безопасности. Либо документируем найденные изменения, чтобы учитывать в будущем.&lt;br /&gt;
+	 &lt;/li&gt;
+	&lt;li&gt;Просматриваем Watchdog. Это встроенный модуль Drupal, который фиксирует ошибки. Если их много, то сайт будет работать медленно и дальнейшая его поддержка будет усложнена — придётся тратить время на выяснение причин впоследствии. Мы просматриваем страницы сайта на наличие ошибок в журнале Watchdog. Если всё выполнено по стандартам Drupal, то там не будет ничего лишнего. Если же работал непрофессиональный или неопытный разработчик, то в журнале Watchdog будут записи об ошибках. Иногда их слишком много, именно поэтому в них нужно разобраться сразу.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;strong&gt;2. Изучаем состояние Composer и конфигурации для сайтов на Drupal 8+ и Features для Drupal 7. Всё это необходимо для того, чтобы:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;не конфликтовать с тем, как работали на сайте до нас, иначе есть риск многое сломать;&lt;/li&gt;
+	&lt;li&gt;быстро обновить или установить нужный модуль на сайт;&lt;/li&gt;
+	&lt;li&gt;записать историю изменений настроек сайта;&lt;/li&gt;
+	&lt;li&gt;быстро переносить изменения с копий сайта на основной сайт;&lt;/li&gt;
+	&lt;li&gt;уменьшить количество ошибок (это делает робот, а не человек, который не совершенен).&lt;/li&gt;
+	&lt;li&gt;Если состояние далеко от удовлетворительного, то по согласованию с клиентом мы приводим в порядок нужные части сайта.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;strong&gt;3. Выясняем, всё ли в порядке с отображением сайта. &lt;/strong&gt;Кроме внутренних процессов у сайта есть ещё и внешний вид — то, как он отображается у ваших клиентов. За внешний вид отвечает тема оформления. Как правило, при её разработке используется препроцессор — специальный язык программирования и инструментарий. И если в начале создания использовали препроцессор, а после работали без него, то в коде сайта будет трудно ориентироваться. Есть риск потери всех внесённых изменений, если их внесли не туда или препроцессор запущен неправильно. Препроцессоров много, поэтому мы выясняем, какой именно был использован и как продолжить с ним работать.&lt;/p&gt;
+
+&lt;p&gt;Надеюсь мне удалось доступно объяснить, почему онбординг так важен. По сути, это тот же приём смены, как на любом производстве. Мы ценим комфорт и скорость, ведь это нужно и нам, и клиенту. Четыре часа времени, чтобы потом спокойно работать в «полевых» условиях. Поверьте, оно того стоит.&lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/podderzhka" hreflang="ru"&gt;Поддержка&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=332&amp;2=comment&amp;3=comment" token="e11v9JoHiQ8DQrkXhNjkgxeLTX-oM6FGxhL8VzfCacI"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;</description>
+  <pubDate>Wed, 04 May 2022 08:48:53 +0000</pubDate>
+    <dc:creator>Сергей Синица</dc:creator>
+    <guid isPermaLink="false">332 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/luchshe-4-chasa-potratit-i-za-5-minut-doletet-zachem-nuzhen-obyazatelnyy-onbording-na-sayte#comments</comments>
+    </item>
+<item>
+  <title>Интеграция Sendpulse с сайтом на Drupal</title>
+  <link>https://drupal-coder.ru/blog/integraciya-sendpulse-s-saytom-na-drupal</link>
+  <description>
+&lt;span&gt;Интеграция Sendpulse с сайтом на Drupal&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/35" lang="" about="https://drupal-coder.ru/user/35" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Алексей Синица&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;вт, 03/15/2022 - 11:26&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2022-03/Mar-Business_18.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;E-mail-рассылки помогают вернуть клиента на сайт, подтолкнуть его к повторной покупке или оповестить о скидках. Чтобы человек автоматически получали нужное письмо в нужный момент, необходимо интегрировать с сайтом сервис массовых рассылок. В этой статье мы расскажем вам об одном из таких сервисов, его возможностях и преимуществах.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;SendPulse&lt;/strong&gt; — это сервис, где можно создавать и распространять sms и web-рассылки, рассылки из мессенджеров и приложений, push-уведомления и чат-боты. SendPulse — это полноценный маркетинговый инструмент с подробной статистикой по множеству параметров.&lt;/p&gt;
+
+&lt;h3&gt;Какие задачи решает SendPulse&lt;/h3&gt;
+
+&lt;p&gt;Если мы будем говорить о каждой возможности/услуге сервиса отдельно, то статья займёт много вашего времени и превратится в совсем уж рекламную. Наша задача — рассказать о преимуществах сервиса в целом и что он может дать владельцам сайтов на Drupal.&lt;/p&gt;
+
+&lt;p&gt;Для удобства мы сосредоточимся на основной услуге от SendPulse — e-mail-рассылках. Остальные возможности сервиса вы можете изучить на их официальном сайте. Всё представленное можно интегрировать с сайтом на Drupal.&lt;/p&gt;
+
+&lt;h3&gt;Как e-mail-рассылки помогают увеличить конверсию на сайте&lt;/h3&gt;
+
+&lt;p&gt;Разные специалисты предлагают разную типологию e-mail рассылок. Мы для удобства остановимся на двух категориях: &lt;/p&gt;
+
+&lt;p&gt;Информационные рассылки. На сайте появилась новая статья, проходит акция, поступил товар, предстоит событие и т.д.&lt;br /&gt;
+Триггерные рассылки. Например, человек бросил корзину с товарами — ему приходит письмо с напоминанием об этом, скидкой или промокодом, которые могут подтолкнуть к покупке. &lt;/p&gt;
+
+&lt;p&gt;Ребята из SendPulse собирали статистику по триггерным письмам с брошенной корзиной. Как видите, процент открытий и кликов говорит сам за себя.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;span style="font-size:12pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#000000"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;&lt;span style="border:none"&gt;&lt;span style="display:inline-block"&gt;&lt;span style="overflow:hidden"&gt;&lt;span style="width:602px"&gt;&lt;span style="height:483px"&gt;&lt;img height="483" src="https://lh4.googleusercontent.com/rX9_6nMfuyubvDCh76byvEawc3HV0Q-md6rmKhlSaMgrfywWM2e66HnmYtHa8AiuTNCv46otb31E0xEIAQc6y5BkJllnNzRqcOpzpjgXv4esK949Yl4zJ0aaxeHY1qM1TK-syKWr" width="602" /&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Например, мы настраивали нашему клиенту рассылку по следующим событиям:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;после регистрации. Клиент зарегистрировался, но ничего не покупал. Отличный повод прислать приветственное письмо и предложить самые популярные товары, например; &lt;/li&gt;
+	&lt;li&gt;после совершения покупки. Когда заказ оформлен, на почту должна приходить информация о заказе. Это настолько привычная практика, что иначе уже и не представить. Можно настроить целую цепочку по статусу заказа &lt;/li&gt;
+	&lt;li&gt;при брошенной корзине, если через 30 минут заказ не был оформлен или завершён.&lt;/li&gt;
+&lt;/ul&gt;&lt;h3&gt;Можно ли настроить рассылку напрямую с сайта?&lt;/h3&gt;
+
+&lt;p&gt;У Drupal действительно есть возможность настраивать прямые рассылки. Человек оставляет почту на сайте и мы начинаем отправлять письма прямо с него.&lt;/p&gt;
+
+&lt;p&gt;Но у сервисов вроде SendPulse есть два неоспоримых преимущества:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1. Обход спам-фильтров.&lt;/strong&gt; Любой сервис справится с этой задачей лучше прямой рассылки.&lt;br /&gt;&lt;strong&gt;2. Сбор статистики.&lt;/strong&gt; Вы никогда не узнаете, сколько ваших писем дошли до адресатов, сколько из них были открыты и уж тем более сколько было совершено целевых действий. А значит никакого осознанного улучшения рассылок, в зависимости от их эффективности.&lt;/p&gt;
+
+&lt;h3&gt;Каким сайтам необходим SendPulse?&lt;/h3&gt;
+
+&lt;p&gt;Основной повод для любого бизнеса — желание повысить конверсию на сайте. Либо если нужно решить точечные проблемы, вроде той же брошенной корзины или ухода пользователей с сайта, если нужного товара нет в наличии.&lt;/p&gt;
+
+&lt;p&gt;Если вы хотите подключить SendPulse к сайту на Drupal, &lt;a href="https://drupal-coder.ru/support"&gt;обращайтесь к нам&lt;/a&gt;. &lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/integracii" hreflang="ru"&gt;интеграции&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/podderzhka" hreflang="ru"&gt;Поддержка&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=323&amp;2=comment&amp;3=comment" token="3gs1bfrFfs-DBDKxYwHn4fTDSiaaAQA3szo7OM5Ywg0"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/integraciya-sayta-drupal-8-s-crm-bitriks24" hreflang="ru"&gt;Интеграция сайта Drupal 8 с CRM Битрикс24&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/integraciya-platyozhnoy-sistemy-s-saytom-na-drupal" hreflang="ru"&gt;Интеграция платёжной системы с сайтом на Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Tue, 15 Mar 2022 11:26:01 +0000</pubDate>
+    <dc:creator>Алексей Синица</dc:creator>
+    <guid isPermaLink="false">323 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>Интеграция платёжной системы с сайтом на Drupal</title>
+  <link>https://drupal-coder.ru/blog/integraciya-platyozhnoy-sistemy-s-saytom-na-drupal</link>
+  <description>
+&lt;span&gt;Интеграция платёжной системы с сайтом на Drupal&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/35" lang="" about="https://drupal-coder.ru/user/35" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Алексей Синица&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;вс, 03/13/2022 - 09:41&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2022-03/business-online-shopping-and-sale-concept.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Чтобы получать от клиентов оплату за товары и услуги, нужно подключить на сайт платёжную систему. Одноразовые платежи за товары или подписка на информационный сервис — в обоих случаях мы говорим об одинаковом решении. Если вашему сайту на Drupal нужна платёжная система, ознакомьтесь с нашей статьёй.&lt;/p&gt;
+
+&lt;h3&gt;Виды платформ для оплаты и чем они отличаются&lt;/h3&gt;
+
+&lt;p&gt;Если пришло время внедрить на ваш Drupal-сайт платёжную систему, вам предстоит выбрать оптимальный для вашего случая вариант. Платёжные системы отличаются способами сбора комиссии, процентами платежей, наличием поддержки и многими другими нюансами. Мы опишем только основные их отличия:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;интернет-эквайринг банков — банк помогает посетителю сайта совершить платёж через интернет: проверяет данные карты, списывает у клиента средства и переводит их на счёт продавца (Сбербанк, Альфа-Банк, Тинькофф и др.);&lt;/li&gt;
+	&lt;li&gt;электронные кошельки — организация заводит расчётный счёт, куда поступают средства с электронного кошелька клиента (ЮMoney, Webmoney, PayPal);&lt;/li&gt;
+	&lt;li&gt;платёжные агрегаторы — подключают на сайт сразу несколько способов оплаты: картой, электронной валютой, наличными при получении и т. п. (PayAnyWay, Fondy, Ю.Касса, CloudPayments и т.д.)&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Плюсы и минусы всех этих способов мы расписывать не будем. К тому же, выбор зависит только от задач вашего бизнеса, стадии его развития, тарифов, уровня службы поддержки платёжных систем и т.д. &lt;/p&gt;
+
+&lt;h3&gt;Разовая оплата, подписки и пожертвования&lt;/h3&gt;
+
+&lt;p&gt;Drupal позволяет интегрировать любую платёжную систему для любых целей:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;подписка на сервисы доступа к контенту на любой период времени с автоматическим списанием в нужную дату;&lt;/li&gt;
+	&lt;li&gt;регулярные и единоразовые пожертвования;&lt;/li&gt;
+	&lt;li&gt;оплата покупок. &lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;br /&gt;&lt;span style="font-size:11pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#000000"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:italic"&gt;&lt;span style="text-decoration:none"&gt;&lt;span style="border:none"&gt;&lt;span style="display:inline-block"&gt;&lt;span style="overflow:hidden"&gt;&lt;span style="width:602px"&gt;&lt;span style="height:273px"&gt;&lt;img height="273" src="https://lh5.googleusercontent.com/th5FlATYTQa6pbTTQCRWEmufQdN8zx4qxc1Iv3W5dxvlHyDp8oBzKNAPRLYbSBzPS_rjsyKpSdH8JvczG2-XuM7xEtKQUGgH-lZM2dAwXKQoIbEuDC7juG_iGlu_rNDMyI-mO9zZ" width="602" /&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Например, у нашего клиента — швейцарского новостного портала на русском языке &lt;a href="http://nashagazeta.ch/"&gt;nashagazeta.ch&lt;/a&gt; подключена платёжная система PayPal с возможностью подписки на полгода и год&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3&gt;Нюансы законодательства и пользовательского опыта&lt;/h3&gt;
+
+&lt;p&gt;Для клиента расстаться с данными карты большой стресс, особенно если он на сайте впервые. Поэтому сама форма оплаты должна быть удобной и выглядеть надёжно, чтобы вызывать доверие. Мы продумываем архитектуру страницы так, чтобы форма оплаты адаптировалась под любые устройства, особенно под смартфоны на которые сейчас приходится более 60% общего интернет-трафика. Форму оплаты можно разместить внутри сайта или настроить её открытие в новой вкладке, с переходом на сайт платёжной системы. Это зависит от особенностей платформы и пожеланий владельца сайта.&lt;/p&gt;
+
+&lt;p&gt;Обязательно обратите внимание на требования законодательства и 54-ФЗ: важно настроить фискализацию, отправку чеков клиентам и в ФНС. Все эти требования могут быть учтены платёжной системой, а могут потребовать дополнительной настройки. Мы занимаемся настройкой этих параметров и также можем помочь с соблюдением необходимых требований.&lt;/p&gt;
+
+&lt;h3&gt;Сколько занимает внедрение?&lt;/h3&gt;
+
+&lt;p&gt;По опыту прошлых проектов, в среднем на внедрение платёжной системы уходит 40 часов наших разработчиков. Вопрос в том, что для некоторых систем уже есть типовые решения, для других понадобится индивидуальная разработка.&lt;/p&gt;
+
+&lt;p&gt;После внедрения мы проводим полное тестирование всех шагов оплаты, чтобы ваш клиент сразу попал в дружественную среду без багов и ошибок.&lt;/p&gt;
+
+&lt;p&gt;Если вы хотите подключить платёжную систему к сайту на Drupal, &lt;a href="https://drupal-coder.ru/support"&gt;обращайтесь к нам&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/integracii" hreflang="ru"&gt;интеграции&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/podderzhka" hreflang="ru"&gt;Поддержка&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=321&amp;2=comment&amp;3=comment" token="4A3C-vM4cdC_14MqYTB1IonrPYlaG3HAuxsfWRiZcqE"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/integraciya-sayta-drupal-8-s-crm-bitriks24" hreflang="ru"&gt;Интеграция сайта Drupal 8 с CRM Битрикс24&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/integraciya-sendpulse-s-saytom-na-drupal" hreflang="ru"&gt;Интеграция Sendpulse с сайтом на Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Sun, 13 Mar 2022 09:41:09 +0000</pubDate>
+    <dc:creator>Алексей Синица</dc:creator>
+    <guid isPermaLink="false">321 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>«Cоциальная сеть» травматологов, ортопедов и хирургов calcaneus.ru: переезд с самописного сайта на Drupal. Миграция десятков тысяч пользователей и тонн контента</title>
+  <link>https://drupal-coder.ru/blog/pereezd-s-samopisnogo-sayta-na-drupal-migraciya-desyatkov-tysyach-polzovateley-i-tonn-kontenta</link>
+  <description>
+&lt;span&gt;«Cоциальная сеть» травматологов, ортопедов и хирургов calcaneus.ru: переезд с самописного сайта на Drupal. Миграция десятков тысяч пользователей и тонн контента&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/35" lang="" about="https://drupal-coder.ru/user/35" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Алексей Синица&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;пт, 03/11/2022 - 08:39&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2022-03/20943678.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Сайты могут быть созданы как на готовых платформах (WordPress, Tilda, Drupal), так и самописными — когда разработчик (ожидаемо) сам пишет код, который превращается в сайт. В какой-то момент такое мероприятие становится слишком дорогим удовольствием: программист должен городить код на любой, даже самый простой запрос. Готовых решений, как у известных платформ, у самописки нет.&lt;/p&gt;
+
+&lt;p&gt;К нам обратились клиенты как раз с таким сайтом. Их задача на тот момент могла вылиться в 200 часов разработки против 50 часов этой же задачи на Drupal. Так мы предложили им миграцию и перспективы развития, но обо всём по порядку. &lt;/p&gt;
+
+&lt;p&gt;В этой статье мы расскажем о том, как переносили данные с самописного сайта и проводили миграцию, какие фишки Drupal даёт сайту с множеством контента и какие преимущества дарит переезд на Drupal в принципе. &lt;/p&gt;
+
+&lt;h3&gt;Клиент и его задача&lt;/h3&gt;
+
+&lt;p&gt;Наш клиент — «социальная сеть» травматологов, ортопедов и хирургов &lt;a href="https://calcaneus.ru/"&gt;calcaneus.ru&lt;/a&gt;. На их сайте специалисты со всей России публикуют тематические статьи, делятся опытом и общаются. Как мы уже говорили, сайт сделан на чистом коде. Никакой системы управления контентом для админов, никакого привычного движка для простых смертных — онли код. &lt;/p&gt;
+
+&lt;p&gt;И по сути, владельцы могли внедрять всё, что угодно. Но докручивать нужный функционал на самописе становилось всё дороже и всё дольше. &lt;/p&gt;
+
+&lt;p&gt;Клиент обратился с запросом добавить на сайт календарь событий. Чтобы пользователи могли записываться на онлайн и офлайн-мероприятия, получать уведомления о них и т.д. При оценке мы выяснили, что задача займёт 200 часов, хотя на Drupal под это есть готовые модули. Их не надо писать заново и внедряются они куда быстрее — часов за 50. Плюс разговор с клиентом дал понять, что они планируют дальнейшее развитие и новые функции, которые могут занять куда больше времени. Мы предложили оптимальное решение: переезд на Drupal для экономии времени, сил и денег (эта троица звучит банально, но так и есть).&lt;/p&gt;
+
+&lt;h3&gt;Контентному сайту нужен Drupal&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;— У меня есть сайт, который работает, зачем переезжать?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Но мы не мы, если не расскажем про преимущества Drupal.&lt;/p&gt;
+
+&lt;p&gt;Оговоримся: на старте сделать самописный сайт было не самым плохим решением, всё по правилам MVP (минимально жизнеспособного продукта): набросать недорогой прототип, проверить работоспособность и спрос. Но как только случился положительный эффект, нужно задуматься о более рациональном развитии.&lt;/p&gt;
+
+&lt;p&gt;Наш основной довод для этого клиента был прост: у вас контентный сайт. Несколько тысяч статей, профили пользователей, в перспективе календарь. А Drupal буквально создан для работы с контентом:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;сформировать подборки статей &lt;/li&gt;
+	&lt;li&gt;внедрить поиск по статьям&lt;/li&gt;
+	&lt;li&gt;взаимодействовать с воркфлоу: сохранять черновики, модерировать статьи и т.д.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;И всё это может сделать мышкой в админке минимально обученный человек, вместо программиста, который полезет в код. Помимо этого:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;массовые операции над пользователями: забанить, дать новый статус;&lt;/li&gt;
+	&lt;li&gt;инструменты модерации комментариев и контента;&lt;/li&gt;
+	&lt;li&gt;проще собирать отчёты: сколько комментариев было добавлено за какой-то период;&lt;/li&gt;
+	&lt;li&gt;в будущем проще внедрять аналитику.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Контентному сайту как воздух необходима система управления контентом, а её не было. Самописка выполняла необходимый минимум, но для нового функционала нужен был программист, который хорошо знает сайт и будет его дописывать.&lt;/p&gt;
+
+&lt;h3&gt;Этапы работы&lt;/h3&gt;
+
+&lt;p&gt;Вот в каком порядке мы действовали.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1. Выгрузили из базы данных старого сайта весь контент в отдельные файлы.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2. Создали пустой сайт без контента со всем функционалом, который был на старом сайте.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3. Написали миграцию. &lt;/strong&gt;Условно пути соответствия между местами откуда мы взяли старые значения и местами, куда нам нужно записать на новом сайте. По всем сущностям на сайте прописывается путь: имя пользователя было здесь, перенести его нужно сюда и т.д. Таким же образом нужно перевести:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;комментарии&lt;/li&gt;
+	&lt;li&gt;лайки;&lt;/li&gt;
+	&lt;li&gt;профили пользователей, избранное у пользователей.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Мы впервые проводили работу по миграции пользователей с сохранением паролей. Сложность была в том, что самописный сайт и Drupal имеют разные системы шифрования. Паролей в открытом виде у нас не было, поэтому нам нужно было перекодировать их из одной системы в другую. У нас всё получилось, поэтому все пользователи продолжили пользоваться сайтом под своими учётками. &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;4. Импортировали контент на сайт.&lt;/strong&gt; Ещё одна загвоздка: контент был неоднородным. Например, в процессе развития проекта, изменилась система загрузки картинок. Поэтому в части статей картинки хранились одним образом, а в части поновее — другим. При переносе это приходилось учитывать. Так что было достаточно много ручной работы по данным, которые плохо импортировались.&lt;/p&gt;
+
+&lt;p&gt;Мы переносили пользователей, статьи, комментарии под статьями, рейтинг статей, избранные статьи, избранные контакты и многое другое. &lt;/p&gt;
+
+&lt;p&gt;Также провели большую работу по изменению админки Drupal, чтобы пользователи и редакторы после переноса попали в привычное окружение. Обычно клиентов это не интересует, т.к. с внутренним устройством имеют дело только сотрудники или разработчики. В этом случае на кону стоял комфорт пользователей, поэтому команда дизайнеров, замороченных на юзабилити, развлеклась с переделкой админки Drupal под вид самописной. Привычный друпальный вид остался только для супер-админов, которые кодят. &lt;/p&gt;
+
+&lt;p&gt;На этом же этапе мы внедряли календарь событий.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;5. Запуск.&lt;/strong&gt; Мы закрыли старый сайт от записи на три дня, чтобы там не образовался новый контент. Выгрузили заново все файлы, загрузили на наш на пустой сайт, протестировали и запустили. Переключили домен, настроили инфраструктуру, сервер. Подняли копию, чтобы внедрять изменения в будущем.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Бонус:&lt;/strong&gt; параллельно с переносом, мы сделали небольшой редизайн по просьбе заказчика. Пользователи особо не заметили подмены — их просто разлогинило, а перезашли они на слегка обновлённый сайт.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Итог:&lt;/strong&gt; сайт на момент написания статьи работает месяц без серьёзных ошибок. Пользователи продолжают заходить, регистрироваться, администраторы публикуют статьи. Жизнь идёт своим чередом.&lt;/p&gt;
+
+&lt;h3&gt;Выводы и перспективы развития&lt;/h3&gt;
+
+&lt;p&gt;В дальнейшем заказчик хочет внедрить функционал для продажи онлайн-курсов. Помимо этого, у клиента есть сайт, который развивают параллельно. Его также планируется перенести на Drupal и внедрить мультисайтинг — оставить единую кодовую базу, но с разным контентом, чтобы новые функции внедрялись на второй сайт параллельно.&lt;/p&gt;
+
+&lt;p&gt;И это далеко не всё. Но даже учитывая только эти планы на развитие, Drupal обойдётся однозначно дешевле. Второй плюс — надёжность. Все модули, необходимые для развития, у Drupal стабильные, оттестированные, в них меньше багов и ошибок. Кодить новые функции с нуля, это, грубо говоря, изобретать велосипед. Единообразный стандартизированный контент. И никакого насилия.&lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/podderzhka" hreflang="ru"&gt;Поддержка&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=319&amp;2=comment&amp;3=comment" token="TmnKd8NSVFS82qrkeHR7BaLBIWtfNt4pK96YbIOZUt8"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;</description>
+  <pubDate>Fri, 11 Mar 2022 08:39:29 +0000</pubDate>
+    <dc:creator>Алексей Синица</dc:creator>
+    <guid isPermaLink="false">319 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/pereezd-s-samopisnogo-sayta-na-drupal-migraciya-desyatkov-tysyach-polzovateley-i-tonn-kontenta#comments</comments>
+    </item>
+<item>
+  <title>Правильно поставленная задача - половина успеха</title>
+  <link>https://drupal-coder.ru/blog/pravilno-postavlennaya-zadacha-polovina-uspekha</link>
+  <description>
+&lt;span&gt;Правильно поставленная задача - половина успеха&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/35" lang="" about="https://drupal-coder.ru/user/35" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Алексей Синица&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;пт, 10/25/2019 - 11:30&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2019-10/application-3426397_1920.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;К моменту публикации этой статьи нашим отделом поддержки закрыто более 40 000 заявок, по которым отработано более 90 000 человеко-часов. Суть работы поддержки заключается в оперативной доработке сайта по заявкам заказчика с почасовой оплатой. В работу берутся любые задачи - от изменения цвета кнопки до внедрения интернет-магазина на существующий несколько лет сайт. Основные метрики в работе отдела, на которые обращают внимание наши клиенты, это время начала работы над задачей - время реакции, стоимость выполнения работы и время от поступления задачи в работу до момента приемки работы на основном сайте клиента.&lt;/p&gt;
+
+&lt;p class="thumbnail"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/redmine-initlab.png" class="img-responsive left" /&gt;&lt;/p&gt;
+ 
+&lt;p&gt;Время реакции регулируется приоритезацией задач и планированием, а стоимость выполнения работ напрямую зависит от опыта сотрудников - ответственность за эти два компонента полностью лежит на нашей компании и мы с ней успешно справляемся. Но третья часть сильно зависит от клиента. От момента поступления задачи до момента приемки работ клиентом на основном сайте в среднем проходит 4 дня. За это время мы принимаем заявку, квалифицируем ее, определяя требуемый уровень и компетенции разработчика, уточняем задание, если оно сформулировано недостаточно четко, выполняем задание на копии сайта, проводим тестирование, сдаем задачу клиенту на копии, переносим на основной сайт, еще раз проверяем и только после этого закрываем задачу. В этом процессе значительная доля успеха зависит от клиента.
+&lt;/p&gt;
+
+&lt;p&gt;От полноты формулировки задачи напрямую зависит будет ли результат работы решать ту проблему, ради которой задача заводилась, не говоря уже о сроках, в которые она будет выполнена. Мы всегда старались облегчить жизнь нашим клиентам и в начале сотрудничества предлагали ставить задачи в свободной форме для удобства заказчика. Будет непонятно - мы спросим. Клиент начинал слать задачи, мы просили ответить на наши вопросы, вносили корректировки в задание, подсказывали заказчику как лучше сформулировать и через некоторое время формулировки задач от клиента становились понятнее и лучше. Такой подход позволял нам быстрее получить от клиента задачу и сделать процесс более простым. Но очевидный минус в этом случае - на начальных этапах сотрудничества задачи делались дольше, чем могли бы, если бы формулировки изначально были правильными. Поэтому мы решили собрать основные ошибки, которые допускаются при постановке задач, чтобы можно было на этих примерах избежать проблем с самого начала.&lt;/p&gt;
+
+&lt;p&gt;Итак, все примеры выдуманы, все совпадения случайны ;)&lt;/p&gt;
+
+&lt;h2&gt;Тема письма&lt;/h2&gt;
+
+&lt;p&gt;Поскольку задачи у нас принимаются по электронной почте, их важную часть занимает тема письма. Грамотное оформление темы письма позволяет проще идентифицировать задачу в потоке. Зачастую мы видим игнорирование оформления темы и список задач выглядит так:&lt;/p&gt;
+
+&lt;ul class="alert alert-danger list-unstyled"&gt;&lt;li&gt;#34876 - Без темы&lt;/li&gt;
+  &lt;li&gt;#34877 - Без темы&lt;/li&gt;
+  &lt;li&gt;#34878 - Новая&lt;/li&gt;
+  &lt;li&gt;#34879 - ВАЖНО!!!&lt;/li&gt;
+  &lt;li&gt;#34880 - RE: FWD: Ошибка!&lt;/li&gt;
+  &lt;li&gt;#34881 - Заявка&lt;/li&gt;
+  &lt;li&gt;#34882 - Правка&lt;/li&gt;
+  &lt;li&gt;#34883 - Срочно&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Ориентироваться в таком списке достаточно тяжело и приходится перебрать несколько заявок, прежде чем обнаружится нужная.&lt;/p&gt;
+&lt;p&gt;Идеальный вариант в данном случае - краткое, но емкое описание задачи или проблемы, например:&lt;/p&gt;
+
+&lt;ul class="alert alert-success list-unstyled"&gt;&lt;li&gt;#34876 - Доработка формы обратной связи&lt;/li&gt;
+  &lt;li&gt;#34877 - Размещение новости&lt;/li&gt;
+  &lt;li&gt;#34878 - Регистрация пользователя&lt;/li&gt;
+  &lt;li&gt;#34879 - Ошибка при оформлении заказа&lt;/li&gt;
+&lt;/ul&gt;&lt;h2&gt; Где ошибка?&lt;/h2&gt;
+
+&lt;p&gt;При описании ошибки на сайте следует особое внимание уделить описанию способа повторения ошибки. Простой скриншот фрагмента страницы или даже всей страницы с ошибкой бывает мало информативен. Рекомендуем в заявке указывать:&lt;/p&gt;
+
+&lt;div class="panel-group" id="accordion"&gt;
+    &lt;div class="panel panel-success"&gt;
+      &lt;div class="panel-heading"&gt;
+        &lt;h3 class="panel-title"&gt;ссылку на страницу, на которой воспроизводится ошибка&lt;/h3&gt;
+      &lt;/div&gt;
+      &lt;div class="panel-body"&gt;
+    &lt;p&gt;Свой сайт вы знаете очень хорошо, однако разработчик, который приходит работать с готовым сайтом, может потратить существенное время на поиск нужного раздела. Для Вас может быть очевидно, что страница, которую вы в задаче называете "подбор персонала по городам в регионах", находится на третьем уровне в меню справа и имеет заголовок "Монтажники в Самаре", но для конечного исполнителя это не так и локализация страницы с ошибкой может занять столько же времени, сколько и сама работа над исправлением. Просто дайте ссылку на страницу.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class="panel panel-success"&gt;
+      &lt;div class="panel-heading"&gt;
+        &lt;h3 class="panel-title"&gt;пользователя, под которым ошибка возникает&lt;/h3&gt;
+      &lt;/div&gt;
+      &lt;div class="panel-body"&gt;
+&lt;p&gt;Разметка страницы для анонимного и авторизованного пользователя может отличаться. Если вы зашли на сайт под своей учетной записью и увидели, что что-то не так с версткой, то будет лучше, если вы в задаче так и укажете, что ошибка воспроизводится для зарегистрированного пользователя. Особенно, если для анонима этой ошибки нет. Если этого не указать, то разработчик может потратить дополнительное время на попытки воспроизвести ошибку в разных браузерах, на разных устройствах, операционных системах, разрешениях экрана, прежде, чем залогинится на сайт.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+ 
+    &lt;div class="panel panel-success"&gt;
+      &lt;div class="panel-heading"&gt;
+        &lt;h3 class="panel-title"&gt;последовательность действий, приводящих к ошибке&lt;/h3&gt;
+      &lt;/div&gt;
+      &lt;div class="panel-body"&gt;
+&lt;p&gt;Если разработчик получит заявку, в которой написано, например: "Ошибка в заказе на третьем шаге." То он в первую очередь попробует создать заказ. Если заказ создастся успешно, то скорее всего вы получите сообщение о том, что ошибку не удается воспроизвести с просьбой указать конкретные данные, которые вы вводите при оформлении заказа. После этого разработчик переключится на другую задачу и в этот день к проблеме скорее всего не вернется. В результате вы получите решение позже, чем если бы описали какие значения вы вводите в форму, какой товар заказываете, сколько штук, какой метод оплаты и доставки выбрали.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class="panel panel-success"&gt;
+      &lt;div class="panel-heading"&gt;
+        &lt;h3 class="panel-title"&gt;устройство, на котором ошибка воспроизводится, браузер, или разрешение экрана.&lt;/h3&gt;
+      &lt;/div&gt;
+      &lt;div class="panel-body"&gt;
+ &lt;p&gt;Если раньше частой проблемой была кроссбраузерность, то сегодня браузеры отображают сайты более-менее одинаково. Однако остро стала проблема кроссплатформенности. MacOs, Linux, Windows, Android, iOs - мы не знаем за каким устройством вы работали, когда заметили ошибку в верстке. &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2&gt; Решаемая проблема&lt;/h2&gt;
+
+&lt;p&gt;Очень полезно в задаче указывать контекст, в котором эта задача появилась и проблему, которую нужно решить. Простой пример, который встречался в нашей практике несколько раз: клиент просит сохранять на сайте статистику о просмотрах страниц. Нужно хранить ip адреса, дату посещения, источник перехода, просматриваемые страницы, составлять отчеты, графики, выгружать данные в файлы. Реализация функционала на сайте выльется в десятки часов. Очевидно, что задачей в данном случае является не разработка описанного функционала, а решение проблемы анализа посещаемости, которая решается настройкой Яндекс метрики или Гугл аналитики, и занимает существенно меньше времени. Это очень простой пример, в котором решаемая проблема очевидна и разработчик легко поймет, что клиенту нужно не совсем то, что он просит, однако бывает не так просто. &lt;/p&gt;
+
+&lt;h2&gt;Переписка по созданным заявкам&lt;/h2&gt;
+
+&lt;p&gt;Исполнитель по заявке определяется в соответствии с компетенциями сотрудника. Если на проекте заведено сразу много задач, то очень вероятно, что они назначены на разных исполнителей. Это позволяет решать задачи быстрее и вести работу параллельно по нескольким заявкам. Часто бывает так, что клиент, обсуждая какой-либо вопрос, "перескакивает" на обсуждение другой задачи. Всевозможные "кстати, вот в заявке #12345 забыл добавить что..." и "а вот в #12345 вы спрашивали, отвечу тут" могут сильно усложнить жизнь обеим сторонам процесса. Разработчик текущей задачи может даже не подозревать о существовании заявки #12345, поэтому комментарий к этой задаче может либо потеряться, либо ответ будет получен не так оперативно, как хотелось бы.&lt;/p&gt;
+
+&lt;h2&gt; А вот тут еще немного доделайте...&lt;/h2&gt;
+
+&lt;p&gt;Такое часто случается на больших заявках, либо на проектах, у которых заявок не много. Работаем мы, к примеру, над внедрением мобильной версии. Работа близится к завершению, остаются небольшие корректировки и согласования. Отправляем на согласование результат работ по странице контактов, в ответ клиент просит заменить карту и добавить новый отдел; отправляем на согласование страницу каталога - в ответ приходят корректироваки к пунктам меню и слайдеру на главной, который давайте вообще уберем, а вместо него выведем блок с популярными товарами. Все идет хорошо, замечания делаются, работа движется, но потом оказывается, что на внедрение мобильной версии ушло 100 часов и 3 месяца, а это уже за рамками договоренностей. При детальном рассмотрении выяснится, что на мобильную версию ушло совсем немного, по сравнению с доработками, но для этого выяснения нужно потратить немало времени и сходу ответить на вопрос "Сколько ушло на мобильную" просто невозможно.&lt;/p&gt;
+
+&lt;h2&gt;Одна проблема - одна задача&lt;/h2&gt;
+
+&lt;p&gt;Обычная ситуация - у клиента длительное время копятся задачи, он записывает их в отдельный документ и в какой-то момент решает, что хватит терпеть и обращается за услугой поддержки. Задачи самые разные: поправить верстку, разобраться с медленной работой сайта, внедрить функционал разной степени сложности и т.д., и все в одной заявке. В таких случаях мы стараемся разбить задачу на несколько заявок, чтобы можно было раздать их разным специалистам и делать параллельно, но это всегда связано с дополнительными временными затратами - нужно выделить задачи из общего списка, придумать новую тему, завести задачу, отправить список новых задач клиенту для дальнейшей коммуникации клиента с разработчиками. Это процесс не сложный, но из-за него ваша задача точно попадет в работу на сутки позже.&lt;/p&gt;
+
+&lt;p&gt;Бывают ситуации, когда в задаче указано 3-4 проблемы, которые будет решать один разработчик и не всегда из первого касания к задаче становится понятно, что будут трудности. В таком случае задача попадает к разработчику без изменений. Он приступает к работе, начинает задавать вопросы по задачам и со временем накапливается большой массив переписки, работать с которым становится трудно и что-то может потеряться. &lt;/p&gt;
+
+&lt;p&gt;Еще один весьма вероятный минус - если одна из проблем заявки будет решаться сильно дольше остальных, то вы рискуете получить более простые исправления на основном сайте сильно позже, чем если бы они были в отдельных заявках.&lt;/p&gt;
+
+&lt;h2&gt;Заключение&lt;/h2&gt;
+
+&lt;p&gt;В качестве заключения, тезисно опишу как лучше всего ставить задачи:&lt;/p&gt;
+
+&lt;ol&gt;&lt;li&gt;Напишите в теме несколько слов о сути задачи:
+    &lt;ul class="list-unstyled"&gt;&lt;li&gt;&lt;span class="glyphicon glyphicon-remove text-danger"&gt;&lt;/span&gt; Нет: задача&lt;/li&gt;
+      &lt;li&gt;&lt;span class="glyphicon glyphicon-ok text-success"&gt;&lt;/span&gt; Да: изменение кнопки&lt;/li&gt; 
+    &lt;/ul&gt;&lt;/li&gt;
+  &lt;li&gt;В теле письма расскажите подробно об одной проблеме, которую нужно решить:
+    &lt;ul class="list-unstyled"&gt;&lt;li&gt;&lt;span class="glyphicon glyphicon-remove text-danger"&gt;&lt;/span&gt; Нет: не могу сделать заказ и что-то каталог тормозит&lt;/li&gt;
+      &lt;li&gt;&lt;span class="glyphicon glyphicon-ok text-success"&gt;&lt;/span&gt; Да: при выборе метода оплаты банковской картой возникает ошибка, скриншот во вложении.&lt;/li&gt; 
+      &lt;li&gt;&lt;span class="glyphicon glyphicon-ok text-success"&gt;&lt;/span&gt; Да: под анонимом медленно открываются страницы каталога&lt;/li&gt;
+    &lt;/ul&gt;&lt;/li&gt;
+  &lt;li&gt;Если речь о разработке, то расскажите не только какое вы видите решение, но и какую проблемы решаете - возможно мы посоветуем решение лучше:
+    &lt;ul class="list-unstyled"&gt;&lt;li&gt;&lt;span class="glyphicon glyphicon-remove text-danger"&gt;&lt;/span&gt; Нет: отключите кэширование на сайте&lt;/li&gt;
+      &lt;li&gt;&lt;span class="glyphicon glyphicon-ok text-success"&gt;&lt;/span&gt; Да: при обновлении информации на страницах товаров, анонимные пользователи не сразу видят изменения. Может давайте кэш отключим?&lt;/li&gt; 
+    &lt;/ul&gt;&lt;/li&gt;
+  &lt;li&gt;В процессе обсуждения задачи не стоит упоминать о других проблемах, на которые не заведены заявки, либо которые решаются в рамках других заявок.&lt;/li&gt;
+&lt;/ol&gt;&lt;p&gt;Несмотря на все вышенаписанное, мы примем от вас задачу в любом виде, поможем сформулировать и решить проблему и даже постараемся угадать, что вы имели ввиду и предсказать последствия того, о чем вы умолчали. &lt;/p&gt;
+
+&lt;p&gt;С любовью, ваша поддержка.&lt;/p&gt;
+
+
+
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/uslugi" hreflang="ru"&gt;Услуги&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/podderzhka" hreflang="ru"&gt;Поддержка&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=239&amp;2=comment&amp;3=comment" token="UEqJblgvDLsyBRLIA0F9atdiaIH0yG49vsgyqw32eGc"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/pereezd-s-samopisnogo-sayta-na-drupal-migraciya-desyatkov-tysyach-polzovateley-i-tonn-kontenta" hreflang="ru"&gt;«Cоциальная сеть» травматологов, ортопедов и хирургов calcaneus.ru: переезд с самописного сайта на Drupal. Миграция десятков тысяч пользователей и тонн контента&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Fri, 25 Oct 2019 11:30:53 +0000</pubDate>
+    <dc:creator>Алексей Синица</dc:creator>
+    <guid isPermaLink="false">239 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/pravilno-postavlennaya-zadacha-polovina-uspekha#comments</comments>
+    </item>
+<item>
+  <title>Генерация и отправка PDF с результатами заполнения Webform</title>
+  <link>https://drupal-coder.ru/blog/generaciya-i-otpravka-pdf-s-rezultatami-zapolneniya-webform</link>
+  <description>
+&lt;span&gt;Генерация и отправка PDF с результатами заполнения Webform&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/35" lang="" about="https://drupal-coder.ru/user/35" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Алексей Синица&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;ср, 01/24/2018 - 10:36&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p dir="ltr"&gt;В этой статье мы рассмотрим решение задачи генерации файла в формате PDF из данных, введенных пользователем в форму, созданную модулем Webform, наложение этих данных на заранее подготовленную подложку и отправку на почту пользователю, заполнившему форму.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Нам понадобятся следующие модули:&lt;/p&gt;
+
+&lt;ul dir="ltr"&gt;&lt;li&gt;Webform&lt;/li&gt;
+	&lt;li&gt;Views&lt;/li&gt;
+	&lt;li&gt;Views PDF&lt;/li&gt;
+	&lt;li&gt;Rules&lt;/li&gt;
+	&lt;li&gt;Webform Rules&lt;/li&gt;
+	&lt;li&gt;Mimemail&lt;/li&gt;
+&lt;/ul&gt;&lt;p dir="ltr"&gt;и библиотеки&lt;/p&gt;
+
+&lt;ul dir="ltr"&gt;&lt;li&gt;tcpdf&lt;/li&gt;
+	&lt;li&gt;fpdi&lt;/li&gt;
+&lt;/ul&gt;&lt;p dir="ltr"&gt;1. Устанавливаем необходимые модули.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;2. Кладем необходимые библиотеки в /sites/all/libraries.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;3. Создаем форму с необходимыми полями.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;4. Создаем новый вьюс.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;В качестве типа сущности для отображения выбираем “Отправленные формы”. Страница и блок нам не понадобятся, поэтому соответствующие галочки можно снять.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;&lt;img src="https://lh6.googleusercontent.com/7sVqCa_gTETO3pCaEMrFmT7mfEWiSrt8VIP3yxwRTOKk9T-esZgwVzeMDiglypcpsBc4H6DEjnMR-Xc3oP-8OkfbPNTty66PbcURCZG8Zu8Z1WwcBP7t1EgYELyZBEmVcdDfYXCB" /&gt;&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p dir="ltr"&gt;На странице редактирования вьюса создаем дисплей типа PDF Page.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;&lt;img src="https://lh4.googleusercontent.com/R6XAhSF6v8ySZmaSnnvY36e-Py2mjs1yCqqkFJAVuM_SBaF4NmPI0SjawQPuDvv62899KRh48V0hBEfTTb46pevLWtU_xTXNLJdCO4KSrdXIba5HOn8tst2Vum_1P2_dWak556zz" /&gt;&lt;/p&gt;
+
+&lt;p dir="ltr"&gt; &lt;/p&gt;
+
+&lt;p dir="ltr"&gt;В поля добавляем “Webform submission data: Значение” для каждого поля, заполняемого пользователем&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;&lt;img src="https://lh5.googleusercontent.com/RqOnuMD5DKXuXSlaoBY0sNdrfvOAW-FfJsrmYTJlrrAtf5nBx1ALzFdCMZfGrVMnWKXykvGM3w41eGoYsOqp-3OOHW_uyl26ne-SgQN7v6ibmj0JrW927weGf36R4Jh9aSW7R4p2" /&gt;&lt;/p&gt;
+
+&lt;p dir="ltr"&gt; &lt;/p&gt;
+
+&lt;p dir="ltr"&gt;В поле Webform node вводим nid вебформы, в Component data выбираем поле, заполняемое пользователем.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;&lt;img src="https://lh6.googleusercontent.com/PjpJQHxC2JonJFj27pLvvhtxctc2Hv56QzR94ap6f3wfDVcfkFGgDNLoglR-behx-tUO2OpHsjSEkA3jD6hYqA5BftUmjgImdVZXvW75x_S1nDA8v1XbYpeSfDmS-iJEMdX94eRv" /&gt;&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p dir="ltr"&gt;В качестве контекстного фильтра используем Отправленные формы: Sid. Если значения нет в URL, то выводим “Страница не найдена”.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;&lt;img src="https://lh4.googleusercontent.com/tr6Go_4_Xe63090d7Rs4wt-6hkgeCclmhL9hFSD3_T-3wl9IG8rRprzJKKDkE8dk4zukglqoQ1MCwqD32JFLh-GiGYp_fGocUVKPWIxyobn2jH7xicGopTqZn0DVBG5XcFgUmffm" /&gt;&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Теперь необходимо добавить PDF файл, который будет являться подложкой, на которой будут размещаться введенные пользователем данные, и расположить эти данные на странице.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Для этого в нашем вьюсе переходим в настройки отображения PDF Fields&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;&lt;img src="https://lh4.googleusercontent.com/b3T3uqno3U8WXCdPHmtBoK6VGrB2IN51vyTpjNWhUVEjuEiMs_O8onhz9W03qFdmRyrkmcSoqAFUZJ6W9lsbmvxr4CbiXo_SxAAmljkwBtR_qrQDPa-tPjDFkvwP3aRF9yyuCEaP" /&gt;&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;В поле “Upload New Template File” загружаем PDF файл и применяем настройки. После этого опять открываем это же окно и в Template PDF выбираем загруженный файл.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;Далее необходимо в этом же окне пройтись по всем добавленным ранее полям и указать им позиционирование на листе и настройки шрифта.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p dir="ltr"&gt;5. Теперь необходимо настроить правило, которое будет при отправке формы создавать новый файл и отправлять его по почте.&lt;/p&gt;
+
+&lt;p&gt;Переходим в админку модуля Rules и создаем новое правило.&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;В качестве события выбираем “After a webform has been submitted”&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;&lt;img src="https://lh4.googleusercontent.com/LF1sY0mv4NDtBihm4ILagXQ8L7mUnBaV0Ix5LnN64Z0JbFh1ZpASwC32VWR__vp4WZnySnyIHmWqN87JU2E8pEzDhOYv3DqzphKnU6kS5fHccJr0Lk2LZ9yQ4jBejMdu9xHM_p4s" /&gt;&lt;/p&gt;
+
+&lt;p dir="ltr"&gt;В качестве действия сначала необходимо выбрать Save PDF as file on server, где нужно указать вьюс, созданный ранее, в аргументы передать [data:sid] и в STORE PATH указать путь, по которому будут храниться сгенерированные файлы, например sites/default/files/[data:sid].pdf&lt;/p&gt;
+
+&lt;p&gt;Вторым действием должен быть Send HTML e-mail, у которого в поле ATTACHMENTS нужно указать путь к сгенерированному файлу, например sites/default/files/[data:sid].pdf. Все остальные поля этого действия заполняются в зависимости от требований к оформлению письма.&lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/podderzhka" hreflang="ru"&gt;Поддержка&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;h2 class="block-form-title"&gt;Комментарии&lt;/h2&gt;
+    
+  
+  &lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  POSTREALITY
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;пятница, февраля 2, 2018 - 18:57&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Коллега, огромное спасибо Вам за столь полезную статью! Но, кажется, то ли лыжи не едут, то ли я ... Дело в том, что дойдя до момента создания вьюса, я встретился со следующей ситуацией: когда добавляю дисплей типа PDF Page, в ответ получаю полностью пустую страницу, а не страницу конфигурации создаваемого дисплея. Складивается такое ощущение, что что-то не донастроено. Возникает вопрос: а не требуют ли каких либо "тонкостей" библиотеки tcpdf и fpdi? Спасибо!&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=11&amp;1=default&amp;2=ru&amp;3=" token="DMyUe_ilmP0Lj6A6weaBxQN5L84rbN8RVIIPVQnH8Do"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+&lt;div class="indented"&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;понедельник, февраля 5, 2018 - 08:25&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;Спасибо за вопрос!
+С библиотеками никаких дополнительных операций не требуется. Рекомендую посмотреть логи на предмет ошибок.&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=12&amp;1=default&amp;2=ru&amp;3=" token="FIR3BBb14hPMPa09pXpa2eB55bwnSzb4Z0O7FO8czTs"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+&lt;/div&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Дмитрий
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;четверг, декабря 20, 2018 - 09:04&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Здравствуйте,благодарю за статью. Не подскажите как сделать вывод русского языка? В данный момент выводит знаки вопроса,вместо русского языка.&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=118&amp;1=default&amp;2=ru&amp;3=" token="G83jzmW4zf4JyJ-gtHtfuQFRrINWB20HiEtz5OxhJz8"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+&lt;div class="indented"&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;вторник, февраля 19, 2019 - 08:28&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;Добрый день!
+Скорее всего проблема в том, что в используемом шрифте нет кириллических символов. Попробуйте другой.&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=141&amp;1=default&amp;2=ru&amp;3=" token="vbsAEMM55vb0RsSXztcG29pxuDHV53o8l7e1Be-dTkE"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+&lt;/div&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Кристина
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;понедельник, февраля 18, 2019 - 20:09&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Здравствуйте! У меня такая же проблема.&lt;br /&gt;
+Ошибка "Warning: require_once(sites/all/libraries/tcpdf/tcpdf.php")&lt;br /&gt;
+Но в папке с этой библиотекой такого файла нет изначально.&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=140&amp;1=default&amp;2=ru&amp;3=" token="K77TBKiiX7_hhL5XWJHjI8YmUk86-ms6ok-D2O1weZI"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+&lt;div class="indented"&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;вторник, февраля 19, 2019 - 08:31&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;Добрый день!
+Возможно в библиотеке что-то поменялось. Попробуйте взять более старую версию.&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=142&amp;1=default&amp;2=ru&amp;3=" token="khXB2wyb8F_aOLaz66UlZHGlDc3tSVv7WfLmMJZclms"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+&lt;div class="indented"&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Кристина
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;среда, февраля 20, 2019 - 00:15&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Спасибо! Попробую.&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=143&amp;1=default&amp;2=ru&amp;3=" token="jYEw63zoSP13DVnhhHvIBz4paIebfoPmqNfNMOsz70I"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+&lt;/div&gt;&lt;/div&gt;
+ 
+      &lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=137&amp;2=comment&amp;3=comment" token="jjnO2kYkKbWdP4KOL6hxoMXGBrhTN0iDgDYOV0EW-s8"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;</description>
+  <pubDate>Wed, 24 Jan 2018 10:36:05 +0000</pubDate>
+    <dc:creator>Алексей Синица</dc:creator>
+    <guid isPermaLink="false">137 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/generaciya-i-otpravka-pdf-s-rezultatami-zapolneniya-webform#comments</comments>
+    </item>
+
+  </channel>
+</rss>

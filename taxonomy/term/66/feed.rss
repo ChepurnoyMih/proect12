@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:og="http://ogp.me/ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:schema="http://schema.org/" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" version="2.0" xml:base="https://drupal-coder.ru/">
+  <channel>
+    <title>выставка конференция ecom expo</title>
+    <link>https://drupal-coder.ru/</link>
+    <description/>
+    <language>ru</language>
+    
+    <item>
+  <title>Отчет об участии в выставке EcomExpo 2017</title>
+  <link>https://drupal-coder.ru/blog/otchet-ob-uchastii-v-vystavke-ecomexpo-2017</link>
+  <description>
+&lt;span&gt;Отчет об участии в выставке EcomExpo 2017&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/43" lang="" about="https://drupal-coder.ru/user/43" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Дарья Бочкарёва&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;чт, 06/29/2017 - 12:50&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2019-10/1-ECOMEXPO-2017-417.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;24 - 25 мая в Москве в Экспоцентре Сокольники прошла крупнейшая в России и Восточной Европе выставка технологий для интернет-торговли ECOM Expo'17.&lt;/p&gt;
+
+&lt;p&gt;В этом году выставка приняла 8000 посетителей, так или иначе связанных с онлайн-торговлей. Было размещено 250 стендов ведущих инновационных российских и зарубежных компаний, обслуживающих интернет-магазины.&lt;/p&gt;
+
+&lt;div style="clear:both;"&gt;
+&lt;p&gt;&lt;img alt="эком экспо" src="https://drupal-coder.ru/sites/default/files/inline-images/1-ECOMEXPO-2017-417.jpg" style="height:240px; padding-right:10px; float:left;" /&gt;&lt;img alt="ecom expo 2017" src="https://drupal-coder.ru/sites/default/files/inline-images/1-ECOMEXPO-2017-190.jpg" style="height:240px; padding-right:10px; float:left;" /&gt;&lt;img alt="ecom expo 17" src="https://drupal-coder.ru/sites/default/files/inline-images/1-ECOMEXPO-2017-296.jpg" style="height:240px; padding-right:10px; float:left;" /&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div style="clear:both;"&gt;
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Свой стенд на выставке представил и наш Инитлаб (головное предприятие Drupal Coder).&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Мы представили наше новое направление - &lt;a href="https://drupal-coder.ru/vr-ar"&gt;разработка дополненной (AR) и виртуальной (VR) реальности&lt;/a&gt;. Показали как работает наше приложение дополненной реальности для ритейла. С этим приложением Сергей Синица также выступил в пленарной сессии, куда были приглашены самые интересные стартапы в ecommerce. По итогам сессии наш проект завоевал &lt;a href="https://oborot.ru/articles/ecom-expo17-roboty-i-drugie-gosti-iz-budushhego-i82682.html"&gt;наибольшую поддержку эксперто&lt;/a&gt;в и получил памятный сертификат.&lt;/p&gt;
+&lt;img alt="сертификат победителя" data-entity-type="file" data-entity-uuid="bc8ee9d4-abd9-405f-a1b8-1f105a5b263a" src="https://drupal-coder.ru/sites/default/files/inline-images/%D0%A1%D0%B5%D1%80%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%82%20%D0%98%D0%BD%D0%B8%D1%82%D0%BB%D0%B0%D0%B1%20%282%29.jpg" class="align-center" width="429" height="600" loading="lazy" /&gt;&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;На своем стенде мы также представили обновленный проект &lt;a href="http://n1commerce.ru"&gt;n1commerce&lt;/a&gt; - платформа для создания интернет-магазинов на Drupal c безграничными возможностями. Хочется отметить, что мы были единственными представителями Drupal-сообщества на выставке. Мы рады, что удалось познакомить аудиторию с drupal и его возможностями. Было горько слышать в разговоре от посетителей фразу "Так Друпал - это как Битрикс?". Хотелось бы более активного участия drupal-сообщества в продвижении бренда, ведь он этого достоин .)&lt;/p&gt;
+
+&lt;div style="clear:both;"&gt;
+&lt;p&gt;&lt;img alt="initlab ecom expo" src="https://drupal-coder.ru/sites/default/files/inline-images/IMG_5316.JPG" style="height:265px; padding-right:10px; float:left;" /&gt;&lt;img alt="drupal coder ecom expo" src="https://drupal-coder.ru/sites/default/files/inline-images/IMG_7999.JPG" style="height:265px; padding-right:10px; float:left;" /&gt;&lt;img alt="initlab ecom expo 17" src="https://drupal-coder.ru/sites/default/files/inline-images/IMG_5348.jpg" style="height:265px; padding-right:10px; float:left;" /&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div style="clear:both;"&gt;
+&lt;p&gt;В целом, выставка для нас оказалась очень полезной. Мы получили более полусотни заявок на наши продукты. Познакомились с другими интересными проектами и их создателями. Получили обратную связь и рекомендации по развитию наших продуктов от коллег и бизнеса.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Представляем вам небольшое видео о нашем участии в ECOM Expo'17.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;&lt;iframe allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/5LwzP2H_-qM" width="600"&gt;&lt;/iframe&gt;&lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/vystavka-konferencia-ecom-expo" hreflang="ru"&gt;выставка конференция ecom expo&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=114&amp;2=comment&amp;3=comment" token="M_b41FhfcGGV_51pqf4pLN8DiPzm8PwIWBx7oPidUEw"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/ispolzovanie-otchetov-ecommerce-v-yandeksmetrike" hreflang="ru"&gt;Использование отчетов Ecommerce в Яндекс.Метрике &lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Thu, 29 Jun 2017 12:50:45 +0000</pubDate>
+    <dc:creator>Дарья Бочкарёва</dc:creator>
+    <guid isPermaLink="false">114 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/otchet-ob-uchastii-v-vystavke-ecomexpo-2017#comments</comments>
+    </item>
+
+  </channel>
+</rss>

@@ -1,0 +1,811 @@
+﻿<!DOCTYPE html>
+<html lang="ru" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
+  <head>
+    <meta charset="utf-8">
+<noscript><style>form.antibot * :not(.antibot-message) { display: none !important; }</style>
+</noscript><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-87805467-1"></script>
+<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag("js", new Date());gtag("set", "developer_id.dMDhkMT", true);gtag("config", "UA-87805467-1", {"groups":"default","anonymize_ip":true,"page_placeholder":"PLACEHOLDER_page_path","allow_ad_personalization_signals":false});</script>
+<meta http-equiv="content-language" content="ru">
+<meta name="description" content="Мы хотели бы поделиться опытом, как используя views и views_data_export сделать выгрузку yml в Yandex.Market на Drupal 7. Концепция состоит в том, чтобы, используя views, получить нужные данные и далее собрать все в шаблонах для views_data_export. Такой вариант подходит для выгрузки данных из нод, таксономии, entity и продуктов commerce.">
+<meta name="keywords" content="создание сайтов на drupal, разработка Drupal-сайтов">
+<meta property="og:type" content="blog">
+<meta property="og:url" content="https://drupal-coder.ru/blog/vygruzka-yml-dlya-yandeksmarketa">
+<meta property="og:title" content="Выгрузка yml для Яндекс.Маркета">
+<meta property="og:description" content="Мы хотели бы поделиться опытом, как используя views и views_data_export сделать выгрузку yml в Yandex.Market на Drupal 7. Концепция состоит в том, чтобы, используя views, получить нужные данные и далее собрать все в шаблонах для views_data_export. Такой вариант подходит для выгрузки данных из нод, таксономии, entity и продуктов commerce.">
+<meta name="Generator" content="Drupal 9 (https://www.drupal.org)">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="..\sites\default\files\android-chrome-256x256.png" type="image/png">
+<link rel="alternate" hreflang="ru" href="..\blog\vygruzka-yml-dlya-yandeksmarketa.html">
+<link rel="canonical" href="..\blog\vygruzka-yml-dlya-yandeksmarketa.html">
+<link rel="shortlink" href="..\blog\vygruzka-yml-dlya-yandeksmarketa.html">
+
+    <title>Выгрузка yml для Яндекс.Маркета | drupal-coder.ru</title>
+    <link rel="stylesheet" media="all" href="..\sites\default\files\css\css_y8CdfJDNR-tG0CPnRDokR6Eh9OUJplbHLVQ9A8myecQ.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_tFXlTqkfn6J-Qtpt9xbB8JudSaJfOGxRSmpeidDAzPE.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_c0CK9J5WwpjjjzUIU22NJ_K_N6o0HFHz68-eM_V9Q7Q.css">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/@unicorn-fail/drupal-bootstrap-styles@0.0.2/dist/3.4.0/8.x-3.x/drupal-bootstrap.min.css" integrity="sha512-tGFFYdzcicBwsd5EPO92iUIytu9UkQR3tLMbORL9sfi/WswiHkA1O3ri9yHW+5dXk18Rd+pluMeDBrPKSwNCvw==" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_ULmc1mwKFKQRQmxYsjphW6dsh2g6jX4LXXBAtdO0vIE.css">
+
+    
+    <meta name="cmsmagazine" content="3d47b05beba40f3816d9741ee18c01a5">
+
+    
+    
+           <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P4SXQSG');</script>
+<!-- End Google Tag Manager -->
+    
+    
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Bold.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Medium.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Regular.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/fontawesome/webfonts/fa-brands-400.woff2" crossorigin="anonymous">
+    <link rel='manifest' href='..\manifest.json'>
+    <meta name="format-detection" content="telephone=no">
+
+          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MXPCP8Q"></script>
+      </head>
+  <body class="page-node-152 path-node page-node-type-blog has-glyphicons">
+
+                  <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4SXQSG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+      
+          
+
+    <a href="#main-content" class="visually-hidden focusable skip-link">
+      Перейти к основному содержанию
+    </a>
+    
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
+    
+      
+          <header class="navbar navbar-default" id="navbar" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+            <div class="region region-navigation">
+    <section id="block-pikselvkskript" class="block block-block-content block-block-contentbf8d9e8f-617c-4e8f-8501-7586be8255e0 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script>(window.Image ? (new Image()) : document.createElement('img')).src = 'https://vk.com/rtrg?p=VK-RTRG-238064-1VWIQ';</script></div>
+      
+  </section>
+
+<section id="block-globalsitetagadwords" class="block block-block-content block-block-content27617f8e-58d1-4a2a-9f23-31eab95a43c8 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><!-- Global site tag (gtag.js) - AdWords: 948581894 -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=AW-948581894"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-948581894');
+</script></div>
+      
+  </section>
+
+            <a class="logo navbar-btn pull-left" href="..\index.htm" title="Главная" rel="home">
+            <img src="..\themes\custom\bootstrap_dc\images\logo-initlab.svg" alt="Главная" width="156" height="31">
+        </a>
+            
+  </div>
+
+        </div>
+                          <div class="navbar-collapse-wrapper">
+
+            <div class="navbar-collapse collapse">
+                <div class="region region-navigation-collapsible">
+    <nav role="navigation" aria-labelledby="block-bootstrap-dc-main-menu-menu" id="block-bootstrap-dc-main-menu">
+            
+  <h2 class="visually-hidden" id="block-bootstrap-dc-main-menu-menu">Основная навигация</h2>
+  
+
+        
+              <ul class="menu nav navbar-nav">
+                      <li><a href="..\support.html" data-drupal-link-system-path="node/1">Поддержка Drupal</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-admin.html" class="dropdown-toggle" data-toggle="dropdown">DevOps <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\import-migrate-upgrade.html" data-drupal-link-system-path="node/4">Миграция</a>
+                  </li>
+                  <li><a href="..\backup.html" data-drupal-link-system-path="node/3">Бэкапы</a>
+                  </li>
+                  <li><a href="..\drupal-security-audit.html" data-drupal-link-system-path="node/9">Аудит безопасности</a>
+                  </li>
+                  <li><a href="..\boost-drupal.html" data-drupal-link-system-path="node/5">Оптимизация скорости</a>
+                  </li>
+                  <li><a href="..\ssl.html" data-drupal-link-system-path="node/99">Переезд на https</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\blog.html" data-drupal-link-system-path="blog">Блог</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-seo.html" class="dropdown-toggle" data-toggle="dropdown">Продвижение <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\drupal-seo\context.html" data-drupal-link-system-path="node/111">Реклама</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li class="expanded dropdown"><a href="..\team.html" class="dropdown-toggle" data-toggle="dropdown">О нас <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\team.html#team" data-drupal-link-system-path="team">Команда</a>
+                  </li>
+                  <li><a href="..\drupalgive.html" data-drupal-link-system-path="node/135">Drupalgive</a>
+                  </li>
+                  <li><a href="..\drupal-courses.html" data-drupal-link-system-path="node/10">Курсы Drupal</a>
+                  </li>
+                  <li><a href="..\vacancies.html" data-drupal-link-system-path="vacancies">Вакансии</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\happy-customers.html" data-drupal-link-system-path="happy-customers">Проекты</a>
+                  </li>
+                  <li><a href="..\contacts.html" data-drupal-link-system-path="node/86">Контакты</a>
+                  </li>
+              </ul>
+      
+
+
+  </nav>
+
+  </div>
+
+            </div>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+              </div>
+    </header>
+  
+
+      <div class="page-header-big" role="heading">
+        <div class="container">
+            <div class="region region-header">
+        <h1 class="page-header">
+<span>Выгрузка yml для Яндекс.Маркета</span>
+</h1>
+
+<section class="views-element-container block block-views block-views-blockuser-block-1 clearfix" id="block-views-block-user-block-1">
+  
+    
+
+      <div class="form-group"><div class="view view-user view-id-user view-display-id-block_1 js-view-dom-id-ddb235d08e03495f1ab99b9774278919602b28184c97f8c1e4eb2688d4142027">
+  
+    
+      
+      <div class="view-content">
+          <div class="views-row"><div class="views-field views-field-user-picture"><div class="field-content">  <img loading="lazy" src="..\sites\default\files\styles\avatar_mini\public\pictures\2019-12\IMG_2500_0.jpg?itok=zSW3J7KK" width="45" height="45" alt="" typeof="foaf:Image" class="img-responsive">
+
+
+</div></div><div class="views-field views-field-field-name"><div class="field-content">Долженков Александр</div></div></div>
+
+    </div>
+  
+          </div>
+</div>
+
+  </section>
+
+<section id="block-yashare" class="block-yashare block block-block-content block-block-contentee72d8fb-02e9-4ef6-8e71-0df16bee86a9 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+<script src="//yastatic.net/share2/share.js"></script>
+<div class="ya-share2" data-services="vkontakte,odnoklassniki,gplus,twitter"></div></div>
+      
+  </section>
+
+
+  </div>
+
+        </div>
+      
+    </div>
+  
+
+<div class="main-wrapper">
+  <div role="main" class="main-container container js-quickedit-main-content">
+    <div class="row">
+
+
+
+            
+                  <section class="col-sm-12">
+
+                
+                
+                
+                                      
+                  
+                          <a id="main-content"></a>
+            <div class="region region-content">
+        <ol class="breadcrumb">
+          <li>
+                  <a href="..\blog.html">Блог</a>
+              </li>
+          <li class="active">
+                  Выгрузка yml для Яндекс.Маркета
+              </li>
+      </ol>
+
+<div data-drupal-messages-fallback="" class="hidden"></div>
+  <article data-history-node-id="152" role="article" about="https://drupal-coder.ru/blog/vygruzka-yml-dlya-yandeksmarketa" class="blog is-promoted full clearfix">
+
+  
+    
+
+  
+
+  <div class="content">
+    
+    <ul class="links inline list-inline"><li class="comment-add"><a href="..\blog\vygruzka-yml-dlya-yandeksmarketa.html#comment-form" title="Поделитесь своими мыслями и мнениями." hreflang="ru">Добавить комментарий</a></li></ul><div id="field-language-display"><div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group">
+      <label class="control-label">Language</label>
+  
+  
+  Russian
+
+  
+  
+  </div>
+</div>
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><p>Мы хотели бы поделиться опытом, как используя <a href="https://www.drupal.org/project/views">views</a> и <a href="https://www.drupal.org/project/views_data_export">views_data_export</a> сделать выгрузку yml в Yandex.Market на Drupal 7. </p>
+<p>Концепция состоит в том, чтобы, используя views, получить нужные данные и далее собрать все в шаблонах для views_data_export. Такой вариант подходит для выгрузки данных из нод, таксономии, entity и продуктов commerce.</p>
+<p>Для начала рекомендуем узнать по подробнее о формате yml в <a href="https://yandex.ru/support/partnermarket/export/yml.html">официальной документации</a>.</p>
+<p>Наш пример мы будем рассматривать на нодах, а категории представлены терминами таксономии. Нам потребуется два views'а, первый это вспомогательный, предоставит нам категории, а второй данные товаров.</p>
+
+<h4>Views yml_categories</h4>
+<p>Первым мы сделаем views категорий. Он будет передавать готовую структуру категорий в наш основной views. Потребуется views с типом данных "термин таксономии". Создание страницы и блока выключим и перейдем к настройки views'a и полей. Добавим отображение "Data export".</p>
+<div style="overflow: hidden;">
+  <div class="blog-img-2"><img src="..\sites\default\files\blog\yml_c_fields.png"></div>
+  <div class="blog-img-2"><img src="..\sites\default\files\blog\yml_c_role.png"></div>
+</div>
+<p>Изменим формат на XML, остальные настройки формата оставим как есть. В фильтры добавим словарь категорий. Добавим вывод полей "имя" и "ID термина". Эти поля мы будем выводить в шаблоне и формировать структуру формата yml.</p>
+<p>Укажем путь, по которому будем получать наш файл yml, а также настроим права доступа, чтобы только администратор сайта мог получить выгрузку. Будем выводить весь набор наших товаров, установив отображение всех элементов.</p>
+<p>Для категорий нам нужно добиться простой конструкции вида:</p>
+<pre>
+<code>&lt;categories&gt;
+  &lt;category id="id_категории"&gt;название_категории&lt;/category&gt;
+  ...
+&lt;/categories&gt;
+</code></pre>
+
+<h5>views-data-export-xml-header--yml-categories.tpl.php</h5>
+<pre>
+<code>&lt;categories&gt;
+</code></pre>
+<p>В header открываем родительский тег <code>&lt;categories&gt;</code>. Это обязательное поле в yml.</p>
+
+<h5>views-data-export-xml-body--yml-categories.tpl.php</h5>
+<pre>
+<code>&lt;?php foreach ($themed_rows as $count => $row): ?&gt;
+  &lt;category id="&lt;?php echo $row['tid'] ?&gt;"&gt;
+    &lt;?php echo $row['name'] ?&gt;
+  &lt;/category&gt;
+&lt;?php endforeach; ?&gt;
+</code></pre>
+<p><code>$themed_row</code> - это массив готовых данных из views'а. Массив пропустим через цикл, чтобы обернуть каждую категорию в тег. За id возьмем tid таксономии, а наименование поместим внутрь тега.</p>
+
+<h5>views-data-export-xml-footer--yml-categories.tpl.php</h5>
+<pre>
+<code>&lt;/categories&gt;
+</code></pre>
+<p>Закроем тег <code>&lt;/categories&gt;</code>, тем самым закончим работать с yml_categories.</p>
+
+<h4>Views yml</h4>
+<p>Теперь нам потребуется views для нод (содержимое). Так же как и для категорий мы будем использовать отображение "Data export".</p>
+<div style="overflow: hidden;">
+  <div class="blog-img-3"><img src="..\sites\default\files\blog\yml_fields.png"></div>
+  <div class="blog-img-3"><img src="..\sites\default\files\blog\yml_role.png"></div>
+  <div class="blog-img-3"><img src="..\sites\default\files\blog\yml_advanced.png"></div>
+</div>
+<p>Формат изменим на XML. Добавим фильтр по типу нашего товара или ноды, в нашем случае это "дверь". Если вы используете мультиязычность на своем сайте, то можете добавить фильтр языка. Настройку полей произведем чуть позже.</p>
+<p>Укажем путь для экспорта yml, а также настроим права доступа. Будем выводить весь набор наших товаров.</p>
+<p>В столбце "дополнительно" нас интересует только один параметр "настройка запроса". Включим перезапись SQl, чтобы views не проверял node_access.</p>
+<div class="blog-img-1"><img src="..\sites\default\files\blog\yml_query.png"></div>
+
+<p>В формате yml есть обязательные и необязательные поля. Чтобы <a href="https://webmaster.yandex.ru/tools/xml-validator/">валидатор</a> пропустил наш файл, нам нужно добавить все обязательные поля. Создадим структуру yml в шаблонах к нашему views'у. Нам потребуется перекрыть <code>header</code>, <code>body</code> и <code>footer</code>. На потребуется перекрыть шаблоны для views_data_export: <code>views-data-export-xml-header.tpl.php</code>, <code>views-data-export-xml-body.tpl.php</code> и <code>views-data-export-xml-footer.tpl.php</code>. Переименуем их так, чтобы шаблоны работали только для конкретного views'a, указав имя вашего <code>--yml</code> (<code>views-data-export-xml-body--yml.tpl.php</code>).</p>
+
+<h5>views-data-export-xml-header--yml.tpl.php</h5>
+<pre>
+<code language="php">&lt;?php print '&lt;?xml version="1.0" encoding="UTF-8" ?&gt;'; ?&gt;
+
+&lt;!DOCTYPE yml_catalog SYSTEM "shops.dtd"&gt;
+&lt;yml_catalog date="&lt;?php echo date('Y-m-d h:i'); ?&gt;"&gt;
+&lt;shop&gt;
+  &lt;name&gt;&lt;?php echo variable_get('site_name', 'Drupal'); ?&gt;&lt;/name&gt;
+  &lt;company&gt;&lt;?php echo variable_get('site_name', 'Drupal'); ?&gt;&lt;/company&gt;
+  &lt;url&gt;&lt;?php echo $GLOBALS['base_url']; ?&gt;&lt;/url&gt;
+  &lt;currencies&gt;&lt;currency id="RUR" rate="1"/&gt;&lt;/currencies&gt;
+
+  &lt;?php print views_embed_view('yml_categories', 'views_data_export_1'); ?&gt;
+
+  &lt;offers&gt;
+</code></pre>
+<p>Разберем подробнее код выше. Чтобы вам было ясно зачем мы используем поля. Подробнее можно ознакомиться с полями в <a href="https://yandex.ru/support/partnermarket/export/yml.html#elements">официальной документации</a>. Первые две строки это обязательны для yml. <code>yml_catalog</code> содержит параметр <code>date</code>, который через функцию <code language="php">date('Y-m-d h:i')</code> передает время создания файла. В тег <code>shop</code> размещаем все настройки нашего магазина.</p>
+<ul>
+  <li>name</li>
+  <li>company</li>
+  <li>url</li>
+  <li>currencies</li>
+  <li>categories</li>
+  <li>offers</li>
+</ul>
+<p>В <code>name</code>, <code>company</code>, <code>url</code> выведем название сайта и адрес через <code>variable_get</code>. <code>currencies</code> содержит информацию о валюте. Строка <code>views_embed_view('yml_categories', 'views_data_export_1')</code> мы подставляем наш views категорий (<code>yml_categories</code> - имя views'а категорий, <code>views_data_export_1</code> - имя отображения категорий).</p>
+<h5>views-data-export-xml-body--yml.tpl.php</h5>
+<pre>
+<code language="php">&lt;?php foreach ($themed_rows as $count => $row): ?&gt;
+  &lt;offer id="&lt;?php echo $row['nid']; ?&gt;" available="true"&gt;
+    &lt;url&gt;&lt;?php echo $row['path']; ?&gt;&lt;/url&gt;
+    &lt;price&gt;&lt;?php echo $row['field_price_from']; ?&gt;&lt;/price&gt;
+    &lt;currencyId&gt;RUR&lt;/currencyId&gt;
+    &lt;categoryId&gt;&lt;?php echo $row['field_category']; ?&gt;&lt;/categoryId&gt;
+    &lt;?php if (!empty($row['field_main_img'])): ?&gt;
+      &lt;picture&gt;
+      &lt;?php $matches = array();
+        if (!empty($row['field_main_img']) && preg_match('/src="(.*\.(jpg|png|jpeg))"/', $row['field_main_img'], $matches)) {
+          echo $matches[1];
+        } ?&gt;
+      &lt;/picture&gt;
+    &lt;?php endif; ?&gt;
+    &lt;name&gt;&lt;?php echo $row['title']; ?&gt;&lt;/name&gt;	
+    &lt;description&gt;&lt;?php echo htmlspecialchars($row['body']); ?&gt;&lt;/description&gt;
+    &lt;country_of_origin&gt;Россия&lt;/country_of_origin&gt;
+
+    &lt;?php if (!empty($row['field_door_material'])) :?&gt;
+      &lt;param name="Материал"&gt;&lt;?php echo $row['field_door_material']; ?&gt;&lt;/param&gt;
+    &lt;?php endif; ?&gt;
+    &lt;?php if (!empty($row['field_door_collection'])) :?&gt;
+      &lt;param name="Коллекция"&gt;&lt;?php echo $row['field_door_collection']; ?&gt;&lt;/param&gt;
+    &lt;?php endif; ?&gt;
+    &lt;?php if (!empty($row['field_door_color'])) {
+        $color_arr = explode('|', $row['field_door_color']); 
+
+        foreach ($color_arr as $color) {
+          echo '&lt;param name="Цвет"&gt;' . $color . '&lt;/param&gt;';
+        }
+      } ?&gt;
+  &lt;/offer&gt;
+&lt;?php endforeach; ?&gt;
+</code></pre>
+<p>В этом шаблоне мы выводим поля views'а в теги. Все поля мы получаем из массива <code>$row</code>. Для списка ниже, добавим во views соответствующие поля.</p>
+<ul>
+  <li>offer - этоn тег обязательный параметр <code>id</code>, в него мы добавим <code>nid</code></li>
+  <li>url - добавим url из поля <code>path</code></li>
+  <li>price - нужно вывести поле содержащие цену вашего товара (<code>field_price_from</code>)</li>
+  <li>currencyId - добавим индекс валюты (RUR)</li>
+  <li>categoryId - нужно указать поле таксономии отвечающие за категорю (<code>field_category</code>)</li>
+  <li>name - наименование товара или же заголовок ноды (<code>title</code>)</li>
+  <li>picture - добавим поле картинки с проверкой регулярным выражением (<code>field_main_img</code>) </li>
+  <li>description - описание ноды ли товара (<code>body</code>)</li>
+  <li>country_of_origin - страна производидель</li>
+  <li>param - необязательное поля для yml. В него добавляем различные характеристики товара, такие как вес, размер и т.д.</li>
+</ul>
+<p>Необязательные поля, такие как <code>&lt;picture&gt;</code>, мы обернули в if для проверки существования переменой в массиве <code>$row</code>.<code>&lt;picture&gt;</code> необязательно, но Яндекс.Маркет рекомендует его добавлять. Разберем <code>&lt;param name=""&gt;</code> по подробней. В атрибут <code>name</code> добавляем название характеристики, именно это название будет отображаться в маркете. В нашем примере поле <code>field_door_color</code> множественное и поэтому выводим его через цикл добавляя все его значения. <code>&lt;param&gt;</code> следует наполнять в соответствии с вашим набором характеристик товара.</p>
+
+<h5>views-data-export-xml-footer--yml.tpl.php</h5>
+<p>В шаблоне footer мы закрываем теги <code>offers</code>, <code>shop</code> и <code>yml_catalog</code></p>
+<pre>
+<code>&lt;/offers&gt;
+&lt;/shop&gt;
+&lt;/yml_catalog&gt;
+</code></pre>
+
+<h4>Итог</h4>
+<p>Собрав views'ы и шаблоны, перейдя по адресу <code>/yml</code>, вы сможете сделать выгрузку yml для вашего магазина в Яндекс.Маркете.</p></div>
+      
+      <div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items">
+              <div class="field--item category-tag"><a href="..\blog\yml.html" hreflang="ru">yml</a></div>
+              <div class="field--item category-tag"><a href="..\blog\views.html" hreflang="ru">views</a></div>
+              <div class="field--item category-tag"><a href="..\blog\yandex.html" hreflang="ru">yandex</a></div>
+          </div>
+  
+  <div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above">
+    <div class="field--label">Еще по теме</div>
+          <div class="field--items">
+              <div class="field--item"><a href="..\blog\podnimaem-ctr-c-089-do-292-v-yandeksdirekt-i-s-118-do-52-v-googleads.html" hreflang="ru">Поднимаем CTR c 0,89% до 2,92% в Яндекс.Директ и с 1,18% до 5,2% в Google.Ads</a></div>
+          <div class="field--item"><a href="..\blog\ispolzovanie-otchetov-ecommerce-v-yandeksmetrike.html" hreflang="ru">Использование отчетов Ecommerce в Яндекс.Метрике </a></div>
+          <div class="field--item"><a href="..\blog\sayt-na-drupal-i-servis-yandekskollekcii.html" hreflang="ru">Сайт на Drupal и сервис Яндекс.Коллекции</a></div>
+              </div>
+      </div>
+
+
+      <div class="field-yashare">
+        <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+        <script src="//yastatic.net/share2/share.js"></script>
+        <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+                <div class="ya-share2" id="block-ya-share2" data-services="vkontakte,facebook,odnoklassniki,gplus,twitter"></div>
+        <a href="..\rss.rss" target="_blank"><span class="iconify" id="block-iconify" data-icon="ion:logo-rss" style="color: #da8c2c;" data-width="29" data-height="29"></span></a>
+              </div>
+  </div>
+
+  <section>
+      
+    <h2 class="block-form-title">Комментарии</h2>
+    
+  
+  <div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Андрей
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">пятница, июня 15, 2018 - 07:30</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>Спасибо за статью! Очень помогло, правда у вас есть небольшая ошибка, нет закрывающего тега в строке:<br>
+ &lt;?php echo $row['title']; ?</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\152\comment\26.html">Ответить</a></li></ul>
+
+</div>
+
+
+<div class="indented"><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">вторник, июня 26, 2018 - 07:28</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item">Спасибо за замечание! Обязательно поправим.</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\152\comment\32.html">Ответить</a></li></ul>
+
+</div>
+
+</div><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Виталий
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">вторник, сентября 11, 2018 - 21:29</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>Спасибо большое за подробный гайд. Вопрос - можно ли сделать экспорт автоматически по запуску крона?</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\152\comment\55.html">Ответить</a></li></ul>
+
+</div>
+
+
+<div class="indented"><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Виталий
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">среда, сентября 12, 2018 - 16:36</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>имеется в виду, по запуску крона, создание обновленного yml-файла на сервере в корне сайта</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\152\comment\59.html">Ответить</a></li></ul>
+
+</div>
+
+
+<div class="indented"><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Виталий
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">вторник, сентября 18, 2018 - 18:04</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>Решение вопроса с сохранением на сервере и автоматизацией:<br>
+1. делаем (заменяя параметры, где надо, на свои значения) и подключаем модуль: <a href="https://www.drupal.org/project/views_data_export/issues/1875456#comment-9670603">https://www.drupal.org/project/views_data_export/issues/1875456#comment…</a>. Модуль позволяет прописать место дефолтного сохранения на сервере.<br>
+2. настраиваем в менеджере задач (на стороне сервера) еще одну задачу на выполнение - прописываем команду:<br>
+cd /home/USER/public_html &amp;&amp; /usr/bin/env PATH=/home/USER/.composer/vendor/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin COLUMNS=72 ../vendor/bin/drush -u 1 --uri=<a href="https://mysite.ru">https://mysite.ru</a> --quiet views-data-export yml views_data_export_1 yml_export.xml<br>
+USER - название вашего пользователя</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\152\comment\65.html">Ответить</a></li></ul>
+
+</div>
+
+<div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Виталий
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">вторник, сентября 18, 2018 - 18:12</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>PS drush на сервере д.б. уже установлен.</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\152\comment\66.html">Ответить</a></li></ul>
+
+</div>
+
+</div></div><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Виталий
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">вторник, сентября 11, 2018 - 22:16</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>Имхо, при добавлении в фильтры поля "Термин таксономии: Название" надо снять галочку с  пункта "Сделать это поле ссылкой на страницу его термина таксономии".  Категории выгружаются без ссылок (насколько я правильно просмотрел образцы этих файлов, конечно)</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\152\comment\56.html">Ответить</a></li></ul>
+
+</div>
+
+<div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Виталий
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">вторник, сентября 11, 2018 - 22:32</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>Еще один вопрос - если каталог многоуровневый, то как это прописывается в списке категорий? Как сделать, чтобы прописывались родительские id?</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\152\comment\57.html">Ответить</a></li></ul>
+
+</div>
+
+<div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Виталий
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">вторник, сентября 11, 2018 - 23:08</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>По поводу добавления parentId, если каталог имеет не плоскую структуру (присутвует вложенность категорий) вопрос решается след образом:<br>
+1. в связях добавляем "Термин таксономии: Родительский термин" (снимем галочку в настройках с пункта "Эта связь обязательна")<br>
+2. В полях добавляем еще один "Термин таксономии: ID термина", но в настройках выбираем "Связь -&gt; Родитель"<br>
+3. корректируем views-data-export-xml-body--yml-categories.tpl.php на следующий вид:<br>
+&lt;?php foreach ($themed_rows as $count =&gt; $row): ?&gt;<br>
+    " parentId="&lt;?php echo $row['tid_1'] ?&gt;"&gt;<br>
+        &lt;?php echo $row['name'] ?&gt;</p>
+<p>&lt;?php endforeach; ?&gt;<br>
+Вроде все.</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\152\comment\58.html">Ответить</a></li></ul>
+
+</div>
+
+
+<div class="indented"><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Виталий
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">вторник, сентября 18, 2018 - 18:35</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>Боюсь, в п.3 ввел в заблуждение. Полностью views-data-export-xml-body--yml-categories.tpl.php будет выглядеть так:<br>
+<code>&lt;?php foreach ($themed_rows as $count =&gt; $row): ?&gt;<br>
+    " parentId="&lt;?php echo $row['tid_1'] ?&gt;"&gt;&lt;?php echo $row['name'] ?&gt;<br>
+&lt;?php endforeach; ?&gt;</code></p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\152\comment\67.html">Ответить</a></li></ul>
+
+</div>
+
+</div><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Олег
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">понедельник, мая 18, 2020 - 07:32</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>Картинка товара отсутствует в выгрузке yml. Не проходит условие if !empty. Какие настройки поля должны быть во views?</p>
+<p>PS. Картинок на товарах от 1 до 5</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\152\comment\452.html">Ответить</a></li></ul>
+
+</div>
+
+<div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Иван
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">вторник, июля 20, 2021 - 16:39</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>А для 8-9 версии возможно ли так сделать?</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\152\comment\1722.html">Ответить</a></li></ul>
+
+</div>
+
+
+<div class="indented"><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  cosmos
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">четверг, августа 12, 2021 - 08:08</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>Как минимум так же повторить переопределние вьюса,<br>
+но я думаю есть более удобные варианты</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\152\comment\1723.html">Ответить</a></li></ul>
+
+</div>
+
+</div><div class="comment-article view-mode-default ds-1col clearfix">
+
+  
+
+  
+            <div class="field field--name-comment-author field--type-ds field--label-hidden field--item">  Дмитрий
+</div>
+      
+            <div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item">понедельник, апреля 18, 2022 - 19:37</div>
+      
+            <div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"><p>Добрый вечер!</p>
+<p>Подскажите пожалуйста, как мне переопределить шаблон представлений, для view data export. Как бы я не менял имя новых файлов, в папке с шаблонами модуля, не могу добиться разного вывода данных. Drupal упорно читает дефолтные файлы шаблона.</p>
+</div>
+      <ul class="links inline list-inline"><li class="comment-reply"><a href="reply\node\152\comment\1733.html">Ответить</a></li></ul>
+
+</div>
+
+
+ 
+      <div class="comment-form-wrapper">
+      <h2 class="block-form-title">Добавить комментарий</h2>
+      <form class="comment-comment-form comment-form antibot" data-drupal-selector="comment-form" data-action="https://drupal-coder.ru/comment/reply/node/152/comment" action="/antibot" method="post" id="comment-form" accept-charset="UTF-8">
+  <noscript>
+  <div class="antibot-no-js antibot-message antibot-message-warning">Вы должны включить JavaScript чтобы использовать эту форму.</div>
+</noscript>
+<div class="form-item js-form-item form-type-textfield js-form-type-textfield form-item-name js-form-item-name form-group">
+      <label for="edit-name" class="control-label">Ваше имя</label>
+  
+  
+  <input placeholder="Ваше имя" data-drupal-selector="edit-name" class="form-text form-control" type="text" id="edit-name" name="name" value="" size="30" maxlength="60">
+
+  
+  
+  </div>
+<input autocomplete="off" data-drupal-selector="form-ybj9dekxkh43wyhwpx2scfj2wkvgyvu-uzrvwqgbf-c" type="hidden" name="form_build_id" value="form-YBJ9dEKXKh43wyHwpx2SCfJ2WKvgyVu-UzrVwQGbf_c"><input data-drupal-selector="edit-comment-comment-form" type="hidden" name="form_id" value="comment_comment_form"><input data-drupal-selector="edit-antibot-key" type="hidden" name="antibot_key" value=""><div class="field--type-text-long field--name-comment-body field--widget-text-textarea form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-wrapper" id="edit-comment-body-wrapper">      <div class="js-text-format-wrapper text-format-wrapper js-form-item form-item">
+  <div class="form-item js-form-item form-type-textarea js-form-type-textarea form-item-comment-body-0-value js-form-item-comment-body-0-value">
+      <label for="edit-comment-body-0-value" class="control-label js-form-required form-required">Комментарий</label>
+  
+  
+  <div class="form-textarea-wrapper">
+  <textarea class="js-text-full text-full form-textarea required form-control resize-vertical" data-media-embed-host-entity-langcode="ru" data-drupal-selector="edit-comment-body-0-value" id="edit-comment-body-0-value" name="comment_body[0][value]" rows="5" cols="60" placeholder="" required="required" aria-required="true"></textarea>
+</div>
+
+
+  
+  
+  </div>
+<div class="js-filter-wrapper filter-wrapper form-inline form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format" id="edit-comment-body-0-format"><div class="filter-help form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format-help" id="edit-comment-body-0-format-help"><a href="..\filter\tips.html" target="_blank" title="Opens in new window" data-toggle="tooltip" data-drupal-selector="edit-comment-body-0-format-help-about" class="icon-before" id="edit-comment-body-0-format-help-about"><span class="icon glyphicon glyphicon-question-sign" aria-hidden="true"></span>О текстовых форматах</a></div>
+</div>
+
+  </div>
+
+  </div>
+<div data-drupal-selector="edit-actions" class="form-actions form-group js-form-wrapper form-wrapper" id="edit-actions"><button data-drupal-selector="edit-submit" class="button button--primary js-form-submit form-submit btn-primary btn" type="submit" id="edit-submit" name="op" value="Отправить">Отправить</button></div>
+
+</form>
+
+    </div> 
+  
+</section>
+
+
+</article>
+
+
+  </div>
+
+              </section>
+
+                </div>
+  </div>
+
+
+      <footer class="footer" role="contentinfo">
+      <div class=" container">  
+          <div class="region region-footer">
+    <section id="block-footerphone" class="block block-block-content block-block-content07b69e1d-d1db-4e8b-bb14-dc4563ef50bc clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="block-form-contacts">
+  <ul>
+    <li class="block-form-phone"><a href="tel:88002222673">8 800 222-26-73</a></li>
+  </ul>
+</div></div>
+      
+  </section>
+
+<section id="block-copyright" class="block block-block-content block-block-content263c1cb2-b142-4488-af8e-99f92fcb7640 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="social-links">
+  <ul class="social-links-wrapper">
+    <li class="social-links-item"><a target="_blank" href="https://vk.com/initlab"><i class="fab fa-vk"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://teleg.one/initlabbot" title="Свяжитесь с нами"><i class="fab fa-telegram-plane"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.youtube.com/channel/UCyFEbngMB-bK2ulNtd_W43A"><i class="fab fa-youtube"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://zen.yandex.ru/id/6037ce072f500a068c630fec"><img style="width: 16px; margin-bottom: 5px;" src="..\sites\default\files\icons\zen-icon.svg"></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.facebook.com/initlabkr/"><img style="width: 25px; margin-bottom: 5px;" src="..\sites\default\files\icons\icon-facebook-ru-dc.svg"></a></li>
+  </ul>  
+</div>
+
+<p>ООО «Инитлаб», Краснодар, Россия.
+<a class="goal__tel" href="tel:+78002222673">8 800 222-26-73</a><br>
+Drupal является зарегистрированной торговой маркой Dries Buytaert.</p>
+</div>
+      
+  </section>
+
+
+  </div>
+
+      </div>
+    </footer>
+  </div>
+
+  </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"comment\/55","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"ru","currentQuery":{"page":0}},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"ajaxPageState":{"libraries":"antibot\/antibot.form,bootstrap\/popover,bootstrap\/theme,bootstrap\/tooltip,bootstrap_dc\/bootstrap-scripts,bootstrap_dc\/dc,bootstrap_dc\/global-styling,bootstrap_dc\/seo,colorbox\/default,colorbox_inline\/colorbox_inline,colorbox_load\/colorbox_load,comment\/drupal.comment-by-viewer,filter\/drupal.filter,google_analytics\/google_analytics,ng_lightbox\/ng_lightbox,system\/base,views\/views.module","theme":"bootstrap_dc","theme_token":null},"ajaxTrustedUrl":{"https:\/\/drupal-coder.ru\/comment\/reply\/node\/152\/comment":true},"colorbox":{"opacity":"0.85","current":"{current} \u0438\u0437 {total}","previous":"\u00ab \u041f\u0440\u0435\u0434\u044b\u0434\u0443\u0449\u0438\u0439","next":"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0439 \u00bb","close":"Close","maxWidth":"98%","maxHeight":"98%","fixed":true,"mobiledetect":true,"mobiledevicewidth":"480px"},"google_analytics":{"account":"UA-87805467-1","trackOutbound":true,"trackMailto":true,"trackTel":true,"trackDownload":true,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip","trackColorbox":true},"bootstrap":{"forms_has_error_value_toggle":1,"modal_animation":1,"modal_backdrop":"true","modal_focus_input":1,"modal_keyboard":1,"modal_select_text":1,"modal_show":1,"modal_size":"","popover_enabled":1,"popover_animation":1,"popover_auto_close":1,"popover_container":"body","popover_content":"","popover_delay":"0","popover_html":0,"popover_placement":"right","popover_selector":"","popover_title":"","popover_trigger":"click","tooltip_enabled":1,"tooltip_animation":1,"tooltip_container":"body","tooltip_delay":"0","tooltip_html":0,"tooltip_placement":"auto left","tooltip_selector":"","tooltip_trigger":"hover"},"antibot":{"forms":{"comment-form":{"id":"comment-form","key":"5D-i6uDYb-gr3-4qQZFOE5ec3-2jdoq6QSz9J26Pt50"}}},"user":{"uid":0,"permissionsHash":"66bb25c0b665c533dd9436d0cd4e99532a723088208bff0a05f2bf113d3703ac"}}</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="..\sites\default\files\js\js_2omCfdjRPteGoPcs4txReDz1ziq8dw_NERpcaIRsDPk.js"></script>
+<script src="..\sites\default\files\js\js_U0-ei-DZ6u8k-JNjuYyeU7SkryXEZZ54qVWXctdF9xs.js"></script>
+<script src="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+<script src="..\sites\default\files\js\js_0JpfcTomuXtSWa_m9aC3Cl6jt3QOGmlwYugQhh4TJxo.js"></script>
+<script src="..\sites\default\files\js\js_s-3xOYzWEgR_FYD47Em71gucXCZV2wtpxM9O-gGfPco.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:og="http://ogp.me/ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:schema="http://schema.org/" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" version="2.0" xml:base="https://drupal-coder.ru/">
+  <channel>
+    <title>семинар google</title>
+    <link>https://drupal-coder.ru/</link>
+    <description/>
+    <language>ru</language>
+    
+    <item>
+  <title>Поднимаем CTR c 0,89% до 2,92% в Яндекс.Директ и с 1,18% до 5,2% в Google.Ads</title>
+  <link>https://drupal-coder.ru/blog/podnimaem-ctr-c-089-do-292-v-yandeksdirekt-i-s-118-do-52-v-googleads</link>
+  <description>
+&lt;span&gt;Поднимаем CTR c 0,89% до 2,92% в Яндекс.Директ и с 1,18% до 5,2% в Google.Ads&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/43" lang="" about="https://drupal-coder.ru/user/43" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Дарья Бочкарёва&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;пт, 01/24/2020 - 10:46&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2020-01/digital-marketing-1433427_1920.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Мы оказываем услуги ведения контекстной рекламы. Оптимизируем для повышения продаж готовые рекламные кампании в аккаунтах наших клиентов. Хотим поделиться кейсом по контекстной рекламе для компании по реализации строительной техники на территории Краснодарского края.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Цель:&lt;/b&gt; продажи техники и запчастей с сайта с помощью контекстной рекламы.&lt;br /&gt;&lt;b&gt;Задача:&lt;/b&gt; оптимизировать рекламные кампании в Яндекс.Директ и GoogleAds&lt;br /&gt;&lt;b&gt;Регион продвижения:&lt;/b&gt; Краснодарский край.&lt;/p&gt;
+
+&lt;p&gt;На сегодняшний день контекстная реклама — наиболее точный способ точечно показывать рекламу целевой аудитории.&lt;/p&gt;
+
+&lt;p&gt;Смысл работы контекстной рекламы предельно прост: если объявление соответствует запросам пользователя – вероятность того, что он может отдать предпочтение именно этой компании, увеличивается. Но для компаний, работающих в сфере B2B, необходимо учитывать особенности:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;высокая конкуренция по узким специализированным запросам, которая поднимает цены клика до крайне высокого уровня;&lt;/li&gt;
+	&lt;li&gt;долгий срок принятия решения;&lt;/li&gt;
+	&lt;li&gt;многоуровневое согласование.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Учитывая эти особенности, были выбраны следующие KPI:&lt;/p&gt;
+
+&lt;ol&gt;&lt;li&gt;Рост CTR (ключевой показатель эффективности в контекстной рекламе, показывает, как часто пользователи после просмотра рекламного объявления переходят на сайт);&lt;/li&gt;
+	&lt;li&gt;Снижение стоимости одного звонка CPL;&lt;/li&gt;
+	&lt;li&gt;Рост количества звонков.&lt;/li&gt;
+&lt;/ol&gt;&lt;p&gt;На момент начала работ с клиентом в Яндекс.Директ и Google Реклама были следующие показатели:&lt;/p&gt;
+
+&lt;p&gt;1) 183234 Показов, 1634 Кликов, 0,89% CTR в Яндекс.Директ&lt;/p&gt;
+
+&lt;figure class="text-center thumbnail"&gt;&lt;img class="img-responsive" alt="Яндекс.Директ" src="https://drupal-coder.ru/sites/default/files/blog/blog-ctr-1.jpg" /&gt;&lt;figcaption&gt;&lt;i&gt;1: Яндекс.Директ&lt;/i&gt;&lt;/figcaption&gt;&lt;/figure&gt;&lt;p&gt;2) 145696 Показов, 1715 Кликов, 1,18% CTR в Google.Ads&lt;/p&gt;
+
+&lt;p&gt;После полного анализа существующих рекламных кампаний:&lt;/p&gt;
+
+&lt;figure class="text-center thumbnail"&gt;&lt;img class="img-responsive" alt="Google Реклама" src="https://drupal-coder.ru/sites/default/files/blog/blog-ctr-2.jpg" /&gt;&lt;figcaption&gt;&lt;i&gt;2: Google Реклама&lt;/i&gt;&lt;/figcaption&gt;&lt;/figure&gt;&lt;p&gt;Утвердили с клиентом еще раз услуги, которые будем продвигать в контекстной рекламе: продажу фронтальных погрузчиков, запчастей к ним и ремонт строительной техники.&lt;/p&gt;
+
+&lt;figure class="text-center thumbnail"&gt;&lt;img class="img-responsive" alt="Рекламные кампании в GA и Яндекс.Директ" src="https://drupal-coder.ru/sites/default/files/blog/blog-ctr-3.jpg" /&gt;&lt;figcaption&gt;&lt;i&gt;3: Рекламные кампании в GA и Яндекс.Директ&lt;/i&gt;&lt;/figcaption&gt;&lt;/figure&gt;&lt;p&gt;Исходя из предыдущего пункта, проработали структуру рекламной кампании. Вынесли в отдельные группы объявлений запросы по разным видам техники, чтобы прописать уникальные объявления.&lt;/p&gt;
+
+&lt;p&gt;Договорились доработать структуру сайта (убрали лишние разделы, снизили количество переходов к необходимой информации).&lt;/p&gt;
+
+&lt;p&gt;Для дальнейшего анализа рекламы и ее показателей было предложено клиенту начать работу с коллтерекингом.&lt;/p&gt;
+
+&lt;p&gt;Сервис коллтрекинга помог отслеживать целевые звонки, более точно вычислить стоимость лидов, работать с перераспределением бюджета на каналы, приносящие больше лидов.&lt;/p&gt;
+
+&lt;figure class="text-center thumbnail"&gt;&lt;img class="img-responsive" alt="Отчет из коллтрекинга" src="https://drupal-coder.ru/sites/default/files/blog/blog-ctr-4.jpg" /&gt;&lt;figcaption&gt;&lt;i&gt;4: Отчет из коллтрекинга&lt;/i&gt;&lt;/figcaption&gt;&lt;/figure&gt;&lt;p&gt;В итоге было вычислено, что на каждые 10 звонков из Яндек.Директ приходилось 20 звонков из Google Ads по стоимости почти в 2 раза меньше.&lt;/p&gt;
+
+&lt;figure class="text-center thumbnail"&gt;&lt;img class="img-responsive" alt="Отчет по CPL" src="https://drupal-coder.ru/sites/default/files/blog/blog-ctr-5.jpg" /&gt;&lt;figcaption&gt;&lt;i&gt;5: Отчет по CPL&lt;/i&gt;&lt;/figcaption&gt;&lt;/figure&gt;&lt;p&gt;Так же прослушивая записи телефонных разговоров, мы отследили дополнительные минус-слова, выяснили, кто звонит чаще (мужчины или женщины), в какое время (утром, вечером), сделали корректировки ставок в зависимости от полученных данных.&lt;/p&gt;
+
+&lt;p&gt;В результате проведенных оптимизационных работ, был выявлен рост CTR: за прошедший месяц (октябрь 2019) он оставил &lt;strong&gt;5,2% в GoogleAds&lt;/strong&gt; и &lt;strong&gt;2,92% в Яндекс.Директ.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Ведутся дальнейшие работы по снижению стоимости звонка, было согласовано с клиентом перераспределение бюджета в пользу Google Ads.&lt;/p&gt;
+
+&lt;p&gt;На следующих этапах нами выполняется:&lt;/p&gt;
+
+&lt;ol&gt;&lt;li&gt;Анализ стоимости звонка исходя из новых бюджетов.&lt;/li&gt;
+	&lt;li&gt;Вычисление стоимости звонков по каждой рекламной кампании и группе объявлений.&lt;/li&gt;
+	&lt;li&gt;Определение набора максимально эффективных ключевых слов.&lt;/li&gt;
+	&lt;li&gt;Определение наиболее эффективных посадочных страниц.&lt;/li&gt;
+&lt;/ol&gt;&lt;p&gt;На всех этапах мы используем современные инструменты аналитики и коллтрекинга, такие как Google Analytics, Google Data Studio, Яндекс.Метрика, Callibri. Эти сервисы и планомерная работа по улучшению сайта помогают нам делать более эффективными рекламные кампании в Яндекс.Директ и GoogleAds.&lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/seo" hreflang="ru"&gt;SEO&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/prodvizenie-saitov" hreflang="ru"&gt;Продвижение сайтов&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/seminar-google" hreflang="ru"&gt;семинар google&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/google-adwords" hreflang="ru"&gt;Google Adwords&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/yandex" hreflang="ru"&gt;yandex&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=242&amp;2=comment&amp;3=comment" token="kz-R6sHq8pRhFgqjnweZhHBFUpaijkAlj65nngshbmU"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/vygruzka-yml-dlya-yandeksmarketa" hreflang="ru"&gt;Выгрузка yml для Яндекс.Маркета&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/ispolzovanie-otchetov-ecommerce-v-yandeksmetrike" hreflang="ru"&gt;Использование отчетов Ecommerce в Яндекс.Метрике &lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/sayt-na-drupal-i-servis-yandekskollekcii" hreflang="ru"&gt;Сайт на Drupal и сервис Яндекс.Коллекции&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Fri, 24 Jan 2020 10:46:23 +0000</pubDate>
+    <dc:creator>Дарья Бочкарёва</dc:creator>
+    <guid isPermaLink="false">242 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/podnimaem-ctr-c-089-do-292-v-yandeksdirekt-i-s-118-do-52-v-googleads#comments</comments>
+    </item>
+<item>
+  <title>Мы на семинаре от Google "Реклама в Google AdWords"</title>
+  <link>https://drupal-coder.ru/blog/my-na-seminare-ot-google-reklama-v-google-adwords</link>
+  <description>
+&lt;span&gt;Мы на семинаре от Google "Реклама в Google AdWords"&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/43" lang="" about="https://drupal-coder.ru/user/43" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Дарья Бочкарёва&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;пн, 11/14/2016 - 17:28&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2019-10/digital-marketing-1725340_1920.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;&lt;img alt="google partners" src="https://drupal-coder.ru/sites/default/files/inline-images/AdWords.JPG" style="width:200px; float:left; padding-right:10px;" /&gt;8 и 9 ноября наш seo-отдел в лице Никиты и меня сходили на семинар для Партнеров Google "Реклама в Google AdWords", который проходил в отеле Форум.&lt;/p&gt;
+
+&lt;p&gt;На встрече мы дружно освежили базовую информацию по рекламе и настройкам, познакомились с контекстно-медийной сетью в Google AdWords, разобрали практические задачи.&lt;/p&gt;
+
+&lt;p&gt;После семинара был организован экзамен базового уровня по Google AdWords, на который остался Никита и успешно его сдал.&lt;/p&gt;
+
+&lt;p&gt;Поздравляем Никиту Симонова с успешным прохождением сертификации Google AdWords! &lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/seminar-google" hreflang="ru"&gt;семинар google&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=98&amp;2=comment&amp;3=comment" token="GuzD-p87H_iMGzhXSG-7GsvLKPVAbPv4TFIYyf7wmGQ"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/keys-po-povysheniyu-kachestva-kontekstnoy-reklamy" hreflang="ru"&gt;Кейс по повышению качества контекстной рекламы&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Mon, 14 Nov 2016 17:28:08 +0000</pubDate>
+    <dc:creator>Дарья Бочкарёва</dc:creator>
+    <guid isPermaLink="false">98 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/my-na-seminare-ot-google-reklama-v-google-adwords#comments</comments>
+    </item>
+
+  </channel>
+</rss>

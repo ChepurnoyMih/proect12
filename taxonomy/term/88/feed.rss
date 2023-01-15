@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:og="http://ogp.me/ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:schema="http://schema.org/" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" version="2.0" xml:base="https://drupal-coder.ru/">
+  <channel>
+    <title>nodejs</title>
+    <link>https://drupal-coder.ru/</link>
+    <description/>
+    <language>ru</language>
+    
+    <item>
+  <title>Drupal + browser-sync</title>
+  <link>https://drupal-coder.ru/blog/drupal-browser-sync</link>
+  <description>
+&lt;span&gt;Drupal + browser-sync&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/59" lang="" about="https://drupal-coder.ru/user/59" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Александр Долженков&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;вт, 07/30/2019 - 21:29&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2019-10/browsersync-and-drupal.png&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;При работе с js хочется, чтобы браузер сам перезагружал страницу, так сказать делал hot reload, или, изменяя стили в css, они автоматически изменились в браузере (инъекция), как, например,  это происходит при работе с React или Vue. Но как же этого добиться с Drupal? Есть много решений, но все они так или иначе используют browser-sync. Browser-sync - это пакет для nodejs, позволяющий синхронизировать несколько браузеров, а также делающий автоматическую перезагрузку страниц и инъекции стилей. Используя связку nodejs + gulp + browser-sync, мы будем делать всю эту магию вместе с Drupal. Мы не будем рассматривать как устанавливать nodejs, но он должен быть у вас установлен. Итак приступим!&lt;/p&gt;
+
+&lt;h3&gt;Gulp&lt;/h3&gt;
+&lt;p&gt;Gulp - замечательный таск-менеджер, гибкий и быстрый. Его роль заключается в отслеживании изменения файлов и последующем запуске browser-sync. Мы не будем
+  подробно разбирать синтаксис конфигураций gulp, но вы подробнее можете ознакомиться в &lt;a href="https://github.com/gulpjs/gulp/blob/v3.9.1/docs/API.md"&gt;документации&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4&gt;Установка&lt;/h4&gt;
+&lt;p&gt;Изначально установим gulp-cli, чтобы иметь возможность вызывать gulp в терминале:&lt;/p&gt;
+&lt;pre&gt;
+&lt;code language="bash"&gt;sudo npm install -g gulp-cli&lt;/code&gt;
+&lt;/pre&gt;
+&lt;p&gt;Далее в директории проекта установим gulp локально:&lt;/p&gt;
+&lt;pre&gt;
+&lt;code language="bash"&gt;sudo npm install -D gulp&lt;/code&gt;
+&lt;/pre&gt;
+&lt;p&gt;Флаг
+  &lt;code&gt;-D&lt;/code&gt; вносит в package.json запись о Gulp в секцию devDependencies, отмечая, что пакет нужен только для разработки.
+&lt;/p&gt;
+&lt;p&gt;Установим browser-sync:&lt;/p&gt;
+&lt;pre&gt;
+&lt;code language="bash"&gt;sudo npm i -D browser-sync&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;h3&gt;Настройка gulp и browser-sync&lt;/h3&gt;
+
+&lt;p&gt;Создадим в корневой директории темы файл
+  &lt;code&gt;gulpfile.js&lt;/code&gt;. Будем использовать строгий режим в javascript. Добавим модули gulp и browser-sync.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code language="javascript"&gt;
+'use strict';
+
+const gulp = require('gulp');
+const browserSync = require('browser-sync');
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Приступим к добавлению задачи для gulp и настройки browser-sync. В функцию
+  &lt;code language="javascript"&gt;gulp.task()&lt;/code&gt; обернем вызов и настройки browser-sync.&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code language="javascript"&gt;
+gulp.task('sync', function() {
+  browserSync.init({
+    proxy: domain,
+    port: 8080
+  });
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Разберем код выше поподробнее.
+  &lt;code language="javascript"&gt;browserSync.init()&lt;/code&gt; - это метод browser-sync для инициализации.
+  &lt;code language="javascript"&gt;proxy&lt;/code&gt; позволяет нам проксировать сервер по типу Apache или NGinx. Нужно указать домен или ip сервера. А
+  также нам нужно указать порт, по которому
+  сервер отдает сайт. О других настройках browser-sync можете почитать
+  &lt;a href="https://browsersync.io/docs/options"&gt;тут&lt;/a&gt;.&lt;/p&gt;
+  &lt;p&gt;Если мы вызовем в консоли
+    &lt;code language="bash"&gt;gulp sync&lt;/code&gt;, он применит только последние изменения в файлах. Это неудобно. Нам
+    нужно вызывать browser-sync каждый раз как
+    мы изменяем файл. Будем делать это непосредственно вызовом метода
+    &lt;code language="javascript"&gt;browserSync.watch()&lt;/code&gt;. И теперь наш полный
+    &lt;code&gt;gulpfile.js&lt;/code&gt; выглядит так:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code language="javascript"&gt;
+  'use strict';
+
+  const settings = {
+    domain: 'd7.dev.zz',
+    port: '8080'
+  }
+  
+  const gulp = require('gulp');
+  const browserSync = require('browser-sync');
+  
+  gulp.task('sync', function() {
+    browserSync.init({
+      proxy: settings.domain,
+      port: settings.port
+    });
+  
+    browserSync.watch('./css/*.css').on('change', browserSync.reload);
+  });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;При изменении css gulp вызовет
+  &lt;code language="javascript"&gt;browserSync.reload&lt;/code&gt;, этот метод перезапустит browser-sync и добавит изменения в браузер.&lt;/p&gt;
+
+&lt;p&gt;Вместо
+  &lt;code&gt;'./css/*.css'&lt;/code&gt; подставьте путь к вашим css файлам. Продублировав строку с
+  &lt;code&gt;browserSync.watch()&lt;/code&gt;, можно добавлять отслеживание, например, javascript файлов:&lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code language="javascript"&gt;
+browserSync.watch('./css/*.css').on('change', browserSync.reload);
+browserSync.watch('./js/*.js').on('change', browserSync.reload);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Стоит отметить, что можно делать перезагрузку даже при изменении шаблонов тем. Нужно только добавить за ними "слежку".&lt;/p&gt;
+
+&lt;h3&gt;Link CSS&lt;/h3&gt;
+&lt;p&gt;Для корректной работы инъекций в браузер нам потребуется установить модуль &lt;a href="https://www.drupal.org/project/link_css"&gt;Link CSS&lt;/a&gt;. Он есть для 7 и 8 версии. Зачем нужен этот модуль? В Drupal все css файлы добавляются на страницу через &lt;code&gt;@import&lt;/code&gt; тега &lt;code&gt;&lt;style&gt;&lt;/style&gt;&lt;/code&gt;, это не позволяет browser-sync делать инъекции. Модуль изменяет подход добавления css файлов, меняя его с &lt;code&gt;@import&lt;/code&gt; на тег &lt;code&gt;&lt;link /&gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3&gt;Использование&lt;/h3&gt;
+&lt;p&gt;Вызвав в консоли &lt;code language="bash"&gt;gulp sync&lt;/code&gt;, мы запустим обработчик gulp, который будет следить за нашими файлами, и при их изменении делать перезагрузку или инъекцию в браузер. Browser-sync в это время будет проксировать сервер с Drupal'ом, и откроет отдельную вкладку в браузере, где будет реагировать на все изменения файлов. Так просто можно добавить hot reload для работы с Drupal.&lt;/p&gt;&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-7" hreflang="ru"&gt;Drupal 7&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-8" hreflang="ru"&gt;Drupal 8&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/nodejs" hreflang="ru"&gt;nodejs&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/gulp" hreflang="ru"&gt;gulp&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;h2 class="block-form-title"&gt;Комментарии&lt;/h2&gt;
+    
+  
+  &lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Павел
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;вторник, июня 16, 2020 - 19:08&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Подскажите как почистить кэш с помощью gulp при редактировании twig шаблонов.&lt;br /&gt;
+browserSync.watch('./templates/*.html.twig').on('change', browserSync.reload);&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=492&amp;1=default&amp;2=ru&amp;3=" token="YtYR5dj9JUz84hjE_dcug6twfyw2h8T7WZoJSEQGCFY"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+ 
+      &lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=228&amp;2=comment&amp;3=comment" token="Zte9ZrY2w56zOLGbfFmBV9L11zaY_w9-V3lQd4WBu8A"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/routing-drupal-8-prosai-hookmenu" hreflang="ru"&gt;Роутинг Drupal 8. Прощай hook_menu.&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/rabota-s-bazoi-dannyh-v-drupal-8" hreflang="ru"&gt;Работа с базой данных в Drupal 8&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/tema-oformleniya-dlya-drupal-8" hreflang="ru"&gt;Тема оформления для Drupal 8&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Tue, 30 Jul 2019 21:29:40 +0000</pubDate>
+    <dc:creator>Александр Долженков</dc:creator>
+    <guid isPermaLink="false">228 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/drupal-browser-sync#comments</comments>
+    </item>
+
+  </channel>
+</rss>

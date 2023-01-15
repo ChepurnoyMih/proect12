@@ -1,0 +1,530 @@
+﻿<!DOCTYPE html>
+<html lang="ru" dir="ltr" prefix="content: http://purl.org/rss/1.0/modules/content/  dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/  og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#  schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#  sioct: http://rdfs.org/sioc/types#  skos: http://www.w3.org/2004/02/skos/core#  xsd: http://www.w3.org/2001/XMLSchema# ">
+  <head>
+    <meta charset="utf-8">
+<noscript><style>form.antibot * :not(.antibot-message) { display: none !important; }</style>
+</noscript><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-87805467-1"></script>
+<script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments)};gtag("js", new Date());gtag("set", "developer_id.dMDhkMT", true);gtag("config", "UA-87805467-1", {"groups":"default","anonymize_ip":true,"page_placeholder":"PLACEHOLDER_page_path","allow_ad_personalization_signals":false});</script>
+<meta http-equiv="content-language" content="ru">
+<meta name="description" content="В этой статье мы расскажем о нашем Drupal-модуле для онлайн-касс и о том, как мы модифицировали его для маркировки чеков по системе «Честный знак» для нашего клиента.">
+<meta name="keywords" content="создание сайтов на drupal, разработка Drupal-сайтов">
+<meta property="og:type" content="blog">
+<meta property="og:url" content="https://drupal-coder.ru/blog/keys-kak-my-nastraivali-markirovku-chekov-po-sisteme-chestnyy-znak-integraciya-onlayn-kass-s">
+<meta property="og:title" content="Кейс: как мы настраивали маркировку чеков по системе «Честный ЗНАК». Интеграция онлайн-касс с сайтами на Drupal">
+<meta property="og:description" content="В этой статье мы расскажем о нашем Drupal-модуле для онлайн-касс и о том, как мы модифицировали его для маркировки чеков по системе «Честный знак» для нашего клиента.">
+<meta name="Generator" content="Drupal 9 (https://www.drupal.org)">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="..\sites\default\files\android-chrome-256x256.png" type="image/png">
+<link rel="alternate" hreflang="ru" href="keys-kak-my-nastraivali-markirovku-chekov-po-sisteme-chestnyy-znak-integraciya-onlayn-kass-s.html">
+<link rel="canonical" href="keys-kak-my-nastraivali-markirovku-chekov-po-sisteme-chestnyy-znak-integraciya-onlayn-kass-s.html">
+<link rel="shortlink" href="keys-kak-my-nastraivali-markirovku-chekov-po-sisteme-chestnyy-znak-integraciya-onlayn-kass-s.html">
+
+    <title>Кейс: как мы настраивали маркировку чеков по системе «Честный ЗНАК». Интеграция онлайн-касс с сайтами на Drupal | drupal-coder.ru</title>
+    <link rel="stylesheet" media="all" href="..\sites\default\files\css\css_y8CdfJDNR-tG0CPnRDokR6Eh9OUJplbHLVQ9A8myecQ.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_tFXlTqkfn6J-Qtpt9xbB8JudSaJfOGxRSmpeidDAzPE.css">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_c0CK9J5WwpjjjzUIU22NJ_K_N6o0HFHz68-eM_V9Q7Q.css">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="//cdn.jsdelivr.net/npm/@unicorn-fail/drupal-bootstrap-styles@0.0.2/dist/3.4.0/8.x-3.x/drupal-bootstrap.min.css" integrity="sha512-tGFFYdzcicBwsd5EPO92iUIytu9UkQR3tLMbORL9sfi/WswiHkA1O3ri9yHW+5dXk18Rd+pluMeDBrPKSwNCvw==" crossorigin="anonymous">
+<link rel="stylesheet" media="all" href="..\sites\default\files\css\css_ULmc1mwKFKQRQmxYsjphW6dsh2g6jX4LXXBAtdO0vIE.css">
+
+    
+    <meta name="cmsmagazine" content="3d47b05beba40f3816d9741ee18c01a5">
+
+    
+    
+           <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P4SXQSG');</script>
+<!-- End Google Tag Manager -->
+    
+    
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Bold.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Medium.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/Montserrat/Montserrat-Regular.woff2" crossorigin="anonymous">
+    <link rel="preload" as="font" href="themes/custom/bootstrap_dc/fonts/fontawesome/webfonts/fa-brands-400.woff2" crossorigin="anonymous">
+    <link rel='manifest' href='..\manifest.json'>
+    <meta name="format-detection" content="telephone=no">
+
+          <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MXPCP8Q"></script>
+      </head>
+  <body class="page-node-344 path-node page-node-type-blog has-glyphicons">
+
+                  <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4SXQSG" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+      
+          
+
+    <a href="#main-content" class="visually-hidden focusable skip-link">
+      Перейти к основному содержанию
+    </a>
+    
+      <div class="dialog-off-canvas-main-canvas" data-off-canvas-main-canvas="">
+    
+      
+          <header class="navbar navbar-default" id="navbar" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+            <div class="region region-navigation">
+    <section id="block-pikselvkskript" class="block block-block-content block-block-contentbf8d9e8f-617c-4e8f-8501-7586be8255e0 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script>(window.Image ? (new Image()) : document.createElement('img')).src = 'https://vk.com/rtrg?p=VK-RTRG-238064-1VWIQ';</script></div>
+      
+  </section>
+
+<section id="block-globalsitetagadwords" class="block block-block-content block-block-content27617f8e-58d1-4a2a-9f23-31eab95a43c8 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><!-- Global site tag (gtag.js) - AdWords: 948581894 -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=AW-948581894"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-948581894');
+</script></div>
+      
+  </section>
+
+            <a class="logo navbar-btn pull-left" href="..\index.htm" title="Главная" rel="home">
+            <img src="..\themes\custom\bootstrap_dc\images\logo-initlab.svg" alt="Главная" width="156" height="31">
+        </a>
+            
+  </div>
+
+        </div>
+                          <div class="navbar-collapse-wrapper">
+
+            <div class="navbar-collapse collapse">
+                <div class="region region-navigation-collapsible">
+    <nav role="navigation" aria-labelledby="block-bootstrap-dc-main-menu-menu" id="block-bootstrap-dc-main-menu">
+            
+  <h2 class="visually-hidden" id="block-bootstrap-dc-main-menu-menu">Основная навигация</h2>
+  
+
+        
+              <ul class="menu nav navbar-nav">
+                      <li><a href="..\support.html" data-drupal-link-system-path="node/1">Поддержка Drupal</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-admin.html" class="dropdown-toggle" data-toggle="dropdown">DevOps <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\import-migrate-upgrade.html" data-drupal-link-system-path="node/4">Миграция</a>
+                  </li>
+                  <li><a href="..\backup.html" data-drupal-link-system-path="node/3">Бэкапы</a>
+                  </li>
+                  <li><a href="..\drupal-security-audit.html" data-drupal-link-system-path="node/9">Аудит безопасности</a>
+                  </li>
+                  <li><a href="..\boost-drupal.html" data-drupal-link-system-path="node/5">Оптимизация скорости</a>
+                  </li>
+                  <li><a href="..\ssl.html" data-drupal-link-system-path="node/99">Переезд на https</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\blog.html" data-drupal-link-system-path="blog">Блог</a>
+                  </li>
+                  <li class="expanded dropdown"><a href="..\drupal-seo.html" class="dropdown-toggle" data-toggle="dropdown">Продвижение <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\drupal-seo\context.html" data-drupal-link-system-path="node/111">Реклама</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li class="expanded dropdown"><a href="..\team.html" class="dropdown-toggle" data-toggle="dropdown">О нас <span class="caret"></span></a>
+                                  <div class="container-fluid dropdown-menu-wrapper">
+        <ul class="menu dropdown-menu">
+                      <li><a href="..\team.html#team" data-drupal-link-system-path="team">Команда</a>
+                  </li>
+                  <li><a href="..\drupalgive.html" data-drupal-link-system-path="node/135">Drupalgive</a>
+                  </li>
+                  <li><a href="..\drupal-courses.html" data-drupal-link-system-path="node/10">Курсы Drupal</a>
+                  </li>
+                  <li><a href="..\vacancies.html" data-drupal-link-system-path="vacancies">Вакансии</a>
+                  </li>
+                </ul>   
+      </div>
+      
+            </li>
+                  <li><a href="..\happy-customers.html" data-drupal-link-system-path="happy-customers">Проекты</a>
+                  </li>
+                  <li><a href="..\contacts.html" data-drupal-link-system-path="node/86">Контакты</a>
+                  </li>
+              </ul>
+      
+
+
+  </nav>
+
+  </div>
+
+            </div>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+              </div>
+    </header>
+  
+
+      <div class="page-header-big" role="heading">
+        <div class="container">
+            <div class="region region-header">
+        <h1 class="page-header">
+<span>Кейс: как мы настраивали маркировку чеков по системе «Честный ЗНАК». Интеграция онлайн-касс с сайтами на Drupal</span>
+</h1>
+
+<section class="views-element-container block block-views block-views-blockuser-block-1 clearfix" id="block-views-block-user-block-1">
+  
+    
+
+      <div class="form-group"><div class="view view-user view-id-user view-display-id-block_1 js-view-dom-id-49d04a8202140c05eb944fd83023698133ad6c298dd9641b0fa1c2841f0825ef">
+  
+    
+      
+      <div class="view-content">
+          <div class="views-row"><div class="views-field views-field-user-picture"><div class="field-content">  <img loading="lazy" src="..\sites\default\files\styles\avatar_mini\public\pictures\2019-12\IMG_2486_0.jpg?itok=S8CiRCUf" width="45" height="45" alt="" typeof="foaf:Image" class="img-responsive">
+
+
+</div></div><div class="views-field views-field-field-name"><div class="field-content">Мкртчян Геворг</div></div></div>
+
+    </div>
+  
+          </div>
+</div>
+
+  </section>
+
+<section id="block-yashare" class="block-yashare block block-block-content block-block-contentee72d8fb-02e9-4ef6-8e71-0df16bee86a9 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+<script src="//yastatic.net/share2/share.js"></script>
+<div class="ya-share2" data-services="vkontakte,odnoklassniki,gplus,twitter"></div></div>
+      
+  </section>
+
+
+  </div>
+
+        </div>
+      
+    </div>
+  
+
+<div class="main-wrapper">
+  <div role="main" class="main-container container js-quickedit-main-content">
+    <div class="row">
+
+
+
+            
+                  <section class="col-sm-12">
+
+                
+                
+                
+                                      
+                  
+                          <a id="main-content"></a>
+            <div class="region region-content">
+        <ol class="breadcrumb">
+          <li>
+                  <a href="..\blog.html">Блог</a>
+              </li>
+          <li class="active">
+                  Кейс: как мы настраивали маркировку чеков по системе «Честный ЗНАК». Интеграция онлайн-касс с сайтами на Drupal
+              </li>
+      </ol>
+
+<div data-drupal-messages-fallback="" class="hidden"></div>
+  <article data-history-node-id="344" role="article" about="https://drupal-coder.ru/blog/keys-kak-my-nastraivali-markirovku-chekov-po-sisteme-chestnyy-znak-integraciya-onlayn-kass-s" class="blog is-promoted full clearfix">
+
+  
+    
+
+  
+
+  <div class="content">
+    
+    
+            <div class="field field--name-field-blog-img field--type-image field--label-hidden field--item">/sites/default/files/2022-07/111.jpg</div>
+      <div id="field-language-display"><div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group">
+      <label class="control-label">Language</label>
+  
+  
+  Russian
+
+  
+  
+  </div>
+</div>
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><p>По закону №54-ФЗ «О применении контрольно-кассовой техники», владелец интернет-магазина обязан интегрировать свой сайт с онлайн-кассой. Это нужно для соблюдения требований законодательства: отправлять в налоговую инспекцию электронные версии чеков, передавать фискальные данные и т.д.</p>
+
+<p>Помимо обязательных данных, прописанных в законе, с 2018 года некоторых предпринимателей коснулось нововведение: «Честный ЗНАК» — система маркировка товаров, которая пока охватывает только несколько категорий, но в ближайшем будущем будет обязательной для всех российских производств. Эта маркировка должна быть нанесена на товар, а информация о ней содержаться в чеке полного расчёта.</p>
+
+<p>В этой статье мы расскажем о нашем Drupal-модуле для онлайн-касс и о том, как мы модифицировали его для маркировки чеков по системе «Честный знак» для нашего клиента.</p>
+
+<h2>Drupal-модуль от Initlab для генерации чеков</h2>
+
+<p>Наш разработчик Геворг Мкртчян создал контрибный модуль для выполнения требований ФЗ-54. Контрибный означает, что его можно скачать с drupal.org, он поддерживается сообществом Drupal-разработчиков. Если вы программист, можете скачать его бета-версию по <a href="https://www.drupal.org/project/bcheck">ссылке</a>.</p>
+
+<p>Важное уточнение: эта версия модуля не включает передачу маркировки «Честного ЗНАКА», о которой мы пишем ниже. Решение написано под бизнес-процессы конкретного клиента, делиться им в публичном доступе мы пока не планируем. Однако базовая версия прекрасно подойдёт для работы с Бизнес.Ру.</p>
+
+<p>Этот модуль позволяет интегрировать сайт на Drupal с сервисом «Онлайн-чеки» от Бизнес.Ру  — это облачный сервис для автоматизации бизнеса, который поддерживает интеграцию со многими популярными платформами интернет-магазинов и осуществляет полную поддержку онлайн-касс (54-ФЗ) и ЕГАИС.</p>
+
+<p>Наш модуль генерирует чек, сохраняет его копию в базе данных сайта и направляет его со всеми необходимыми данными в онлайн-кассу Бизнес.Ру. Этот модуль и был подключен на сайте нашего клиента <a href="https://www.rastl.ru/">RASTL</a> — интернет-магазина постельного белья и ивановского текстиля. </p>
+
+<p>Здесь может возникнуть резонный вопрос: почему бы не воспользоваться готовым сервисом генерации чеков, например, в составе процессинга платежей Сбербанка? У решения использовать отдельный сервис для оплаты чеков три причины: </p>
+
+<p>1)  для удобства клиентов, на сайте задействовано несколько методов платежей, а не только процессинг Сбербанка, поэтому пришлось бы писать отдельные решения под каждую платёжную систему, что крайне затратно;<br>
+2) на момент внедрения онлайн-кассы возможности работы с чеками у процессинга Сбербанка были ограничены, а Бизнес.Ру был одним из лидеров в этой сфере, с хорошей клиентской поддержкой и условиями;<br>
+3) у клиента на сайте своя логика продаж, скидок и промокодов, поэтому оптимально было использовать именно отдельный сервис.</p>
+
+<p>Наш модуль — это универсальный способ учесть все требования законодательства и не сломать сложную систему внутренней логики продаж. Например, в процессе формирования чека учитывается алгоритм применения скидок. При этом в модуле можно прописать применение промокодов, стоимость доставки и любые другие опции по заказам.</p>
+
+<p>Мы кратко опишем этапы покупки без сложных технических подробностей. Это нужно для понимания роли нашего модуля в процессе продаж и как в дальнейшем он был доработан:<br>
+1) человек оплачивает покупку на сайте любым удобным способом;<br>
+2) наш модуль формирует чек о предоплате, сохраняет его на сервере сайта и отправляет на Бизнес.ру;<br>
+3) Бизнес.Ру направляет сформированный электронный чек в ОФД (оператор фискальных данных) и в онлайн-кассу интернет-магазина;<br>
+4) ОФД направляет чек покупателю и передаёт данные о продаже в ФНС.</p>
+
+<p>Покупка совершена, требования законодательства выполнены. С модулем у нашего клиента не было никаких проблем до появления системы «Честный ЗНАК». Его было необходимо доработать, потому что на предпоследнем шаге чек стало нужно наполнять новой информацией и отправлять в новое место, но обо всём по порядку. </p>
+
+<h2>«Честный ЗНАК»</h2>
+
+<p>В 2018 году в нашей стране появился «Честный ЗНАК» — национальная система маркировки кодами Data Matrix. Она помогает отследить путь товара от производителя к покупателю и призвана бороться с незаконным оборотом продукции, некачественными товарами и недобросовестными производителями.</p>
+
+<p>Уже с января 2021 коды Data Matrix наносят на табачные, меховые изделия, обувь, лекарственные препараты и др. Если вы предприниматель и вашей продукции пока что не коснулся ЧЗ, вам всё равно нужно морально к этому приготовиться: к 2024 году планируется сделать маркировку обязательной для всех без исключения товаров на российском рынке.</p>
+
+<p>Каждому подлежащему маркировке товару присваивается уникальный код Data Matrix. Он должен быть нанесён на продукцию физически в виде наклейки, а информация о нём должна быть передана в систему «Честный ЗНАК» (дальше мы будем сокращать её как ЧЗ). Каждый код можно проверить в системе ЧЗ, где будет отражена подробная информация о товаре.</p>
+
+<h2>Кейс клиента</h2>
+
+<p>Итак, товары интернет-магазина RASTL  стали подлежать маркировке ЧЗ. То сеть теперь нашему клиенту нужно отправлять в Бизнес.Ру не только чек о предоплате, но и чек с информацией о маркировке. Давайте разбираться в этапах формирования, нанесения и передачи маркировки Data Matrix. </p>
+
+<h2>Как проходит маркировка товаров</h2>
+
+<p>Код маркировки формируется сразу после его изготовления и ввода в оборот. Производитель продукции «заказывает» коды для товаров у системы ЧЗ и наносит их на товар:</p>
+
+<p>1) в системе ЧЗ создаётся карточка товара, задаётся количество изготовленных единиц и после формируются уникальные коды маркировок для всей партии;<br>
+2) отсюда коды выводятся в печать на нужный носитель;<br>
+3) маркировка наносится на товары.</p>
+
+<p>Затем производитель отправляет товар продавцу, в нашем случае интернет-магазину. В его CRM заносится количество единиц полученного товара и коды соответствующих им маркировок.</p>
+
+<p>При подготовке оплаченного заказа к отправке, маркировка отобранных товаров должна сканироваться и передаваться вместе с сопроводительной документацией в Бизнес.ру в виде второго чека — чека полного расчёта. И поскольку первый чек генерирует наш модуль, то и генерацию второго нам нужно было доверить ему.</p>
+
+<h2>Что не так с маркировкой чеков?</h2>
+
+<p>По нашей первой цепочке чек с предоплатой, сформированный на сайте, попадает в ОФД, а затем в налоговую и клиенту. Но теперь мы должны отчитаться не о том, сколько денег получили от клиента, а о том, что продали то самое маркированное фабричное полотенце, а не сшили его в подвале. Налоговой и ЧЗ нужна разная информация, поэтому мы не можем упихнуть всё в один чек и прислать разом: оплачено, не контрафакт.</p>
+
+<p>То есть получается, что теперь нам нужен второй чек:</p>
+
+<p>1) первый чек — информация о предоплате (оплате заказа) для налоговой и покупателя, отправляется после формирования заказа;<br>
+2) второй чек — информация о маркировке для ЧЗ и покупателя, отправляется после сбора посылки.</p>
+
+<p>Мы уже разобрались, как Data Matrix оказывается на товаре и как проходит оплата на сайте, теперь рассмотрим процессы, которые происходят после.</p>
+
+<p>У интернет-магазина RASTL CRM собственной разработки, где содержится информация о товарных остатках и соответствующих им кодах маркировок. Именно отсюда передаются данные на сайт для дальнейшего взаимодействия с Бизнес.ру</p>
+
+<p>После оплаты заказа происходит следующее:</p>
+
+<p>1) чек предоплаты сформирован, отправлен в Бизнес.Ру и клиенту;<br>
+2) заказ с сайта импортируется в CRM для обработки;<br>
+3) заказ собирается и подготавливается к отправке. Как мы писали выше, на этом этапе в CRM регистрируются фактические коды маркировок для товаров, которые будут отправлены. Если сильно упростить, до момента отправки товара клиенту код «спит». Он сгенерирован, наклеен на товар и содержит информацию о нём, но нигде не отображается;<br>
+4) формируется сопроводительная документация, из CRM на сайт передаются коды маркировок;<br>
+5) модуль на сайте генерирует чек полного расчёта с информацией о маркировке товара и передаёт его в Бизнес.ру;<br>
+6) Бизнес.Ру передаёт этот чек в ОФД, ОФД отправляет его в ЧЗ и маркировка проданных товаров выводится из системы;<br>
+7) покупатель получает оба чека на электронную почту или по смс.</p>
+
+<p>С этими знаниями мы приступили к апгрейду модуля, чтобы «научить» его передавать информацию о маркировке товара в Бизнес.Ру. </p>
+
+<h2>Суть задачи и первые трудности</h2>
+
+<p>Код маркировки в физическом виде — это скопление квадратиков в квадратике. Но при передаче на сайт и дальше, когда заказ собран, ЧЗ через CRM шлёт на наш модуль строку с информацией о маркировке, которую мы должны передать в Бизнес.Ру. </p>
+
+<p>Конечно, хотелось бы рассказать, как мы слёту всё переделали и запустили. Но мы столкнулись с тем, что строка с информацией о маркировке ни при каких условиях не отправлялись на Бизнес.Ру. Постараемся не перегружать вас программистскими подробностями наших мытарств и сократим рассказ о поиске решения.</p>
+
+<h2>Перекодировка маркировки: как мы добивались правды у ЧЗ и Бизнес.Ру</h2>
+
+<p>Сама маркировка состоит из кода товара и серийного номера товара. Именно в таком формате она поступает из CRM клиента в наш модуль. Мы пытались передать её в таком формате в Бизнес.Ру, но ничего не получалось — маркировка не попадала в ОФД. За эту доработку взялся наш разработчик Константин Прозоров.</p>
+
+<p><img alt="Честный знак Drupal" data-entity-type="file" data-entity-uuid="aa07353d-d68b-4ca8-b4c8-7151f9a4f9c7" src="..\sites\default\files\inline-images\1_0.jpg" width="600" height="266" loading="lazy"></p>
+
+<p><br>
+Мы стали искать ответы на сайте ЧЗ, так как вся заваруха ради них. Оказалось, что две группы данных из CRM (код и номер товара) нужно было перекодировать в шестнадцатиричный формат. К такому нас жизнь готовила, поэтому мы встроили перекодировку в наш модуль. Он стал передавать данные в нужном формате, чтобы и ЧЗ, и Бизнес.Ру были нами довольны. </p>
+
+<p><img alt="Честный знак Drupal" data-entity-type="file" data-entity-uuid="3021ac5d-c032-481c-bc7e-3aa3703a3177" src="..\sites\default\files\inline-images\2_0.jpg" width="600" height="204" loading="lazy"></p>
+
+<p>Первая маленькая победа: маркировка стала поступать в ОФД. Но нам сказали, что она всё равно некорректная. И поскольку мы сделали всё возможное по документации ЧЗ, дальше решили искать ответы у Бизнес.Ру. Спустя заявку на горячей линии, письмо на поддержку и ещё один звонок, нашего Константина соединили с программистом, который понимал всю тираду про байты, кодировки и прочее умное.</p>
+
+<p>Выяснилось, что мы прописали слишком полную перекодировку по примеру ЧЗ. Но нигде не было сказано, что первые четыре байта дописывает Бизнес.Ру к уже преобразованной в шестнадцатиричный формат маркировке.<br><br><img alt="Честный знак Drupal" data-entity-type="file" data-entity-uuid="128444d7-49cb-4f13-a906-0694d9cdf1e3" src="..\sites\default\files\inline-images\3_0.jpg" width="600" height="208" loading="lazy"></p>
+
+<p>К слову сказать, если бы не живое общение, мы бы долго искали ответ. Например, в той же пояснительной документации Бизнес.Ру есть вот такая информация:</p>
+
+<p><img alt="Честный знак Drupal" data-entity-type="file" data-entity-uuid="fca92bfc-4b95-4cce-a954-ca79c5730a64" src="..\sites\default\files\inline-images\4_0.jpg" width="600" height="42" loading="lazy"></p>
+
+<p>Но нет алгоритма формирования и никакой информации об этом «кусочке», который они подставляют сами.</p>
+
+<p>В итоге всё сложилось благополучно. Модуль модифицирован, маркировка уходит куда нужно — хэппи энд.</p>
+
+<h2>Вместо вывода</h2>
+
+<p>«Честный ЗНАК» — неизбежное будущее всего российского рынка. В прошлом году это были шины, в этом питьевая вода и БАДы, а в следующем — ваши товары или товары ваших клиентов. Крайне рекомендуем всем, кто так или иначе связан с онлайн-торговлей, заранее к этому подготовиться. Пока что достаточно морально и информационно, но и с апгрейдом нужного инструментария не затягивайте — если что-то можно заранее организовать или улучшить, то так и поступите. </p>
+
+<p>Наша команда накопила приличный опыт в сфере автоматизации работы с чеками и маркировкой товаров для интернет-магазинов. Если у вас есть задачи по внедрению или настройке подобных технологий — <a href="..\support.html">обращайтесь к нам</a>.</p>
+</div>
+      
+  <div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above">
+    <div class="field--label">Еще по теме</div>
+          <div class="field--items">
+              <div class="field--item"><a href="integraciya-platyozhnoy-sistemy-s-saytom-na-drupal.html" hreflang="ru">Интеграция платёжной системы с сайтом на Drupal</a></div>
+              </div>
+      </div>
+
+
+      <div class="field-yashare">
+        <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+        <script src="//yastatic.net/share2/share.js"></script>
+        <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+                <div class="ya-share2" id="block-ya-share2" data-services="vkontakte,facebook,odnoklassniki,gplus,twitter"></div>
+        <a href="..\rss.rss" target="_blank"><span class="iconify" id="block-iconify" data-icon="ion:logo-rss" style="color: #da8c2c;" data-width="29" data-height="29"></span></a>
+              </div>
+  </div>
+
+  <section>
+  
+  
+ 
+      <div class="comment-form-wrapper">
+      <h2 class="block-form-title">Добавить комментарий</h2>
+      <form class="comment-comment-form comment-form antibot" data-drupal-selector="comment-form" data-action="https://drupal-coder.ru/comment/reply/node/344/comment" action="/antibot" method="post" id="comment-form" accept-charset="UTF-8">
+  <noscript>
+  <div class="antibot-no-js antibot-message antibot-message-warning">Вы должны включить JavaScript чтобы использовать эту форму.</div>
+</noscript>
+<div class="form-item js-form-item form-type-textfield js-form-type-textfield form-item-name js-form-item-name form-group">
+      <label for="edit-name" class="control-label">Ваше имя</label>
+  
+  
+  <input placeholder="Ваше имя" data-drupal-selector="edit-name" class="form-text form-control" type="text" id="edit-name" name="name" value="" size="30" maxlength="60">
+
+  
+  
+  </div>
+<input autocomplete="off" data-drupal-selector="form-kyux0mvyveudhoswifribsckxl05osbhfklnfcdqeuk" type="hidden" name="form_build_id" value="form-kyux0MVyvEudhOswiFriBsCKxL05osbHfKlNfCDqeuk"><input data-drupal-selector="edit-comment-comment-form" type="hidden" name="form_id" value="comment_comment_form"><input data-drupal-selector="edit-antibot-key" type="hidden" name="antibot_key" value=""><div class="field--type-text-long field--name-comment-body field--widget-text-textarea form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-wrapper" id="edit-comment-body-wrapper">      <div class="js-text-format-wrapper text-format-wrapper js-form-item form-item">
+  <div class="form-item js-form-item form-type-textarea js-form-type-textarea form-item-comment-body-0-value js-form-item-comment-body-0-value">
+      <label for="edit-comment-body-0-value" class="control-label js-form-required form-required">Комментарий</label>
+  
+  
+  <div class="form-textarea-wrapper">
+  <textarea class="js-text-full text-full form-textarea required form-control resize-vertical" data-media-embed-host-entity-langcode="ru" data-drupal-selector="edit-comment-body-0-value" id="edit-comment-body-0-value" name="comment_body[0][value]" rows="5" cols="60" placeholder="" required="required" aria-required="true"></textarea>
+</div>
+
+
+  
+  
+  </div>
+<div class="js-filter-wrapper filter-wrapper form-inline form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format" id="edit-comment-body-0-format"><div class="filter-help form-group js-form-wrapper form-wrapper" data-drupal-selector="edit-comment-body-0-format-help" id="edit-comment-body-0-format-help"><a href="..\filter\tips.html" target="_blank" title="Opens in new window" data-toggle="tooltip" data-drupal-selector="edit-comment-body-0-format-help-about" class="icon-before" id="edit-comment-body-0-format-help-about"><span class="icon glyphicon glyphicon-question-sign" aria-hidden="true"></span>О текстовых форматах</a></div>
+</div>
+
+  </div>
+
+  </div>
+<div data-drupal-selector="edit-actions" class="form-actions form-group js-form-wrapper form-wrapper" id="edit-actions"><button data-drupal-selector="edit-submit" class="button button--primary js-form-submit form-submit btn-primary btn" type="submit" id="edit-submit" name="op" value="Отправить">Отправить</button></div>
+
+</form>
+
+    </div> 
+  
+</section>
+
+
+</article>
+
+
+  </div>
+
+              </section>
+
+                </div>
+  </div>
+
+
+      <footer class="footer" role="contentinfo">
+      <div class=" container">  
+          <div class="region region-footer">
+    <section id="block-footerphone" class="block block-block-content block-block-content07b69e1d-d1db-4e8b-bb14-dc4563ef50bc clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="block-form-contacts">
+  <ul>
+    <li class="block-form-phone"><a href="tel:88002222673">8 800 222-26-73</a></li>
+  </ul>
+</div></div>
+      
+  </section>
+
+<section id="block-copyright" class="block block-block-content block-block-content263c1cb2-b142-4488-af8e-99f92fcb7640 clearfix">
+  
+    
+
+      
+            <div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"><div class="social-links">
+  <ul class="social-links-wrapper">
+    <li class="social-links-item"><a target="_blank" href="https://vk.com/initlab"><i class="fab fa-vk"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://teleg.one/initlabbot" title="Свяжитесь с нами"><i class="fab fa-telegram-plane"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.youtube.com/channel/UCyFEbngMB-bK2ulNtd_W43A"><i class="fab fa-youtube"></i></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://zen.yandex.ru/id/6037ce072f500a068c630fec"><img style="width: 16px; margin-bottom: 5px;" src="..\sites\default\files\icons\zen-icon.svg"></a></li>
+    <li class="social-links-item"><a target="_blank" href="https://www.facebook.com/initlabkr/"><img style="width: 25px; margin-bottom: 5px;" src="..\sites\default\files\icons\icon-facebook-ru-dc.svg"></a></li>
+  </ul>  
+</div>
+
+<p>ООО «Инитлаб», Краснодар, Россия.
+<a class="goal__tel" href="tel:+78002222673">8 800 222-26-73</a><br>
+Drupal является зарегистрированной торговой маркой Dries Buytaert.</p>
+</div>
+      
+  </section>
+
+
+  </div>
+
+      </div>
+    </footer>
+  </div>
+
+  </div>
+
+    
+    <script type="application/json" data-drupal-selector="drupal-settings-json">{"path":{"baseUrl":"\/","scriptPath":null,"pathPrefix":"","currentPath":"node\/344","currentPathIsAdmin":false,"isFront":false,"currentLanguage":"ru"},"pluralDelimiter":"\u0003","suppressDeprecationErrors":true,"ajaxPageState":{"libraries":"antibot\/antibot.form,bootstrap\/popover,bootstrap\/theme,bootstrap\/tooltip,bootstrap_dc\/bootstrap-scripts,bootstrap_dc\/dc,bootstrap_dc\/global-styling,bootstrap_dc\/seo,colorbox\/default,colorbox_inline\/colorbox_inline,colorbox_load\/colorbox_load,filter\/drupal.filter,google_analytics\/google_analytics,ng_lightbox\/ng_lightbox,system\/base,views\/views.module","theme":"bootstrap_dc","theme_token":null},"ajaxTrustedUrl":{"https:\/\/drupal-coder.ru\/comment\/reply\/node\/344\/comment":true},"colorbox":{"opacity":"0.85","current":"{current} \u0438\u0437 {total}","previous":"\u00ab \u041f\u0440\u0435\u0434\u044b\u0434\u0443\u0449\u0438\u0439","next":"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0439 \u00bb","close":"Close","maxWidth":"98%","maxHeight":"98%","fixed":true,"mobiledetect":true,"mobiledevicewidth":"480px"},"google_analytics":{"account":"UA-87805467-1","trackOutbound":true,"trackMailto":true,"trackTel":true,"trackDownload":true,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip","trackColorbox":true},"bootstrap":{"forms_has_error_value_toggle":1,"modal_animation":1,"modal_backdrop":"true","modal_focus_input":1,"modal_keyboard":1,"modal_select_text":1,"modal_show":1,"modal_size":"","popover_enabled":1,"popover_animation":1,"popover_auto_close":1,"popover_container":"body","popover_content":"","popover_delay":"0","popover_html":0,"popover_placement":"right","popover_selector":"","popover_title":"","popover_trigger":"click","tooltip_enabled":1,"tooltip_animation":1,"tooltip_container":"body","tooltip_delay":"0","tooltip_html":0,"tooltip_placement":"auto left","tooltip_selector":"","tooltip_trigger":"hover"},"antibot":{"forms":{"comment-form":{"id":"comment-form","key":"5D-i6uDYb-gr3-4qQZFOE5ec3-2jdoq6QSz9J26Pt50"}}},"user":{"uid":0,"permissionsHash":"66bb25c0b665c533dd9436d0cd4e99532a723088208bff0a05f2bf113d3703ac"}}</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="..\sites\default\files\js\js_kFVTvKCxW3cWmdAcJABrE5Fa90cD_Go5IxgQw9oFgJ0.js"></script>
+<script src="..\sites\default\files\js\js_d5BC-2wlh3XH4S29GgaPGie7NxyWY0K1EhPg30LGzwA.js"></script>
+<script src="//cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+<script src="..\sites\default\files\js\js_CNCJCgJnATwdWHfgCEncmZchd6pVQciEiBxkoYS9btY.js"></script>
+<script src="..\sites\default\files\js\js_PZPdVr1rIFXjUagjykPULRTCC8T4ZfIghTqFAwKg6ZI.js"></script>
+
+  </body>
+</html>

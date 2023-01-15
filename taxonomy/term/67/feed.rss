@@ -1,0 +1,1013 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:og="http://ogp.me/ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:schema="http://schema.org/" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" version="2.0" xml:base="https://drupal-coder.ru/">
+  <channel>
+    <title>Drupal</title>
+    <link>https://drupal-coder.ru/</link>
+    <description/>
+    <language>ru</language>
+    
+    <item>
+  <title>Вышел Drupal 10: что нового и почему лучше начать миграцию на новую версию уже сейчас</title>
+  <link>https://drupal-coder.ru/blog/vyshel-drupal-10-chto-novogo-i-pochemu-luchshe-nachat-migraciyu-na-novuyu-versiyu-uzhe-seychas</link>
+  <description>
+&lt;span&gt;Вышел Drupal 10: что нового и почему лучше начать миграцию на новую версию уже сейчас&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/51" lang="" about="https://drupal-coder.ru/user/51" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Сергей Синица&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;пн, 12/19/2022 - 08:42&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;К новому году команда Drupal положила нам под ёлочку десятую версию с новыми технологиями и приятными переменами в скорости работы и безопасности. В этой небольшой статье мы заглянем в список инноваций и узнаем, чем они нас порадуют, а также расскажем, почему лучше задуматься о переезде на последнюю версию уже сейчас.&lt;/p&gt;
+
+&lt;h3&gt;Что изменилось в новой версии Drupal&lt;/h3&gt;
+
+&lt;p&gt;14 декабря 2022 года вышел Drupal 10 — последняя на текущий момент версия CMF (или CMS, многие до сих пор спорят) с открытым кодом, плод усилий тысяч разработчиков.&lt;/p&gt;
+
+&lt;h3&gt;Список обновлений в Drupal 10&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Интерфейс Olivero. &lt;/strong&gt;Olivero станет заменой теме оформления Bartik, которая была установлена по умолчанию на версиях 7, 8 и 9. Устаревший интерфейс создавал ложное впечатление о возможностях Drupal.&lt;/p&gt;
+
+&lt;p&gt;Более плавный, элегантный и современный интерфейс. Его основное преимущество — соответствие WCAG, руководству по доступности веб-контента для людей с ограниченными возможностями. Теперь создавать новые проекты на Drupal стало ещё удобнее.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Drupal 10" data-entity-type="file" data-entity-uuid="f04cf681-ddb2-47fa-9a06-b2690f14be7a" src="https://drupal-coder.ru/sites/default/files/inline-images/1_1.png" width="512" height="502" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Бэкенд от Claro. &lt;/strong&gt;Также заменит устаревшую тему Seven. Улучшенное юзабилити для работы с контентом: вкладки администратора перемещены по результатам исследований пользовательского опыта для лучшей доступности, улучшено редактирование с мобильных устройств. Любые подобные улучшение потенциально ускоряет работу с сайтом для модераторов и контент-менеджеров.&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Drupal 10" data-entity-type="file" data-entity-uuid="0904d0de-e1a2-41ac-8560-ffc29a62fa70" src="https://drupal-coder.ru/sites/default/files/inline-images/2_2.png" width="512" height="453" loading="lazy" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;CKEditor 5. &lt;/strong&gt;Обслуживание CKEditor 4 истекает в 2023 году. Этот модуль для работы с текстами служил более 10 лет, теперь его заменит более современный приемник. Причём, пятая версия теперь входит в ядро Drupal 10 и не требует отдельной установки.&lt;br /&gt;
+Обновления на радость контент-менеджерам: можно редактировать ссылки и изображения без дополнительных окон, прямо на месте, а при вставке текстов из Google Docs и Word CKEditor 5 удалит разметку из этих программ.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Современные компоненты JavaScript для замены некоторых применений jQuery. &lt;/strong&gt;Раньше в Drupal была встроена большая библиотека jQuery, которая занималась реализацией функций, не поддерживаемых в браузерах. Благодаря развитию технологии JavaScript растут возможности браузеров — они могут выполнять часть того, что раньше лежало на jQuery. Теперь от части этой библиотеки можно отказаться, что ускорит загрузку сайта и его работу.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Генератор тем Starterkit. &lt;/strong&gt;Создание новых сайтов стало ещё удобнее. Теперь при сборке темы на основе базовой версии можно не бояться проблем с обновлениями. После создания темы с помощью Starterkit можно отслеживать изменения в теме, чтобы включить в неё улучшения и исправления ошибок. это поможет сайту оставаться более стабильным.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Symfony 6 на замену Symfony 4 и PHP 8.1.&lt;/strong&gt; В Symfony 6 улучшены производительность и безопасность — устранены баги и исправлены уязвимости. Новая версия PHP 8.1 работает быстрее и долго будет оставаться безопасной.&lt;/p&gt;
+
+&lt;p&gt;Все эти обновления помогут упростить поддержку, повысить производительность сайта,  улучшить взаимодействие с платформой как для разработчиков, так и для нетехнических пользователей.&lt;/p&gt;
+
+&lt;h3&gt;Важный блок для тех, у кого сайт на Drupal 7&lt;/h3&gt;
+
+&lt;p&gt;Казалось бы, зачем владельцу iPhone 5 самая новая модель? Эта работает, звонит и выходит в интернет. Если не вдаваться в детали дизайна и ненужных функций, мы упрёмся в повышение производительности, лучшее железо и другие приятные возможности.&lt;/p&gt;
+
+&lt;p&gt;То же самое можно сказать о Drupal 7 — самая популярная версия с кодом десятилетней давности. В 2023 году прекращается поддержка этой версии Drupal, с неё нужно уходить как можно скорее. Если вернуться к аналогии с iPhone, просто представьте, что больше нельзя обновлять приложения на нём или ваши данные намного легче украсть отсюда, чем с новой модели, которую во всю обслуживают и улучшают.&lt;br /&gt;
+Если вам кажется, что изменилось не так много, нужно понимать, что сравнение идёт с  8 и 9 версиями, переходить с которых будет немного проще, а перемены не такими значительными. Но вот между 7 и 10 Drupal за 10 лет образовалась настоящая пропасть. Вот небольшой список того, что ещё можно получить, если совершить «прыжок» с 7 на 10: &lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;увеличится скорость открытия страниц за счет динамического кэширования (сбрасывается только кэш изменённых блоков и страниц, а не всего сайта;&lt;/li&gt;
+	&lt;li&gt;будет тратиться меньше времени разработчиков (денег) на перенос настроек dev/pro. Поддержка конфигураций позволит отслеживать все изменения настроек сайта в системе контроля версий GIT;&lt;/li&gt;
+	&lt;li&gt;станет доступна технология FaceBook Big Pipe, благодаря которой посетителям быстрее отображается контент: можно настроить отложенную загрузку блоков (например, рекламу) за один запрос к веб-серверу;&lt;/li&gt;
+	&lt;li&gt;упростится возможность реализации многоязычности и доступности контента для людей с ограниченными возможностями;&lt;/li&gt;
+	&lt;li&gt;станет доступна поддержка нового формата изображений webp для ускорения загрузки изображений и продвижения в поисковиках;&lt;/li&gt;
+	&lt;li&gt;расширятся возможности интеграции с другими системами импорта\экспорта контента за счет встроенных миграций и веб-сервисов. Например, можно предоставить партнерам  доступ для автоматического обновления контента на сайте, либо массово импортировать статьи, отдавать контент сайта в мобильное приложение или на партнерские сайты.&lt;/li&gt;
+	&lt;li&gt;добавится готовый модуль для создания мобильного приложения по технологии PWA &lt;/li&gt;
+	&lt;li&gt;будет больше готовых модулей интеграции, например рассылки Unisender, CRM Битрикс 24, Google AMP (аналог Яндекс.Турбо);&lt;/li&gt;
+	&lt;li&gt;будет поддерживаться современная семантическая верстка, разметка Schema.org, Microformats.org, Open Graph, JSON-LD для передачи информации поисковикам и увеличения переходов из поисковых систем;&lt;/li&gt;
+	&lt;li&gt;будет добавлена поддержка встроенных видео и интеграция с YouTube, Vimeo;&lt;/li&gt;
+	&lt;li&gt;появится возможность реализовать полнотекстовой поиск с поддержкой русской морфологии через интеграцию Apache Solr.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Довольно внушительный список, согласитесь. И всё это даже не покупка iPhone поновее. Это как поменять машину на ракету.&lt;/p&gt;
+
+&lt;h3&gt;Что будет со старыми версиями Drupal?&lt;/h3&gt;
+
+&lt;p&gt;Мы всё равно будем поддерживать более ранние версии Drupal. Но нужно понимать, что большинство новых фишек, обновлений и улучшений будут недоступны на тех версиях, поддержка который прекращена.&lt;/p&gt;
+
+&lt;p&gt;Если вам дорога безопасность вашего сайта и его стабильность, лучше задуматься о переезде уже сейчас.&lt;/p&gt;
+
+&lt;h3&gt;Зачем мигрировать на новую версию Drupal?&lt;/h3&gt;
+
+&lt;p&gt;Миграцию всегда можно провести с пользой. Когда проект развивается долго, на нём копится технический долг, мёртвый код и баги, от которых можно избавиться переходом на новую версию. Этот груз сказывается на качестве сайта и удорожает поддержку — приходится делать одно и то же, чинить в одном месте, пока ломается в другом. За один раз можно избавиться от того, что копилось десятки лет разработки и несколько поколений разработчиков разного уровня. &lt;/p&gt;
+
+&lt;p&gt;Помимо апгрейда, можно также провести, редизайн, который будет намного проще и дешевле внедрить при переезде на обновлённую версию Drupal.&lt;/p&gt;
+
+&lt;p&gt;В новом году подарите вашему проекту новую жизнь: до 31 января 2023 года, в честь перехода на Drupal 10, &lt;strong&gt;Initlab предлагает скидку 50% на &lt;a href="https://drupal-coder.ru/import-migrate-upgrade"&gt;аудит миграции&lt;/a&gt;&lt;/strong&gt;. А если вы до конца января 2023 года решите перевести сайт на новую версию Drupal, мы также сделаем &lt;a href="https://drupal-coder.ru/import-migrate-upgrade"&gt;&lt;strong&gt;скидку на работы по миграции по итогам аудита вашего сайта&lt;/strong&gt;&lt;/a&gt;.&lt;br /&gt;
+ &lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=351&amp;2=comment&amp;3=comment" token="pQxN14c32Pdp4lI1ELRLbG9_YTnZAjoC6qfy2YZcyV4"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;</description>
+  <pubDate>Mon, 19 Dec 2022 08:42:07 +0000</pubDate>
+    <dc:creator>Сергей Синица</dc:creator>
+    <guid isPermaLink="false">351 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>PWA: как превратить сайт на Drupal в приложение без особых затрат</title>
+  <link>https://drupal-coder.ru/blog/pwa-kak-prevratit-sayt-na-drupal-v-prilozhenie-bez-osobykh-zatrat</link>
+  <description>
+&lt;span&gt;PWA: как превратить сайт на Drupal в приложение без особых затрат&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/35" lang="" about="https://drupal-coder.ru/user/35" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Алексей Синица&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;чт, 05/05/2022 - 10:40&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2022-05/shutterstock_1818087794.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Хотите запустить своё мобильное приложение, но у вас пока нет огромного бюджета? Если у вас есть сайт на Drupal, мы можем предложить вам недорогую и достойную альтернативу полноценному приложению — PWA. Рассказываем о технологии, принципе её работы и преимуществах.&lt;/p&gt;
+
+&lt;h3&gt;Что такое PWA?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;PWA или прогрессивное мобильное приложение (Progressive Web Applications)&lt;/strong&gt; — технология, которая позволяет превратить сайт в подобие мобильного приложения. &lt;/p&gt;
+
+&lt;p&gt;PWA даёт привычный пользовательский опыт: на рабочем столе появляется иконка как у приложения, внутренний интерфейс похож на полноценное приложение, вкладки быстро открываются и грузятся. PWA может работать в автономном режиме и позволяет присылать push-уведомления.&lt;/p&gt;
+
+&lt;p&gt;PWA идеально подходит для запуска минимально жизнеспособного продукта, проверки спроса или других гипотез, а в разработке и поддержке обходится намного дешевле полноценного приложения.&lt;/p&gt;
+
+&lt;p&gt;PWA можно скачать как напрямую с сайта, так и разместить в Google Play.&lt;/p&gt;
+
+&lt;h3&gt;Какие задачи решает PWA?&lt;/h3&gt;
+
+&lt;p&gt;Многие пользователи уже привыкли к тому, что большую часть привычных действий можно делать в приложениях: читать новости, совершать покупки, заказывать еду и т.д. Сайты в браузере чаще всего в этом плане менее конкуренты. И если раньше основным возражением против такого расклада был большой размер приложений, то нынешние поколения смартфонов имеют достаточный объём памяти. А в случае с PWA этот аргумент тем более не работает, т.к. PWA весит несколько Мб против уже привычных нескольких сотен Мб. &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;PWA поможет:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;протестировать спрос или другую гипотезу;&lt;/li&gt;
+	&lt;li&gt;увеличить время нахождения на сайте;&lt;/li&gt;
+	&lt;li&gt;повысить узнаваемость бренда с помощью иконки сайта на стартовом экране телефона;&lt;/li&gt;
+	&lt;li&gt;увеличить конверсию благодаря push-уведомлениям со скидками/акциями.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;strong&gt;PWA отлично подходит для сайтов, на которые люди часто заходят: &lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;новостные порталы, &lt;/li&gt;
+	&lt;li&gt;блоги, &lt;/li&gt;
+	&lt;li&gt;сайты доставки, &lt;/li&gt;
+	&lt;li&gt;любые сайты с личными кабинетами.&lt;/li&gt;
+&lt;/ul&gt;&lt;h3&gt;Плюсы и минусы PWA&lt;/h3&gt;
+
+&lt;p&gt;Несколько плюсов мы уже перечислили, но на всякий случай повторим их в полном списке:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;позволяет сэкономить на разработке и поддержке;&lt;/li&gt;
+	&lt;li&gt;не требует много места на смартфоне  — всего несколько Мб;&lt;/li&gt;
+	&lt;li&gt;скачивается в один клик с сайта;&lt;/li&gt;
+	&lt;li&gt;может быть размещено в Google Play как настоящее приложение;&lt;/li&gt;
+	&lt;li&gt;не ломает пользовательский опыт: понятный и привычный интерфейс, как у приложения;&lt;/li&gt;
+	&lt;li&gt;загружается быстро, работает в офлайн-режиме благодаря кэшированию;&lt;/li&gt;
+	&lt;li&gt;повышает время нахождения на сайте и вероятность конверсии;&lt;/li&gt;
+	&lt;li&gt;позволяет сэкономить на повторном привлечении клиента без расходов на ретаргетинг и ремаркетинг.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Прямо на сайте можно разместить баннер или всплывающее окно с предложением добавить ваше приложение на главный экран. Так пользователь сможет видеть вас чаще и ему будет проще сделать заказ/совершить покупку/узнать новости и т.д.&lt;/p&gt;
+
+&lt;p&gt;В этом случае главное не спугнуть пользователя. Навязчивое приглашение установить сайт на телефон может оттолкнуть клиента:  он может посчитать это угрозой безопасности.&lt;/p&gt;
+
+&lt;p&gt;Правильнее будет расписать все преимущества от установки PWA и продемонстрировать его выгоду. В этом случае пользователь охотнее согласится скачать незнакомое ПО.&lt;/p&gt;
+
+&lt;p&gt;PWA также может помочь поисковому продвижению. Например, обратная ссылка на сайт в Google Play способна привлечь дополнительных посетителей. Также на ранжирование сайта влияют хорошие поведенческие показатели, которые видят поисковики благодаря PWA. Люди пользуются сайтом и совершают целевые действия? Значит им всё нравится и сайт можно продвигать на поиске. В обычной ситуации посетители могли бы просто уйти из-за низкой скорости, плохой оптимизации или другого фактора, но в PWA всё заточено под комфорт пользователя — как в приложении.&lt;/p&gt;
+
+&lt;p&gt;Минусов у PWA объективно меньше:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;некоторые устройства могут не поддерживать PWA из-за версии ОС;&lt;/li&gt;
+	&lt;li&gt;офлайн-доступ не безграничен — закэшировать вообще весь сайт возможности нет, но можно сделать специальную страницу с просьбой подключиться к интернету.&lt;/li&gt;
+&lt;/ul&gt;&lt;h3&gt;Кейс из нашей практики&lt;/h3&gt;
+
+&lt;p&gt;Несмотря на всю прелесть технологии, про PWA до сих пор знают немногие. И очень жаль, потому что мы можем с лёгкостью превратить любой сайт на Drupal в прогрессивное приложение.&lt;/p&gt;
+
+&lt;p&gt;Например, в качестве эксперимента мы превратили в PWA наш собственный сайт.&lt;/p&gt;
+
+&lt;p&gt;А для нашего клиента, интернет-магазина &lt;a href="https://www.pnevmoteh.ru/"&gt;PNEVMOTEH&lt;/a&gt;, мы сделали целых три приложения — на русском, казахском и белорусском языках. Клиент работает в разных странах и в качестве гипотезы хотел проверить, насколько востребована будет установка приложений в его нише, дабы не тратить огромные деньги на разработку. Взрывных показателей по установкам не ожидалось, т.к. никаких рекламных и других затрат на продвижение в проект не закладывалось.&lt;/p&gt;
+
+&lt;p&gt;В результате за всё время существования PWA PNEVMOTEH установили всего 73 раза. Из них 14 белорусских, 59 российских, а вот установок из Казахстана вообще не случилось.&lt;em&gt;&lt;strong&gt; &lt;/strong&gt;&lt;/em&gt;&lt;br /&gt;&lt;span style="font-size:11.5pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Arial"&gt;&lt;span style="color:#1d1c1d"&gt;&lt;span style="background-color:#ffffff"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;&lt;span style="border:none"&gt;&lt;span style="display:inline-block"&gt;&lt;span style="overflow:hidden"&gt;&lt;span style="width:494px"&gt;&lt;span style="height:360px"&gt;&lt;img height="360" src="https://lh4.googleusercontent.com/98QtzGxioRSbwJsy_qkLhLbIstgkd80x1MJFaOochjuCHY64T6f6wG9SVDizkSskhnR0Tq9VcAN92_VhXxplawMrqQKZPhNCMMLyL9DyOqxytnTonN3c84ngOkzYgN4RAH_baLWaPXPymiRsdg" width="494" /&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Статистика установок PWA приложения PNEVMOTEH в Google Play&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3&gt;Что нужно для того, чтобы заказать разработку PWA?&lt;/h3&gt;
+
+&lt;p&gt;Вам понадобится: сайт вашего бизнеса на Drupal и определённый бюджет. Размер последнего зависит от нескольких факторов:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Будет ли PWA размещаться в магазинах приложений.&lt;/strong&gt; Если в хотите, чтобы PWA можно было установить не только с вашего сайта, но и с Google Play, необходимо будет провести дополнительную работу по написанию определённого кода под Android.&lt;br /&gt;&lt;strong&gt;В каком состоянии мобильная версия сайта.&lt;/strong&gt; Насколько хорошо ваш сайт адаптирован под мобильные устройства? Как быстро он загружается и ничего ли там не едет за пределы экрана? Этот фактор влияет не только на стоимость, но и на скорость работы.&lt;br /&gt;&lt;strong&gt;Какое количество функционала планируется.&lt;/strong&gt; Например, push-уведомления о скидках и акциях нужно будет добавлять в систему. В рамках поддержки на это будет уходить определённое время разработчиков.&lt;/p&gt;
+
+&lt;p&gt;Разумеется, это лишь основные параметры. И даже с учётом любых других обстоятельств, это всё равно выгоднее, чем заказывать полновесную разработку мобильного приложения. Тем более если вы озадачиваетесь этим впервые.&lt;/p&gt;
+
+&lt;h3&gt;Стоимость разработки&lt;/h3&gt;
+
+&lt;p&gt;Мы несколько раз акцентировали внимание на том, что PWA в разработке гораздо дешевле. На прогрессивное приложение для PNEVMOTEH у нас ушло 15 часов. Сюда входила подготовка сайта + написание кода под Android для размещения на Google Play. Важная деталь: это заняло так мало времени, потому что сайт был уже оптимизирован и хорошо адаптирован под мобильные устройства.&lt;/p&gt;
+
+&lt;p&gt;Даже по ставке самого опытного нашего разработчика эти часы не обойдутся вам в миллион и более. А когда речь идёт о написании приложения с нуля, именно о таких суммах обычно идёт речь. &lt;/p&gt;
+
+&lt;p&gt;Если вас заинтересовала технология PWA и вы хотите своё приложение без лишних затрат, &lt;a href="https://drupal-coder.ru/support"&gt;обращайтесь к нам&lt;/a&gt;. Наши менеджеры ответят на любые ваши вопросы. &lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/podderzhka" hreflang="ru"&gt;Поддержка&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/prodvizenie-saitov" hreflang="ru"&gt;Продвижение сайтов&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=333&amp;2=comment&amp;3=comment" token="DSxFnKL4z2y7PlL4r1E6ULhcAZDrbJ1kU8A56cWc1tg"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;</description>
+  <pubDate>Thu, 05 May 2022 10:40:26 +0000</pubDate>
+    <dc:creator>Алексей Синица</dc:creator>
+    <guid isPermaLink="false">333 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>Интеграция Sendpulse с сайтом на Drupal</title>
+  <link>https://drupal-coder.ru/blog/integraciya-sendpulse-s-saytom-na-drupal</link>
+  <description>
+&lt;span&gt;Интеграция Sendpulse с сайтом на Drupal&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/35" lang="" about="https://drupal-coder.ru/user/35" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Алексей Синица&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;вт, 03/15/2022 - 11:26&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2022-03/Mar-Business_18.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;E-mail-рассылки помогают вернуть клиента на сайт, подтолкнуть его к повторной покупке или оповестить о скидках. Чтобы человек автоматически получали нужное письмо в нужный момент, необходимо интегрировать с сайтом сервис массовых рассылок. В этой статье мы расскажем вам об одном из таких сервисов, его возможностях и преимуществах.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;SendPulse&lt;/strong&gt; — это сервис, где можно создавать и распространять sms и web-рассылки, рассылки из мессенджеров и приложений, push-уведомления и чат-боты. SendPulse — это полноценный маркетинговый инструмент с подробной статистикой по множеству параметров.&lt;/p&gt;
+
+&lt;h3&gt;Какие задачи решает SendPulse&lt;/h3&gt;
+
+&lt;p&gt;Если мы будем говорить о каждой возможности/услуге сервиса отдельно, то статья займёт много вашего времени и превратится в совсем уж рекламную. Наша задача — рассказать о преимуществах сервиса в целом и что он может дать владельцам сайтов на Drupal.&lt;/p&gt;
+
+&lt;p&gt;Для удобства мы сосредоточимся на основной услуге от SendPulse — e-mail-рассылках. Остальные возможности сервиса вы можете изучить на их официальном сайте. Всё представленное можно интегрировать с сайтом на Drupal.&lt;/p&gt;
+
+&lt;h3&gt;Как e-mail-рассылки помогают увеличить конверсию на сайте&lt;/h3&gt;
+
+&lt;p&gt;Разные специалисты предлагают разную типологию e-mail рассылок. Мы для удобства остановимся на двух категориях: &lt;/p&gt;
+
+&lt;p&gt;Информационные рассылки. На сайте появилась новая статья, проходит акция, поступил товар, предстоит событие и т.д.&lt;br /&gt;
+Триггерные рассылки. Например, человек бросил корзину с товарами — ему приходит письмо с напоминанием об этом, скидкой или промокодом, которые могут подтолкнуть к покупке. &lt;/p&gt;
+
+&lt;p&gt;Ребята из SendPulse собирали статистику по триггерным письмам с брошенной корзиной. Как видите, процент открытий и кликов говорит сам за себя.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;span style="font-size:12pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#000000"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;&lt;span style="border:none"&gt;&lt;span style="display:inline-block"&gt;&lt;span style="overflow:hidden"&gt;&lt;span style="width:602px"&gt;&lt;span style="height:483px"&gt;&lt;img height="483" src="https://lh4.googleusercontent.com/rX9_6nMfuyubvDCh76byvEawc3HV0Q-md6rmKhlSaMgrfywWM2e66HnmYtHa8AiuTNCv46otb31E0xEIAQc6y5BkJllnNzRqcOpzpjgXv4esK949Yl4zJ0aaxeHY1qM1TK-syKWr" width="602" /&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Например, мы настраивали нашему клиенту рассылку по следующим событиям:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;после регистрации. Клиент зарегистрировался, но ничего не покупал. Отличный повод прислать приветственное письмо и предложить самые популярные товары, например; &lt;/li&gt;
+	&lt;li&gt;после совершения покупки. Когда заказ оформлен, на почту должна приходить информация о заказе. Это настолько привычная практика, что иначе уже и не представить. Можно настроить целую цепочку по статусу заказа &lt;/li&gt;
+	&lt;li&gt;при брошенной корзине, если через 30 минут заказ не был оформлен или завершён.&lt;/li&gt;
+&lt;/ul&gt;&lt;h3&gt;Можно ли настроить рассылку напрямую с сайта?&lt;/h3&gt;
+
+&lt;p&gt;У Drupal действительно есть возможность настраивать прямые рассылки. Человек оставляет почту на сайте и мы начинаем отправлять письма прямо с него.&lt;/p&gt;
+
+&lt;p&gt;Но у сервисов вроде SendPulse есть два неоспоримых преимущества:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1. Обход спам-фильтров.&lt;/strong&gt; Любой сервис справится с этой задачей лучше прямой рассылки.&lt;br /&gt;&lt;strong&gt;2. Сбор статистики.&lt;/strong&gt; Вы никогда не узнаете, сколько ваших писем дошли до адресатов, сколько из них были открыты и уж тем более сколько было совершено целевых действий. А значит никакого осознанного улучшения рассылок, в зависимости от их эффективности.&lt;/p&gt;
+
+&lt;h3&gt;Каким сайтам необходим SendPulse?&lt;/h3&gt;
+
+&lt;p&gt;Основной повод для любого бизнеса — желание повысить конверсию на сайте. Либо если нужно решить точечные проблемы, вроде той же брошенной корзины или ухода пользователей с сайта, если нужного товара нет в наличии.&lt;/p&gt;
+
+&lt;p&gt;Если вы хотите подключить SendPulse к сайту на Drupal, &lt;a href="https://drupal-coder.ru/support"&gt;обращайтесь к нам&lt;/a&gt;. &lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/integracii" hreflang="ru"&gt;интеграции&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/podderzhka" hreflang="ru"&gt;Поддержка&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=323&amp;2=comment&amp;3=comment" token="3gs1bfrFfs-DBDKxYwHn4fTDSiaaAQA3szo7OM5Ywg0"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/integraciya-sayta-drupal-8-s-crm-bitriks24" hreflang="ru"&gt;Интеграция сайта Drupal 8 с CRM Битрикс24&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/integraciya-platyozhnoy-sistemy-s-saytom-na-drupal" hreflang="ru"&gt;Интеграция платёжной системы с сайтом на Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Tue, 15 Mar 2022 11:26:01 +0000</pubDate>
+    <dc:creator>Алексей Синица</dc:creator>
+    <guid isPermaLink="false">323 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>Интеграция платёжной системы с сайтом на Drupal</title>
+  <link>https://drupal-coder.ru/blog/integraciya-platyozhnoy-sistemy-s-saytom-na-drupal</link>
+  <description>
+&lt;span&gt;Интеграция платёжной системы с сайтом на Drupal&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/35" lang="" about="https://drupal-coder.ru/user/35" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Алексей Синица&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;вс, 03/13/2022 - 09:41&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2022-03/business-online-shopping-and-sale-concept.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Чтобы получать от клиентов оплату за товары и услуги, нужно подключить на сайт платёжную систему. Одноразовые платежи за товары или подписка на информационный сервис — в обоих случаях мы говорим об одинаковом решении. Если вашему сайту на Drupal нужна платёжная система, ознакомьтесь с нашей статьёй.&lt;/p&gt;
+
+&lt;h3&gt;Виды платформ для оплаты и чем они отличаются&lt;/h3&gt;
+
+&lt;p&gt;Если пришло время внедрить на ваш Drupal-сайт платёжную систему, вам предстоит выбрать оптимальный для вашего случая вариант. Платёжные системы отличаются способами сбора комиссии, процентами платежей, наличием поддержки и многими другими нюансами. Мы опишем только основные их отличия:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;интернет-эквайринг банков — банк помогает посетителю сайта совершить платёж через интернет: проверяет данные карты, списывает у клиента средства и переводит их на счёт продавца (Сбербанк, Альфа-Банк, Тинькофф и др.);&lt;/li&gt;
+	&lt;li&gt;электронные кошельки — организация заводит расчётный счёт, куда поступают средства с электронного кошелька клиента (ЮMoney, Webmoney, PayPal);&lt;/li&gt;
+	&lt;li&gt;платёжные агрегаторы — подключают на сайт сразу несколько способов оплаты: картой, электронной валютой, наличными при получении и т. п. (PayAnyWay, Fondy, Ю.Касса, CloudPayments и т.д.)&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Плюсы и минусы всех этих способов мы расписывать не будем. К тому же, выбор зависит только от задач вашего бизнеса, стадии его развития, тарифов, уровня службы поддержки платёжных систем и т.д. &lt;/p&gt;
+
+&lt;h3&gt;Разовая оплата, подписки и пожертвования&lt;/h3&gt;
+
+&lt;p&gt;Drupal позволяет интегрировать любую платёжную систему для любых целей:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;подписка на сервисы доступа к контенту на любой период времени с автоматическим списанием в нужную дату;&lt;/li&gt;
+	&lt;li&gt;регулярные и единоразовые пожертвования;&lt;/li&gt;
+	&lt;li&gt;оплата покупок. &lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;&lt;br /&gt;&lt;span style="font-size:11pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#000000"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:italic"&gt;&lt;span style="text-decoration:none"&gt;&lt;span style="border:none"&gt;&lt;span style="display:inline-block"&gt;&lt;span style="overflow:hidden"&gt;&lt;span style="width:602px"&gt;&lt;span style="height:273px"&gt;&lt;img height="273" src="https://lh5.googleusercontent.com/th5FlATYTQa6pbTTQCRWEmufQdN8zx4qxc1Iv3W5dxvlHyDp8oBzKNAPRLYbSBzPS_rjsyKpSdH8JvczG2-XuM7xEtKQUGgH-lZM2dAwXKQoIbEuDC7juG_iGlu_rNDMyI-mO9zZ" width="602" /&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Например, у нашего клиента — швейцарского новостного портала на русском языке &lt;a href="http://nashagazeta.ch/"&gt;nashagazeta.ch&lt;/a&gt; подключена платёжная система PayPal с возможностью подписки на полгода и год&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3&gt;Нюансы законодательства и пользовательского опыта&lt;/h3&gt;
+
+&lt;p&gt;Для клиента расстаться с данными карты большой стресс, особенно если он на сайте впервые. Поэтому сама форма оплаты должна быть удобной и выглядеть надёжно, чтобы вызывать доверие. Мы продумываем архитектуру страницы так, чтобы форма оплаты адаптировалась под любые устройства, особенно под смартфоны на которые сейчас приходится более 60% общего интернет-трафика. Форму оплаты можно разместить внутри сайта или настроить её открытие в новой вкладке, с переходом на сайт платёжной системы. Это зависит от особенностей платформы и пожеланий владельца сайта.&lt;/p&gt;
+
+&lt;p&gt;Обязательно обратите внимание на требования законодательства и 54-ФЗ: важно настроить фискализацию, отправку чеков клиентам и в ФНС. Все эти требования могут быть учтены платёжной системой, а могут потребовать дополнительной настройки. Мы занимаемся настройкой этих параметров и также можем помочь с соблюдением необходимых требований.&lt;/p&gt;
+
+&lt;h3&gt;Сколько занимает внедрение?&lt;/h3&gt;
+
+&lt;p&gt;По опыту прошлых проектов, в среднем на внедрение платёжной системы уходит 40 часов наших разработчиков. Вопрос в том, что для некоторых систем уже есть типовые решения, для других понадобится индивидуальная разработка.&lt;/p&gt;
+
+&lt;p&gt;После внедрения мы проводим полное тестирование всех шагов оплаты, чтобы ваш клиент сразу попал в дружественную среду без багов и ошибок.&lt;/p&gt;
+
+&lt;p&gt;Если вы хотите подключить платёжную систему к сайту на Drupal, &lt;a href="https://drupal-coder.ru/support"&gt;обращайтесь к нам&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/integracii" hreflang="ru"&gt;интеграции&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/podderzhka" hreflang="ru"&gt;Поддержка&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=321&amp;2=comment&amp;3=comment" token="4A3C-vM4cdC_14MqYTB1IonrPYlaG3HAuxsfWRiZcqE"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/integraciya-sayta-drupal-8-s-crm-bitriks24" hreflang="ru"&gt;Интеграция сайта Drupal 8 с CRM Битрикс24&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/integraciya-sendpulse-s-saytom-na-drupal" hreflang="ru"&gt;Интеграция Sendpulse с сайтом на Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Sun, 13 Mar 2022 09:41:09 +0000</pubDate>
+    <dc:creator>Алексей Синица</dc:creator>
+    <guid isPermaLink="false">321 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>Технология Google AMP для сайтов на Drupal: быстрая загрузка страниц сайта с мобильного телефона</title>
+  <link>https://drupal-coder.ru/blog/tekhnologiya-google-amp-dlya-saytov-na-drupal-bystraya-zagruzka-stranic-sayta-s-mobilnogo</link>
+  <description>
+&lt;span&gt;Технология Google AMP для сайтов на Drupal: быстрая загрузка страниц сайта с мобильного телефона&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/51" lang="" about="https://drupal-coder.ru/user/51" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Сергей Синица&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;чт, 03/10/2022 - 11:54&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2022-03/2809413.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Более 60% интернет-трафика приходится на мобильные устройства. Пользователь условного смартфона ждёт, что страница загрузится меньше чем за три секунды, иначе он просто закроет вкладку и уйдёт к вашим конкурентам.&lt;/p&gt;
+
+&lt;p&gt;В этой статье мы расскажем вам о технологии Google, которая решает сразу две задачи: увеличивает скорость загрузки мобильных страниц и продвигает такие страницы на поиске.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;AMP (Accelerated Mobile Pages)&lt;/strong&gt; — это технология ускоренных мобильных страниц от Google. Она позволяет отображать страницы сайта на мобильных устройствах с максимальной скоростью.&lt;/p&gt;
+
+&lt;p&gt;Медленная загрузка негативно влияет на пользовательский опыт. А Google как раз заинтересован в том, чтобы юзерам было комфортно в поисковике, даже с медленным интернетом.&lt;/p&gt;
+
+&lt;p&gt;Если кратко, то технология работает следующим образом: команда поддержки/разработчик/владелец сайта подготавливает нужные страницы по требованиям AMP, а Google форматирует каждую из них в облегчённую версию, сохраняет в собственный кэш и отдаёт пользователю.&lt;/p&gt;
+
+&lt;p&gt;Наш разработчик &lt;a href="https://drupal-coder.ru/blog/nastroyka-amp-dlya-drupal-8-i-9"&gt;писал инструкцию&lt;/a&gt; по настройке AMP на Drupal, в статье по ссылке можно посмотреть на поэтапное внедрение этой технологии.&lt;/p&gt;
+
+&lt;h3&gt;Зачем подключать AMP?&lt;/h3&gt;
+
+&lt;p&gt;Google учитывает скорость загрузки страниц при ранжировании сайтов на поиске. Вы хотите, чтобы ваш сайт оказался в топе выдачи? Вопрос риторический :)&lt;/p&gt;
+
+&lt;h3&gt;Кейс из нашей практики&lt;/h3&gt;
+
+&lt;p&gt;Если загуглить с телефона "stout stw 0002 50 л", первой после рекламного блока будет страница наших клиентов — &lt;a href="https://www.stout.ru/"&gt;stout.ru&lt;/a&gt;. Эта страница откроется моментально благодаря AMP-оптимизации. &lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;
+&lt;video autoplay="" height="480" loop="" preload="metadata" src="https://drupal-coder.ru/sites/default/files/blog/animations/animation.gif.mp4" width="640"&gt; &lt;/video&gt;&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Загрузка происходит очень быстро. Все элементы на странице уже «прогреты» и подгружаются моментально&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Google загружает страницу из своего кэша → она мгновенно открывается даже с медленным интернетом → человек получает информацию быстро → Google доволен и поднимает страницу в поисковой выдаче.&lt;/p&gt;
+
+&lt;h3&gt;Каким сайтам нужно подключить AMP?&lt;/h3&gt;
+
+&lt;p&gt;Эта технология принесёт пользу любому сайту, в особенности интернет-магазинам, производителям и дилерам с широким ассортиментом продукции, сайтам СМИ и т.д.&lt;br /&gt;
+Сколько занимает внедрение AMP?&lt;/p&gt;
+
+&lt;p&gt;От 35 часов, по опыту прошлых проектов. Зависит от сложности сайта и количества страниц на нём. &lt;/p&gt;
+
+&lt;h3&gt;Яндекс.Турбо&lt;/h3&gt;
+
+&lt;p&gt;По схожей схеме работает Яндекс.Турбо. Это такая же технология по созданию лёгких версий веб-страниц, которые быстро открываются на мобильных устройствах. Помимо этого, Яндекс.Турбо помогает ускорить загрузку сайтов в Яндекс.Браузере.&lt;/p&gt;
+
+&lt;p&gt;Мы одинаково успешно внедряем обе технологии на любые Drupal-сайты.&lt;/p&gt;
+
+&lt;p&gt;Если вас заинтересовала технология AMP и вы хотите оптимизировать свой сайт под мобильные устройства, &lt;a href="https://drupal-coder.ru/support"&gt;свяжитесь с нами&lt;/a&gt;. Менеджеры Initlab ответят на любые ваши вопросы.&lt;br /&gt;
+ &lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/prodvizenie-saitov" hreflang="ru"&gt;Продвижение сайтов&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=318&amp;2=comment&amp;3=comment" token="31bwrzZBZPoa3-6UMywKNKKTKGEwRkoFiMg0HiBhFeo"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/nash-web-razrabotchik-napisal-statyu-instrukciyu-po-nastroyke-amp-dlya-drupal-8-i-9" hreflang="ru"&gt;Наш web-разработчик написал статью-инструкцию по настройке AMP для Drupal 8 и 9 💪&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Thu, 10 Mar 2022 11:54:29 +0000</pubDate>
+    <dc:creator>Сергей Синица</dc:creator>
+    <guid isPermaLink="false">318 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>Улучшение параметров Core Web Vitals на Drupal-сайтах</title>
+  <link>https://drupal-coder.ru/blog/uluchshenie-parametrov-core-web-vitals-na-drupal-saytakh</link>
+  <description>
+&lt;span&gt;Улучшение параметров Core Web Vitals на Drupal-сайтах&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/51" lang="" about="https://drupal-coder.ru/user/51" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Сергей Синица&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;ср, 03/02/2022 - 14:45&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2022-03/2225966.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Google ранжирует страницы сайтов с учётом их удобства для пользователей — чем лучше страница, чем выше вы в поисковой выдаче. Для оценки качества страниц Google использует Core Web Vitals — систему параметров, которые показывают уровень комфорта взаимодействия пользователя с web-ресурсом. Мы расскажем вам о том, из чего складывается оценка качества страниц сайта и как Initlab может помочь улучшить все показатели, за которыми следит Google.&lt;/p&gt;
+
+&lt;h3&gt;&lt;strong&gt;Основные показатели Core Web Vitals&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;Отрисовка самого крупного контента (LCP — Largest Contentful Paint) — как долго идёт отрисовки самого крупного элемента страницы:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li aria-level="1" style="list-style-type:disc"&gt;&lt;span style="font-size:12pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#3c763d"&gt;&lt;span style="background-color:#ffffff"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;до 2,5 сек — хорошо;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+	&lt;li aria-level="1" style="list-style-type:disc"&gt;&lt;span style="font-size:12pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#8a6d3b"&gt;&lt;span style="background-color:#ffffff"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;от 2,5 сек до 4.0 — требуются улучшения;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+	&lt;li aria-level="1" style="list-style-type:disc"&gt;&lt;span style="font-size:12pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#a94442"&gt;&lt;span style="background-color:#ffffff"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;от 4.0 сек — плохо.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p style="list-style-type:disc"&gt;&lt;br /&gt;
+ &lt;/p&gt;
+&lt;img alt="LCP_ru" data-entity-type="file" data-entity-uuid="172f7878-b511-4d3c-bd4a-f28b8b7bf839" src="https://drupal-coder.ru/sites/default/files/inline-images/LCP_ru.png" class="align-center" width="600" height="164" loading="lazy" /&gt;&lt;p style="list-style-type:disc"&gt;&lt;span style="font-size:12pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#333333"&gt;&lt;span style="background-color:#ffffff"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;&lt;span style="border:none"&gt;&lt;span style="display:inline-block"&gt;&lt;span style="overflow:hidden"&gt;&lt;span style="width:600px"&gt;&lt;span style="height:164px"&gt;Совокупное смещение макета (CLS — Cumulative Layout Shift) — как быстро страница становится стабильной. Вы зашли на сайт с телефона, нажали на кнопку, а в это время сайт прогрузился, картинка сдвинулась и оказалось, что вы кликнули на рекламный баннер. Значения:&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;ul&gt;&lt;li aria-level="1" style="list-style-type:disc"&gt;&lt;span style="font-size:12pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#3c763d"&gt;&lt;span style="background-color:#ffffff"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;до 0.1 — хорошо;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+	&lt;li aria-level="1" style="list-style-type:disc"&gt;&lt;span style="font-size:12pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#8a6d3b"&gt;&lt;span style="background-color:#ffffff"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;от 0.1 до 0.25 — требуются улучшения;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+	&lt;li aria-level="1" style="list-style-type:disc"&gt;&lt;span style="font-size:12pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#a94442"&gt;&lt;span style="background-color:#ffffff"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;от 0.25 — плохо.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p style="list-style-type:disc"&gt;&lt;br /&gt;
+ &lt;/p&gt;
+&lt;img alt="CLS_ru" data-entity-type="file" data-entity-uuid="1180d61e-a88d-4453-966f-9e3438a978c5" src="https://drupal-coder.ru/sites/default/files/inline-images/CLS_ru.png" class="align-center" width="600" height="166" loading="lazy" /&gt;&lt;p style="list-style-type:disc"&gt;&lt;br /&gt;&lt;span style="font-size:12pt; font-variant:normal; white-space:pre-wrap"&gt;&lt;span style="font-family:Montserrat,sans-serif"&gt;&lt;span style="color:#333333"&gt;&lt;span style="font-weight:400"&gt;&lt;span style="font-style:normal"&gt;&lt;span style="text-decoration:none"&gt;На самом деле, метрик куда больше. Они постоянно меняются, поэтому за их показателями нужно постоянно следить, чтобы скорость сайта не проседала.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p style="list-style-type:disc"&gt;&lt;br /&gt;
+ &lt;/p&gt;
+&lt;img alt="scores_ru" data-entity-type="file" data-entity-uuid="b8edc9db-1431-4dd5-89ec-965126670cef" src="https://drupal-coder.ru/sites/default/files/inline-images/%D0%BF%D0%BE%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D0%B8_ru.png" class="align-center" width="600" height="225" loading="lazy" /&gt;&lt;h3 style="list-style-type: disc;"&gt;&lt;strong&gt;Зачем следить за этими показателями?&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p style="list-style-type:disc"&gt;Всё просто: если ваш сайт плох с точки зрения Core Web Vitals, то Google не захочет показывать его пользователям в первых рядах. Их задача — уменьшить в поисковой выдаче количество сайтов, где пользователи получат негативный опыт и увеличить количество тех, которые дадут опыт качественного взаимодействия. Соответственно, хорошему сайту прямая дорожка в ТОП.&lt;/p&gt;
+
+&lt;h3 style="list-style-type: disc;"&gt;&lt;strong&gt;Кейс из нашей практики&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p style="list-style-type:disc"&gt;Например: наш клиент &lt;a href="https://scamatic.ru/"&gt;scamatic.ru&lt;/a&gt;, для которого мы проводили работу по оптимизации метрик Core Web Vitals. Вот такая производительность у мобильной версии сайта клиента:&lt;/p&gt;
+
+&lt;p style="list-style-type:disc"&gt;&lt;br /&gt;
+ &lt;/p&gt;
+&lt;img alt="mob_scamatic" data-entity-type="file" data-entity-uuid="d118a618-a09b-4a71-b5bf-a823e331b509" src="https://drupal-coder.ru/sites/default/files/inline-images/%D0%BF%D0%BE%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D0%B82_ru.png" class="align-center" width="600" height="272" loading="lazy" /&gt;&lt;p style="list-style-type:disc"&gt;&lt;br /&gt;
+И такая на десктопной:&lt;/p&gt;
+
+&lt;p style="list-style-type:disc"&gt;&lt;br /&gt;
+ &lt;/p&gt;
+&lt;img alt="desctop_scamatic" data-entity-type="file" data-entity-uuid="9e39d3b2-9430-44da-ad63-eb6123655cb7" src="https://drupal-coder.ru/sites/default/files/inline-images/%D0%BF%D0%BE%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D0%B5%D0%BB%D0%B83_ru.png" class="align-center" width="600" height="272" loading="lazy" /&gt;&lt;p style="list-style-type:disc"&gt;А ещё на PageSpeed Insights можно отследить количество успешных изменений на сайте, которые повысили скорость загрузки сайта и улучшили показатели Core Web Vitals.&lt;/p&gt;
+
+&lt;p style="list-style-type:disc"&gt;&lt;br /&gt;
+ &lt;/p&gt;
+&lt;img alt="audit" data-entity-type="file" data-entity-uuid="c5d2a1f3-47ab-416d-ba20-205350b8177a" src="https://drupal-coder.ru/sites/default/files/inline-images/%D0%B0%D1%83%D0%B4%D0%B8%D1%82_ru.png" class="align-center" width="600" height="235" loading="lazy" /&gt;&lt;h3 style="list-style-type: disc;"&gt;&lt;strong&gt;Этапы работы над увеличением скорости страниц&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;У Drupal есть все необходимые модули для соблюдения всех требований поискового алгоритма.&lt;/p&gt;
+
+&lt;p&gt;Для начала мы проводим аудит. Google рекомендует начать с проверки всех страниц сайта, чтобы определить, какие из них можно улучшить. Затем мы изучаем отчёт об основных интернет-показателях, который содержит общие сведения о состоянии сайта и обнаруженных на нём проблемах.&lt;/p&gt;
+
+&lt;p&gt;Если показатели Core Web Vitals далеки от идеальных, мы решаем это при помощи стандартных инструментов Drupal, например:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;встроенное кеширование Drupal: Internal Dynamic Page Cache, Internal Page Cache. Для большинства небольших проектов будет достаточно включить модуль Internal Page Cache, чтобы back-end отдавал данные с более чем достаточной скоростью. Значения Core Web Vitals будут в порядке, если на фронтэнде нет серьезных проблем;&lt;/li&gt;
+	&lt;li&gt;lazy load «ленивая загрузка»: поможет, если данные динамичны и их нельзя кешировать, Например, данные корзины пользователя в интернет-магазине;&lt;/li&gt;
+	&lt;li&gt;модуль Warmer: позволяет производить разогрев кэша с использованием очередей, если инвалидация кеша происходит часто или в больших объёмах&lt;/li&gt;
+	&lt;li&gt;модуль BigPipe: ускоряет время доставки страницы, отправляя неизменяемые части страницы в браузер немедленно, одновременно визуализируя динамические части по мере их подготовки. BigPipe автоматически определяет и отделяет статические (и обычно кэшированные) части страницы — например, основной контент и изображения — от динамических, не кэшируемых, персонализированных элементов, например, рекомендаций или, например, содержимого корзины покупок.&lt;/li&gt;
+&lt;/ul&gt;&lt;h3&gt;&lt;strong&gt;Каким сайтам нужно улучшать параметры Core Web Vitals?&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p style="list-style-type:disc"&gt;Абсолютно всем, которые хотят оказаться в топы поисковой выдачи. Это будет полезно и интернет-магазинам, и информационным сайтам на любых языках.&lt;/p&gt;
+
+&lt;h3 style="list-style-type: disc;"&gt;&lt;strong&gt;Если увеличить скорость загрузки страниц, поисковые позиции сайта улучшатся?&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;Да, но не кардинально. Улучшение показателей Core Web Vitals входит в SEO-продвижение от Initlab, а значит это лишь малая часть работы над поисковой оптимизацией.&lt;/p&gt;
+
+&lt;p&gt;Но «малая» не равно «незначительная». Это важный параметр, над которым мы будем работать в рамках наших услуг.&lt;/p&gt;
+
+&lt;p&gt;Если вы хотите увеличить скорость загрузки вашего сайта, &lt;a href="https://drupal-coder.ru/drupal-seo"&gt;обращайтесь к нам&lt;/a&gt;. Менеджеры Initlab ответят на любые ваши вопросы.&lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/seo" hreflang="ru"&gt;SEO&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/prodvizenie-saitov" hreflang="ru"&gt;Продвижение сайтов&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=315&amp;2=comment&amp;3=comment" token="oeRqenhOwgTD1HBL9Z32Y_legSc19PvhYaf2Qf-8cnI"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;</description>
+  <pubDate>Wed, 02 Mar 2022 14:45:59 +0000</pubDate>
+    <dc:creator>Сергей Синица</dc:creator>
+    <guid isPermaLink="false">315 at https://drupal-coder.ru</guid>
+    </item>
+<item>
+  <title>Небольшой урожай с Рейтинга Рунета 2021 🎉</title>
+  <link>https://drupal-coder.ru/blog/nebolshoy-urozhay-s-reytinga-runeta-2021</link>
+  <description>
+&lt;span&gt;Небольшой урожай с Рейтинга Рунета 2021 🎉&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/51" lang="" about="https://drupal-coder.ru/user/51" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Сергей Синица&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;вт, 02/22/2022 - 09:58&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Победы —это повод для радости. Всё остальное — мотивация для роста и улучшений. И хотя войти в десятку или тройку лучших для нас тоже почётно, азарт занять лидирующие позиции куда сильнее.&lt;/p&gt;
+
+&lt;p&gt;Итак, за прошлый год мы заняли:&lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;1-е место как разработчики сайтов на Drupal&lt;/li&gt;
+&lt;li&gt;1-е место по поддержке и развитию сайтов на Drupal&lt;/li&gt;
+&lt;li&gt;2-е место в рейтинге разработчиков сайтов в г. Краснодаре&lt;/li&gt;
+&lt;li&gt;3-е место по разработке и продвижению сайтов в г. Краснодаре&lt;/li&gt;
+&lt;li&gt;7-е места в категориях «SEO-компании в г. Краснодаре» и «разработчики
+интернет-магазинов среднего ценового сегмента»&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;В очередной раз благодарим команду за наш общий успех.&lt;/p&gt;
+
+&lt;p&gt;Drupal — это мы 💪&lt;/p&gt;
+
+&lt;div class="row"&gt;
+&lt;div class="col-md-2 col-xs-6"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/runet_results/1.jpg" /&gt;&lt;/div&gt;
+&lt;div class="col-md-2 col-xs-6"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/runet_results/2.jpg" /&gt;&lt;/div&gt;
+&lt;div class="col-md-2 col-xs-6"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/runet_results/3.jpg" /&gt;&lt;/div&gt;
+&lt;div class="col-md-2 col-xs-6"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/runet_results/4.jpg" /&gt;&lt;/div&gt;
+&lt;div class="col-md-2 col-xs-6"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/runet_results/5.jpg" /&gt;&lt;/div&gt;
+&lt;div class="col-md-2 col-xs-6"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/runet_results/Диплом ИМ_page-0001.jpg" /&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/prodvizenie-saitov" hreflang="ru"&gt;Продвижение сайтов&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=314&amp;2=comment&amp;3=comment" token="_3Df-Y3aJWZ2TUjZAPPHB5UFmX9gnwBoDx58uxqrCNc"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/initlab-top-1-komanda-po-drupal-v-rossii" hreflang="ru"&gt;Initlab — ТОП-1 команда по Drupal в России!&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/initlab-na-konferencii-camp-ii" hreflang="ru"&gt;Initlab на конференции A-Camp II&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/startoval-initlab-ping-pong-cup-2016" hreflang="ru"&gt;Стартовал Initlab Ping Pong Cup 2016&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Tue, 22 Feb 2022 09:58:16 +0000</pubDate>
+    <dc:creator>Сергей Синица</dc:creator>
+    <guid isPermaLink="false">314 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/nebolshoy-urozhay-s-reytinga-runeta-2021#comments</comments>
+    </item>
+<item>
+  <title>Мой доступный всем секретный Drupal-модуль для улучшения SEO установили более тысячи раз</title>
+  <link>https://drupal-coder.ru/blog/moy-dostupnyy-vsem-sekretnyy-drupal-modul-dlya-uluchsheniya-seo-ustanovili-bolee-tysyachi-raz</link>
+  <description>
+&lt;span&gt;Мой доступный всем секретный Drupal-модуль для улучшения SEO установили более тысячи раз&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/42" lang="" about="https://drupal-coder.ru/user/42" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Андрей Тымчук&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;чт, 02/03/2022 - 16:13&lt;/span&gt;
+
+            &lt;div class="field field--name-field-blog-img field--type-image field--label-hidden field--item"&gt;/sites/default/files/2022-02/Multi-language.jpg&lt;/div&gt;
+      &lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt; Мой drupal-модуль установили более тысячи раз 🎉&lt;/p&gt; 
+
+&lt;p&gt;А это значит, что я помог тысяче сайтов улучшить ситуацию с SEO и отправить пользователей на нужную страницу.&lt;/p&gt; 
+
+&lt;p&gt;Модуль разработан для мультиязычных сайтов. Он даёт возможность настроить редирект с непереведённой страницы на страницу с оригинальным текстом на первоначальном языке.&lt;/p&gt;
+
+&lt;p&gt;Например, у вас на сайте новость на английском языке. Переводить на русский вы её не стали, потому что эта информация не нужна вашим русскоговорящим клиентам. Но сама страница будет доступна при переключении языковой версии — интерфейс переведётся, а сама новость нет. Такая страница считается дубликатом, вредит SEO-продвижению сайта и ломает UX — пользователь может посчитать, что на сайте неисправна функция перевода.&lt;/p&gt;
+
+&lt;p&gt;Мой модуль от подобных проблем избавляет. Поисковик, получив редирект, просто не проиндексирует страницу-дубликат без перевода. А если пользователь всё-таки окажется на непереведённой странице, то его отправит на язык оригинала и по интерфейсу будет понятно, что новость/статья/услуга не для его региона.&lt;/p&gt; 
+
+&lt;p&gt;Мы описали общую схему работы, и если вы разработчик, то узнать детали и скачать для установки модуль можно 
+&lt;a href="https://www.drupal.org/project/content_translation_redirect" target="_blank"&gt;здесь&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/seo" hreflang="ru"&gt;SEO&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/prodvizenie-saitov" hreflang="ru"&gt;Продвижение сайтов&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=300&amp;2=comment&amp;3=comment" token="010dPsm-DdBKGjUYFZkXmYBCTUy3W_76IA_L7ReUE6o"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/kak-my-obuchaem-seo-i-delaem-poiskovuyu-optimizaciyu-dlya-drupal-saytov" hreflang="ru"&gt;Как мы обучаем SEO и делаем поисковую оптимизацию для Drupal-сайтов&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/povysheniya-trafika-ne-predel-kak-my-uluchshali-sayt-klienta-posle-uspeshnoy-seo-optimizacii" hreflang="ru"&gt;Повышения трафика — не предел: как мы улучшали сайт клиента после успешной SEO-оптимизации&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/seo-prodvizhenie-internet-magazinov-na-drupal-sozdali-modul-kotoryy-prevraschaet-svoystva" hreflang="ru"&gt;SEO-продвижение интернет-магазинов на Drupal: создали модуль, который превращает свойства товаров в осмысленные заголовки&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Thu, 03 Feb 2022 16:13:23 +0000</pubDate>
+    <dc:creator>Андрей Тымчук</dc:creator>
+    <guid isPermaLink="false">300 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/moy-dostupnyy-vsem-sekretnyy-drupal-modul-dlya-uluchsheniya-seo-ustanovili-bolee-tysyachi-raz#comments</comments>
+    </item>
+<item>
+  <title>Вставка блока в текстовое поле</title>
+  <link>https://drupal-coder.ru/blog/vstavka-bloka-v-tekstovoe-pole</link>
+  <description>
+&lt;span&gt;Вставка блока в текстовое поле&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/59" lang="" about="https://drupal-coder.ru/user/59" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Александр Долженков&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;пт, 01/28/2022 - 19:05&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;В этой статье мы расскажем, как вывести любой блок с помощью подстановки токена в текстовое поле. В итоге у нас получится готовый модуль для Drupal 8-9.&lt;/p&gt;
+
+&lt;h4&gt;Создание модуля&lt;/h4&gt;
+
+&lt;p&gt;Создадим директорию для модуля и назовем её, например: insert_block_token.&lt;/p&gt;
+
+&lt;p&gt;Добавим файл конфигурации модулю insert_block_token.info.yml и добавим в него конфигурации.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;name: Insert Block Token
+type: module
+description: "Inserts the contents of a block into the text field using token."
+package: custom
+core_version_requirement: ^8 || ^9
+
+dependencies:
+  - drupal:block
+  - drupal:filter
+
+version: '8.x-1.0'
+project: 'insert_block_token'&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Для правильной работы нам потребуется сделать 2 зависимости от блока block и filter. Эти блоки являются частью ядра Drupal.&lt;/p&gt;
+
+&lt;p&gt;Название и описание можно использовать на ваш выбор.&lt;/p&gt;
+
+&lt;p&gt;Теперь нам потребуется файл с кодом модуля insert_block_token.module.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;/**
+* Implements hook_help().
+*/
+
+function insert_block_token_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#insert_block_token':
+      return t('&lt;p--&gt;Use special token to insert the contents of a block into a text field.&lt;/p--&gt;');
+  }
+} &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Вся работа модуля будет реализована в плагине для текстовых фильтров, поэтому в insert_block_token.module мы добавляем только справочную информацию.&lt;/p&gt;
+
+&lt;h4&gt;Создание фильтра&lt;/h4&gt;
+
+&lt;p&gt;Создадим плагин для фильтра, соблюдая правила структуры директорий src/Plugin/Filter/. В директорию Filter добавляем файл InsertBlockTokenFilter.php. Имя файла состоит из названия модуля в CamelCase и Filter &lt;НазваниеМодуля&gt;Filter.php. Так как это стандартный тип плагина, подключать или указывать не нужно — Drupal автоматически подключит его сразу после включения модуля.&lt;/p&gt;
+
+&lt;p&gt;Определим пространство имен и дополнительные классы в нашем фильтре.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;namespace Drupal\insert_block_token\Plugin\Filter;
+ 
+use Drupal\Core\Url;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\filter\Plugin\FilterBase;
+use Drupal\filter\FilterProcessResult;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;ul&gt;&lt;li&gt;Url — класс ссылки;&lt;/li&gt;
+	&lt;li&gt;FormStateInterface — интерфейс для $form_state;&lt;/li&gt;
+	&lt;li&gt;FilterBase — класс фильтра;&lt;/li&gt;
+	&lt;li&gt;FilterProcessResult — класс для вывода содержимого фильтра.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Добавим класс и наследуем его от FilterBase, также добавим обязательную &lt;a href="https://www.drupal.org/docs/8/api/filter-api/overview" rel="noopener noreferrer" target="_blank"&gt;аннотацию&lt;/a&gt; к фильтру.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;/**
+ * Class InsertBlockTokenFilter.
+ *
+ * @package Drupal\insert_block_token\Plugin\Filter
+ *
+ * @Filter( 
+ * id = "filter_insert_block_token",
+ * title = @Translation("Insert blocks"),
+ * description = @Translation("Inserts the contents of a block into a node using [block:block-entity-id] tags."),
+ * type = Drupal\filter\Plugin\FilterInterface::TYPE_MARKUP_LANGUAGE,
+ * )
+ */
+
+ class InsertBlockTokenFilter extends FilterBase { &lt;/code&gt; &lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Переопределим метод &lt;a href="https://api.drupal.org/api/drupal/core%21modules%21filter%21src%21Plugin%21FilterBase.php/function/FilterBase%3A%3Atips/8.3.x" rel="noopener noreferrer" target="_blank"&gt;tips&lt;/a&gt;. Он отвечает за отображение подсказок на странице описания фильтров filter/tips и краткого описания фильтров в поле ввода.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;public function tips($long = FALSE) {
+  if ($long) {
+    return $this-&gt;t('&lt;a name="filter-insert_block_token" id="filter-insert_block_token"&gt;&lt;/a&gt;You may use [block:&lt;em&gt;block_entity_id&lt;/em&gt;] to display the contents of block.');
+  } else {
+    $tips_url = Url::fromRoute("filter.tips_all", [], ['fragment' =&gt; 'filter-insert_block_token']);
+    return $this-&gt;t('You may use &lt;a href="@insert_block_token_help"&gt;[block:&lt;em&gt;block_entity_id&lt;/em&gt;]&lt;/a&gt; to display the contents of block.', ["@insert_block_token_help" =&gt; $tips_url-&gt;toString()]);
+  }
+} &lt;/code&gt; &lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Код работы фильтра пишем в методе process. Для начала добавим регулярное выражение, которое в содержимом будет находить наш токен. Далее из токена будем доставать id сущности блока.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;public function process($text, $langcode) {
+  if (preg_match_all("/\[block:([^\]]+)+\]/", $text, $match)) {
+    $raw_tags = $repl = [];
+    foreach ($match[1] as $key =&gt; $value) {
+      $raw_tags[] = $match[0][$key];
+
+      if (strpos($value, '=') !== FALSE) {
+        $block_id_split = explode('=', $value); $block_id = $block_id_split[1];
+      } else {
+        $block_id = $value;
+      } &lt;/code&gt; &lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;Теперь нам нужно добавить вызов блока. Добавим код для блоков и кастомных блоков (контентных, создаваемых в админке). Инициализируем переменную $replacement и положим в нее рендер блока.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;$replacement = '';
+// Render blocks in code.
+if ($block = \Drupal::service('entity_type.manager')
+ -&gt;getStorage('block')
+ -&gt;load($block_id)) {
+  $block_view = \Drupal::service('entity_type.manager')
+    -&gt;getViewBuilder('block')
+    -&gt;view($block);
+  $replacement = \Drupal::service('renderer')-&gt;render($block_view);
+} 
+
+// Render custom blocks. 
+if ($block = \Drupal::service('entity_type.manager')
+  -&gt;getStorage('block_content')
+  -&gt;load($block_id)) {
+
+  $block_view = \Drupal::service('entity_type.manager')
+   -&gt;getViewBuilder('block_content')
+   -&gt;view($block); $replacement = \Drupal::service('renderer')-&gt;render($block_view);
+  } 
+$repl[] = $replacement; &lt;/code&gt; &lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt;В заключении осталось только подменить наш токен в содержимом и передать измененное содержимое как результат работы фильтра на вывод.&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;pre&gt;
+&lt;code&gt;  $text = str_replace($raw_tags, $repl, $text);
+}
+
+return new FilterProcessResult($text); &lt;/code&gt; &lt;/pre&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;h4&gt;Итог&lt;/h4&gt;
+
+&lt;p&gt;Мы написали модуль и реализовали в нем подстановку блока по токену.&lt;/p&gt;
+
+&lt;p&gt;Код всего модуля: &lt;a href="https://drupal-coder.ru/sites/default/files/blog/insert_block_token.zip"&gt;insert_block_token&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Документация по классу &lt;a href="https://api.drupal.org/api/drupal/core%21modules%21filter%21src%21Plugin%21FilterBase.php/class/FilterBase/8.3.x" rel="noopener noreferrer" target="_blank"&gt;FilterBase&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-8" hreflang="ru"&gt;Drupal 8&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=295&amp;2=comment&amp;3=comment" token="1jb8zcaIB6r56HMYLRmsai1Lwvql2Ixmx2NXv4afjjc"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/suschnosti-drupal-8" hreflang="ru"&gt;Сущности Drupal 8&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/prodvinutaya-zagruzka-suschnostey-v-drupal-8" hreflang="ru"&gt;Продвинутая загрузка сущностей в Drupal 8&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Fri, 28 Jan 2022 19:05:44 +0000</pubDate>
+    <dc:creator>Александр Долженков</dc:creator>
+    <guid isPermaLink="false">295 at https://drupal-coder.ru</guid>
+    <comments>https://drupal-coder.ru/blog/vstavka-bloka-v-tekstovoe-pole#comments</comments>
+    </item>
+<item>
+  <title>Настройка AMP для Drupal 8 и 9</title>
+  <link>https://drupal-coder.ru/blog/nastroyka-amp-dlya-drupal-8-i-9</link>
+  <description>
+&lt;span&gt;Настройка AMP для Drupal 8 и 9&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/59" lang="" about="https://drupal-coder.ru/user/59" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Александр Долженков&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;ср, 01/26/2022 - 09:27&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Для ускорения мобильных страниц Google предлагает использовать их технологию — AMP. Она позволяет генерировать облегченные страницы — они грузятся быстрее обычных из-за особой системы кэширования. Поисковая система Google охотнее продвигает такие страницы в поисковой выдаче (Яндекс с этой технологией пока не дружит).&lt;/p&gt;
+&lt;p&gt;В этой статье мы рассмотрим пошаговую настройку вывода AMP-страниц на Drupal.&lt;/p&gt;
+
+&lt;h4&gt;Установка модуля&lt;/h4&gt;
+&lt;p&gt;Для начала установим модуль AMP. Мы рекомендуем использовать composer. Для Drupal 8 и 9 (до 9.1+)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;composer require 'drupal/amp’&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;На момент написания статьи, актуальная версия модуля AMP 3.5 не поддерживала Drupal версии 9.1+. По этой причине устанавливаем dev версию модуля, для Drupal 9.1+.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;composer require 'drupal/amp:3.x-dev@dev'&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Все требуемые для работы библиотеки по умолчанию устанавливаются с модулем.&lt;/p&gt;
+
+&lt;h4&gt;Установка темы&lt;/h4&gt;
+&lt;p&gt;Для вывода AMP-страниц потребуется тема оформления. Можно использовать любую тему совместимую с Drupal 8+ и удовлетворяющую требованиям AMP. С конвертацией и требованиями можно ознакомиться &lt;a href="https://www.drupal.org/docs/contributed-modules/accelerated-mobile-pages-amp/amp-version-83/converting-your-primary-theme" target="_blank" rel="noopener noreferrer"&gt;тут&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Мы будем использовать специальную и уже готовую тему AMPTheme. Заметим, что это тема готова к использованию с AMP, но она не содержит стилей. Их можно будет добавить самостоятельно. Установка чистой темы позволит избежать конфликтов и проблем с отображением, которые могут возникнуть, если использовать большую и сложную тему.&lt;/p&gt;
+&lt;p&gt;Установим тему:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;composer require 'drupal/amptheme’&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Теперь нам нужно сделать подтему из &lt;code&gt;ampsubtheme_example&lt;/code&gt;. Вы можете создать её сами или использовать уже подготовленную нами &lt;a href="https://github.com/alexgred/ampsubtheme" target="_blank" rel="noopener noreferrer"&gt;подтему&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Название темы &lt;code&gt;ampsubtheme&lt;/code&gt; можно изменить, оно должно содержать символы латиницы, цифры и символ нижнего подчеркивания “_”. Переименуем папку с темой и все файлы, содержащие &lt;code&gt;ampsubtheme&lt;/code&gt; в названии. В файле &lt;code&gt;ampsubtheme&lt;/code&gt;.theme заменим вхождение &lt;code&gt;ampsubtheme&lt;/code&gt; на ваше название.&lt;/p&gt;
+&lt;p&gt;На странице управления темами &lt;code&gt;admin/appearance&lt;/code&gt; включим (установим) вашу тему и AMP Base. Отметим, что устанавливать по умолчанию не нужно, только включить.&lt;/p&gt;
+&lt;div style="text-align: center; margin: 20px 0;"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/amp/themes.jpg" alt="" /&gt;&lt;/div&gt;
+
+&lt;h4&gt;Настройка&lt;/h4&gt;
+&lt;p&gt;Перейдем к настройке модуля &lt;code&gt;admin/config/services/amp&lt;/code&gt;. Выберем подтему для отображения.&lt;/p&gt;
+&lt;div style="text-align: center; margin: 20px 0;"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/amp/amp_theme.jpg" alt="" /&gt;&lt;/div&gt;
+&lt;p&gt;Выбираем тип материала, который хотим отображать как AMP страницы и жмем “enable”.&lt;/p&gt;
+&lt;div style="text-align: center; margin: 20px 0;"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/amp/enable.jpg" alt="" /&gt;&lt;/div&gt;
+&lt;p&gt;Выбираем дисплей AMP и сохраняем тип материала.&lt;/p&gt;
+&lt;div style="text-align: center; margin: 20px 0;"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/amp/choose_display.jpg" alt="" /&gt;&lt;/div&gt;
+&lt;p&gt;Переходим к настройки дисплея “configure”.&lt;/p&gt;
+&lt;div style="text-align: center; margin: 20px 0;"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/amp/conf.jpg" alt="" /&gt;&lt;/div&gt;
+&lt;p&gt;Для текста формата полей выбираем AMP text, AMP Trimmed Text или AMP Summary or Trimmed в зависимости ваших нужд по выводу текста. Для изображениях выбираем AMP image и настраиваем.&lt;/p&gt;
+&lt;div style="text-align: center; margin: 20px 0;"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/amp/display.jpg" alt="" /&gt;&lt;/div&gt;
+&lt;p&gt;Важно! для responsive значения ширины и высоты ОБЯЗАТЕЛЬНО. Можно указывать ratio, например: 16х9&lt;/p&gt;
+&lt;div style="text-align: center; margin: 20px 0;"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/amp/img.jpg" alt="" /&gt;&lt;/div&gt;
+&lt;p&gt;Проверяем работу модуля перейдя на тестовую страницу: &lt;code&gt;admin/amp/library/test&lt;/code&gt;. Если видим “The Library is working”, значит вы все сделали правильно и все работает.&lt;/p&gt;
+&lt;div style="text-align: center; margin: 20px 0;"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/amp/test.jpg" alt="" /&gt;&lt;/div&gt;
+&lt;p&gt;Для отображения дополнительных кнопок сохранения AMP можно активировать соответствующую галочку:&lt;/p&gt;
+&lt;div style="text-align: center; margin: 20px 0;"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/amp/add.jpg" alt="" /&gt;&lt;/div&gt;
+&lt;p&gt;Дополнительные настройки, использование которых — на ваш риск:&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;Advanced option — конвертирует все HTML в поле body в AMPhtml. Не рекомендуем, так как может удалить часть HTML, который не соответствует стандартам AMP.&lt;/li&gt;
+  &lt;li&gt;Experimental option — будет генерировать весь сайт в AMP формате. Также не рекомендуем — тоже может удалить часть HTML, который не соответствует стандартам AMP.&lt;/li&gt;
+&lt;/ul&gt;&lt;div style="text-align: center; margin: 20px 0;"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/amp/adv.jpg" alt="" /&gt;&lt;/div&gt;
+
+&lt;h4&gt;Настройка и добавление блоков&lt;/h4&gt;
+&lt;p&gt;AMP-страницы, как и обычные, поддерживают вывод блоков &lt;code&gt;admin/structure/block/list/ampsubtheme&lt;/code&gt;. Настройка происходит так же, как и обычно. Нужно только выбрать соответствующую тему.&lt;/p&gt;
+&lt;div style="text-align: center; margin: 20px 0;"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/amp/blocks.jpg" alt="" /&gt;&lt;/div&gt;
+&lt;p&gt;В теме оформления можно добавить свои регионы. Это производится как и в обычной теме в файле &lt;code&gt;my_amp_theme.info.yml.info.yml&lt;/code&gt;. Не забудьте сбросить кэш после внесения изменений в файл конфигураций темы.&lt;/p&gt;
+
+&lt;h4&gt;Итог&lt;/h4&gt;
+&lt;p&gt;Мы настроили модуль и тему для AMP.&lt;/p&gt;
+&lt;p&gt;Чтобы открыть доступ к страницам AMP, нужно запросить страницу с добавлением параметра ?amp в адресную строку, например: &lt;code&gt;node/12345?amp&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Модуль поддерживает режим отладки. Чтобы открыть к нему доступ, в адресную строку добавляем параметр: &lt;code&gt;?amp&amp;debug#development=1&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4&gt;Дополнительные материалы&lt;/h4&gt;
+&lt;p&gt;Документация технологии AMP с дополнительными тегами: &lt;a href="https://amp.dev/" target="_blank" rel="noopener noreferrer"&gt;https://amp.dev/&lt;/a&gt;&lt;br /&gt;
+  Документация по модулю: &lt;a href="https://www.drupal.org/docs/8/modules/accelerated-mobile-pages-amp/amp-version-83" target="_blank" rel="noopener noreferrer"&gt;https://www.drupal.org/docs/8/modules/accelerated-mobile-pages-amp/amp-version-83&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal" hreflang="ru"&gt;Drupal&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/drupal-8" hreflang="ru"&gt;Drupal 8&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/prodvizenie-saitov" hreflang="ru"&gt;Продвижение сайтов&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=294&amp;2=comment&amp;3=comment" token="_8dmtEYvMrzg7f9GTUFmT0L61xh-uUTbizTQ2JIK1zA"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/tekhnologiya-google-amp-dlya-saytov-na-drupal-bystraya-zagruzka-stranic-sayta-s-mobilnogo" hreflang="ru"&gt;Технология Google AMP для сайтов на Drupal: быстрая загрузка страниц сайта с мобильного телефона&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Wed, 26 Jan 2022 09:27:19 +0000</pubDate>
+    <dc:creator>Александр Долженков</dc:creator>
+    <guid isPermaLink="false">294 at https://drupal-coder.ru</guid>
+    </item>
+
+  </channel>
+</rss>

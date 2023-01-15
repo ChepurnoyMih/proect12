@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:og="http://ogp.me/ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:schema="http://schema.org/" xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:sioct="http://rdfs.org/sioc/types#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" version="2.0" xml:base="https://drupal-coder.ru/">
+  <channel>
+    <title>views</title>
+    <link>https://drupal-coder.ru/</link>
+    <description/>
+    <language>ru</language>
+    
+    <item>
+  <title>Выгрузка yml для Яндекс.Маркета</title>
+  <link>https://drupal-coder.ru/blog/vygruzka-yml-dlya-yandeksmarketa</link>
+  <description>
+&lt;span&gt;Выгрузка yml для Яндекс.Маркета&lt;/span&gt;
+
+&lt;span&gt;&lt;a title="Просмотр профиля пользователя." href="https://drupal-coder.ru/user/59" lang="" about="https://drupal-coder.ru/user/59" typeof="schema:Person" property="schema:name" datatype="" xml:lang=""&gt;Александр Долженков&lt;/a&gt;&lt;/span&gt;
+
+&lt;span&gt;ср, 05/30/2018 - 08:16&lt;/span&gt;
+&lt;div id="field-language-display"&gt;&lt;div class="form-item js-form-item form-type-item js-form-type-item form-item- js-form-item- form-group"&gt;
+      &lt;label class="control-label"&gt;Language&lt;/label&gt;
+  
+  
+  Russian
+
+  
+  
+  &lt;/div&gt;
+&lt;/div&gt;
+            &lt;div class="field field--name-body field--type-text-with-summary field--label-hidden field--item"&gt;&lt;p&gt;Мы хотели бы поделиться опытом, как используя &lt;a href="https://www.drupal.org/project/views"&gt;views&lt;/a&gt; и &lt;a href="https://www.drupal.org/project/views_data_export"&gt;views_data_export&lt;/a&gt; сделать выгрузку yml в Yandex.Market на Drupal 7. &lt;/p&gt;
+&lt;p&gt;Концепция состоит в том, чтобы, используя views, получить нужные данные и далее собрать все в шаблонах для views_data_export. Такой вариант подходит для выгрузки данных из нод, таксономии, entity и продуктов commerce.&lt;/p&gt;
+&lt;p&gt;Для начала рекомендуем узнать по подробнее о формате yml в &lt;a href="https://yandex.ru/support/partnermarket/export/yml.html"&gt;официальной документации&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Наш пример мы будем рассматривать на нодах, а категории представлены терминами таксономии. Нам потребуется два views'а, первый это вспомогательный, предоставит нам категории, а второй данные товаров.&lt;/p&gt;
+
+&lt;h4&gt;Views yml_categories&lt;/h4&gt;
+&lt;p&gt;Первым мы сделаем views категорий. Он будет передавать готовую структуру категорий в наш основной views. Потребуется views с типом данных "термин таксономии". Создание страницы и блока выключим и перейдем к настройки views'a и полей. Добавим отображение "Data export".&lt;/p&gt;
+&lt;div style="overflow: hidden;"&gt;
+  &lt;div class="blog-img-2"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/yml_c_fields.png" /&gt;&lt;/div&gt;
+  &lt;div class="blog-img-2"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/yml_c_role.png" /&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Изменим формат на XML, остальные настройки формата оставим как есть. В фильтры добавим словарь категорий. Добавим вывод полей "имя" и "ID термина". Эти поля мы будем выводить в шаблоне и формировать структуру формата yml.&lt;/p&gt;
+&lt;p&gt;Укажем путь, по которому будем получать наш файл yml, а также настроим права доступа, чтобы только администратор сайта мог получить выгрузку. Будем выводить весь набор наших товаров, установив отображение всех элементов.&lt;/p&gt;
+&lt;p&gt;Для категорий нам нужно добиться простой конструкции вида:&lt;/p&gt;
+&lt;pre&gt;
+&lt;code&gt;&lt;categories&gt;
+  &lt;category id="id_категории"&gt;название_категории&lt;/category&gt;
+  ...
+&lt;/categories&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5&gt;views-data-export-xml-header--yml-categories.tpl.php&lt;/h5&gt;
+&lt;pre&gt;
+&lt;code&gt;&lt;categories&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;В header открываем родительский тег &lt;code&gt;&lt;categories&gt;&lt;/code&gt;. Это обязательное поле в yml.&lt;/p&gt;
+
+&lt;h5&gt;views-data-export-xml-body--yml-categories.tpl.php&lt;/h5&gt;
+&lt;pre&gt;
+&lt;code&gt;&lt;?php foreach ($themed_rows as $count =&gt; $row): ?&gt;
+  &lt;category id="&lt;?php echo $row['tid'] ?&gt;"&gt;
+    &lt;?php echo $row['name'] ?&gt;
+  &lt;/category&gt;
+&lt;?php endforeach; ?&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;$themed_row&lt;/code&gt; - это массив готовых данных из views'а. Массив пропустим через цикл, чтобы обернуть каждую категорию в тег. За id возьмем tid таксономии, а наименование поместим внутрь тега.&lt;/p&gt;
+
+&lt;h5&gt;views-data-export-xml-footer--yml-categories.tpl.php&lt;/h5&gt;
+&lt;pre&gt;
+&lt;code&gt;&lt;/categories&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Закроем тег &lt;code&gt;&lt;/categories&gt;&lt;/code&gt;, тем самым закончим работать с yml_categories.&lt;/p&gt;
+
+&lt;h4&gt;Views yml&lt;/h4&gt;
+&lt;p&gt;Теперь нам потребуется views для нод (содержимое). Так же как и для категорий мы будем использовать отображение "Data export".&lt;/p&gt;
+&lt;div style="overflow: hidden;"&gt;
+  &lt;div class="blog-img-3"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/yml_fields.png" /&gt;&lt;/div&gt;
+  &lt;div class="blog-img-3"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/yml_role.png" /&gt;&lt;/div&gt;
+  &lt;div class="blog-img-3"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/yml_advanced.png" /&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Формат изменим на XML. Добавим фильтр по типу нашего товара или ноды, в нашем случае это "дверь". Если вы используете мультиязычность на своем сайте, то можете добавить фильтр языка. Настройку полей произведем чуть позже.&lt;/p&gt;
+&lt;p&gt;Укажем путь для экспорта yml, а также настроим права доступа. Будем выводить весь набор наших товаров.&lt;/p&gt;
+&lt;p&gt;В столбце "дополнительно" нас интересует только один параметр "настройка запроса". Включим перезапись SQl, чтобы views не проверял node_access.&lt;/p&gt;
+&lt;div class="blog-img-1"&gt;&lt;img src="https://drupal-coder.ru/sites/default/files/blog/yml_query.png" /&gt;&lt;/div&gt;
+
+&lt;p&gt;В формате yml есть обязательные и необязательные поля. Чтобы &lt;a href="https://webmaster.yandex.ru/tools/xml-validator/"&gt;валидатор&lt;/a&gt; пропустил наш файл, нам нужно добавить все обязательные поля. Создадим структуру yml в шаблонах к нашему views'у. Нам потребуется перекрыть &lt;code&gt;header&lt;/code&gt;, &lt;code&gt;body&lt;/code&gt; и &lt;code&gt;footer&lt;/code&gt;. На потребуется перекрыть шаблоны для views_data_export: &lt;code&gt;views-data-export-xml-header.tpl.php&lt;/code&gt;, &lt;code&gt;views-data-export-xml-body.tpl.php&lt;/code&gt; и &lt;code&gt;views-data-export-xml-footer.tpl.php&lt;/code&gt;. Переименуем их так, чтобы шаблоны работали только для конкретного views'a, указав имя вашего &lt;code&gt;--yml&lt;/code&gt; (&lt;code&gt;views-data-export-xml-body--yml.tpl.php&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h5&gt;views-data-export-xml-header--yml.tpl.php&lt;/h5&gt;
+&lt;pre&gt;
+&lt;code language="php"&gt;&lt;?php print '&lt;?xml version="1.0" encoding="UTF-8" ?&gt;'; ?&gt;
+
+&lt;!DOCTYPE yml_catalog SYSTEM "shops.dtd"&gt;
+&lt;yml_catalog date="&lt;?php echo date('Y-m-d h:i'); ?&gt;"&gt;
+&lt;shop&gt;
+  &lt;name&gt;&lt;?php echo variable_get('site_name', 'Drupal'); ?&gt;&lt;/name&gt;
+  &lt;company&gt;&lt;?php echo variable_get('site_name', 'Drupal'); ?&gt;&lt;/company&gt;
+  &lt;url&gt;&lt;?php echo $GLOBALS['base_url']; ?&gt;&lt;/url&gt;
+  &lt;currencies&gt;&lt;currency id="RUR" rate="1"/&gt;&lt;/currencies&gt;
+
+  &lt;?php print views_embed_view('yml_categories', 'views_data_export_1'); ?&gt;
+
+  &lt;offers&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Разберем подробнее код выше. Чтобы вам было ясно зачем мы используем поля. Подробнее можно ознакомиться с полями в &lt;a href="https://yandex.ru/support/partnermarket/export/yml.html#elements"&gt;официальной документации&lt;/a&gt;. Первые две строки это обязательны для yml. &lt;code&gt;yml_catalog&lt;/code&gt; содержит параметр &lt;code&gt;date&lt;/code&gt;, который через функцию &lt;code language="php"&gt;date('Y-m-d h:i')&lt;/code&gt; передает время создания файла. В тег &lt;code&gt;shop&lt;/code&gt; размещаем все настройки нашего магазина.&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;name&lt;/li&gt;
+  &lt;li&gt;company&lt;/li&gt;
+  &lt;li&gt;url&lt;/li&gt;
+  &lt;li&gt;currencies&lt;/li&gt;
+  &lt;li&gt;categories&lt;/li&gt;
+  &lt;li&gt;offers&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;В &lt;code&gt;name&lt;/code&gt;, &lt;code&gt;company&lt;/code&gt;, &lt;code&gt;url&lt;/code&gt; выведем название сайта и адрес через &lt;code&gt;variable_get&lt;/code&gt;. &lt;code&gt;currencies&lt;/code&gt; содержит информацию о валюте. Строка &lt;code&gt;views_embed_view('yml_categories', 'views_data_export_1')&lt;/code&gt; мы подставляем наш views категорий (&lt;code&gt;yml_categories&lt;/code&gt; - имя views'а категорий, &lt;code&gt;views_data_export_1&lt;/code&gt; - имя отображения категорий).&lt;/p&gt;
+&lt;h5&gt;views-data-export-xml-body--yml.tpl.php&lt;/h5&gt;
+&lt;pre&gt;
+&lt;code language="php"&gt;&lt;?php foreach ($themed_rows as $count =&gt; $row): ?&gt;
+  &lt;offer id="&lt;?php echo $row['nid']; ?&gt;" available="true"&gt;
+    &lt;url&gt;&lt;?php echo $row['path']; ?&gt;&lt;/url&gt;
+    &lt;price&gt;&lt;?php echo $row['field_price_from']; ?&gt;&lt;/price&gt;
+    &lt;currencyId&gt;RUR&lt;/currencyId&gt;
+    &lt;categoryId&gt;&lt;?php echo $row['field_category']; ?&gt;&lt;/categoryId&gt;
+    &lt;?php if (!empty($row['field_main_img'])): ?&gt;
+      &lt;picture&gt;
+      &lt;?php $matches = array();
+        if (!empty($row['field_main_img']) &amp;&amp; preg_match('/src="(.*\.(jpg|png|jpeg))"/', $row['field_main_img'], $matches)) {
+          echo $matches[1];
+        } ?&gt;
+      &lt;/picture&gt;
+    &lt;?php endif; ?&gt;
+    &lt;name&gt;&lt;?php echo $row['title']; ?&gt;&lt;/name&gt;	
+    &lt;description&gt;&lt;?php echo htmlspecialchars($row['body']); ?&gt;&lt;/description&gt;
+    &lt;country_of_origin&gt;Россия&lt;/country_of_origin&gt;
+
+    &lt;?php if (!empty($row['field_door_material'])) :?&gt;
+      &lt;param name="Материал"&gt;&lt;?php echo $row['field_door_material']; ?&gt;&lt;/param&gt;
+    &lt;?php endif; ?&gt;
+    &lt;?php if (!empty($row['field_door_collection'])) :?&gt;
+      &lt;param name="Коллекция"&gt;&lt;?php echo $row['field_door_collection']; ?&gt;&lt;/param&gt;
+    &lt;?php endif; ?&gt;
+    &lt;?php if (!empty($row['field_door_color'])) {
+        $color_arr = explode('|', $row['field_door_color']); 
+
+        foreach ($color_arr as $color) {
+          echo '&lt;param name="Цвет"&gt;' . $color . '&lt;/param&gt;';
+        }
+      } ?&gt;
+  &lt;/offer&gt;
+&lt;?php endforeach; ?&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;В этом шаблоне мы выводим поля views'а в теги. Все поля мы получаем из массива &lt;code&gt;$row&lt;/code&gt;. Для списка ниже, добавим во views соответствующие поля.&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;offer - этоn тег обязательный параметр &lt;code&gt;id&lt;/code&gt;, в него мы добавим &lt;code&gt;nid&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;url - добавим url из поля &lt;code&gt;path&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;price - нужно вывести поле содержащие цену вашего товара (&lt;code&gt;field_price_from&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;currencyId - добавим индекс валюты (RUR)&lt;/li&gt;
+  &lt;li&gt;categoryId - нужно указать поле таксономии отвечающие за категорю (&lt;code&gt;field_category&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;name - наименование товара или же заголовок ноды (&lt;code&gt;title&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;picture - добавим поле картинки с проверкой регулярным выражением (&lt;code&gt;field_main_img&lt;/code&gt;) &lt;/li&gt;
+  &lt;li&gt;description - описание ноды ли товара (&lt;code&gt;body&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;country_of_origin - страна производидель&lt;/li&gt;
+  &lt;li&gt;param - необязательное поля для yml. В него добавляем различные характеристики товара, такие как вес, размер и т.д.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Необязательные поля, такие как &lt;code&gt;&lt;picture&gt;&lt;/code&gt;, мы обернули в if для проверки существования переменой в массиве &lt;code&gt;$row&lt;/code&gt;.&lt;code&gt;&lt;picture&gt;&lt;/code&gt; необязательно, но Яндекс.Маркет рекомендует его добавлять. Разберем &lt;code&gt;&lt;param name=""&gt;&lt;/code&gt; по подробней. В атрибут &lt;code&gt;name&lt;/code&gt; добавляем название характеристики, именно это название будет отображаться в маркете. В нашем примере поле &lt;code&gt;field_door_color&lt;/code&gt; множественное и поэтому выводим его через цикл добавляя все его значения. &lt;code&gt;&lt;param&gt;&lt;/code&gt; следует наполнять в соответствии с вашим набором характеристик товара.&lt;/p&gt;
+
+&lt;h5&gt;views-data-export-xml-footer--yml.tpl.php&lt;/h5&gt;
+&lt;p&gt;В шаблоне footer мы закрываем теги &lt;code&gt;offers&lt;/code&gt;, &lt;code&gt;shop&lt;/code&gt; и &lt;code&gt;yml_catalog&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;
+&lt;code&gt;&lt;/offers&gt;
+&lt;/shop&gt;
+&lt;/yml_catalog&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4&gt;Итог&lt;/h4&gt;
+&lt;p&gt;Собрав views'ы и шаблоны, перейдя по адресу &lt;code&gt;/yml&lt;/code&gt;, вы сможете сделать выгрузку yml для вашего магазина в Яндекс.Маркете.&lt;/p&gt;&lt;/div&gt;
+      
+      &lt;div class="field field--name-field-kategoria field--type-entity-reference field--label-hidden field--items"&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/yml" hreflang="ru"&gt;yml&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/views" hreflang="ru"&gt;views&lt;/a&gt;&lt;/div&gt;
+              &lt;div class="field--item category-tag"&gt;&lt;a href="https://drupal-coder.ru/blog/yandex" hreflang="ru"&gt;yandex&lt;/a&gt;&lt;/div&gt;
+          &lt;/div&gt;
+  &lt;section&gt;&lt;h2 class="block-form-title"&gt;Комментарии&lt;/h2&gt;
+    
+  
+  &lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Андрей
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;пятница, июня 15, 2018 - 07:30&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Спасибо за статью! Очень помогло, правда у вас есть небольшая ошибка, нет закрывающего тега в строке:&lt;br /&gt;
+ &lt;?php echo $row['title']; ?&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=26&amp;1=default&amp;2=ru&amp;3=" token="Mr99jcyrN_wY9tS8PGwbDEv22U0-UzQUajYlhxXeh7E"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+&lt;div class="indented"&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;вторник, июня 26, 2018 - 07:28&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;Спасибо за замечание! Обязательно поправим.&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=32&amp;1=default&amp;2=ru&amp;3=" token="C-sNrwSZAukazm6qxbC4D8XGS5kKjjjoyF-tk_dNX_c"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+&lt;/div&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Виталий
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;вторник, сентября 11, 2018 - 21:29&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Спасибо большое за подробный гайд. Вопрос - можно ли сделать экспорт автоматически по запуску крона?&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=55&amp;1=default&amp;2=ru&amp;3=" token="GX4wVdjs6AQSrSOSR2HZMbEFGWqVZ2yR9AOLq9b3xWc"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+&lt;div class="indented"&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Виталий
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;среда, сентября 12, 2018 - 16:36&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;имеется в виду, по запуску крона, создание обновленного yml-файла на сервере в корне сайта&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=59&amp;1=default&amp;2=ru&amp;3=" token="5l7SDYi6bk9vi4hdMypc4j8T4tfCq_lMzEmkeKEgB3E"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+&lt;div class="indented"&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Виталий
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;вторник, сентября 18, 2018 - 18:04&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Решение вопроса с сохранением на сервере и автоматизацией:&lt;br /&gt;
+1. делаем (заменяя параметры, где надо, на свои значения) и подключаем модуль: &lt;a href="https://www.drupal.org/project/views_data_export/issues/1875456#comment-9670603"&gt;https://www.drupal.org/project/views_data_export/issues/1875456#comment…&lt;/a&gt;. Модуль позволяет прописать место дефолтного сохранения на сервере.&lt;br /&gt;
+2. настраиваем в менеджере задач (на стороне сервера) еще одну задачу на выполнение - прописываем команду:&lt;br /&gt;
+cd /home/USER/public_html &amp;&amp; /usr/bin/env PATH=/home/USER/.composer/vendor/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin COLUMNS=72 ../vendor/bin/drush -u 1 --uri=&lt;a href="https://mysite.ru"&gt;https://mysite.ru&lt;/a&gt; --quiet views-data-export yml views_data_export_1 yml_export.xml&lt;br /&gt;
+USER - название вашего пользователя&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=65&amp;1=default&amp;2=ru&amp;3=" token="y9DAkBkV7ZCDWqhzHal0iMsse8pS1pnOEdX0CwYZRyg"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Виталий
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;вторник, сентября 18, 2018 - 18:12&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;PS drush на сервере д.б. уже установлен.&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=66&amp;1=default&amp;2=ru&amp;3=" token="NQH-S-SCHgmvecCmuog4ljhIBV4jw8Ix5UFaXZMYTLQ"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+&lt;/div&gt;&lt;/div&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Виталий
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;вторник, сентября 11, 2018 - 22:16&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Имхо, при добавлении в фильтры поля "Термин таксономии: Название" надо снять галочку с  пункта "Сделать это поле ссылкой на страницу его термина таксономии".  Категории выгружаются без ссылок (насколько я правильно просмотрел образцы этих файлов, конечно)&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=56&amp;1=default&amp;2=ru&amp;3=" token="gd0u_A_v6tSJM6jPskfn668WI6jhAAs_2xaXpXZTh4Y"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Виталий
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;вторник, сентября 11, 2018 - 22:32&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Еще один вопрос - если каталог многоуровневый, то как это прописывается в списке категорий? Как сделать, чтобы прописывались родительские id?&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=57&amp;1=default&amp;2=ru&amp;3=" token="kESny72MB5UH_R7pTNvtBgX5JrG9BVLNe-mdrcg-nkY"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Виталий
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;вторник, сентября 11, 2018 - 23:08&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;По поводу добавления parentId, если каталог имеет не плоскую структуру (присутвует вложенность категорий) вопрос решается след образом:&lt;br /&gt;
+1. в связях добавляем "Термин таксономии: Родительский термин" (снимем галочку в настройках с пункта "Эта связь обязательна")&lt;br /&gt;
+2. В полях добавляем еще один "Термин таксономии: ID термина", но в настройках выбираем "Связь -&gt; Родитель"&lt;br /&gt;
+3. корректируем views-data-export-xml-body--yml-categories.tpl.php на следующий вид:&lt;br /&gt;
+&lt;?php foreach ($themed_rows as $count =&gt; $row): ?&gt;&lt;br /&gt;
+    " parentId="&lt;?php echo $row['tid_1'] ?&gt;"&gt;&lt;br /&gt;
+        &lt;?php echo $row['name'] ?&gt;&lt;/p&gt;
+&lt;p&gt;&lt;?php endforeach; ?&gt;&lt;br /&gt;
+Вроде все.&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=58&amp;1=default&amp;2=ru&amp;3=" token="3ilSJ1JoouSm0tpU_PPdpY-LAmhDm8pPnCPauCFnkMY"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+&lt;div class="indented"&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Виталий
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;вторник, сентября 18, 2018 - 18:35&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Боюсь, в п.3 ввел в заблуждение. Полностью views-data-export-xml-body--yml-categories.tpl.php будет выглядеть так:&lt;br /&gt;&lt;code&gt;&lt;?php foreach ($themed_rows as $count =&gt; $row): ?&gt;&lt;br /&gt;
+    " parentId="&lt;?php echo $row['tid_1'] ?&gt;"&gt;&lt;?php echo $row['name'] ?&gt;&lt;br /&gt;
+&lt;?php endforeach; ?&gt;&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=67&amp;1=default&amp;2=ru&amp;3=" token="sQSnzJDca1TwnOv0QQE4slp1t23oNPJdHGCRxvselYI"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+&lt;/div&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Олег
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;понедельник, мая 18, 2020 - 07:32&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Картинка товара отсутствует в выгрузке yml. Не проходит условие if !empty. Какие настройки поля должны быть во views?&lt;/p&gt;
+&lt;p&gt;PS. Картинок на товарах от 1 до 5&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=452&amp;1=default&amp;2=ru&amp;3=" token="kwjgqG6lYJKR97pDDtLNkDKUBnSPlxijnct_OW7_VJM"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Иван
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;вторник, июля 20, 2021 - 16:39&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;А для 8-9 версии возможно ли так сделать?&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1722&amp;1=default&amp;2=ru&amp;3=" token="gbgzSHONz6ig_upCABjnza0XrIPy04Rh8hN_uSzb8hY"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+&lt;div class="indented"&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  cosmos
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;четверг, августа 12, 2021 - 08:08&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Как минимум так же повторить переопределние вьюса,&lt;br /&gt;
+но я думаю есть более удобные варианты&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1723&amp;1=default&amp;2=ru&amp;3=" token="H112IEMN1H5vJ-TpDVhlFze2ABWALDUfkIZQLahRgZM"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+&lt;/div&gt;&lt;div class="comment-article view-mode-default ds-1col clearfix"&gt;
+
+  
+
+  
+            &lt;div class="field field--name-comment-author field--type-ds field--label-hidden field--item"&gt;  Дмитрий
+&lt;/div&gt;
+      
+            &lt;div class="field field--name-comment-post-date field--type-ds field--label-hidden field--item"&gt;понедельник, апреля 18, 2022 - 19:37&lt;/div&gt;
+      
+            &lt;div property="schema:text" class="field field--name-comment-body field--type-text-long field--label-hidden field--item"&gt;&lt;p&gt;Добрый вечер!&lt;/p&gt;
+&lt;p&gt;Подскажите пожалуйста, как мне переопределить шаблон представлений, для view data export. Как бы я не менял имя новых файлов, в папке с шаблонами модуля, не могу добиться разного вывода данных. Drupal упорно читает дефолтные файлы шаблона.&lt;/p&gt;
+&lt;/div&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderLinks" arguments="0=1733&amp;1=default&amp;2=ru&amp;3=" token="4ZZyfhKc0izJ7RpOYq7HrkGL29JKSFZzeE-ACPdChy8"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt;
+
+
+ 
+      &lt;div class="comment-form-wrapper"&gt;
+      &lt;h2 class="block-form-title"&gt;Добавить комментарий&lt;/h2&gt;
+      &lt;drupal-render-placeholder callback="comment.lazy_builders:renderForm" arguments="0=node&amp;1=152&amp;2=comment&amp;3=comment" token="ZM7wl_t0KDeRO24NHjt5ohgLgQ6F70FN5-uH7lCUQFE"&gt;&lt;/drupal-render-placeholder&gt;&lt;/div&gt; 
+  
+&lt;/section&gt;&lt;div class="field field--name-field-esche-po-teme field--type-entity-reference field--label-above"&gt;
+    &lt;div class="field--label"&gt;Еще по теме&lt;/div&gt;
+          &lt;div class="field--items"&gt;
+              &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/podnimaem-ctr-c-089-do-292-v-yandeksdirekt-i-s-118-do-52-v-googleads" hreflang="ru"&gt;Поднимаем CTR c 0,89% до 2,92% в Яндекс.Директ и с 1,18% до 5,2% в Google.Ads&lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/ispolzovanie-otchetov-ecommerce-v-yandeksmetrike" hreflang="ru"&gt;Использование отчетов Ecommerce в Яндекс.Метрике &lt;/a&gt;&lt;/div&gt;
+          &lt;div class="field--item"&gt;&lt;a href="https://drupal-coder.ru/blog/sayt-na-drupal-i-servis-yandekskollekcii" hreflang="ru"&gt;Сайт на Drupal и сервис Яндекс.Коллекции&lt;/a&gt;&lt;/div&gt;
+              &lt;/div&gt;
+      &lt;/div&gt;
+</description>
+  <pubDate>Wed, 30 May 2018 08:16:05 +0000</pubDate>
+    <dc:creator>Александр Долженков</dc:creator>
+    <guid isPermaLink="false">152 at https://drupal-coder.ru</guid>
+    </item>
+
+  </channel>
+</rss>
